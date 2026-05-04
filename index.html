@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astra.CC by ningqi - 第三方网站</title>
+  <link rel="icon" href="images/logo-white.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --sf-img-1: url("images/logo.svg");
+    }
+  </style>
+  <style>
+    :root {
+      --bg-color: #111;
+      --bg-secondary: #222;
+      --text-primary: #eee;
+      --text-secondary: #888;
+      --accent-color: #66ccff;
+      --scrollbar-thumb: #666;
+      --scrollbar-thumb-hover: #777;
+      --scrollbar-thumb-active: #555;
+      --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-weight: 500;
+      --font-weight-bold: 700;
+    }
+
+    ::-webkit-scrollbar {
+      background-color: var(--bg-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+      background-color: var(--scrollbar-thumb-active);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-weight: 500;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+      font-weight: 500;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .bg-ae {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80vmax;
+      height: 80vmax;
+      z-index: 1;
+      opacity: 0.06;
+      pointer-events: none;
+      color: var(--text-primary, #fff);
+    }
+
+    .bg-ae svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bg-ae text {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .slogan {
+      color: #fff;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 70px;
+      font-weight: bold;
+      text-shadow: 10px 10px 20px #111;
+      white-space: nowrap;
+      display: inline-block;
+      animation: blink-caret 0.75s step-end infinite;
+      overflow: hidden;
+      will-change: width;
+      transition: width 1.6s cubic-bezier(0.76, 0, 0.42, 0.99), border-right 0.3s ease;
+    }
+
+    .slogan span {
+      display: inline-block;
+    }
+
+    .slogan.typing-done {
+      border-right: none;
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: #0099ff;
+      }
+    }
+
+    .tab {
+      display: flex;
+      position: fixed;
+      background-color: rgba(34, 34, 34, 0.75);
+      width: 100%;
+      margin: 0;
+      left: 0;
+      top: 0;
+      height: 60px;
+      padding: 10px 0;
+      justify-content: space-between;
+      z-index: 1000;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .page {
+      position: relative;
+      min-height: calc(100vh - 60px);
+      padding-top: 60px;
+      animation: fadeIn 0.4s ease-out;
+      width: 100%;
+      overflow-x: hidden;
+      z-index: 1;
+    }
+
+    .horizontal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      width: 100%;
+      height: calc(100vh - 60px);
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .h-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 56px;
+      background-color: rgba(34, 34, 34, 0.35);
+      border: none;
+      border-bottom: 1px solid var(--scrollbar-thumb);
+      cursor: pointer;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      user-select: none;
+    }
+
+    .h-card:last-child {
+      border-bottom: none;
+    }
+
+    .h-card:hover {
+      background-color: rgba(102, 204, 255, 0.12);
+      border-bottom-color: rgba(102, 204, 255, 0.3);
+    }
+
+    .h-card:hover .h-card-title {
+      color: #66ccff;
+    }
+
+    .h-card:hover .h-card-subtitle {
+      color: rgba(102, 204, 255, 0.7);
+    }
+
+    .h-card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-right: 8px;
+      transition: color 0.25s ease;
+    }
+
+    .h-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      transition: color 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    #tabLogo {
+      height: 40px;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 30px;
+    }
+
+    .tabButtonTab {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-right: 20px;
+      height: 100%;
+    }
+
+    .tabButton {
+      background-color: #00000000;
+      color: #eee;
+      border: 0;
+      height: 100%;
+      width: auto;
+      min-width: 50px;
+      padding: 0 8px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .tabButton:hover {
+      background-color: #333;
+    }
+
+    .tabButton a {
+      text-decoration: none;
+      color: #eee;
+    }
+
+    .daylight-mode {
+      --bg-color: #f8f8f8;
+      --bg-secondary: #f0f0f0;
+      --text-primary: #333;
+      --text-secondary: #666;
+      --scrollbar-thumb: #ccc;
+      --scrollbar-thumb-hover: #bbb;
+      --scrollbar-thumb-active: #aaa;
+    }
+
+    .daylight-mode .bg-ae text {
+      stroke: #333;
+    }
+
+    .daylight-mode #tabLogo {
+      filter: invert(1);
+    }
+
+    .daylight-mode .endlogo {
+      filter: invert(1);
+    }
+
+    .daylight-mode .h-card {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-bottom-color: #e0e0e0;
+    }
+
+    .daylight-mode .h-card:hover {
+      background-color: rgba(102, 204, 255, 0.05);
+      border-bottom-color: var(--accent-color);
+    }
+
+    .daylight-mode .tab {
+      background-color: var(--bg-color);
+      opacity: 0.9;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .tabButton {
+      color: #333;
+    }
+
+    .daylight-mode .tabButton:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .daylight-mode .tabButton a {
+      color: #333;
+    }
+
+    .daylight-mode #qq-button img {
+      filter: brightness(0);
+    }
+
+    .daylight-mode .end {
+      background-color: var(--bg-color);
+      opacity: 0.75;
+      filter: brightness(0.9);
+    }
+
+    .daylight-mode .end-copyright {
+      color: var(--text-secondary);
+    }
+
+    .daylight-mode .content {
+      background-color: var(--bg-color);
+    }
+
+    .daylight-mode .page {
+      background-color: var(--bg-color);
+      z-index: 0;
+    }
+
+    .daylight-mode .theme-toggle-btn,
+    .daylight-mode #theme-toggle-btn {
+      color: #333;
+    }
+
+    .daylight-mode .titleF {
+      color: #333;
+    }
+
+    .daylight-mode .titleFintor {
+      color: #333;
+    }
+
+    .daylight-mode .featureCard {
+      background-color: var(--bg-secondary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.075);
+    }
+
+    .daylight-mode .featureCard:hover {
+      background-color: #e0e0e0;
+    }
+
+    .daylight-mode .featureTitle {
+      color: #333;
+    }
+
+    .daylight-mode .featureDesc {
+      color: #666;
+    }
+
+    .daylight-mode .OnlineButton {
+      color: #fff;
+    }
+
+    .daylight-mode .DesktopButton {
+      background-color: #666;
+      color: #fff;
+    }
+
+    .daylight-mode .updateT {
+      color: #333;
+    }
+
+    .daylight-mode .updateTIn {
+      color: #333;
+    }
+
+    .daylight-mode .UpdateC {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #333;
+    }
+
+    .daylight-mode .backgroundF {
+      display: none;
+    }
+
+    .daylight-mode .slogan {
+      color: #333;
+      text-shadow: 10px 10px 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .daylight-mode .introend,
+    .daylight-mode .endby,
+    .daylight-mode .link {
+      color: #333;
+    }
+
+    .daylight-mode .copyright {
+      color: #666;
+    }
+
+    .daylight-mode .footer {
+      background-color: var(--bg-secondary);
+      color: #333;
+    }
+
+    .daylight-mode .download-card {
+      background-color: rgba(102, 204, 255, 0.04);
+      border-color: rgba(102, 204, 255, 0.2);
+    }
+
+    .daylight-mode .download-card:hover {
+      background-color: rgba(102, 204, 255, 0.08);
+      border-color: var(--accent-color);
+    }
+
+    .daylight-mode .download-card-title {
+      color: #333;
+    }
+
+    .daylight-mode .download-card-icon img {
+      filter: none;
+    }
+
+    .daylight-mode .download-panel {
+      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+    }
+
+    .daylight-mode .download-item {
+      background: var(--bg-secondary);
+    }
+
+    .daylight-mode .download-item-name {
+      color: #333;
+    }
+
+    .daylight-mode .download-item-size {
+      color: #666;
+    }
+
+    .daylight-mode .download-panel-title {
+      color: #666;
+    }
+
+    
+
+    .tools-panel {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 24px auto;
+      padding: 28px 32px;
+      background-color: rgba(34, 34, 34, 0.4);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .tools-panel {
+        padding: 20px 16px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+
+    .daylight-mode .tools-panel {
+      background-color: rgba(255, 255, 255, 0.6);
+      border-color: #e0e0e0;
+    }
+
+    .release-selector {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      z-index: 1;
+    }
+
+    .custom-dropdown {
+      position: relative;
+      min-width: 200px;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .custom-dropdown-button {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-family);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .custom-dropdown-button:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(102, 204, 255, 0.15);
+    }
+
+    .custom-dropdown-button:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(102, 204, 255, 0.25);
+      background-color: rgba(102, 204, 255, 0.05);
+    }
+
+    .custom-dropdown-arrow {
+      font-size: 10px;
+      transition: transform 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .custom-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      backdrop-filter: blur(15px);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      z-index: 1000;
+      max-height: 300px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .custom-dropdown-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .custom-dropdown-option {
+      padding: 11px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: var(--font-family);
+      border-left: 3px solid transparent;
+    }
+
+    .custom-dropdown-option:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-left-color: var(--accent-color);
+    }
+
+    .custom-dropdown-option.active {
+      background: rgba(102, 204, 255, 0.12);
+      color: var(--accent-color);
+      border-left-color: var(--accent-color);
+    }
+
+    .custom-dropdown-menu::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .custom-dropdown-menu::-webkit-scrollbar-track {
+      background: var(--bg-color);
+      border-radius: 4px;
+    }
+
+    .custom-dropdown-menu::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 4px;
+    }
+
+    .custom-dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb-hover);
+    }
+
+    .download-card {
+      width: 100%;
+      max-width: 100%;
+      background-color: rgba(102, 204, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(102, 204, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .download-card:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.08);
+    }
+
+    .download-card-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .download-card-header:hover {
+      background-color: rgba(102, 204, 255, 0.08);
+    }
+
+    .download-card-icon {
+      color: var(--accent-color);
+      flex-shrink: 0;
+    }
+
+    .download-card-icon img {
+      filter: brightness(0) invert(1);
+    }
+
+    .download-card-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-family);
+    }
+
+    .download-card-arrow {
+      color: var(--text-secondary);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .download-card.expanded .download-card-arrow {
+      transform: rotate(180deg);
+    }
+
+    .download-card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+      padding: 0 20px;
+      opacity: 0;
+    }
+
+    .download-card.expanded .download-card-content {
+      max-height: 600px;
+      padding: 0 20px 20px;
+      opacity: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) transparent;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 3px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+      border-radius: 3px;
+    }
+
+    .download-card.expanded .download-card-content::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+
+    .download-panel {
+      visibility: hidden;
+      opacity: 0;
+      max-height: 0;
+      width: 100%;
+      background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
+      backdrop-filter: blur(20px);
+      padding: 0 0;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: visibility 0.25s ease, opacity 0.25s ease, max-height 0.25s ease, padding 0.25s ease;
+      z-index: 2;
+    }
+
+    .download-panel.show {
+      visibility: visible;
+      opacity: 1;
+      max-height: 500px;
+      padding: 15px 0;
+      z-index: 2;
+    }
+
+    .download-panel-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      z-index: 2;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 100%;
+    }
+
+    .filter-tab {
+      background: var(--bg-secondary);
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .filter-tab:hover {
+      background: var(--bg-color);
+      color: var(--text-primary);
+    }
+
+    .filter-tab.active {
+      background: var(--accent-color, #0099ff);
+      color: #fff;
+      border-color: var(--accent-color, #0099ff);
+    }
+
+    .download-panel-title {
+      color: var(--text-secondary);
+      font-size: 12px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+
+    .download-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .download-item {
+      flex: 1 1 calc(33.333% - 10px);
+      min-width: 280px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .download-item:hover {
+      background: rgba(0,153,255,0.15);
+      border-color: #0099ff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0,153,255,0.1);
+    }
+
+    .download-item-name {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      z-index: 2;
+    }
+
+    .download-item-size {
+      color: var(--text-secondary);
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .download-item:hover .download-item-size {
+      color: #0099ff;
+    }
+
+    .titleShow {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 100px;
+      padding-bottom: 50px;
+      height: 1000px;
+    }
+
+    .LogoTitle {
+      margin-top: 160px;
+      width: 400px;
+      max-width: 90%;
+      height: auto;
+    }
+
+    .TitleShowPho {
+      width: 70%;
+      max-width: 100%;
+      height: auto;
+      position: relative;
+      left: 0;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.1s ease-out, left 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      will-change: transform;
+      object-fit: contain;
+    }
+
+    .TitleShowPho:hover {
+      transform: rotateX(15deg) translateZ(-10px);
+    }
+
+    .p3d {
+      z-index: -1;
+      position: absolute;
+      perspective: 1200px;
+      width: 80%;
+      max-width: 100%;
+      height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 200px;
+      transition: width 0.3s ease, padding-top 0.6s ease;
+    }
+
+    .titleF {
+      color: #eee;
+      display: flex;
+      justify-content: right;
+      font-size: xx-large;
+      font-weight: bold;
+      margin-right: 40px;
+    }
+
+    .titleFintor {
+      color: #eee;
+      display: flex;
+      justify-content: right;
+      font-size: large;
+      margin-right: 80px;
+    }
+
+    .features {
+      height: 800px;
+      z-index: 1;
+    }
+
+    .backgroundF {
+      background-color: #00000055;
+      z-index: -10;
+      width: 100%;
+      height: 880px;
+      margin-top: -80px;
+      position: absolute;
+    }
+
+    .featureCards {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 50px;
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .featureCard {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      background-color: #222;
+      border-radius: 15px;
+      padding: 30px;
+      width: 30%;
+      height: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+      word-wrap: break-word;
+      word-break: break-word;
+      z-index: 2;
+    }
+
+    .featureCard:hover {
+      height: 200px;
+      transform: translateY(-10px);
+      background-color: #2a2a2a;
+      z-index: 10;
+    }
+
+    .featureTitle {
+      color: #eee;
+      font-size: large;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 1;
+      text-align: right;
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .featureCard:hover .featureTitle {
+      top: 20px;
+      transform: translateY(0);
+    }
+
+    .featureDesc {
+      color: #aaa;
+      font-size: medium;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      pointer-events: none;
+    }
+
+    .featureCard:hover .featureDesc {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .OnlineButton,
+    .DesktopButton {
+      width: 120px;
+      border: 0;
+      height: 40px;
+      font-size: large;
+      margin: 10px;
+      margin-top: 20px;
+      border-radius: 10px;
+      transition: filter 0.3s ease;
+      min-height: 44px;
+    }
+
+    .OnlineButton {
+      background-color: #0099ff;
+      color: #eee;
+    }
+
+    .DesktopButton {
+      background-color: #111;
+      color: #eee;
+    }
+
+    .OnlineButton:hover,
+    .DesktopButton:hover {
+      filter: brightness(1.2);
+    }
+
+    .OnlineButton:active,
+    .DesktopButton:active {
+      filter: brightness(0.8);
+    }
+
+    .Update {
+      margin-top: 200px;
+      margin-bottom: 500px;
+    }
+
+    .updateT {
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      font-size: xx-large;
+      font-weight: bold;
+    }
+
+    .updateTIn {
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      font-size: large;
+    }
+
+    .UpdateC {
+      position: relative;
+      background-color: #000000bb;
+      border-radius: 10px;
+      color: #eee;
+      justify-content: center;
+      width: 60%;
+      margin: 20px auto;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .ubgd {
+      width: 100%;
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .ubg {
+      width: auto;
+      height: 100%;
+      margin-top: -200px;
+      filter: blur(2px);
+      opacity: 0.8;
+    }
+
+    .end {
+      padding: 60px;
+      padding-bottom: 20px;
+      margin: 0;
+      margin-top: 100px;
+      background-color: rgba(34, 34, 34, 0.9);
+      left: 0;
+      width: 100%;
+      min-height: 200px;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .end-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      flex: 1;
+    }
+
+    .end-copyright {
+      text-align: center;
+      padding: 20px 0 0 0;
+      margin-top: auto;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-family: 'Mi Sans', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0 !important;
+    }
+
+    .endlogo {
+      width: 200px;
+      height: auto;
+    }
+
+    .introend,
+    .endby,
+    .link {
+      color: #eee;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .introend {
+      font-size: small;
+    }
+
+    .endby,
+    .link {
+      font-size: x-large;
+    }
+
+    #qq-button {
+      font-size: 1.5em;
+      padding: 12px 24px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding: 20px 0;
+      color: #888;
+      font-size: 0.9rem;
+      font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      width: fit-content;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .iconLink {
+      width: 20px;
+      height: 20px;
+    }
+
+    .iconLinkB {
+      margin: 10px;
+    }
+
+    .footer {
+      background-color: #222;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 10px;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footerT {
+      font-size: small;
+    }
+
+    @media (max-width: 1200px) {
+      .LogoTitle {
+        width: 300px;
+      }
+
+      .featureCard {
+        width: 40%;
+      }
+
+      .featureCard:hover {
+        width: 40%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .LogoTitle {
+        width: 250px;
+      }
+
+      .slogan {
+        font-size: 50px;
+      }
+
+      .featureCards {
+        padding: 0 20px;
+      }
+
+      .featureCard {
+        width: 45%;
+      }
+
+      .featureCard:hover {
+        width: 45%;
+      }
+
+      .titleF {
+        font-size: x-large;
+        margin-right: 20px;
+      }
+
+      .titleFintor {
+        margin-right: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #tabLogo {
+        height: 35px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 20px;
+      }
+
+      .tabButtonTab {
+        margin-right: 20px;
+      }
+
+      .tabButton {
+        width: auto;
+        min-width: 50px;
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .slogan {
+        font-size: 36px;
+        width: 100%;
+        text-align: center;
+        margin: 20px 0;
+        word-wrap: break-word;
+      }
+
+      .slogan span {
+        display: inline-block;
+      }
+
+      .LogoTitle {
+        width: 200px;
+        margin-top: 100px;
+      }
+
+      .p3d {
+        width: 90%;
+        margin-top: 100px;
+        height: 400px;
+      }
+
+      .TitleShowPho {
+        width: 100%;
+        height: auto;
+      }
+
+      .titleShow {
+        padding-top: 50px;
+        height: 700px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 100px;
+        font-size: 16px;
+      }
+
+      .features {
+        height: auto;
+        min-height: 600px;
+      }
+
+      .backgroundF {
+        height: 700px;
+        margin-top: -40px;
+      }
+
+      .featureCards {
+        align-items: center;
+      }
+
+      .featureCard {
+        width: 80%;
+        margin: 10px 0;
+      }
+
+      .featureCard:hover {
+        width: 80%;
+        height: auto;
+        min-height: 200px;
+      }
+
+      .featureTitle {
+        transform: none;
+        text-align: center;
+        top: 20px;
+      }
+
+      .featureCard:hover .featureTitle {
+        position: static;
+        top: auto;
+        transform: none;
+      }
+
+      .featureDesc {
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .titleF {
+        font-size: large;
+        justify-content: center;
+        margin-right: 0;
+      }
+
+      .titleFintor {
+        font-size: medium;
+        justify-content: center;
+        margin-right: 0;
+      }
+
+      .Update {
+        margin-top: 100px;
+        height: auto;
+        min-height: 500px;
+      }
+
+      .updateT {
+        font-size: x-large;
+      }
+
+      .updateTIn {
+        font-size: medium;
+      }
+
+      .ubg {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        margin-top: -100px;
+      }
+
+      .end {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto;
+        padding: 40px 20px;
+      }
+
+      .endlogo {
+        width: 150px;
+      }
+
+      .link {
+        margin-top: 20px;
+      }
+
+      .download-panel-inner {
+        padding: 0 10px;
+      }
+
+      .filter-tabs {
+        justify-content: center;
+      }
+
+      .filter-tab {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .download-item {
+        padding: 12px 10px;
+      }
+
+      .download-item-name {
+        font-size: 14px;
+      }
+
+      .tabButton a {
+        font-size: 13px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        min-height: 48px;
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab {
+        padding: 8px 0;
+        height: 50px;
+      }
+
+      .tabButtonTab {
+        margin-right: 10px;
+      }
+
+      .tabButton {
+        min-width: 50px;
+        font-size: 12px;
+        padding: 0 5px;
+        width: auto;
+      }
+
+      .slogan {
+        font-size: 24px;
+        line-height: 1.4;
+        text-shadow: 5px 5px 10px #111;
+      }
+
+      .LogoTitle {
+        width: 150px;
+        margin-top: 60px;
+      }
+
+      .p3d {
+        margin-top: 80px;
+        height: 300px;
+      }
+
+      .titleShow {
+        padding-top: 30px;
+        height: 600px;
+        padding-bottom: 20px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 120px;
+        height: 35px;
+        font-size: 14px;
+        margin: 5px;
+      }
+
+      .featureCard {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .featureCard:hover {
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+      }
+
+      .titleF {
+        font-size: medium;
+        padding: 0 10px;
+      }
+
+      .titleFintor {
+        font-size: small;
+        padding: 0 10px;
+      }
+
+      .backgroundF {
+        height: 600px;
+        margin-top: -20px;
+      }
+
+      .features {
+        min-height: 500px;
+      }
+
+      .updateT {
+        font-size: large;
+      }
+
+      .updateTIn {
+        font-size: small;
+      }
+
+      .ubg {
+        margin-top: -80px;
+      }
+
+      .end {
+        padding: 30px 15px;
+      }
+
+      .endlogo {
+        width: 120px;
+      }
+
+      .endby {
+        font-size: medium;
+      }
+
+      .link {
+        font-size: medium;
+      }
+
+      .introend {
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .footerT {
+        font-size: 9px;
+      }
+
+      .download-card-title {
+        font-size: 14px;
+      }
+
+      .download-panel {
+        max-height: 400px;
+      }
+
+      .download-panel.show {
+        max-height: 400px;
+        padding: 10px 0;
+      }
+
+      .download-item {
+        padding: 14px 8px;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .download-item-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .download-item-name {
+        font-size: 13px;
+        word-break: break-all;
+      }
+
+      .download-item-size {
+        font-size: 11px;
+      }
+
+      .download-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .tabButton a {
+        font-size: 12px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 130px;
+        height: 44px;
+        font-size: 14px;
+        margin: 8px;
+        min-height: 44px;
+      }
+
+    @media (max-width: 320px) {
+      .slogan {
+        font-size: 20px;
+      }
+
+      .LogoTitle {
+        width: 120px;
+        margin-top: 40px;
+      }
+
+      .p3d {
+        height: 200px;
+      }
+
+      .titleShow {
+        height: 500px;
+      }
+
+      .OnlineButton,
+      .DesktopButton {
+        width: 110px;
+        height: 40px;
+        font-size: 12px;
+        min-height: 40px;
+      }
+
+      .featureCard {
+        width: 95%;
+        padding: 15px;
+      }
+
+      .featureCard:hover {
+        width: 95%;
+      }
+
+      .featureTitle {
+        font-size: 14px;
+      }
+
+      .featureDesc {
+        font-size: 12px;
+      }
+
+      .tabButton a {
+        font-size: 11px;
+      }
+
+      .download-card-title {
+        font-size: 13px;
+      }
+
+      .filter-tab {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+
+      .endlogo {
+        width: 100px;
+      }
+
+      .endby {
+        font-size: small;
+      }
+
+      .link {
+        font-size: small;
+      }
+    }
+  </style>
+  
+  <link rel="canonical" href="https://editors.astras.cc/">
+  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
+  <style>
+    .loading {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--bg-color);
+      z-index: 100000000;
+      transition: 1s ease;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading svg {
+      width: 5rem;
+      margin-bottom: 2rem;
+      overflow: visible;
+      transition: 0.3s ease;
+    }
+
+    .loading svg circle {
+      fill: none;
+      stroke: var(--text-primary);
+      stroke-width: 12;
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      transform-origin: center;
+      animation: circle_rotate 3s ease-in infinite;
+    }
+
+    @keyframes circle_rotate {
+
+      0% {
+        transform: rotate(0deg);
+        stroke-dashoffset: 160;
+      }
+
+      100% {
+        transform: rotate(360deg);
+        stroke-dashoffset: -160;
+      }
+    }
+
+    .loading p {
+      font-family: sans-serif;
+      font-size: 2rem;
+      color: var(--text-primary);
+      font-weight: 900;
+      transition: 0.3s ease;
+    }
+
+    .loading_out {
+      transform: translateY(100%);
+    }
+
+    .loading_out svg,
+    .loading_out p {
+      opacity: 0;
+    }
+
+    .pointer {
+      --width: 2.5rem;
+      --height: 2.5rem;
+      position: fixed;
+      top: calc(var(--height) / -2);
+      left: calc(var(--width) / -2);
+      width: var(--width);
+      height: var(--height);
+      transition: all 0.18s ease-out;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .pointer div {
+      position: absolute;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-width: 0.2rem;
+      border-color: #0099ff;
+    }
+
+    .pointer div:nth-child(1) {
+      top: 0;
+      left: 0;
+      border-top-style: solid;
+      border-left-style: solid;
+    }
+
+    .pointer div:nth-child(2) {
+      top: 0;
+      right: 0;
+      border-top-style: solid;
+      border-right-style: solid;
+    }
+
+    .pointer div:nth-child(3) {
+      bottom: 0;
+      left: 0;
+      border-bottom-style: solid;
+      border-left-style: solid;
+    }
+
+    .pointer div:nth-child(4) {
+      bottom: 0;
+      right: 0;
+      border-bottom-style: solid;
+      border-right-style: solid;
+    }
+  </style>
+</head>
+
+<body onload="initPointer()">
+  <div class="bg-ae">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="50%" y="60%" font-size="160" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle" fill="none" stroke="currentColor" stroke-width="1" style="animation: slideInLeft 1s ease-out">Æ</text>
+    </svg>
+  </div>
+  <div class="loading">
+    <svg viewbox='0 0 50 50'>
+      <circle r='25' cx='25' cy='25'></circle>
+    </svg>
+    <p>LOADING</p>
+  </div>
+  <div class="pointer">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="tab">
+    <img src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;1229&quot; height=&quot;290&quot;&gt;&lt;rect fill-opacity=&quot;0&quot;/&gt;&lt;/svg&gt;" alt="logo" id="tabLogo" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-1)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
+    <div class="tabButtonTab">
+      <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()">
+        <a href="javascript:void(0)" class="tabButton">夜间</a>
+      </button>
+      <button type="button" class="tabButton" id="lang-toggle-btn" onclick="toggleLang()">
+        <a href="javascript:void(0)" class="tabButton">EN</a>
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="page" id="page-home" data-page="home" style="display:block;animation:0.4s ease-out 0s 1 normal none running fadeIn">
+      <div class="horizontal-content" id="horizontal-content">
+        <div class="h-card" onclick="animateToPage('https://editors.astras.cc/')">
+          <span class="h-card-title" data-i18n="官网(.cc)">官网(.cc)</span>
+          <span class="h-card-subtitle">editors.astras.cc</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://download.astras.cc/')">
+          <span class="h-card-title" data-i18n="下载站(.cc)">下载站(.cc)</span>
+          <span class="h-card-subtitle">download.astras.cc</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://editors.astras.top/')">
+          <span class="h-card-title" data-i18n="官网(.top)">官网(.top)</span>
+          <span class="h-card-subtitle">editors.astras.top</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://colid.mysxl.cn/')">
+          <span class="h-card-title" data-i18n="COLID Studio">COLID Studio</span>
+          <span class="h-card-subtitle">colid.mysxl.cn</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://colidns.mysxl.cn/')">
+          <span class="h-card-title" data-i18n="COLID NS UI">COLID NS UI</span>
+          <span class="h-card-subtitle">colidns.mysxl.cn</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://ningqi24.mysxl.cn/')">
+          <span class="h-card-title" data-i18n="ningqi作品集-旧">ningqi作品集-旧</span>
+          <span class="h-card-subtitle">ningqi24.mysxl.cn</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://github.com/ningqi24')">
+          <span class="h-card-title" data-i18n="ningqi-github">ningqi-github</span>
+          <span class="h-card-subtitle">github.com/ningqi24</span>
+        </div>
+        <div class="h-card" onclick="animateToPage('https://simplechatmini.astras.cc/')">
+          <span class="h-card-title" data-i18n="SimpleChatMini">SimpleChatMini</span>
+          <span class="h-card-subtitle">simplechatmini.astras.cc</span>
+        </div>
+      </div>
+    </div>
+    <div class="page" id="page-changelog" data-page="changelog" style="display:none;animation:0.4s ease-out 0s 1 normal none running fadeIn"></div>
+    <div class="page" id="page-download" data-page="download" style="display:none"></div>
+  </div>
+  <div class="end">
+    <div class="end-content">
+      <div>
+        <img src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;1229&quot; height=&quot;290&quot;&gt;&lt;rect fill-opacity=&quot;0&quot;/&gt;&lt;/svg&gt;" alt="updateBG" class="endlogo" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-1)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><br>
+        <span class="endby">Astra.CC</span><br>
+        <span class="introend">
+          本项目与 AstraEditor 项目组 无关
+        </span>
+      </div>
+      <div>
+        <a id="qq-button" class="tabButton" href="https://qm.qq.com/q/ynYzV85oHY"><img src="images/qq.png" width="20" height="20" alt="QQ"></a><br>
+      </div>
+    </div>
+    <div class="end-copyright">
+      2026 Bilibili@ningqi 参与制作
+    </div>
+  </div>
+<script>
+  const pointer = {
+    container: document.querySelector(".pointer"),
+    current_target: null,
+    lastX: 0,
+    lastY: 0,
+    isScrolling: false,
+    scrollTimeout: null,
+    rafId: null,
+    isRunning: false,
+    init() {
+      document.addEventListener("mousemove", this.onMouseMove.bind(this), { passive: true });
+      document.addEventListener("scroll", this.onScroll.bind(this), { passive: true, capture: true });
+      document.addEventListener("mousedown", this.onMouseDown.bind(this), { passive: true });
+      document.addEventListener("mouseup", this.onMouseUp.bind(this), { passive: true });
+      window.addEventListener("resize", this.onResize.bind(this), { passive: true });
+      this.bind_targets_events();
+      this.startLoop();
+    },
+    startLoop() {
+      if (this.isRunning) return;
+      this.isRunning = true;
+      const loop = () => {
+        if (!this.isRunning) return;
+        this.updatePosition();
+        this.rafId = requestAnimationFrame(loop);
+      };
+      this.rafId = requestAnimationFrame(loop);
+    },
+    stopLoop() {
+      this.isRunning = false;
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
+    },
+    onMouseMove(e) {
+      this.lastX = e.clientX;
+      this.lastY = e.clientY;
+    },
+    onMouseDown(e) {
+      const target = e.target;
+      if (target && (
+        target === document.documentElement ||
+        target === document.body ||
+        window.getComputedStyle(target).overflow === 'scroll' ||
+        window.getComputedStyle(target).overflowY === 'scroll' ||
+        window.getComputedStyle(target).overflowX === 'scroll' ||
+        target.closest('.custom-dropdown-menu') !== null
+      )) {
+        const rect = target.getBoundingClientRect();
+        const isNearScrollbarX = Math.abs(e.clientX - rect.right) < 20 && rect.height > window.innerHeight;
+        const isNearScrollbarY = Math.abs(e.clientY - rect.bottom) < 20 && rect.width > window.innerWidth;
+        if (isNearScrollbarX || isNearScrollbarY || target === document.documentElement || target === document.body) {
+          this.isScrolling = true;
+        }
+      }
+    },
+    onMouseUp() {
+      this.isScrolling = false;
+    },
+    updatePosition() {
+      let x = this.lastX;
+      let y = this.lastY;
+      if (x === 0 && y === 0) return;
+      if (this.current_target && this.current_target.isConnected) {
+        const rect = this.current_target.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          const center_x = rect.left + rect.width / 2;
+          const center_y = rect.top + rect.height / 2;
+          x = center_x + (x - center_x) * 0.5;
+          y = center_y + (y - center_y) * 0.5;
+        } else {
+          this.current_target = null;
+          this.container.style.setProperty("--width", "2.5rem");
+          this.container.style.setProperty("--height", "2.5rem");
+        }
+      }
+      this.container.style.transform = `translate(${x}px, ${y}px)`;
+    },
+    onScroll() {
+      this.isScrolling = true;
+      if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.isScrolling = false;
+      }, 150);
+      if (this.current_target && this.current_target.isConnected) {
+        const rect = this.current_target.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) {
+          this.current_target = null;
+          this.container.style.setProperty("--width", "2.5rem");
+          this.container.style.setProperty("--height", "2.5rem");
+        }
+      }
+    },
+    onResize() {
+      this.updatePosition();
+    },
+    bind_targets_events() {
+      const targets = document.querySelectorAll("a, button, select, .featureCard, .OnlineButton, .DesktopButton, .tabButton, .download-card-header, .download-item, .custom-dropdown-button, .custom-dropdown-option, .h-card");
+      targets.forEach(ele => {
+        ele.classList.add("magnetic-target");
+        ele.onmouseenter = () => {
+          this.current_target = ele;
+          const rect = ele.getBoundingClientRect();
+          this.container.style.setProperty("--width", rect.width + 10 + "px");
+          this.container.style.setProperty("--height", rect.height + 10 + "px");
+        };
+        ele.onmouseleave = () => {
+          this.current_target = null;
+          this.container.style.setProperty("--width", "2.5rem");
+          this.container.style.setProperty("--height", "2.5rem");
+        };
+      });
+    }
+  };
+
+  function initPointer() {
+    pointer.init();
+  }
+
+  let downloadData = {
+    windows: [],
+    macos: [],
+    linux: [],
+    source: []
+  };
+
+  let currentPlatform = '';
+
+  function toggleDownloadCard(key) {
+    const card = document.getElementById(`download-card-${key}`);
+    const content = document.getElementById(`download-content-${key}`);
+    if (!card || !content) return;
+
+    const isExpanded = card.classList.contains('expanded');
+
+    document.querySelectorAll('.download-card.expanded').forEach(el => {
+      el.classList.remove('expanded');
+    });
+
+    if (!isExpanded) {
+      loadCardContent(key);
+      card.classList.add('expanded');
+      currentPlatform = key;
+    } else {
+      currentPlatform = '';
+    }
+  }
+
+  function loadCardContent(key) {
+    const filterTabs = document.getElementById(`filter-tabs-${key}`);
+    const items = document.getElementById(`download-items-${key}`);
+    if (!filterTabs || !items) return;
+
+    const assets = downloadData[key] || [];
+    let filterTabsHtml = '';
+    if (key === 'linux') {
+      filterTabsHtml = `
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('amd', '${key}')" data-i18n="amd">AMD64</button>
+        <button class="filter-tab" onclick="selectFilter('arm', '${key}')" data-i18n="arm">ARM64</button>
+        <button class="filter-tab" onclick="selectFilter('arm32', '${key}')" data-i18n="arm32">armv7</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('deb', '${key}')" data-i18n="deb">.deb</button>
+        <button class="filter-tab" onclick="selectFilter('rpm', '${key}')" data-i18n="rpm">.rpm</button>
+        <button class="filter-tab" onclick="selectFilter('appimage', '${key}')" data-i18n="appimage">AppImage</button>
+        <button class="filter-tab" onclick="selectFilter('snap', '${key}')" data-i18n="snap">.snap</button>
+        <button class="filter-tab" onclick="selectFilter('tar', '${key}')" data-i18n="tar">.tar.gz</button>
+        <button class="filter-tab" onclick="selectFilter('tarxz', '${key}')" data-i18n="tarxz">.tar.xz</button>
+        <button class="filter-tab" onclick="selectFilter('pkgzst', '${key}')" data-i18n="pkgzst">.pkg.tar.zst</button>
+        <button class="filter-tab" onclick="selectFilter('tarzst', '${key}')" data-i18n="tarzst">.tar.zst</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
+      `;
+    } else if (key === 'windows') {
+      filterTabsHtml = `
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('x64', '${key}')" data-i18n="x64">x64</button>
+        <button class="filter-tab" onclick="selectFilter('x86', '${key}')" data-i18n="x86">x86</button>
+        <button class="filter-tab" onclick="selectFilter('arm64', '${key}')" data-i18n="arm64">ARM64</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('exe', '${key}')" data-i18n="exe">.exe</button>
+        <button class="filter-tab" onclick="selectFilter('msi', '${key}')" data-i18n="msi">.msi</button>
+        <button class="filter-tab" onclick="selectFilter('appx', '${key}')" data-i18n="appx">.appx</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
+      `;
+    } else if (key === 'macos') {
+      filterTabsHtml = `
+        <button class="filter-tab active" onclick="selectFilter('all', '${key}')" data-i18n="全部">全部</button>
+        <button class="filter-tab" onclick="selectFilter('x64', '${key}')" data-i18n="x64">x64</button>
+        <button class="filter-tab" onclick="selectFilter('arm', '${key}')" data-i18n="arm">ARM64</button>
+        <span style="color:var(--text-secondary);font-size:12px;margin:0 8px">|</span>
+        <button class="filter-tab" onclick="selectFilter('dmg', '${key}')" data-i18n="dmg">.dmg</button>
+        <button class="filter-tab" onclick="selectFilter('pkg', '${key}')" data-i18n="pkg">.pkg</button>
+        <button class="filter-tab" onclick="selectFilter('zip', '${key}')" data-i18n="zip">.zip</button>
+      `;
+    }
+
+    let itemsHtml = '';
+    assets.forEach(asset => {
+      const arch = detectArch(asset.name, key);
+      const suffix = detectSuffix(asset.name, key);
+      itemsHtml += `<div class="download-item" data-arch="${arch}" data-suffix="${suffix}" data-platform="${key}" onclick="animateToPage('${asset.proxied_url}')">`;
+      itemsHtml += `<span class="download-item-name">${asset.name}</span>`;
+      itemsHtml += '</div>';
+    });
+
+    filterTabs.innerHTML = filterTabsHtml;
+    items.innerHTML = itemsHtml;
+    pointer.bind_targets_events();
+    applyLang();
+    selectFilter('all', key);
+  }
+
+  function switchPlatform(key) {
+    toggleDownloadCard(key);
+  }
+
+  let currentArch = 'all';
+  let currentSuffix = 'all';
+
+  function detectArch(filename, platform) {
+    const name = filename.toLowerCase();
+    if (platform === 'windows') {
+      if (name.includes('amd64') || name.includes('x86_64') || name.includes('x64') || name.includes('64bit') || name.includes('win64')) return 'x64';
+      if (name.includes('i386') || name.includes('i686') || name.includes('x86') || name.includes('win32') || name.includes('ia32')) return 'x86';
+      if (name.includes('arm64') || name.includes('aarch64')) return 'arm64';
+      return 'x64';
+    } else if (platform === 'macos') {
+      if (name.includes('arm64') || name.includes('aarch64') || name.includes('apple-silicon') || name.includes('macos-arm')) return 'arm';
+      if (name.includes('x64') || name.includes('x86_64') || name.includes('intel') || name.includes('macos-x64')) return 'x64';
+      return 'x64';
+    } else {
+      if (name.includes('amd64') || name.includes('x86_64') || name.includes('x64') || name.includes('64bit')) return 'amd';
+      if (name.includes('arm64') || name.includes('aarch64') || name.includes('armv8')) return 'arm';
+      if (name.includes('armhf') || name.includes('armv7') || name.includes('armv6') || name.includes('rpi') || name.includes('hf')) return 'arm32';
+      return 'amd';
+    }
+  }
+
+  function detectSuffix(filename, platform) {
+    const name = filename.toLowerCase();
+    if (platform === 'windows') {
+      if (name.endsWith('.exe')) return 'exe';
+      if (name.endsWith('.msi')) return 'msi';
+      if (name.endsWith('.appx') || name.endsWith('.appxBundle')) return 'appx';
+      if (name.endsWith('.zip')) return 'zip';
+      return 'other';
+    } else if (platform === 'macos') {
+      if (name.endsWith('.dmg')) return 'dmg';
+      if (name.endsWith('.pkg')) return 'pkg';
+      if (name.endsWith('.zip')) return 'zip';
+      return 'other';
+    } else {
+      if (name.endsWith('.deb')) return 'deb';
+      if (name.endsWith('.rpm')) return 'rpm';
+      if (name.endsWith('.appimage') || name.includes('appimage')) return 'appimage';
+      if (name.endsWith('.snap')) return 'snap';
+      if (name.endsWith('.tar.gz') || name.endsWith('.tgz')) return 'tar';
+      if (name.endsWith('.tar.xz') || name.endsWith('.txz')) return 'tarxz';
+      if (name.endsWith('.pkg.tar.zst')) return 'pkgzst';
+      if (name.endsWith('.tar.zst')) return 'tarzst';
+      if (name.endsWith('.zip')) return 'zip';
+      return 'other';
+    }
+  }
+
+  function selectFilter(value, platform) {
+    const archValues = ['amd', 'arm', 'arm32', 'x64', 'x86', 'arm64'];
+    const suffixValues = ['deb', 'rpm', 'appimage', 'snap', 'tar', 'tarxz', 'pkgzst', 'tarzst', 'zip', 'exe', 'msi', 'dmg', 'pkg', 'appx'];
+    const targetPlatform = platform || currentPlatform;
+    const filterTabsEl = document.getElementById(`filter-tabs-${targetPlatform}`);
+    if (!filterTabsEl) return;
+
+    const allTab = filterTabsEl.querySelector('.filter-tab[data-i18n="全部"]');
+
+    if (value === 'all') {
+      currentArch = 'all';
+      currentSuffix = 'all';
+      filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      if (allTab) {
+        allTab.classList.add('active');
+      }
+    } else if (archValues.includes(value)) {
+      const tab = filterTabsEl.querySelector(`.filter-tab[data-i18n="${value}"]`);
+      if (tab) {
+        if (tab.classList.contains('active')) {
+          tab.classList.remove('active');
+        } else {
+          filterTabsEl.querySelectorAll('.filter-tab').forEach(t => {
+            const tabValue = t.getAttribute('data-i18n');
+            if (archValues.includes(tabValue)) {
+              t.classList.remove('active');
+            }
+          });
+          tab.classList.add('active');
+        }
+      }
+      if (allTab) {
+        allTab.classList.remove('active');
+      }
+    } else if (suffixValues.includes(value)) {
+      const tab = filterTabsEl.querySelector(`.filter-tab[data-i18n="${value}"]`);
+      if (tab) {
+        if (tab.classList.contains('active')) {
+          tab.classList.remove('active');
+        } else {
+          filterTabsEl.querySelectorAll('.filter-tab').forEach(t => {
+            const tabValue = t.getAttribute('data-i18n');
+            if (suffixValues.includes(tabValue)) {
+              t.classList.remove('active');
+            }
+          });
+          tab.classList.add('active');
+        }
+      }
+      if (allTab) {
+        allTab.classList.remove('active');
+      }
+    }
+
+    let activeArch = 'all';
+    let activeSuffix = 'all';
+
+    filterTabsEl.querySelectorAll('.filter-tab.active').forEach(tab => {
+      const tabValue = tab.getAttribute('data-i18n');
+      if (archValues.includes(tabValue)) {
+        activeArch = tabValue;
+      } else if (suffixValues.includes(tabValue)) {
+        activeSuffix = tabValue;
+      }
+    });
+
+    currentArch = activeArch;
+    currentSuffix = activeSuffix;
+
+    const activeTabs = filterTabsEl.querySelectorAll('.filter-tab.active');
+    const hasActiveFilters = activeTabs.length > 0 && !filterTabsEl.querySelector('.filter-tab.active[data-i18n="全部"]');
+
+    if (!hasActiveFilters && activeTabs.length === 0) {
+      currentArch = 'all';
+      currentSuffix = 'all';
+      filterTabsEl.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      if (allTab) {
+        allTab.classList.add('active');
+      }
+    }
+
+    filterDownloadItems(targetPlatform);
+  }
+
+  function filterDownloadItems(platform) {
+    const targetPlatform = platform || currentPlatform;
+    const itemsContainer = document.getElementById(`download-items-${targetPlatform}`);
+    if (!itemsContainer) return;
+    const items = itemsContainer.querySelectorAll('.download-item');
+    items.forEach(item => {
+      const itemArch = item.getAttribute('data-arch');
+      const itemSuffix = item.getAttribute('data-suffix');
+      const archMatch = currentArch === 'all' || itemArch === currentArch;
+      const suffixMatch = currentSuffix === 'all' || itemSuffix === currentSuffix;
+      item.style.display = archMatch && suffixMatch ? 'flex' : 'none';
+    });
+  }
+
+  function hideDownloadPanel() {
+    document.querySelectorAll('.download-card.expanded').forEach(el => el.classList.remove('expanded'));
+    currentPlatform = '';
+  }
+
+  let currentTheme = localStorage.getItem('selectedTheme') || 'light';
+  let currentLang = localStorage.getItem('selectedLang') || 'zh';
+
+  function toggleTheme() {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('selectedTheme', currentTheme);
+    localStorage.setItem('themeAutoDetect', 'false');
+    applyTheme();
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('selectedLang', currentLang);
+    localStorage.setItem('langAutoDetect', 'false');
+    applyLang();
+  }
+
+  const translations = {
+    zh: {
+      '官网(.cc)': '官网(.cc)',
+      '下载站(.cc)': '下载站(.cc)',
+      '官网(.top)': '官网(.top)',
+      'COLID Studio': 'COLID Studio',
+      'COLID NS UI': 'COLID NS UI',
+      'ningqi作品集-旧': 'ningqi作品集-旧',
+      'ningqi-github': 'ningqi-github',
+      'SimpleChatMini': 'SimpleChatMini',
+      'Astra.CC': 'Astra.CC',
+      '本项目与 AstraEditor 项目组 无关': '本项目与 AstraEditor 项目组 无关',
+      '2026 Bilibili@ningqi 参与制作': '2026 Bilibili@ningqi 参与制作',
+      '夜间': '日间',
+      '日间': '夜间',
+      'EN': 'EN'
+    },
+    en: {
+      '官网(.cc)': 'Official (.cc)',
+      '下载站(.cc)': 'Download (.cc)',
+      '官网(.top)': 'Official (.top)',
+      'COLID Studio': 'COLID Studio',
+      'COLID NS UI': 'COLID NS UI',
+      'ningqi作品集-旧': 'ningqi Works - Old',
+      'ningqi-github': 'ningqi-github',
+      'SimpleChatMini': 'SimpleChatMini',
+      'Astra.CC': 'Astra.CC',
+      '本项目与 AstraEditor 项目组 无关': 'Not affiliated with AstraEditor team',
+      '2026 Bilibili@ningqi 参与制作': '2026 Made by Bilibili@ningqi',
+      '夜间': 'Day Mode',
+      '日间': 'Night Mode',
+      'EN': '中文'
+    }
+  };
+
+  function applyLang() {
+    const btn = document.getElementById('lang-toggle-btn');
+    if (btn) {
+      btn.innerHTML = `<a href="javascript:void(0)" class="tabButton">${currentLang === 'zh' ? translations[currentLang]['EN'] : translations[currentLang]['中文']}</a>`;
+    }
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.textContent = translations[currentLang][key];
+      }
+    });
+    document.querySelectorAll('#theme-toggle-btn a.tabButton').forEach(el => {
+      el.textContent = currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间'];
+    });
+    document.querySelectorAll('.endby').forEach(el => {
+      el.textContent = translations[currentLang]['Astra.CC'];
+    });
+    document.querySelectorAll('.introend').forEach(el => {
+      el.textContent = translations[currentLang]['本项目与 AstraEditor 项目组 无关'];
+    });
+    document.querySelectorAll('.end-copyright').forEach(el => {
+      el.textContent = translations[currentLang]['2026 Bilibili@ningqi 参与制作'];
+    });
+  }
+
+  function applyTheme() {
+    const btn = document.getElementById('theme-toggle-btn');
+    if (btn) {
+      btn.innerHTML = `<a href="javascript:void(0)" class="tabButton">${currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间']}</a>`;
+    }
+    if (currentTheme === 'light') {
+      document.documentElement.classList.add('daylight-mode');
+      document.body.classList.add('daylight-mode');
+    } else {
+      document.documentElement.classList.remove('daylight-mode');
+      document.body.classList.remove('daylight-mode');
+    }
+  }
+
+  function autoDetectTheme() {
+    const autoDetect = localStorage.getItem('themeAutoDetect') !== 'false';
+    if (autoDetect) {
+      const hour = new Date().getHours();
+      if (hour >= 6 && hour< 18) {
+        currentTheme = 'light';
+      } else {
+        currentTheme = 'dark';
+      }
+      localStorage.setItem('selectedTheme', currentTheme);
+      localStorage.setItem('themeAutoDetect', 'true');
+      applyTheme();
+    }
+  }
+
+  function autoDetectLang() {
+    const autoDetect = localStorage.getItem('langAutoDetect') !== 'false';
+    if (autoDetect) {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang.startsWith('zh')) {
+        currentLang = 'zh';
+      } else {
+        currentLang = 'en';
+      }
+      localStorage.setItem('selectedLang', currentLang);
+      localStorage.setItem('langAutoDetect', 'true');
+      applyLang();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('selectedTheme')) {
+      autoDetectTheme();
+    } else {
+      applyTheme();
+    }
+    if (!localStorage.getItem('selectedLang')) {
+      autoDetectLang();
+    } else {
+      applyLang();
+    }
+    initAeScrollEffect();
+  });
+
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown.show').forEach(el => el.classList.remove('show'));
+    }
+    if (!event.target.closest('.custom-dropdown')) {
+      document.querySelectorAll('.custom-dropdown-menu.show').forEach(el => el.classList.remove('show'));
+    }
+    if (!event.target.closest('.download-card') && !event.target.closest('.download-card-content')) {
+      hideDownloadPanel();
+    }
+  });
+
+  function animateToPage(url) {
+    const loadingContainer = document.querySelector(".loading");
+    if (loadingContainer) loadingContainer.classList.remove("loading_out");
+    setTimeout(() => {
+      window.location.href = url;
+    }, 1000);
+  }
+
+  window.addEventListener("load", () => {
+    const loadingContainer = document.querySelector(".loading");
+    if (loadingContainer) loadingContainer.classList.add("loading_out");
+  });
+
+  function initAeScrollEffect() {
+    const bgAe = document.querySelector('.bg-ae');
+    if (!bgAe) return;
+
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      );
+      const scrollableHeight = documentHeight - windowHeight;
+      
+      if (scrollableHeight > 0) {
+        const scrollProgress = scrollY / scrollableHeight;
+        
+        const translateX = (scrollProgress * 2 - 1) * 27;
+        const translateY = Math.sin(scrollProgress * Math.PI) * 27;
+        
+        bgAe.style.transform = `translate(-50%, -50%) translateX(${translateX}vmax) translateY(${translateY}vmax)`;
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+  }</script>
+</body>
+</html>
