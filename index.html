@@ -1782,40 +1782,7 @@
   </div>
   <div class="content">
     <div class="page" id="page-home" data-page="home" style="display:block;animation:0.4s ease-out 0s 1 normal none running fadeIn">
-      <div class="horizontal-content" id="horizontal-content">
-        <div class="h-card" onclick="animateToPage('https://editors.astras.cc/')">
-          <span class="h-card-title" data-i18n="官网(.cc)">官网(.cc)</span>
-          <span class="h-card-subtitle">editors.astras.cc</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://download.astras.cc/')">
-          <span class="h-card-title" data-i18n="下载站(.cc)">下载站(.cc)</span>
-          <span class="h-card-subtitle">download.astras.cc</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://editors.astras.top/')">
-          <span class="h-card-title" data-i18n="官网(.top)">官网(.top)</span>
-          <span class="h-card-subtitle">editors.astras.top</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://colid.mysxl.cn/')">
-          <span class="h-card-title" data-i18n="COLID Studio">COLID Studio</span>
-          <span class="h-card-subtitle">colid.mysxl.cn</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://colidns.mysxl.cn/')">
-          <span class="h-card-title" data-i18n="COLID NS UI">COLID NS UI</span>
-          <span class="h-card-subtitle">colidns.mysxl.cn</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://ningqi24.mysxl.cn/')">
-          <span class="h-card-title" data-i18n="ningqi作品集-旧">ningqi作品集-旧</span>
-          <span class="h-card-subtitle">ningqi24.mysxl.cn</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://github.com/ningqi24')">
-          <span class="h-card-title" data-i18n="ningqi-github">ningqi-github</span>
-          <span class="h-card-subtitle">github.com/ningqi24</span>
-        </div>
-        <div class="h-card" onclick="animateToPage('https://simplechatmini.astras.cc/')">
-          <span class="h-card-title" data-i18n="SimpleChatMini">SimpleChatMini</span>
-          <span class="h-card-subtitle">simplechatmini.astras.cc</span>
-        </div>
-      </div>
+      <div class="horizontal-content" id="horizontal-content"></div>
     </div>
     <div class="page" id="page-changelog" data-page="changelog" style="display:none;animation:0.4s ease-out 0s 1 normal none running fadeIn"></div>
     <div class="page" id="page-download" data-page="download" style="display:none"></div>
@@ -1964,6 +1931,42 @@
     linux: [],
     source: []
   };
+
+  let siteButtons = [];
+
+  async function loadSiteButtons() {
+    try {
+      const response = await fetch('site.json');
+      if (!response.ok) throw new Error('Failed to load site.json');
+      const data = await response.json();
+      siteButtons = data.buttons || [];
+      renderSiteButtons();
+    } catch (error) {
+      console.error('Error loading site buttons:', error);
+    }
+  }
+
+  function renderSiteButtons() {
+    const container = document.getElementById('horizontal-content');
+    if (!container || siteButtons.length === 0) return;
+    container.innerHTML = '';
+    siteButtons.forEach(button => {
+      const card = document.createElement('div');
+      card.className = 'h-card';
+      card.onclick = () => animateToPage(button.url);
+      const title = document.createElement('span');
+      title.className = 'h-card-title';
+      title.setAttribute('data-i18n', button.name);
+      title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+      const subtitle = document.createElement('span');
+      subtitle.className = 'h-card-subtitle';
+      subtitle.textContent = button.subtitle;
+      card.appendChild(title);
+      card.appendChild(subtitle);
+      container.appendChild(card);
+    });
+    pointer.bind_targets_events();
+  }
 
   let currentPlatform = '';
 
@@ -2286,6 +2289,7 @@
     document.querySelectorAll('.end-copyright').forEach(el => {
       el.textContent = translations[currentLang]['2026 Bilibili@ningqi 参与制作'];
     });
+    renderSiteButtons();
   }
 
   function applyTheme() {
@@ -2343,6 +2347,7 @@
     } else {
       applyLang();
     }
+    loadSiteButtons();
     initAeScrollEffect();
   });
 

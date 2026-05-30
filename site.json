@@ -1,0 +1,58 @@
+{
+  "buttons": [
+    {
+      "name": "官网-官方原版(.top)",
+      "name_en": "Official - Original (.top)",
+      "subtitle": "editors.astras.top",
+      "url": "https://editors.astras.top/"
+    },
+    {
+      "name": "官网-CC特制版(.cc)",
+      "name_en": "Official - Special (.cc)",
+      "subtitle": "editors.astras.cc",
+      "url": "https://editors.astras.cc/"
+    },
+    {
+      "name": "AstraEditor下载站(.cc)",
+      "name_en": "AstraEditor Download (.cc)",
+      "subtitle": "download.astras.cc",
+      "url": "https://download.astras.cc/"
+    },
+    {
+      "name": "极简搜索标签页",
+      "name_en": "Simple Search Tab",
+      "subtitle": "search.astras.cc",
+      "url": "https://search.astras.cc/"
+    },
+    {
+      "name": "COLID Studio",
+      "name_en": "COLID Studio",
+      "subtitle": "colid.mysxl.cn",
+      "url": "https://colid.mysxl.cn/"
+    },
+    {
+      "name": "COLID NS UI",
+      "name_en": "COLID NS UI",
+      "subtitle": "colidns.mysxl.cn",
+      "url": "https://colidns.mysxl.cn/"
+    },
+    {
+      "name": "ToingOS/NQOS UI",
+      "name_en": "ToingOS/NQOS UI",
+      "subtitle": "ningqi24.mysxl.cn",
+      "url": "https://ningqi24.mysxl.cn/"
+    },
+    {
+      "name": "SimpleChatMini",
+      "name_en": "SimpleChatMini",
+      "subtitle": "simplechatmini.astras.cc",
+      "url": "https://simplechatmini.astras.cc/"
+    },
+    {
+      "name": "ningqi-github",
+      "name_en": "ningqi-github",
+      "subtitle": "github.com/ningqi24",
+      "url": "https://github.com/ningqi24"
+    }
+  ]
+}
