@@ -1,6 +1,12 @@
 {
   "buttons": [
     {
+      "name": "minichat",
+      "name_en": "MiniChat - Astras.cc",
+      "subtitle": "minichat.astras.cc",
+      "url": "https://minichat.astras.cc"
+    },
+    {
       "name": "官网-官方原版(.top)",
       "name_en": "Official - Original (.top)",
       "subtitle": "editors.astras.top",
