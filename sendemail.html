@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>发送邮件</title>
+    <title>通过此域名发送邮件</title>
     <style>
-        /* 全局重置 & 字体 */
+        /* 全局 & 字体 */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
             color: #1e293b;
         }
 
-        /* 卡片 – 极简白，无阴影，只留细边框 */
+        /* 卡片 */
         .card {
             background: #ffffff;
             width: 100%;
@@ -161,9 +161,9 @@
 
     <div class="card">
 
-        <!-- 标题：SVG 邮件图标 + 文字 -->
+        <!-- 标题行 -->
         <div class="title-row">
-            <!-- 简洁邮件图标 -->
+            <!-- 邮件图标 -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2" />
                 <path d="M22 6l-10 7L2 6" />
@@ -175,7 +175,7 @@
         <form id="emailForm">
             <div class="form-group">
                 <label for="to">收件人</label>
-                <input type="email" id="to" value="lyy201314_2023@qq.com" placeholder="example@domain.com" required>
+                <input type="email" id="to" value="example@domain.com" placeholder="example@domain.com" required>
             </div>
 
             <div class="form-group">
