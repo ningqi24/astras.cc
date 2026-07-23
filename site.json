@@ -131,6 +131,17 @@
       "tags": ["代码仓库"],
       "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
       "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories."
+    },
+    {
+      "name": "ningqi开发社",
+      "name_en": "ningqi Dev Studio",
+      "subtitle": "nqxz.mysxl.cn",
+      "url": "https://nqxz.mysxl.cn/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24",
+      "tags": ["工作室", "Scratch", "OS&UI"],
+      "description": "ningqi 的个人作品展示站，收录了 ToingOS、NQ_OS 系列等 Scratch 操作系统作品及其它项目，提供蓝奏云下载链接。",
+      "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud."
     }
   ]
 }
