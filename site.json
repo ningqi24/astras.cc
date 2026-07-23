@@ -7,7 +7,7 @@
       "url": "https://editors.astras.cc/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "编辑器"],
       "description": "AstraEditor 是一款基于 Scratch 的增强型造型编辑器，提供更好的造型编辑器、更多插件和自定义主题，让编程速度「快如闪电」。这是部署在 .cc 域名上的特制版本。",
       "description_en": "AstraEditor is an enhanced Scratch costume editor with a better paint editor, more addons, and custom themes for lightning-fast coding. This is the special version deployed on the .cc domain."
     },
@@ -18,6 +18,7 @@
       "url": "https://download.astras.cc/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
+      "tags": ["下载", "工具"],
       "description": "AstraEditor 各平台客户端下载站。提供大陆地区 GitHub 代理加速下载（按省份分配 ghproxy 节点），并附带 Chrome/Edge 并行下载提速指南。",
       "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips."
     },
@@ -28,6 +29,7 @@
       "url": "https://search.astras.cc/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
+      "tags": ["工具", "搜索"],
       "description": "一个极简风格的搜索引擎首页，界面干净清爽，专注于快速搜索。",
       "description_en": "A minimalist search engine homepage with a clean interface focused on quick searching."
     },
@@ -38,6 +40,7 @@
       "url": "https://minichat.astras.cc",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
+      "tags": ["社交", "聊天"],
       "description": "MiniChat 是一款轻量级在线聊天室（当前版本 4.0.0）。支持注册登录、全局聊天、自定义头像、桌面通知与提示音、@提醒、主题与语言切换等丰富功能。",
       "description_en": "MiniChat is a lightweight online chat room (currently v4.0.0). Features include registration/login, global chat, custom avatars, desktop notifications and sounds, @mentions, theme and language switching, and more."
     },
@@ -48,7 +51,7 @@
       "url": "https://simplechatmini.astras.cc/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "聊天", "组件"],
       "description": "基于 Scratch 的简易聊天 UI 组件，使用 WebGL 渲染，可在 Scratch 项目中嵌入聊天界面。",
       "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects."
     },
@@ -59,6 +62,7 @@
       "url": "https://astras.cc/sendemail",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
+      "tags": ["工具", "邮件"],
       "description": "使用自定义域名发送邮件的在线工具。填写收件人、主题和内容（支持 HTML 格式）即可发送邮件。",
       "description_en": "An online tool to send emails with a custom domain. Simply fill in the recipient, subject, and content (HTML supported) to send."
     },
@@ -69,6 +73,7 @@
       "url": "https://astras.cc/SignGenerator/",
       "author": "NanGua-QWQ",
       "author_url": "https://github.com/NanGua-QWQ",
+      "tags": ["工具", "生成器"],
       "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
       "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export."
     },
@@ -79,7 +84,7 @@
       "url": "https://editors.astras.top/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "编辑器"],
       "description": "AstraEditor 的官方网站（.top 域名），同样提供增强型造型编辑器、更多插件和自定义主题，内容与 .cc 版本一致。",
       "description_en": "The official website of AstraEditor on the .top domain, offering the same enhanced costume editor, more addons, and custom themes as the .cc version."
     },
@@ -90,7 +95,7 @@
       "url": "https://colid.mysxl.cn/",
       "author": "COLID Studio",
       "author_url": "https://colid.mysxl.cn/",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "操作系统", "工作室"],
       "description": "COLID 创意工作室官方网站。使用 Scratch 图形化编程制作操作系统，产品包括 COLID OS（支持窗口拖动、窗口堆叠、任务栏、拓展程序）和 Arc Os 移动端系统。",
       "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system."
     },
@@ -101,7 +106,7 @@
       "url": "https://colidns.mysxl.cn/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "操作系统", "UI"],
       "description": "COLID CE 出品的 NS UI 界面重制项目，旨在让 COLID OS 焕然一新。采用 CC-BY-4.0 开源协议，包含 NS 2.6UI 等版本，兼容部分原版拓展应用。",
       "description_en": "A UI redesign project by COLID CE, aiming to refresh COLID OS with a new look. Released under CC-BY-4.0 license, includes versions like NS 2.6UI, compatible with select original extensions."
     },
@@ -112,7 +117,7 @@
       "url": "https://ningqi24.mysxl.cn/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
-      "tags": ["Scratch"],
+      "tags": ["Scratch", "操作系统", "UI"],
       "description": "ToingOS 是 Ning Qi.24 用 Scratch 制作的操作系统，追寻 COLID OS 的质心之作。包含锁屏登录、桌面壁纸、音量/网络/蓝牙控制、设置面板、WLAN 面板、音乐应用、Dock 栏等功能，持续迭代更新至 1.995 版本。",
       "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995."
     },
@@ -123,6 +128,7 @@
       "url": "https://github.com/ningqi24",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
+      "tags": ["代码仓库"],
       "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
       "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories."
     }

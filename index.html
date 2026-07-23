@@ -240,6 +240,31 @@
       gap: 6px;
     }
 
+    .h-card-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .daylight-mode .h-card-icon {
+      background-color: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .h-card-icon img {
+      width: 24px;
+      height: 24px;
+      display: block;
+      border-radius: 4px;
+    }
+
     .h-card-title-wrap {
       display: flex;
       align-items: center;
@@ -2637,6 +2662,20 @@
         const card = document.createElement('div');
         card.className = 'h-card';
         card.onclick = () => animateToPage(button.url);
+
+        let domain;
+        try { domain = new URL(button.url).hostname; } catch(e) { domain = button.subtitle; }
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'h-card-icon';
+        const iconImg = document.createElement('img');
+        iconImg.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+        iconImg.alt = '';
+        iconImg.onerror = function() {
+          this.parentElement.style.display = 'none';
+        };
+        iconWrap.appendChild(iconImg);
+        card.appendChild(iconWrap);
 
         const left = document.createElement('div');
         left.className = 'h-card-left';
