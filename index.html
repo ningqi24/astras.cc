@@ -334,111 +334,325 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.25s ease;
       pointer-events: none;
     }
 
     .detail-modal-overlay.show {
-      background-color: rgba(0, 0, 0, 0.45);
+      background-color: rgba(0, 0, 0, 0.6);
       pointer-events: auto;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
 
     .detail-modal {
-      background-color: var(--bg-secondary);
-      border: 1px solid var(--scrollbar-thumb);
+      background-color: #1a1b26;
+      border: 1px solid #2a2b36;
       border-radius: 12px;
-      width: 90%;
-      max-width: 440px;
-      max-height: 80vh;
+      width: 92%;
+      max-width: 560px;
+      max-height: 85vh;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      transform: translateY(16px) scale(0.98);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      transform: translateY(12px);
       opacity: 0;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      font-family: var(--font-family);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       display: flex;
       flex-direction: column;
     }
 
+    .daylight-mode .detail-modal {
+      background-color: #ffffff;
+      border-color: #e5e7eb;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
+    }
+
     .detail-modal-overlay.show .detail-modal {
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
       opacity: 1;
     }
 
-    .detail-modal-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--scrollbar-thumb);
+    .detail-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .detail-modal-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .detail-modal-favicon {
-      width: 36px;
-      height: 36px;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: none;
       border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.06);
+      color: #a0a0b0;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+    }
+
+    .daylight-mode .detail-modal-close {
+      background-color: rgba(0, 0, 0, 0.04);
+      color: #6b7280;
+    }
+
+    .detail-modal-close:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .daylight-mode .detail-modal-close:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      color: #1f2937;
+    }
+
+    .detail-modal-header {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid #2a2b36;
+      position: relative;
+    }
+
+    .daylight-mode .detail-modal-header {
+      border-bottom-color: #e5e7eb;
+    }
+
+    .detail-modal-project-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .detail-modal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background-color: #252632;
+      border: 1px solid #353646;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .daylight-mode .detail-modal-favicon {
-      background-color: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.06);
+    .daylight-mode .detail-modal-icon {
+      background-color: #f3f4f6;
+      border-color: #e5e7eb;
     }
 
-    .detail-modal-favicon img {
-      width: 22px;
-      height: 22px;
-      border-radius: 4px;
+    .detail-modal-icon img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       display: block;
     }
 
     .detail-modal-title-wrap {
-      min-width: 0;
       flex: 1;
+      min-width: 0;
+      padding-right: 36px;
     }
 
     .detail-modal-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin: 0;
-      line-height: 1.4;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px 0;
+      line-height: 1.3;
       word-break: break-word;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    }
+
+    .daylight-mode .detail-modal-title {
+      color: #111827;
     }
 
     .detail-modal-domain {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-top: 2px;
+      font-size: 0.8rem;
+      color: #7a7b8a;
       font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-      opacity: 0.8;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .detail-modal-close {
+    .daylight-mode .detail-modal-domain {
+      color: #6b7280;
+    }
+
+    .detail-modal-desc {
+      font-size: 0.9rem;
+      color: #b0b0c0;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .daylight-mode .detail-modal-desc {
+      color: #4b5563;
+    }
+
+    .detail-modal-stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #2a2b36;
+    }
+
+    .daylight-mode .detail-modal-stats {
+      border-top-color: #e5e7eb;
+    }
+
+    .detail-modal-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .detail-modal-stat-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .daylight-mode .detail-modal-stat-value {
+      color: #111827;
+    }
+
+    .detail-modal-stat-label {
+      font-size: 0.72rem;
+      color: #7a7b8a;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+    }
+
+    .daylight-mode .detail-modal-stat-label {
+      color: #6b7280;
+    }
+
+    .detail-modal-body {
+      padding: 20px 28px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .detail-modal-section {
+      margin-bottom: 18px;
+    }
+
+    .detail-modal-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-modal-section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #7a7b8a;
+      margin-bottom: 8px;
+    }
+
+    .daylight-mode .detail-modal-section-label {
+      color: #6b7280;
+    }
+
+    .detail-modal-creators {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .detail-modal-creator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px 6px 6px;
+      background-color: #252632;
+      border: 1px solid #353646;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: #d0d0e0;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .daylight-mode .detail-modal-creator {
+      background-color: #f9fafb;
+      border-color: #e5e7eb;
+      color: #374151;
+    }
+
+    .detail-modal-creator:hover {
+      background-color: #2d2e3c;
+      border-color: var(--accent-color);
+      color: #fff;
+    }
+
+    .daylight-mode .detail-modal-creator:hover {
+      background-color: #f3f4f6;
+      color: #111827;
+    }
+
+    .detail-modal-creator-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #353646;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .daylight-mode .detail-modal-creator-avatar {
+      background-color: #e5e7eb;
+    }
+
+    .detail-modal-creator-avatar svg {
+      width: 12px;
+      height: 12px;
+      color: #7a7b8a;
+    }
+
+    .detail-modal-creator-name {
+      font-weight: 600;
+    }
+
+    .detail-modal-url-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background-color: #252632;
+      border: 1px solid #353646;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .daylight-mode .detail-modal-url-box {
+      background-color: #f9fafb;
+      border-color: #e5e7eb;
+    }
+
+    .detail-modal-url-box:hover {
+      border-color: var(--accent-color);
+    }
+
+    .detail-modal-url-value {
+      font-size: 0.8rem;
+      color: #d0d0e0;
+      word-break: break-all;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      flex: 1;
+    }
+
+    .daylight-mode .detail-modal-url-value {
+      color: #374151;
+    }
+
+    .detail-modal-url-copy {
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -448,187 +662,87 @@
       border: none;
       border-radius: 6px;
       background-color: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      padding: 0;
-    }
-
-    .detail-modal-close:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
-    }
-
-    .daylight-mode .detail-modal-close:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .detail-modal-body {
-      padding: 20px 24px;
-      overflow-y: auto;
-      flex: 1;
-    }
-
-    .detail-modal-section {
-      margin-bottom: 16px;
-    }
-
-    .detail-modal-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .detail-modal-section-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .detail-modal-desc {
-      font-size: 0.88rem;
-      color: var(--text-primary);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .detail-modal-author {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background-color: rgba(102, 204, 255, 0.08);
-      border-radius: 6px;
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.15s ease;
-      border: 1px solid rgba(102, 204, 255, 0.12);
-    }
-
-    .detail-modal-author:hover {
-      background-color: rgba(102, 204, 255, 0.14);
-      border-color: rgba(102, 204, 255, 0.25);
-    }
-
-    .detail-modal-author-link {
-      color: var(--accent-color);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .detail-modal-url-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      background-color: rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .detail-modal-url-box:hover {
-      border-color: var(--accent-color);
-      background-color: rgba(102, 204, 255, 0.05);
-    }
-
-    .daylight-mode .detail-modal-url-box {
-      background-color: rgba(0, 0, 0, 0.02);
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .detail-modal-url-value {
-      font-size: 0.78rem;
-      color: var(--text-primary);
-      word-break: break-all;
-      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-      flex: 1;
-    }
-
-    .detail-modal-url-copy {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border: none;
-      border-radius: 5px;
-      background-color: transparent;
-      color: var(--text-secondary);
+      color: #7a7b8a;
       cursor: pointer;
       transition: all 0.15s ease;
       padding: 0;
     }
 
     .detail-modal-url-copy:hover {
-      background-color: rgba(102, 204, 255, 0.15);
+      background-color: rgba(102, 204, 255, 0.12);
       color: var(--accent-color);
     }
 
     .detail-modal-url-copy.copied {
-      color: #4caf50;
-      background-color: rgba(76, 175, 80, 0.1);
+      color: #10b981;
+      background-color: rgba(16, 185, 129, 0.12);
     }
 
     .detail-modal-footer {
-      padding: 16px 24px 20px;
+      padding: 16px 28px 24px;
       display: flex;
       gap: 10px;
-      border-top: 1px solid var(--scrollbar-thumb);
+      border-top: 1px solid #2a2b36;
       flex-shrink: 0;
+    }
+
+    .daylight-mode .detail-modal-footer {
+      border-top-color: #e5e7eb;
     }
 
     .detail-modal-btn {
       flex: 1;
-      padding: 9px 16px;
+      padding: 10px 18px;
       border: 1px solid transparent;
       border-radius: 8px;
-      font-size: 0.84rem;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
-      font-family: var(--font-family);
+      font-family: inherit;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .detail-modal-btn-close {
-      background-color: rgba(255, 255, 255, 0.04);
-      color: var(--text-secondary);
-      border-color: var(--scrollbar-thumb);
-    }
-
-    .detail-modal-btn-close:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
+      background-color: #252632;
+      color: #d0d0e0;
+      border-color: #353646;
     }
 
     .daylight-mode .detail-modal-btn-close {
       background-color: #fff;
+      color: #374151;
+      border-color: #d1d5db;
+    }
+
+    .detail-modal-btn-close:hover {
+      background-color: #2d2e3c;
+      color: #fff;
     }
 
     .daylight-mode .detail-modal-btn-close:hover {
-      background-color: rgba(0, 0, 0, 0.03);
+      background-color: #f9fafb;
+      color: #111827;
     }
 
     .detail-modal-btn-visit {
       background-color: var(--accent-color);
       color: #fff;
       border-color: var(--accent-color);
+      flex: 1.5;
     }
 
     .detail-modal-btn-visit:hover {
       filter: brightness(1.1);
-      box-shadow: 0 4px 12px rgba(102, 204, 255, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.3);
     }
 
     .detail-modal-btn-visit:active {
+      transform: translateY(0);
       filter: brightness(0.95);
     }
 
@@ -2056,33 +2170,43 @@
 
       .detail-modal {
         width: 92%;
-        max-width: 400px;
+        max-width: 480px;
       }
 
       .detail-modal-header {
-        padding: 16px 18px;
+        padding: 24px 20px 16px;
       }
 
       .detail-modal-title {
-        font-size: 0.95rem;
+        font-size: 1.15rem;
+      }
+
+      .detail-modal-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .detail-modal-icon img {
+        width: 30px;
+        height: 30px;
       }
 
       .detail-modal-body {
-        padding: 16px 18px;
+        padding: 16px 20px;
       }
 
       .detail-modal-footer {
-        padding: 14px 18px 16px;
+        padding: 14px 20px 18px;
       }
 
-      .detail-modal-favicon {
-        width: 32px;
-        height: 32px;
+      .detail-modal-stats {
+        gap: 16px;
+        margin-top: 14px;
+        padding-top: 14px;
       }
 
-      .detail-modal-favicon img {
-        width: 20px;
-        height: 20px;
+      .detail-modal-stat-value {
+        font-size: 0.95rem;
       }
     }
 
@@ -2552,47 +2676,71 @@
 
     const visitText = currentLang === 'zh' ? '访问网站' : 'Visit Site';
     const closeText = currentLang === 'zh' ? '关闭' : 'Close';
-    const descLabel = currentLang === 'zh' ? '简介' : 'Description';
-    const authorLabel = currentLang === 'zh' ? '作者' : 'Author';
-    const urlLabel = currentLang === 'zh' ? '地址' : 'URL';
+    const creatorsLabel = currentLang === 'zh' ? '创作者' : 'Creators';
+    const urlLabel = currentLang === 'zh' ? '网站地址' : 'Website';
+    const typeLabel = currentLang === 'zh' ? '类型' : 'Type';
 
-    let authorHtml = '';
+    let typeText = '';
+    const urlLower = button.url.toLowerCase();
+    if (urlLower.includes('editor')) typeText = currentLang === 'zh' ? '编辑器' : 'Editor';
+    else if (urlLower.includes('search')) typeText = currentLang === 'zh' ? '工具' : 'Tool';
+    else if (urlLower.includes('chat') || urlLower.includes('mail')) typeText = currentLang === 'zh' ? '社交/通讯' : 'Social';
+    else if (urlLower.includes('sign') || urlLower.includes('generator')) typeText = currentLang === 'zh' ? '生成器' : 'Generator';
+    else if (urlLower.includes('download')) typeText = currentLang === 'zh' ? '下载站' : 'Download';
+    else if (urlLower.includes('studio') || urlLower.includes('os') || urlLower.includes('ui')) typeText = currentLang === 'zh' ? '创意项目' : 'Creative';
+    else typeText = currentLang === 'zh' ? '网站' : 'Website';
+
+    let creatorsHtml = '';
     if (button.author) {
-      authorHtml = `
+      creatorsHtml = `
         <div class="detail-modal-section">
-          <div class="detail-modal-section-label">${authorLabel}</div>
-          <a href="${button.author_url || '#'}" target="_blank" rel="noopener noreferrer" class="detail-modal-author">
-            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.8"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>
-            <span class="detail-modal-author-link">${button.author}</span>
-          </a>
+          <div class="detail-modal-section-label">${creatorsLabel}</div>
+          <div class="detail-modal-creators">
+            <a href="${button.author_url || '#'}" target="_blank" rel="noopener noreferrer" class="detail-modal-creator">
+              <div class="detail-modal-creator-avatar">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>
+              </div>
+              <span class="detail-modal-creator-name">${button.author}</span>
+            </a>
+          </div>
         </div>`;
     }
 
     modal.innerHTML = `
       <div class="detail-modal">
+        <button class="detail-modal-close" onclick="closeDetailModal()">
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
         <div class="detail-modal-header">
-          <div class="detail-modal-header-left">
-            <div class="detail-modal-favicon">
-              <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.parentElement.style.display='none'">
+          <div class="detail-modal-project-row">
+            <div class="detail-modal-icon">
+              <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" alt="" onerror="this.parentElement.style.display='none'">
             </div>
             <div class="detail-modal-title-wrap">
-              <h3 class="detail-modal-title" title="${titleText}">${titleText}</h3>
-              <div class="detail-modal-domain" title="${domain}">${domain}</div>
+              <h3 class="detail-modal-title">${titleText}</h3>
+              <div class="detail-modal-domain">${domain}</div>
             </div>
           </div>
-          <button class="detail-modal-close" onclick="closeDetailModal()">
-            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
-          </button>
+          ${descText ? `<p class="detail-modal-desc">${descText}</p>` : ''}
+          <div class="detail-modal-stats">
+            <div class="detail-modal-stat">
+              <span class="detail-modal-stat-value">${typeText}</span>
+              <span class="detail-modal-stat-label">${typeLabel}</span>
+            </div>
+            <div class="detail-modal-stat">
+              <span class="detail-modal-stat-value">${siteButtons.length}</span>
+              <span class="detail-modal-stat-label">${currentLang === 'zh' ? '收录站点' : 'Listed'}</span>
+            </div>
+          </div>
         </div>
         <div class="detail-modal-body">
-          ${descText ? `<div class="detail-modal-section"><div class="detail-modal-section-label">${descLabel}</div><p class="detail-modal-desc">${descText}</p></div>` : ''}
-          ${authorHtml}
+          ${creatorsHtml}
           <div class="detail-modal-section">
             <div class="detail-modal-section-label">${urlLabel}</div>
             <div class="detail-modal-url-box" onclick="copyUrl('${button.url}', this)">
               <span class="detail-modal-url-value">${button.url}</span>
               <button class="detail-modal-url-copy" onclick="event.stopPropagation();copyUrl('${button.url}', this.closest('.detail-modal-url-box'))">
-                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
               </button>
             </div>
           </div>
@@ -2601,7 +2749,7 @@
           <button class="detail-modal-btn detail-modal-btn-close" onclick="closeDetailModal()">${closeText}</button>
           <button class="detail-modal-btn detail-modal-btn-visit" onclick="animateToPage('${button.url}')">
             ${visitText}
-            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L7 9"/><path d="M12 9v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4"/></svg>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L7 9"/><path d="M12 9v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4"/></svg>
           </button>
         </div>
       </div>
