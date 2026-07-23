@@ -153,6 +153,17 @@
       "tags": ["下载"],
       "description": "ningqi 的作品下载站，收录 NQ_OS、NQ_I_OS、NQ_i_V OS、拓影 OS、ToIngOS 等各代 Scratch 伪系统作品及其他项目的蓝奏云/123云盘下载链接。",
       "description_en": "ningqi's download hub, hosting all generations of Scratch pseudo-OS projects including NQ_OS, NQ_I_OS, NQ_i_V OS, TuoyingOS, and ToIngOS via Lanzou/123 cloud drives."
+    },
+    {
+      "name": "COLID NS",
+      "name_en": "COLID NS",
+      "subtitle": "colidns.mysxl.cn",
+      "url": "https://colidns.mysxl.cn",
+      "author": "COLID CE",
+      "author_url": "https://colid.mysxl.cn/",
+      "tags": ["Scratch", "OS&UI"],
+      "description": "COLID NS 操作系统官网，COLID CE 团队出品。包含 NS 2.6 UI 等版本下载，致力于让 ColidOS 焕然一新，使用 CC-BY-4.0 开源协议。",
+      "description_en": "Official site of COLID NS OS by COLID CE team. Features NS 2.6 UI download, aiming to refresh ColidOS with a new look. Licensed under CC-BY-4.0."
     }
   ]
 }
