@@ -2421,7 +2421,7 @@
   </style>
   
   <link rel="canonical" href="https://editors.astras.cc/">
-  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
+  <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data: https:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
   <style>
     .loading {
       position: fixed;
@@ -2721,6 +2721,25 @@
   let currentSearch = '';
   let activeTag = '';
 
+  const tagTranslations = {
+    'Scratch': { zh: 'Scratch', en: 'Scratch' },
+    '编辑器': { zh: '编辑器', en: 'Editor' },
+    '下载': { zh: '下载', en: 'Download' },
+    '工具': { zh: '工具', en: 'Tool' },
+    '社交': { zh: '社交', en: 'Social' },
+    '组件': { zh: '组件', en: 'Component' },
+    'OS&UI': { zh: 'OS&UI', en: 'OS&UI' },
+    '工作室': { zh: '工作室', en: 'Studio' },
+    '代码仓库': { zh: '代码仓库', en: 'Repository' }
+  };
+
+  function translateTag(tag) {
+    if (tagTranslations[tag]) {
+      return tagTranslations[tag][currentLang] || tag;
+    }
+    return tag;
+  }
+
   async function loadSiteButtons() {
     try {
       const response = await fetch('site.json');
@@ -2803,7 +2822,7 @@
       allTags.forEach(tag => {
         const tagBtn = document.createElement('button');
         tagBtn.className = 'tag-filter-btn' + (activeTag === tag ? ' active' : '');
-        tagBtn.textContent = tag;
+        tagBtn.textContent = translateTag(tag);
         tagBtn.onclick = function() {
           activeTag = activeTag === tag ? '' : tag;
           renderSiteButtons();
@@ -2911,8 +2930,8 @@
           button.tags.forEach(tag => {
             const tagEl = document.createElement('span');
             tagEl.className = 'h-card-tag';
-            tagEl.textContent = tag;
-            tagEl.title = currentLang === 'zh' ? '标签: ' + tag : 'Tag: ' + tag;
+            tagEl.textContent = translateTag(tag);
+            tagEl.title = currentLang === 'zh' ? '标签: ' + translateTag(tag) : 'Tag: ' + translateTag(tag);
             titleWrap.appendChild(tagEl);
           });
         }
@@ -2985,7 +3004,7 @@
     let tagsHtml = '';
     if (button.tags && button.tags.length) {
       const tagsList = button.tags.map(tag => `
-        <span class="detail-modal-tag">${tag}</span>
+        <span class="detail-modal-tag">${translateTag(tag)}</span>
       `).join('');
       tagsHtml = `
         <div class="detail-modal-section">
@@ -3362,7 +3381,7 @@
   function applyLang() {
     const btn = document.getElementById('lang-toggle-btn');
     if (btn) {
-      btn.innerHTML = `<a href="javascript:void(0)" class="tabButton">${currentLang === 'zh' ? translations[currentLang]['EN'] : translations[currentLang]['中文']}</a>`;
+      btn.innerHTML = `<a href="javascript:void(0)" class="tabButton">${translations[currentLang]['EN']}</a>`;
     }
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
