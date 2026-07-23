@@ -2418,6 +2418,178 @@
         font-size: small;
       }
     }
+
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background: var(--accent-color);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .daylight-mode .back-to-top {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* View toggle */
+    .view-toggle {
+      display: flex;
+      gap: 4px;
+      margin-left: 12px;
+    }
+    .view-toggle-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--text-secondary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .view-toggle-btn.active {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      background: rgba(102, 204, 255, 0.1);
+    }
+    .view-toggle-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    /* Grid view */
+    .horizontal-content.grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      padding: 0 20px;
+    }
+    .horizontal-content.grid-view .category-header {
+      grid-column: 1 / -1;
+      margin-top: 16px;
+    }
+    .horizontal-content.grid-view .card-group {
+      display: contents;
+    }
+    .horizontal-content.grid-view .h-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 16px;
+      gap: 12px;
+    }
+    .horizontal-content.grid-view .h-card-icon {
+      width: 56px;
+      height: 56px;
+    }
+    .horizontal-content.grid-view .h-card-left {
+      width: 100%;
+    }
+    .horizontal-content.grid-view .h-card-title-wrap {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .horizontal-content.grid-view .h-card-right {
+      width: 100%;
+      justify-content: center;
+    }
+    .horizontal-content.grid-view .h-card-subtitle {
+      text-align: center;
+    }
+    .horizontal-content.grid-view .h-card-title {
+      font-size: 14px;
+    }
+
+    /* Favorite button */
+    .fav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .fav-btn:hover {
+      color: #ff6b6b;
+    }
+    .fav-btn.active {
+      color: #ff6b6b;
+    }
+    .fav-btn svg {
+      display: block;
+    }
+
+    /* Color theme picker */
+    .color-picker {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: 12px;
+    }
+    .color-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .color-dot:hover {
+      transform: scale(1.1);
+    }
+    .color-dot.active {
+      border-color: var(--text-primary);
+      transform: scale(1.1);
+    }
+
+    /* History section */
+    .history-section {
+      margin-bottom: 24px;
+    }
+    .history-clear-btn {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .history-clear-btn:hover {
+      color: var(--accent-color);
+    }
+    .category-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
   </style>
   
   <link rel="canonical" href="https://editors.astras.cc/">
@@ -2557,6 +2729,15 @@
   <div class="tab">
     <img src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;1229&quot; height=&quot;290&quot;&gt;&lt;rect fill-opacity=&quot;0&quot;/&gt;&lt;/svg&gt;" alt="logo" id="tabLogo" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-1)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
     <div class="tabButtonTab">
+      <div class="view-toggle" id="view-toggle">
+        <button type="button" class="view-toggle-btn" id="view-list-btn" onclick="setView('list')" title="列表视图">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>
+        </button>
+        <button type="button" class="view-toggle-btn" id="view-grid-btn" onclick="setView('grid')" title="网格视图">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="4" height="4"/><rect x="9" y="3" width="4" height="4"/><rect x="3" y="9" width="4" height="4"/><rect x="9" y="9" width="4" height="4"/></svg>
+        </button>
+      </div>
+      <div class="color-picker" id="color-picker"></div>
       <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()">
         <a href="javascript:void(0)" class="tabButton">夜间</a>
       </button>
@@ -2572,6 +2753,10 @@
     <div class="page" id="page-changelog" data-page="changelog" style="display:none;animation:0.4s ease-out 0s 1 normal none running fadeIn"></div>
     <div class="page" id="page-download" data-page="download" style="display:none"></div>
   </div>
+  <button id="back-to-top-btn" class="back-to-top" title="回到顶部">
+    <svg viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14V3"/><path d="M3 8l5-5 5 5"/></svg>
+  </button>
+
   <div class="end">
     <div class="end-content">
       <div>
@@ -2780,6 +2965,107 @@
     });
   }
 
+  function createSiteCard(button, index) {
+    const card = document.createElement('div');
+    card.className = 'h-card';
+    card.onclick = () => animateToPage(button.url);
+
+    let domain;
+    let urlObj;
+    try { urlObj = new URL(button.url); domain = urlObj.hostname; } catch(e) { domain = button.subtitle; }
+
+    const cacheBust = '?v=' + Date.now();
+    let iconUrl;
+    if (urlObj && urlObj.hostname === 'github.com') {
+      iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
+    } else {
+      iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
+    }
+
+    const iconWrap = document.createElement('div');
+    iconWrap.className = 'h-card-icon';
+    const iconImg = document.createElement('img');
+    iconImg.src = iconUrl;
+    iconImg.alt = '';
+    iconImg.onerror = function() {
+      this.parentElement.style.display = 'none';
+    };
+    iconWrap.appendChild(iconImg);
+    card.appendChild(iconWrap);
+
+    const left = document.createElement('div');
+    left.className = 'h-card-left';
+
+    const titleWrap = document.createElement('div');
+    titleWrap.className = 'h-card-title-wrap';
+
+    const title = document.createElement('span');
+    title.className = 'h-card-title';
+    title.setAttribute('data-i18n', button.name);
+    title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+
+    titleWrap.appendChild(title);
+
+    if (button.author) {
+      const authorBtn = document.createElement('a');
+      authorBtn.className = 'h-card-author';
+      authorBtn.href = button.author_url || '#';
+      authorBtn.target = '_blank';
+      authorBtn.rel = 'noopener noreferrer';
+      authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
+      authorBtn.innerHTML = '<svg viewBox="0 0 16 16" width="11" height="11" style="vertical-align:-1px;margin-right:3px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>' + button.author;
+      authorBtn.onclick = (e) => {
+        e.stopPropagation();
+        animateToPage(button.author_url);
+      };
+      titleWrap.appendChild(authorBtn);
+    }
+
+    if (button.tags && button.tags.length) {
+      button.tags.forEach(tag => {
+        const tagEl = document.createElement('span');
+        tagEl.className = 'h-card-tag';
+        tagEl.textContent = translateTag(tag);
+        tagEl.title = currentLang === 'zh' ? '标签: ' + translateTag(tag) : 'Tag: ' + translateTag(tag);
+        titleWrap.appendChild(tagEl);
+      });
+    }
+
+    left.appendChild(titleWrap);
+    card.appendChild(left);
+
+    const rightActions = document.createElement('div');
+    rightActions.style.display = 'flex';
+    rightActions.style.alignItems = 'center';
+    rightActions.style.gap = '4px';
+    rightActions.style.flexShrink = '0';
+
+    const favBtn = document.createElement('button');
+    favBtn.className = 'fav-btn' + (isFavorite(button.url) ? ' active' : '');
+    favBtn.title = currentLang === 'zh' ? (isFavorite(button.url) ? '取消收藏' : '收藏') : (isFavorite(button.url) ? 'Unfavorite' : 'Favorite');
+    favBtn.innerHTML = isFavorite(button.url)
+      ? '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-8a3.5 3.5 0 0 1 6.5-2 3.5 3.5 0 0 1 6.5 2c0 4.5-5.5 8-5.5 8z"/></svg>'
+      : '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-5.5-3.5-5.5-8a3.5 3.5 0 0 1 6.5-2 3.5 3.5 0 0 1 6.5 2c0 4.5-5.5 8-5.5 8z"/></svg>';
+    favBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleFavorite(button.url);
+    };
+    rightActions.appendChild(favBtn);
+
+    const detailBtn = document.createElement('button');
+    detailBtn.className = 'h-card-detail-btn';
+    detailBtn.title = currentLang === 'zh' ? '详情' : 'Details';
+    detailBtn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg>';
+    detailBtn.onclick = (e) => {
+      e.stopPropagation();
+      showDetailModal(index);
+    };
+    rightActions.appendChild(detailBtn);
+
+    card.appendChild(rightActions);
+    return card;
+  }
+
   function renderSiteButtons() {
     const container = document.getElementById('horizontal-content');
     if (!container || siteButtons.length === 0) return;
@@ -2834,6 +3120,76 @@
 
     container.appendChild(filterBar);
 
+    const filtered = getFilteredButtons();
+    const noResultLabel = currentLang === 'zh' ? '没有找到匹配的站点' : 'No matching sites found';
+    if (filtered.length === 0) {
+      const emptyState = document.createElement('div');
+      emptyState.className = 'empty-state';
+      emptyState.textContent = noResultLabel;
+      container.appendChild(emptyState);
+      return;
+    }
+
+    const favUrls = getFavorites();
+    const favItems = filtered.filter(({ button }) => favUrls.includes(button.url));
+    const history = getHistory();
+    const historyItems = history
+      .map(h => {
+        const found = filtered.find(({ button }) => button.url === h.url);
+        return found ? { ...found, button: { ...found.button, ...h } } : null;
+      })
+      .filter(Boolean);
+
+    if (!currentSearch && !activeTag) {
+      if (favItems.length > 0) {
+        const headerRow = document.createElement('div');
+        headerRow.className = 'category-header-row';
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        header.textContent = currentLang === 'zh' ? '收藏' : 'Favorites';
+        header.style.marginBottom = '0';
+        header.style.marginTop = '0';
+        headerRow.appendChild(header);
+        container.appendChild(headerRow);
+
+        const groupWrap = document.createElement('div');
+        groupWrap.className = 'card-group';
+        favItems.forEach(({ button, index }) => {
+          const realIndex = siteButtons.findIndex(b => b.url === button.url);
+          groupWrap.appendChild(createSiteCard(button, realIndex > -1 ? realIndex : index));
+        });
+        container.appendChild(groupWrap);
+      }
+
+      if (historyItems.length > 0) {
+        const headerRow = document.createElement('div');
+        headerRow.className = 'category-header-row';
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        header.textContent = currentLang === 'zh' ? '最近访问' : 'Recent';
+        header.style.marginBottom = '0';
+        header.style.marginTop = '0';
+        headerRow.appendChild(header);
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'history-clear-btn';
+        clearBtn.textContent = currentLang === 'zh' ? '清除' : 'Clear';
+        clearBtn.onclick = (e) => {
+          e.stopPropagation();
+          clearHistory();
+        };
+        headerRow.appendChild(clearBtn);
+        container.appendChild(headerRow);
+
+        const groupWrap = document.createElement('div');
+        groupWrap.className = 'card-group';
+        historyItems.slice(0, 5).forEach(({ button, index }) => {
+          const realIndex = siteButtons.findIndex(b => b.url === button.url);
+          groupWrap.appendChild(createSiteCard(button, realIndex > -1 ? realIndex : index));
+        });
+        container.appendChild(groupWrap);
+      }
+    }
+
     const categories = {
       'astraeditor': { zh: 'AstraEditor 系列', en: 'AstraEditor' },
       'tools': { zh: '在线工具', en: 'Online Tools' },
@@ -2847,16 +3203,6 @@
       if (u.includes('search') || u.includes('mail') || u.includes('sign') || u.includes('generator') || u.includes('chat') || u.includes('simplechat')) return 'tools';
       if (u.includes('studio') || u.includes('os') || u.includes('ui') || u.includes('mysxl')) return 'creative';
       return 'links';
-    }
-
-    const filtered = getFilteredButtons();
-    const noResultLabel = currentLang === 'zh' ? '没有找到匹配的站点' : 'No matching sites found';
-    if (filtered.length === 0) {
-      const emptyState = document.createElement('div');
-      emptyState.className = 'empty-state';
-      emptyState.textContent = noResultLabel;
-      container.appendChild(emptyState);
-      return;
     }
 
     const grouped = {};
@@ -2880,85 +3226,7 @@
       groupWrap.className = 'card-group';
 
       grouped[catKey].forEach(({ button, index }) => {
-        const card = document.createElement('div');
-        card.className = 'h-card';
-        card.onclick = () => animateToPage(button.url);
-
-        let domain;
-        let urlObj;
-        try { urlObj = new URL(button.url); domain = urlObj.hostname; } catch(e) { domain = button.subtitle; }
-
-        const cacheBust = '?v=' + Date.now();
-        let iconUrl;
-        if (urlObj && urlObj.hostname === 'github.com') {
-          iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
-        } else {
-          iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
-        }
-
-        const iconWrap = document.createElement('div');
-        iconWrap.className = 'h-card-icon';
-        const iconImg = document.createElement('img');
-        iconImg.src = iconUrl;
-        iconImg.alt = '';
-        iconImg.onerror = function() {
-          this.parentElement.style.display = 'none';
-        };
-        iconWrap.appendChild(iconImg);
-        card.appendChild(iconWrap);
-
-        const left = document.createElement('div');
-        left.className = 'h-card-left';
-
-        const titleWrap = document.createElement('div');
-        titleWrap.className = 'h-card-title-wrap';
-
-        const title = document.createElement('span');
-        title.className = 'h-card-title';
-        title.setAttribute('data-i18n', button.name);
-        title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
-
-        titleWrap.appendChild(title);
-
-        if (button.author) {
-          const authorBtn = document.createElement('a');
-          authorBtn.className = 'h-card-author';
-          authorBtn.href = button.author_url || '#';
-          authorBtn.target = '_blank';
-          authorBtn.rel = 'noopener noreferrer';
-          authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
-          authorBtn.innerHTML = '<svg viewBox="0 0 16 16" width="11" height="11" style="vertical-align:-1px;margin-right:3px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>' + button.author;
-          authorBtn.onclick = (e) => {
-            e.stopPropagation();
-            animateToPage(button.author_url);
-          };
-          titleWrap.appendChild(authorBtn);
-        }
-
-        if (button.tags && button.tags.length) {
-          button.tags.forEach(tag => {
-            const tagEl = document.createElement('span');
-            tagEl.className = 'h-card-tag';
-            tagEl.textContent = translateTag(tag);
-            tagEl.title = currentLang === 'zh' ? '标签: ' + translateTag(tag) : 'Tag: ' + translateTag(tag);
-            titleWrap.appendChild(tagEl);
-          });
-        }
-
-        left.appendChild(titleWrap);
-        card.appendChild(left);
-
-        const detailBtn = document.createElement('button');
-        detailBtn.className = 'h-card-detail-btn';
-        detailBtn.title = currentLang === 'zh' ? '详情' : 'Details';
-        detailBtn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg>';
-        detailBtn.onclick = (e) => {
-          e.stopPropagation();
-          showDetailModal(index);
-        };
-
-        card.appendChild(detailBtn);
-        groupWrap.appendChild(card);
+        groupWrap.appendChild(createSiteCard(button, index));
       });
 
       container.appendChild(groupWrap);
@@ -3477,8 +3745,12 @@
     } else {
       applyLang();
     }
+    applyAccentColor(currentAccentColor);
     loadSiteButtons();
     initAeScrollEffect();
+    initBackToTop();
+    initKeyboardShortcuts();
+    setView(currentView);
   });
 
   document.addEventListener('click', function(event) {
@@ -3540,6 +3812,171 @@
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
+  }
+
+  // Back to top button
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top-btn');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // View toggle
+  let currentView = localStorage.getItem('siteView') || 'list';
+
+  function setView(view) {
+    currentView = view;
+    localStorage.setItem('siteView', view);
+    const container = document.getElementById('horizontal-content');
+    if (!container) return;
+    if (view === 'grid') {
+      container.classList.add('grid-view');
+    } else {
+      container.classList.remove('grid-view');
+    }
+    const listBtn = document.getElementById('view-list-btn');
+    const gridBtn = document.getElementById('view-grid-btn');
+    if (listBtn) listBtn.classList.toggle('active', view === 'list');
+    if (gridBtn) gridBtn.classList.toggle('active', view === 'grid');
+  }
+
+  // Color theme
+  const accentColors = [
+    { name: 'blue', value: '#66ccff' },
+    { name: 'green', value: '#4ade80' },
+    { name: 'purple', value: '#a78bfa' },
+    { name: 'orange', value: '#fb923c' },
+    { name: 'pink', value: '#f472b6' },
+    { name: 'red', value: '#f87171' }
+  ];
+
+  let currentAccentColor = localStorage.getItem('accentColor') || 'blue';
+
+  function applyAccentColor(colorName) {
+    const color = accentColors.find(c => c.name === colorName);
+    if (!color) return;
+    currentAccentColor = colorName;
+    localStorage.setItem('accentColor', colorName);
+    document.documentElement.style.setProperty('--accent-color', color.value);
+    renderColorPicker();
+  }
+
+  function renderColorPicker() {
+    const picker = document.getElementById('color-picker');
+    if (!picker) return;
+    picker.innerHTML = '';
+    accentColors.forEach(color => {
+      const dot = document.createElement('div');
+      dot.className = 'color-dot' + (color.name === currentAccentColor ? ' active' : '');
+      dot.style.backgroundColor = color.value;
+      dot.title = color.name;
+      dot.onclick = () => applyAccentColor(color.name);
+      picker.appendChild(dot);
+    });
+  }
+
+  // Favorites
+  function getFavorites() {
+    try {
+      return JSON.parse(localStorage.getItem('siteFavorites') || '[]');
+    } catch { return []; }
+  }
+
+  function setFavorites(favs) {
+    localStorage.setItem('siteFavorites', JSON.stringify(favs));
+  }
+
+  function isFavorite(url) {
+    return getFavorites().includes(url);
+  }
+
+  function toggleFavorite(url) {
+    const favs = getFavorites();
+    const idx = favs.indexOf(url);
+    if (idx > -1) {
+      favs.splice(idx, 1);
+    } else {
+      favs.unshift(url);
+    }
+    setFavorites(favs);
+    renderSiteButtons();
+  }
+
+  // History
+  const MAX_HISTORY = 10;
+
+  function getHistory() {
+    try {
+      return JSON.parse(localStorage.getItem('siteHistory') || '[]');
+    } catch { return []; }
+  }
+
+  function setHistory(history) {
+    localStorage.setItem('siteHistory', JSON.stringify(history));
+  }
+
+  function addToHistory(button) {
+    const history = getHistory();
+    const idx = history.findIndex(h => h.url === button.url);
+    if (idx > -1) {
+      history.splice(idx, 1);
+    }
+    history.unshift({
+      name: button.name,
+      name_en: button.name_en,
+      url: button.url,
+      subtitle: button.subtitle,
+      author: button.author,
+      author_url: button.author_url,
+      tags: button.tags,
+      time: Date.now()
+    });
+    if (history.length > MAX_HISTORY) history.length = MAX_HISTORY;
+    setHistory(history);
+  }
+
+  function clearHistory() {
+    setHistory([]);
+    renderSiteButtons();
+  }
+
+  const originalAnimateToPage = animateToPage;
+  animateToPage = function(url) {
+    const btn = siteButtons.find(b => b.url === url);
+    if (btn) addToHistory(btn);
+    return originalAnimateToPage(url);
+  };
+
+  // Keyboard shortcuts
+  function initKeyboardShortcuts() {
+    document.addEventListener('keydown', function(event) {
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+      
+      if (event.key === '/') {
+        event.preventDefault();
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) searchInput.focus();
+      }
+      
+      if (event.key >= '1' && event.key <= '9') {
+        const num = parseInt(event.key);
+        const filtered = getFilteredButtons();
+        if (filtered[num - 1]) {
+          event.preventDefault();
+          const btn = filtered[num - 1].button;
+          animateToPage(btn.url);
+        }
+      }
+    });
   }</script>
 </body>
 </html>
