@@ -17,27 +17,27 @@
       "author_url": "https://github.com/NanGua-QWQ"
     },
     {
-      "name": "一个发送邮件的网站与astras.cc",
-      "name_en": "A send email website with astras.cc",
+      "name": "用域名发送邮件 - Astras.cc",
+      "name_en": "Send email with domain name - Astras.cc",
       "subtitle": "astras.cc/sendemail",
       "url": "https://astras.cc/sendemail",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24"
     },
     {
-      "name": "官网-官方原版(.top)",
-      "name_en": "Official - Original (.top)",
+      "name": "AstraEditor 官网(.top)",
+      "name_en": "AstraEditor Official(.top)",
       "subtitle": "editors.astras.top",
       "url": "https://editors.astras.top/"
     },
     {
-      "name": "官网-CC特制版(.cc)",
-      "name_en": "Official - Special (.cc)",
+      "name": "AstraEditor 官网-CC特制版(.cc)",
+      "name_en": "AstraEditor Official-Special(.cc)",
       "subtitle": "editors.astras.cc",
       "url": "https://editors.astras.cc/"
     },
     {
-      "name": "AstraEditor下载站(.cc)",
+      "name": "AstraEditor 下载站(.cc)",
       "name_en": "AstraEditor Download (.cc)",
       "subtitle": "download.astras.cc",
       "url": "https://download.astras.cc/",
@@ -45,7 +45,7 @@
       "author_url": "https://github.com/ningqi24"
     },
     {
-      "name": "Search极简页",
+      "name": "Search 极简页",
       "name_en": "Simple Search Tab",
       "subtitle": "search.astras.cc",
       "url": "https://search.astras.cc/",
