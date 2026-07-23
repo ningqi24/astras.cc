@@ -4,7 +4,9 @@
       "name": "AstraEditor 官网-CC特制版(.cc)",
       "name_en": "AstraEditor Official-Special(.cc)",
       "subtitle": "editors.astras.cc",
-      "url": "https://editors.astras.cc/"
+      "url": "https://editors.astras.cc/",
+      "description": "AstraEditor 编辑器的官方网站，CC 特制版本。",
+      "description_en": "Official website of AstraEditor, special CC version."
     },
     {
       "name": "AstraEditor 下载站(.cc)",
@@ -12,7 +14,9 @@
       "subtitle": "download.astras.cc",
       "url": "https://download.astras.cc/",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "AstraEditor 各平台客户端下载站，提供 Windows、macOS、Linux 版本。",
+      "description_en": "Download station for AstraEditor clients on Windows, macOS and Linux."
     },
     {
       "name": "Search 极简页",
@@ -20,7 +24,9 @@
       "subtitle": "search.astras.cc",
       "url": "https://search.astras.cc/",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "一个极简的搜索引擎首页，支持多搜索引擎切换。",
+      "description_en": "A minimal search engine homepage with multi-engine switching."
     },
     {
       "name": "Minichat聊天 - Astras.cc",
@@ -28,7 +34,9 @@
       "subtitle": "minichat.astras.cc",
       "url": "https://minichat.astras.cc",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "轻量级在线聊天室，支持实时消息发送与接收。",
+      "description_en": "Lightweight online chat room with real-time messaging."
     },
     {
       "name": "SimpleChatMini for scratch",
@@ -36,7 +44,9 @@
       "subtitle": "simplechatmini.astras.cc",
       "url": "https://simplechatmini.astras.cc/",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "基于 Scratch 的简易聊天 UI 组件。",
+      "description_en": "A simple chat UI component built for Scratch."
     },
     {
       "name": "用域名发送邮件 - Astras.cc",
@@ -44,7 +54,9 @@
       "subtitle": "astras.cc/sendemail",
       "url": "https://astras.cc/sendemail",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "使用自定义域名发送邮件的在线工具。",
+      "description_en": "An online tool to send emails with a custom domain."
     },
     {
       "name": "高速编号牌生成器 - NanGua-QWQ",
@@ -52,19 +64,25 @@
       "subtitle": "astras.cc/SignGenerator",
       "url": "https://astras.cc/SignGenerator/",
       "author": "NanGua-QWQ",
-      "author_url": "https://github.com/NanGua-QWQ"
+      "author_url": "https://github.com/NanGua-QWQ",
+      "description": "在线生成高速公路编号牌图片的工具，支持自定义编号与样式。",
+      "description_en": "An online tool to generate highway number sign images with custom numbers and styles."
     },
     {
       "name": "AstraEditor 官网(.top)",
       "name_en": "AstraEditor Official(.top)",
       "subtitle": "editors.astras.top",
-      "url": "https://editors.astras.top/"
+      "url": "https://editors.astras.top/",
+      "description": "AstraEditor 编辑器的官方网站（.top 域名）。",
+      "description_en": "Official website of AstraEditor (.top domain)."
     },
     {
       "name": "COLID Studio",
       "name_en": "COLID Studio",
       "subtitle": "colid.mysxl.cn",
-      "url": "https://colid.mysxl.cn/"
+      "url": "https://colid.mysxl.cn/",
+      "description": "COLID 创意工作室，提供 Scratch 项目的在线设计与制作。",
+      "description_en": "COLID Studio, providing online design and creation for Scratch projects."
     },
     {
       "name": "COLID NS UI for scratch",
@@ -72,7 +90,9 @@
       "subtitle": "colidns.mysxl.cn",
       "url": "https://colidns.mysxl.cn/",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "为 Scratch 项目设计的 COLID NS 用户界面组件库。",
+      "description_en": "COLID NS UI component library designed for Scratch projects."
     },
     {
       "name": "ToingOS/NQOS UI for scratch",
@@ -80,13 +100,17 @@
       "subtitle": "ningqi24.mysxl.cn",
       "url": "https://ningqi24.mysxl.cn/",
       "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "author_url": "https://github.com/ningqi24",
+      "description": "为 Scratch 项目设计的 ToingOS/NQOS 操作系统风格用户界面。",
+      "description_en": "ToingOS/NQOS operating system style UI for Scratch projects."
     },
     {
       "name": "ningqi-github",
       "name_en": "ningqi-github",
       "subtitle": "github.com/ningqi24",
-      "url": "https://github.com/ningqi24"
+      "url": "https://github.com/ningqi24",
+      "description": "ningqi 的 GitHub 主页，包含所有开源项目。",
+      "description_en": "ningqi's GitHub profile with all open-source projects."
     }
   ]
 }

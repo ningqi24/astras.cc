@@ -293,6 +293,206 @@
       white-space: nowrap;
     }
 
+    .h-card-detail-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+
+    .h-card-detail-btn:hover {
+      background-color: rgba(102, 204, 255, 0.18);
+      color: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    .daylight-mode .h-card-detail-btn {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .daylight-mode .h-card-detail-btn:hover {
+      background-color: rgba(102, 204, 255, 0.12);
+    }
+
+    .detail-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.25s ease;
+      pointer-events: none;
+    }
+
+    .detail-modal-overlay.show {
+      background-color: rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+      backdrop-filter: blur(4px);
+    }
+
+    .detail-modal {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 440px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: var(--font-family);
+    }
+
+    .detail-modal-overlay.show .detail-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .detail-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 24px 24px 16px;
+      gap: 16px;
+    }
+
+    .detail-modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .detail-modal-close {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 8px;
+      background-color: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+
+    .detail-modal-close:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    .detail-modal-body {
+      padding: 0 24px 16px;
+    }
+
+    .detail-modal-desc {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      line-height: 1.7;
+      margin: 0 0 16px 0;
+    }
+
+    .detail-modal-author {
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .detail-modal-author-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .detail-modal-author-link:hover {
+      text-decoration: underline;
+    }
+
+    .detail-modal-url {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 14px;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
+
+    .detail-modal-url-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+    }
+
+    .detail-modal-url-value {
+      font-size: 0.82rem;
+      color: var(--text-primary);
+      word-break: break-all;
+      font-family: monospace;
+    }
+
+    .detail-modal-footer {
+      padding: 0 24px 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .detail-modal-visit {
+      padding: 10px 28px;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--accent-color);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+    }
+
+    .detail-modal-visit:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.3);
+    }
+
+    .detail-modal-visit:active {
+      transform: translateY(0);
+    }
+
+    .daylight-mode .detail-modal-url {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .daylight-mode .detail-modal-close:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -1501,6 +1701,15 @@
       .h-card-url {
         font-size: 0.72rem;
       }
+
+      .h-card-detail-btn {
+        width: 28px;
+        height: 28px;
+      }
+
+      .detail-modal {
+        width: 92%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1699,6 +1908,32 @@
 
       .h-card-url {
         font-size: 0.68rem;
+      }
+
+      .h-card-detail-btn {
+        width: 26px;
+        height: 26px;
+      }
+
+      .detail-modal-header {
+        padding: 20px 18px 14px;
+      }
+
+      .detail-modal-title {
+        font-size: 1.05rem;
+      }
+
+      .detail-modal-body {
+        padding: 0 18px 14px;
+      }
+
+      .detail-modal-footer {
+        padding: 0 18px 18px;
+      }
+
+      .detail-modal-visit {
+        width: 100%;
+        padding: 12px;
       }
     }
 
@@ -2087,7 +2322,7 @@
     const container = document.getElementById('horizontal-content');
     if (!container || siteButtons.length === 0) return;
     container.innerHTML = '';
-    siteButtons.forEach(button => {
+    siteButtons.forEach((button, index) => {
       const card = document.createElement('div');
       card.className = 'h-card';
       card.onclick = () => animateToPage(button.url);
@@ -2129,9 +2364,82 @@
       left.appendChild(urlSpan);
 
       card.appendChild(left);
+
+      const detailBtn = document.createElement('button');
+      detailBtn.className = 'h-card-detail-btn';
+      detailBtn.title = currentLang === 'zh' ? '详情' : 'Details';
+      detailBtn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg>';
+      detailBtn.onclick = (e) => {
+        e.stopPropagation();
+        showDetailModal(index);
+      };
+
+      card.appendChild(detailBtn);
       container.appendChild(card);
     });
     pointer.bind_targets_events();
+  }
+
+  function showDetailModal(index) {
+    const button = siteButtons[index];
+    if (!button) return;
+
+    let modal = document.getElementById('detail-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'detail-modal';
+      modal.className = 'detail-modal-overlay';
+      modal.onclick = (e) => {
+        if (e.target === modal) closeDetailModal();
+      };
+      document.body.appendChild(modal);
+    }
+
+    const titleText = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+    const descText = currentLang === 'zh' ? (button.description || '') : (button.description_en || button.description || '');
+
+    let authorHtml = '';
+    if (button.author) {
+      authorHtml = `
+        <div class="detail-modal-author">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:-2px;margin-right:4px"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>
+          <a href="${button.author_url || '#'}" target="_blank" rel="noopener noreferrer" class="detail-modal-author-link">${button.author}</a>
+        </div>`;
+    }
+
+    const visitText = currentLang === 'zh' ? '访问网站' : 'Visit Site';
+    const closeText = currentLang === 'zh' ? '关闭' : 'Close';
+
+    modal.innerHTML = `
+      <div class="detail-modal">
+        <div class="detail-modal-header">
+          <h3 class="detail-modal-title">${titleText}</h3>
+          <button class="detail-modal-close" onclick="closeDetailModal()">
+            <svg viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          </button>
+        </div>
+        <div class="detail-modal-body">
+          ${descText ? `<p class="detail-modal-desc">${descText}</p>` : ''}
+          ${authorHtml}
+          <div class="detail-modal-url">
+            <span class="detail-modal-url-label">${currentLang === 'zh' ? '地址' : 'URL'}</span>
+            <span class="detail-modal-url-value">${button.url}</span>
+          </div>
+        </div>
+        <div class="detail-modal-footer">
+          <button class="detail-modal-visit" onclick="animateToPage('${button.url}')">${visitText}</button>
+        </div>
+      </div>
+    `;
+
+    requestAnimationFrame(() => modal.classList.add('show'));
+  }
+
+  function closeDetailModal() {
+    const modal = document.getElementById('detail-modal');
+    if (modal) {
+      modal.classList.remove('show');
+    }
   }
 
   let currentPlatform = '';
@@ -2526,6 +2834,12 @@
     }
     if (!event.target.closest('.download-card') && !event.target.closest('.download-card-content')) {
       hideDownloadPanel();
+    }
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeDetailModal();
     }
   });
 
