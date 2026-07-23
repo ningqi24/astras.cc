@@ -295,6 +295,29 @@
       color: #0066aa;
     }
 
+    .h-card-tag {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #ffb86b;
+      background-color: rgba(255, 184, 107, 0.12);
+      border: 1px solid rgba(255, 184, 107, 0.25);
+      border-radius: 10px;
+      padding: 1px 8px;
+      white-space: nowrap;
+      line-height: 1.5;
+      cursor: default;
+      user-select: none;
+    }
+
+    .daylight-mode .h-card-tag {
+      background-color: rgba(255, 152, 0, 0.08);
+      border-color: rgba(255, 152, 0, 0.3);
+      color: #e67e22;
+    }
+
     .h-card-url {
       font-size: 0.78rem;
       color: var(--text-secondary);
@@ -573,6 +596,33 @@
 
     .detail-modal-creator-name {
       font-weight: 600;
+    }
+
+    .detail-modal-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .detail-modal-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffb86b;
+      background-color: rgba(255, 184, 107, 0.12);
+      border: 1px solid rgba(255, 184, 107, 0.25);
+      border-radius: 999px;
+      padding: 4px 12px;
+      white-space: nowrap;
+      cursor: default;
+      user-select: none;
+    }
+
+    .daylight-mode .detail-modal-tag {
+      background-color: rgba(255, 152, 0, 0.08);
+      border-color: rgba(255, 152, 0, 0.3);
+      color: #e67e22;
     }
 
     .detail-modal-url-box {
@@ -1897,6 +1947,11 @@
         padding: 1px 6px;
       }
 
+      .h-card-tag {
+        font-size: 0.66rem;
+        padding: 1px 6px;
+      }
+
       .category-header {
         font-size: 0.7rem;
         letter-spacing: 1px;
@@ -2102,6 +2157,11 @@
       }
 
       .h-card-author {
+        font-size: 0.6rem;
+        padding: 0 5px;
+      }
+
+      .h-card-tag {
         font-size: 0.6rem;
         padding: 0 5px;
       }
@@ -2606,6 +2666,16 @@
           titleWrap.appendChild(authorBtn);
         }
 
+        if (button.tags && button.tags.length) {
+          button.tags.forEach(tag => {
+            const tagEl = document.createElement('span');
+            tagEl.className = 'h-card-tag';
+            tagEl.textContent = tag;
+            tagEl.title = currentLang === 'zh' ? '标签: ' + tag : 'Tag: ' + tag;
+            titleWrap.appendChild(tagEl);
+          });
+        }
+
         left.appendChild(titleWrap);
         card.appendChild(left);
 
@@ -2670,6 +2740,21 @@
         </div>`;
     }
 
+    const tagsLabel = currentLang === 'zh' ? '标签' : 'Tags';
+    let tagsHtml = '';
+    if (button.tags && button.tags.length) {
+      const tagsList = button.tags.map(tag => `
+        <span class="detail-modal-tag">${tag}</span>
+      `).join('');
+      tagsHtml = `
+        <div class="detail-modal-section">
+          <div class="detail-modal-section-label">${tagsLabel}</div>
+          <div class="detail-modal-tags">
+            ${tagsList}
+          </div>
+        </div>`;
+    }
+
     modal.innerHTML = `
       <div class="detail-modal">
         <button class="detail-modal-close" onclick="closeDetailModal()">
@@ -2689,6 +2774,7 @@
         </div>
         <div class="detail-modal-body">
           ${creatorsHtml}
+          ${tagsHtml}
           <div class="detail-modal-section">
             <div class="detail-modal-section-label">${urlLabel}</div>
             <div class="detail-modal-url-box" onclick="copyUrl('${button.url}', this)">
