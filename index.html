@@ -2732,6 +2732,125 @@
       border-color: rgba(255, 107, 107, 0.3);
       background: rgba(255, 107, 107, 0.08);
     }
+
+    @media (max-width: 768px) {
+      #tabLogo {
+        height: 28px;
+        margin-left: 12px;
+      }
+      .tabButtonTab {
+        margin-right: 12px;
+        gap: 2px;
+      }
+      .view-toggle {
+        margin-left: 4px;
+      }
+      .view-toggle-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .view-toggle-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+      .color-picker-wrap {
+        margin-left: 2px;
+      }
+      .color-picker-toggle {
+        width: 32px;
+        height: 32px;
+      }
+      .color-picker-toggle svg {
+        width: 16px;
+        height: 16px;
+      }
+      .color-picker-panel {
+        min-width: 160px;
+        padding: 10px;
+      }
+      .tabButtonTab .tabButton {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+      }
+      .horizontal-content.grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+        padding: 0 12px;
+      }
+      .horizontal-content.grid-view .h-card {
+        padding: 20px 10px 12px;
+        min-height: 120px;
+        gap: 8px;
+      }
+      .horizontal-content.grid-view .h-card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+      }
+      .horizontal-content.grid-view .h-card-icon img {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+      }
+      .horizontal-content.grid-view .h-card-title {
+        font-size: 12px;
+      }
+      .horizontal-content.grid-view .h-card-author,
+      .horizontal-content.grid-view .h-card-tag {
+        font-size: 0.65rem;
+        padding: 1px 5px;
+      }
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 16px;
+        right: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #tabLogo {
+        height: 24px;
+        margin-left: 10px;
+      }
+      .tabButtonTab {
+        margin-right: 10px;
+        gap: 0;
+      }
+      .tabButtonTab .tabButton {
+        padding: 3px 6px;
+        font-size: 0.75rem;
+      }
+      .view-toggle {
+        display: none;
+      }
+      .color-picker-toggle {
+        width: 30px;
+        height: 30px;
+      }
+      .color-picker-toggle svg {
+        width: 15px;
+        height: 15px;
+      }
+      .horizontal-content.grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+        padding: 0 10px;
+      }
+      .horizontal-content.grid-view .h-card {
+        padding: 16px 8px 10px;
+        min-height: 100px;
+      }
+      .horizontal-content.grid-view .h-card-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+      .horizontal-content.grid-view .h-card-icon img {
+        width: 22px;
+        height: 22px;
+      }
+    }
   </style>
   
   <link rel="canonical" href="https://editors.astras.cc/">
