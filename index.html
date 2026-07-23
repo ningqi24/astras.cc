@@ -181,8 +181,8 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      min-height: 60px;
-      padding: 12px 20px;
+      min-height: 72px;
+      padding: 14px 20px;
       background-color: rgba(34, 34, 34, 0.35);
       border: none;
       border-bottom: 1px solid var(--scrollbar-thumb);
@@ -190,6 +190,7 @@
       transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
       user-select: none;
       text-align: left;
+      gap: 16px;
     }
 
     .h-card:last-child {
@@ -209,13 +210,20 @@
       color: rgba(102, 204, 255, 0.7);
     }
 
+    .h-card-left {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      gap: 6px;
+    }
+
     .h-card-title-wrap {
       display: flex;
       align-items: center;
-      flex: 1;
       min-width: 0;
-      margin-right: 16px;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .h-card-title {
@@ -233,18 +241,18 @@
       display: inline-flex;
       align-items: center;
       flex-shrink: 0;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 600;
       color: var(--accent-color);
       background-color: rgba(102, 204, 255, 0.12);
       border: 1px solid rgba(102, 204, 255, 0.25);
       border-radius: 10px;
-      padding: 2px 8px;
+      padding: 1px 8px;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
       white-space: nowrap;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     .h-card-author:hover {
@@ -263,6 +271,17 @@
     .daylight-mode .h-card-author:hover {
       background-color: rgba(102, 204, 255, 0.15);
       color: #0066aa;
+    }
+
+    .h-card-url {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+      transition: color 0.25s ease;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .h-card-subtitle {
@@ -1461,22 +1480,26 @@
         min-height: 56px;
       }
 
+      .h-card {
+        min-height: 64px;
+        padding: 12px 15px;
+      }
+
       .h-card-title {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
       }
 
       .h-card-title-wrap {
-        margin-right: 12px;
         gap: 6px;
       }
 
       .h-card-author {
-        font-size: 0.68rem;
-        padding: 2px 6px;
+        font-size: 0.66rem;
+        padding: 1px 6px;
       }
 
-      .h-card-subtitle {
-        font-size: 0.75rem;
+      .h-card-url {
+        font-size: 0.72rem;
       }
     }
 
@@ -1656,22 +1679,26 @@
         min-height: 52px;
       }
 
+      .h-card {
+        min-height: 56px;
+        padding: 10px 12px;
+      }
+
       .h-card-title {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
       }
 
       .h-card-title-wrap {
-        margin-right: 8px;
-        gap: 5px;
+        gap: 4px;
       }
 
       .h-card-author {
-        font-size: 0.62rem;
-        padding: 1px 5px;
+        font-size: 0.6rem;
+        padding: 0 5px;
       }
 
-      .h-card-subtitle {
-        font-size: 0.7rem;
+      .h-card-url {
+        font-size: 0.68rem;
       }
     }
 
@@ -2065,6 +2092,9 @@
       card.className = 'h-card';
       card.onclick = () => animateToPage(button.url);
 
+      const left = document.createElement('div');
+      left.className = 'h-card-left';
+
       const titleWrap = document.createElement('div');
       titleWrap.className = 'h-card-title-wrap';
 
@@ -2090,12 +2120,15 @@
         titleWrap.appendChild(authorBtn);
       }
 
-      const subtitle = document.createElement('span');
-      subtitle.className = 'h-card-subtitle';
-      subtitle.textContent = button.subtitle;
+      left.appendChild(titleWrap);
 
-      card.appendChild(titleWrap);
-      card.appendChild(subtitle);
+      const urlSpan = document.createElement('span');
+      urlSpan.className = 'h-card-url';
+      urlSpan.textContent = button.subtitle;
+
+      left.appendChild(urlSpan);
+
+      card.appendChild(left);
       container.appendChild(card);
     });
     pointer.bind_targets_events();
