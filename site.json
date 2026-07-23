@@ -1,36 +1,6 @@
 {
   "buttons": [
     {
-      "name": "Minichat聊天 - Astras.cc",
-      "name_en": "MiniChat - Astras.cc",
-      "subtitle": "minichat.astras.cc",
-      "url": "https://minichat.astras.cc",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
-    },
-    {
-      "name": "高速编号牌生成器 - NanGua-QWQ",
-      "name_en": "High Speed Number Card Generator - NanGua-QWQ",
-      "subtitle": "astras.cc/SignGenerator",
-      "url": "https://astras.cc/SignGenerator/",
-      "author": "NanGua-QWQ",
-      "author_url": "https://github.com/NanGua-QWQ"
-    },
-    {
-      "name": "用域名发送邮件 - Astras.cc",
-      "name_en": "Send email with domain name - Astras.cc",
-      "subtitle": "astras.cc/sendemail",
-      "url": "https://astras.cc/sendemail",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
-    },
-    {
-      "name": "AstraEditor 官网(.top)",
-      "name_en": "AstraEditor Official(.top)",
-      "subtitle": "editors.astras.top",
-      "url": "https://editors.astras.top/"
-    },
-    {
       "name": "AstraEditor 官网-CC特制版(.cc)",
       "name_en": "AstraEditor Official-Special(.cc)",
       "subtitle": "editors.astras.cc",
@@ -53,6 +23,44 @@
       "author_url": "https://github.com/ningqi24"
     },
     {
+      "name": "Minichat聊天 - Astras.cc",
+      "name_en": "MiniChat - Astras.cc",
+      "subtitle": "minichat.astras.cc",
+      "url": "https://minichat.astras.cc",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
+    },
+    {
+      "name": "SimpleChatMini for scratch",
+      "name_en": "SimpleChatMini for scratch",
+      "subtitle": "simplechatmini.astras.cc",
+      "url": "https://simplechatmini.astras.cc/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
+    },
+    {
+      "name": "用域名发送邮件 - Astras.cc",
+      "name_en": "Send email with domain name - Astras.cc",
+      "subtitle": "astras.cc/sendemail",
+      "url": "https://astras.cc/sendemail",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
+    },
+    {
+      "name": "高速编号牌生成器 - NanGua-QWQ",
+      "name_en": "High Speed Number Card Generator - NanGua-QWQ",
+      "subtitle": "astras.cc/SignGenerator",
+      "url": "https://astras.cc/SignGenerator/",
+      "author": "NanGua-QWQ",
+      "author_url": "https://github.com/NanGua-QWQ"
+    },
+    {
+      "name": "AstraEditor 官网(.top)",
+      "name_en": "AstraEditor Official(.top)",
+      "subtitle": "editors.astras.top",
+      "url": "https://editors.astras.top/"
+    },
+    {
       "name": "COLID Studio",
       "name_en": "COLID Studio",
       "subtitle": "colid.mysxl.cn",
@@ -71,14 +79,6 @@
       "name_en": "ToingOS/NQOS UI for scratch",
       "subtitle": "ningqi24.mysxl.cn",
       "url": "https://ningqi24.mysxl.cn/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
-    },
-    {
-      "name": "SimpleChatMini for scratch",
-      "name_en": "SimpleChatMini for scratch",
-      "subtitle": "simplechatmini.astras.cc",
-      "url": "https://simplechatmini.astras.cc/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24"
     },
