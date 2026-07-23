@@ -165,10 +165,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 0;
       width: 100%;
-      height: calc(100vh - 60px);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      min-height: calc(100vh - 60px);
       font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -176,15 +179,17 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       width: 100%;
-      height: 56px;
+      min-height: 60px;
+      padding: 12px 20px;
       background-color: rgba(34, 34, 34, 0.35);
       border: none;
       border-bottom: 1px solid var(--scrollbar-thumb);
       cursor: pointer;
       transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
       user-select: none;
+      text-align: left;
     }
 
     .h-card:last-child {
@@ -208,8 +213,13 @@
       font-size: 1rem;
       font-weight: 500;
       color: var(--text-primary);
-      margin-right: 8px;
       transition: color 0.25s ease;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 16px;
     }
 
     .h-card-subtitle {
@@ -217,6 +227,8 @@
       color: var(--text-secondary);
       letter-spacing: 0.5px;
       transition: color 0.25s ease;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     @keyframes fadeIn {
@@ -1396,6 +1408,24 @@
         min-height: 48px;
         padding: 0 20px;
       }
+
+      .horizontal-content {
+        padding: 20px 10px;
+      }
+
+      .h-card {
+        padding: 12px 15px;
+        min-height: 56px;
+      }
+
+      .h-card-title {
+        font-size: 0.9rem;
+        margin-right: 12px;
+      }
+
+      .h-card-subtitle {
+        font-size: 0.75rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1564,6 +1594,25 @@
         margin: 8px;
         min-height: 44px;
       }
+
+      .horizontal-content {
+        padding: 15px 5px;
+      }
+
+      .h-card {
+        padding: 10px 12px;
+        min-height: 52px;
+      }
+
+      .h-card-title {
+        font-size: 0.85rem;
+        margin-right: 8px;
+      }
+
+      .h-card-subtitle {
+        font-size: 0.7rem;
+      }
+    }
 
     @media (max-width: 320px) {
       .slogan {
