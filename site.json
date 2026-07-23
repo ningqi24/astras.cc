@@ -1,10 +1,16 @@
 {
   "buttons": [
     {
-      "name": "Minichat",
+      "name": "Minichat聊天 - Astras.cc",
       "name_en": "MiniChat - Astras.cc",
       "subtitle": "minichat.astras.cc",
       "url": "https://minichat.astras.cc"
+    },
+    {
+      "name": "高速编号牌生成器 - NanGua-QWQ",
+      "name_en": "High Speed Number Card Generator - NanGua-QWQ",
+      "subtitle": "astras.cc/SignGenerator",
+      "url": "https://astras.cc/SignGenerator/"
     },
     {
       "name": "一个发送邮件的网站与astras.cc",
@@ -43,20 +49,20 @@
       "url": "https://colid.mysxl.cn/"
     },
     {
-      "name": "COLID NS UI",
-      "name_en": "COLID NS UI",
+      "name": "COLID NS UI for scratch",
+      "name_en": "COLID NS UI for scratch",
       "subtitle": "colidns.mysxl.cn",
       "url": "https://colidns.mysxl.cn/"
     },
     {
-      "name": "ToingOS/NQOS UI",
-      "name_en": "ToingOS/NQOS UI",
+      "name": "ToingOS/NQOS UI for scratch",
+      "name_en": "ToingOS/NQOS UI for scratch",
       "subtitle": "ningqi24.mysxl.cn",
       "url": "https://ningqi24.mysxl.cn/"
     },
     {
-      "name": "SimpleChatMini",
-      "name_en": "SimpleChatMini",
+      "name": "SimpleChatMini for scratch",
+      "name_en": "SimpleChatMini for scratch",
       "subtitle": "simplechatmini.astras.cc",
       "url": "https://simplechatmini.astras.cc/"
     },
