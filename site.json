@@ -28,17 +28,13 @@
       "name": "官网-官方原版(.top)",
       "name_en": "Official - Original (.top)",
       "subtitle": "editors.astras.top",
-      "url": "https://editors.astras.top/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "url": "https://editors.astras.top/"
     },
     {
       "name": "官网-CC特制版(.cc)",
       "name_en": "Official - Special (.cc)",
       "subtitle": "editors.astras.cc",
-      "url": "https://editors.astras.cc/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "url": "https://editors.astras.cc/"
     },
     {
       "name": "AstraEditor下载站(.cc)",
@@ -60,9 +56,7 @@
       "name": "COLID Studio",
       "name_en": "COLID Studio",
       "subtitle": "colid.mysxl.cn",
-      "url": "https://colid.mysxl.cn/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "url": "https://colid.mysxl.cn/"
     },
     {
       "name": "COLID NS UI for scratch",
@@ -92,9 +86,7 @@
       "name": "ningqi-github",
       "name_en": "ningqi-github",
       "subtitle": "github.com/ningqi24",
-      "url": "https://github.com/ningqi24",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24"
+      "url": "https://github.com/ningqi24"
     }
   ]
 }
