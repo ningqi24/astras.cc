@@ -2890,23 +2890,11 @@
         const iconWrap = document.createElement('div');
         iconWrap.className = 'h-card-icon';
         const iconImg = document.createElement('img');
+        iconImg.src = 'https://' + domain + '/favicon.ico';
         iconImg.alt = '';
-        iconImg.loading = 'lazy';
-        let faviconTried = 0;
-        const faviconSources = [
-          'https://' + domain + '/favicon.ico',
-          'https://favicon.im/' + domain + '?larger=true',
-          'https://api.iowen.cn/favicon/' + domain + '.png'
-        ];
         iconImg.onerror = function() {
-          faviconTried++;
-          if (faviconTried < faviconSources.length) {
-            this.src = faviconSources[faviconTried];
-          } else {
-            this.parentElement.style.display = 'none';
-          }
+          this.parentElement.style.display = 'none';
         };
-        iconImg.src = faviconSources[0];
         iconWrap.appendChild(iconImg);
         card.appendChild(iconWrap);
 
