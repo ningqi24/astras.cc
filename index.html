@@ -223,6 +223,101 @@
       padding-left: 4px;
     }
 
+    .filter-bar {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background-color: rgba(34, 34, 34, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .daylight-mode .search-wrap {
+      background-color: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .search-wrap:focus-within {
+      border-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.06);
+    }
+
+    .daylight-mode .search-wrap:focus-within {
+      background-color: rgba(102, 204, 255, 0.04);
+    }
+
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-weight: 500;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    .tags-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-filter-btn {
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+      white-space: nowrap;
+    }
+
+    .daylight-mode .tag-filter-btn {
+      background-color: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .tag-filter-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.06);
+    }
+
+    .tag-filter-btn.active {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #fff;
+    }
+
+    .empty-state {
+      width: 100%;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
     .category-header:first-child {
       margin-top: 0;
     }
@@ -1954,6 +2049,24 @@
         padding: 20px 10px;
       }
 
+      .filter-bar {
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .search-wrap {
+        padding: 8px 12px;
+      }
+
+      .search-input {
+        font-size: 0.85rem;
+      }
+
+      .tag-filter-btn {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
+
       .h-card {
         padding: 10px 14px;
         min-height: 52px;
@@ -2605,6 +2718,8 @@
   };
 
   let siteButtons = [];
+  let currentSearch = '';
+  let activeTag = '';
 
   async function loadSiteButtons() {
     try {
@@ -2618,10 +2733,87 @@
     }
   }
 
+  function getAllTags() {
+    const tagSet = new Set();
+    siteButtons.forEach(btn => {
+      if (btn.tags) btn.tags.forEach(t => tagSet.add(t));
+    });
+    return Array.from(tagSet);
+  }
+
+  function getFilteredButtons() {
+    return siteButtons.map((button, index) => ({ button, index })).filter(({ button }) => {
+      if (activeTag && (!button.tags || !button.tags.includes(activeTag))) {
+        return false;
+      }
+      if (currentSearch) {
+        const searchLower = currentSearch.toLowerCase();
+        const name = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+        const subtitle = button.subtitle || '';
+        const author = button.author || '';
+        const tags = (button.tags || []).join(' ');
+        return name.toLowerCase().includes(searchLower)
+          || subtitle.toLowerCase().includes(searchLower)
+          || author.toLowerCase().includes(searchLower)
+          || tags.toLowerCase().includes(searchLower);
+      }
+      return true;
+    });
+  }
+
   function renderSiteButtons() {
     const container = document.getElementById('horizontal-content');
     if (!container || siteButtons.length === 0) return;
     container.innerHTML = '';
+
+    const searchLabel = currentLang === 'zh' ? '搜索站点...' : 'Search sites...';
+    const allLabel = currentLang === 'zh' ? '全部' : 'All';
+
+    const filterBar = document.createElement('div');
+    filterBar.className = 'filter-bar';
+
+    const searchWrap = document.createElement('div');
+    searchWrap.className = 'search-wrap';
+    const searchIcon = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>';
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'search-input';
+    searchInput.placeholder = searchLabel;
+    searchInput.value = currentSearch;
+    searchInput.oninput = function(e) {
+      currentSearch = e.target.value;
+      renderSiteButtons();
+    };
+    searchWrap.innerHTML = searchIcon;
+    searchWrap.appendChild(searchInput);
+    filterBar.appendChild(searchWrap);
+
+    const allTags = getAllTags();
+    if (allTags.length) {
+      const tagsBar = document.createElement('div');
+      tagsBar.className = 'tags-bar';
+      const allBtn = document.createElement('button');
+      allBtn.className = 'tag-filter-btn' + (activeTag === '' ? ' active' : '');
+      allBtn.textContent = allLabel;
+      allBtn.onclick = function() {
+        activeTag = '';
+        renderSiteButtons();
+      };
+      tagsBar.appendChild(allBtn);
+      allTags.forEach(tag => {
+        const tagBtn = document.createElement('button');
+        tagBtn.className = 'tag-filter-btn' + (activeTag === tag ? ' active' : '');
+        tagBtn.textContent = tag;
+        tagBtn.onclick = function() {
+          activeTag = activeTag === tag ? '' : tag;
+          renderSiteButtons();
+        };
+        tagsBar.appendChild(tagBtn);
+      });
+      filterBar.appendChild(tagsBar);
+    }
+
+    container.appendChild(filterBar);
 
     const categories = {
       'astraeditor': { zh: 'AstraEditor 系列', en: 'AstraEditor' },
@@ -2638,8 +2830,18 @@
       return 'links';
     }
 
+    const filtered = getFilteredButtons();
+    const noResultLabel = currentLang === 'zh' ? '没有找到匹配的站点' : 'No matching sites found';
+    if (filtered.length === 0) {
+      const emptyState = document.createElement('div');
+      emptyState.className = 'empty-state';
+      emptyState.textContent = noResultLabel;
+      container.appendChild(emptyState);
+      return;
+    }
+
     const grouped = {};
-    siteButtons.forEach((button, index) => {
+    filtered.forEach(({ button, index }) => {
       const cat = getCategory(button);
       if (!grouped[cat]) grouped[cat] = [];
       grouped[cat].push({ button, index });
@@ -2669,7 +2871,7 @@
         const iconWrap = document.createElement('div');
         iconWrap.className = 'h-card-icon';
         const iconImg = document.createElement('img');
-        iconImg.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+        iconImg.src = 'https://' + domain + '/favicon.ico';
         iconImg.alt = '';
         iconImg.onerror = function() {
           this.parentElement.style.display = 'none';
@@ -2802,7 +3004,7 @@
         <div class="detail-modal-header">
           <div class="detail-modal-project-row">
             <div class="detail-modal-icon">
-              <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" alt="" onerror="this.parentElement.style.display='none'">
+              <img src="https://${domain}/favicon.ico" alt="" onerror="this.parentElement.style.display='none'">
             </div>
             <div class="detail-modal-title-wrap">
               <h3 class="detail-modal-title">${titleText}</h3>
