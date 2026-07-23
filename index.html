@@ -2888,11 +2888,12 @@
         let urlObj;
         try { urlObj = new URL(button.url); domain = urlObj.hostname; } catch(e) { domain = button.subtitle; }
 
+        const cacheBust = '?v=' + Date.now();
         let iconUrl;
         if (urlObj && urlObj.hostname === 'github.com') {
-          iconUrl = 'https://github.com/favicon.ico';
+          iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
         } else {
-          iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico';
+          iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
         }
 
         const iconWrap = document.createElement('div');
@@ -2988,11 +2989,12 @@
     let urlObj;
     try { urlObj = new URL(button.url); domain = urlObj.hostname; } catch(e) { domain = button.subtitle; }
 
+    const cacheBust = '?v=' + Date.now();
     let iconUrl;
     if (urlObj && urlObj.hostname === 'github.com') {
-      iconUrl = 'https://github.com/favicon.ico';
+      iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
     } else {
-      iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico';
+      iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
     }
 
     const visitText = currentLang === 'zh' ? '访问网站' : 'Visit Site';
