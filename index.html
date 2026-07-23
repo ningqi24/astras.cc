@@ -339,145 +339,116 @@
     }
 
     .detail-modal-overlay.show {
-      background-color: rgba(0, 0, 0, 0.55);
+      background-color: rgba(0, 0, 0, 0.4);
       pointer-events: auto;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .detail-modal {
       background-color: var(--bg-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 2px;
       width: 90%;
-      max-width: 460px;
+      max-width: 480px;
       max-height: 85vh;
       overflow-y: auto;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      transform: scale(0.92) translateY(24px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      transform: translateY(20px);
       opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
       font-family: var(--font-family);
+      position: relative;
     }
 
     .detail-modal-overlay.show .detail-modal {
-      transform: scale(1) translateY(0);
+      transform: translateY(0);
       opacity: 1;
     }
 
-    .detail-modal-banner {
-      position: relative;
-      height: 80px;
-      background: linear-gradient(135deg, var(--accent-color), rgba(102, 204, 255, 0.3));
-      border-radius: 20px 20px 0 0;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .detail-modal-banner::after {
+    .detail-modal::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.15), transparent 60%);
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--accent-color);
+      opacity: 0.6;
+      border-radius: 2px 0 0 2px;
+    }
+
+    .detail-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+      z-index: 2;
+      opacity: 0.6;
+    }
+
+    .detail-modal-close:hover {
+      color: var(--text-primary);
+      opacity: 1;
+      transform: rotate(90deg);
     }
 
     .detail-modal-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 0 24px 8px;
-      margin-top: -28px;
+      padding: 40px 36px 24px;
       position: relative;
-      z-index: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .detail-modal-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background-color: var(--bg-secondary);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .detail-modal-icon img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
-
-    .detail-modal-icon-fallback {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--accent-color);
-      background: linear-gradient(135deg, rgba(102,204,255,0.15), rgba(102,204,255,0.05));
-    }
-
-    .detail-modal-header-info {
-      flex: 1;
-      min-width: 0;
-      padding-right: 36px;
+    .daylight-mode .detail-modal-header {
+      border-bottom-color: rgba(0, 0, 0, 0.06);
     }
 
     .detail-modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.65rem;
+      font-weight: 300;
       color: var(--text-primary);
-      margin: 0;
-      line-height: 1.35;
+      margin: 0 0 10px 0;
+      line-height: 1.3;
       word-break: break-word;
+      letter-spacing: -0.5px;
+      padding-right: 40px;
     }
 
     .detail-modal-domain {
       font-size: 0.78rem;
       color: var(--text-secondary);
-      margin-top: 3px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      letter-spacing: 0.3px;
+      opacity: 0.7;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
 
-    .detail-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border: none;
-      border-radius: 10px;
-      background-color: rgba(0, 0, 0, 0.25);
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      padding: 0;
-      backdrop-filter: blur(4px);
-      z-index: 2;
-    }
-
-    .detail-modal-close:hover {
-      background-color: rgba(0, 0, 0, 0.45);
-      transform: rotate(90deg);
+    .detail-modal-domain::before {
+      content: '→';
+      opacity: 0.5;
     }
 
     .detail-modal-body {
-      padding: 16px 24px;
+      padding: 28px 36px;
     }
 
     .detail-modal-section {
-      margin-bottom: 18px;
+      margin-bottom: 22px;
+      position: relative;
+      padding-left: 14px;
+      border-left: 1px solid var(--scrollbar-thumb);
     }
 
     .detail-modal-section:last-child {
@@ -485,73 +456,90 @@
     }
 
     .detail-modal-section-label {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 2px;
       color: var(--text-secondary);
       margin-bottom: 8px;
-      font-weight: 600;
+      font-weight: 500;
+      opacity: 0.8;
     }
 
     .detail-modal-desc {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-primary);
-      line-height: 1.75;
+      line-height: 1.8;
       margin: 0;
+      font-weight: 300;
     }
 
     .detail-modal-author {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      background-color: rgba(102, 204, 255, 0.08);
-      border: 1px solid rgba(102, 204, 255, 0.15);
-      border-radius: 20px;
-      font-size: 0.82rem;
+      gap: 8px;
+      font-size: 0.85rem;
       color: var(--text-secondary);
+      text-decoration: none;
       transition: all 0.2s ease;
     }
 
+    .detail-modal-author::before {
+      content: 'by';
+      font-style: italic;
+      opacity: 0.5;
+      margin-right: 2px;
+    }
+
     .detail-modal-author:hover {
-      background-color: rgba(102, 204, 255, 0.15);
-      border-color: rgba(102, 204, 255, 0.3);
+      color: var(--accent-color);
     }
 
     .detail-modal-author-link {
-      color: var(--accent-color);
+      color: var(--text-primary);
       text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease;
+      font-weight: 500;
+      border-bottom: 1px solid var(--scrollbar-thumb);
+      padding-bottom: 1px;
+      transition: all 0.2s ease;
     }
 
-    .detail-modal-author-link:hover {
-      text-decoration: underline;
+    .detail-modal-author:hover .detail-modal-author-link {
+      color: var(--accent-color);
+      border-bottom-color: var(--accent-color);
     }
 
     .detail-modal-url-box {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 10px 14px;
-      background-color: rgba(0, 0, 0, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.12);
+      border-radius: 2px;
       cursor: pointer;
       transition: all 0.2s ease;
+      border: 1px solid transparent;
     }
 
     .detail-modal-url-box:hover {
-      background-color: rgba(0, 0, 0, 0.25);
-      border-color: rgba(102, 204, 255, 0.2);
+      background-color: rgba(0, 0, 0, 0.18);
+      border-color: var(--accent-color);
+    }
+
+    .daylight-mode .detail-modal-url-box {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .daylight-mode .detail-modal-url-box:hover {
+      background-color: rgba(0, 0, 0, 0.04);
     }
 
     .detail-modal-url-value {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-primary);
       word-break: break-all;
-      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
       flex: 1;
+      opacity: 0.9;
     }
 
     .detail-modal-url-copy {
@@ -559,113 +547,78 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border: none;
-      border-radius: 7px;
-      background-color: rgba(255, 255, 255, 0.06);
+      background: none;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all 0.2s ease;
       padding: 0;
+      opacity: 0.6;
     }
 
     .detail-modal-url-copy:hover {
-      background-color: rgba(102, 204, 255, 0.18);
       color: var(--accent-color);
+      opacity: 1;
     }
 
     .detail-modal-url-copy.copied {
-      background-color: rgba(76, 175, 80, 0.2);
       color: #4caf50;
+      opacity: 1;
     }
 
     .detail-modal-footer {
-      padding: 16px 24px 24px;
+      padding: 20px 36px 32px;
       display: flex;
-      gap: 10px;
+      gap: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .daylight-mode .detail-modal-footer {
+      border-top-color: rgba(0, 0, 0, 0.06);
     }
 
     .detail-modal-btn {
       flex: 1;
-      padding: 12px;
+      padding: 12px 16px;
       border: none;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: var(--font-family);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      letter-spacing: 0.5px;
     }
 
     .detail-modal-btn-close {
-      background-color: rgba(255, 255, 255, 0.06);
+      background: none;
       color: var(--text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--scrollbar-thumb);
     }
 
     .detail-modal-btn-close:hover {
-      background-color: rgba(255, 255, 255, 0.1);
       color: var(--text-primary);
+      border-color: var(--text-secondary);
     }
 
     .detail-modal-btn-visit {
-      background-color: var(--accent-color);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(102, 204, 255, 0.25);
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
     }
 
     .detail-modal-btn-visit:hover {
-      filter: brightness(1.12);
+      opacity: 0.85;
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(102, 204, 255, 0.35);
     }
 
     .detail-modal-btn-visit:active {
       transform: translateY(0);
-    }
-
-    .daylight-mode .detail-modal {
-      border-color: rgba(0, 0, 0, 0.06);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
-    }
-
-    .daylight-mode .detail-modal-banner {
-      background: linear-gradient(135deg, var(--accent-color), rgba(102, 204, 255, 0.5));
-    }
-
-    .daylight-mode .detail-modal-icon {
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    .daylight-mode .detail-modal-close {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .daylight-mode .detail-modal-close:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    .daylight-mode .detail-modal-url-box {
-      background-color: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .daylight-mode .detail-modal-url-box:hover {
-      background-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .daylight-mode .detail-modal-url-copy {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .daylight-mode .detail-modal-btn-close {
-      background-color: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.08);
     }
 
     @keyframes fadeIn {
@@ -2095,33 +2048,19 @@
       }
 
       .detail-modal-header {
-        padding: 0 18px 8px;
+        padding: 36px 28px 20px;
       }
 
       .detail-modal-title {
-        font-size: 1.02rem;
+        font-size: 1.4rem;
       }
 
       .detail-modal-body {
-        padding: 14px 18px;
+        padding: 22px 28px;
       }
 
       .detail-modal-footer {
-        padding: 14px 18px 18px;
-      }
-
-      .detail-modal-icon {
-        width: 48px;
-        height: 48px;
-      }
-
-      .detail-modal-icon img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .detail-modal-icon-fallback {
-        font-size: 1.2rem;
+        padding: 18px 28px 28px;
       }
     }
 
@@ -2589,15 +2528,11 @@
     let domain;
     try { domain = new URL(button.url).hostname; } catch(e) { domain = button.subtitle; }
 
-    const firstLetter = (titleText.replace(/[^\p{L}]/gu, '')[0] || 'A').toUpperCase();
-
     const visitText = currentLang === 'zh' ? '访问网站' : 'Visit Site';
     const closeText = currentLang === 'zh' ? '关闭' : 'Close';
     const descLabel = currentLang === 'zh' ? '简介' : 'Description';
     const authorLabel = currentLang === 'zh' ? '作者' : 'Author';
     const urlLabel = currentLang === 'zh' ? '地址' : 'URL';
-    const copyText = currentLang === 'zh' ? '复制' : 'Copy';
-    const copiedText = currentLang === 'zh' ? '已复制' : 'Copied';
 
     let authorHtml = '';
     if (button.author) {
@@ -2605,7 +2540,6 @@
         <div class="detail-modal-section">
           <div class="detail-modal-section-label">${authorLabel}</div>
           <a href="${button.author_url || '#'}" target="_blank" rel="noopener noreferrer" class="detail-modal-author">
-            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>
             <span class="detail-modal-author-link">${button.author}</span>
           </a>
         </div>`;
@@ -2613,23 +2547,12 @@
 
     modal.innerHTML = `
       <div class="detail-modal">
-        <div class="detail-modal-banner">
-          <button class="detail-modal-close" onclick="closeDetailModal()">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
-          </button>
-        </div>
+        <button class="detail-modal-close" onclick="closeDetailModal()">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+        </button>
         <div class="detail-modal-header">
-          <div class="detail-modal-icon">
-            <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=64" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="detail-modal-icon-fallback" style="display:none">${firstLetter}</div>
-          </div>
-          <div class="detail-modal-header-info">
-            <h3 class="detail-modal-title">${titleText}</h3>
-            <div class="detail-modal-domain">
-              <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M7 2a5 5 0 100 10 5 5 0 000-10z"/><path d="M11 11l3 3"/></svg>
-              <span>${domain}</span>
-            </div>
-          </div>
+          <h3 class="detail-modal-title">${titleText}</h3>
+          <div class="detail-modal-domain">${domain}</div>
         </div>
         <div class="detail-modal-body">
           ${descText ? `<div class="detail-modal-section"><div class="detail-modal-section-label">${descLabel}</div><p class="detail-modal-desc">${descText}</p></div>` : ''}
@@ -2638,8 +2561,8 @@
             <div class="detail-modal-section-label">${urlLabel}</div>
             <div class="detail-modal-url-box" onclick="copyUrl('${button.url}', this)">
               <span class="detail-modal-url-value">${button.url}</span>
-              <button class="detail-modal-url-copy" onclick="event.stopPropagation();copyUrl('${button.url}', this.closest('.detail-modal-url-box'))" title="${copyText}">
-                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="8" height="8" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/></svg>
+              <button class="detail-modal-url-copy" onclick="event.stopPropagation();copyUrl('${button.url}', this.closest('.detail-modal-url-box'))">
+                <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h6a2 2 0 012 2v6"/><rect x="3" y="5" width="8" height="8" rx="1.5"/></svg>
               </button>
             </div>
           </div>
@@ -2647,8 +2570,8 @@
         <div class="detail-modal-footer">
           <button class="detail-modal-btn detail-modal-btn-close" onclick="closeDetailModal()">${closeText}</button>
           <button class="detail-modal-btn detail-modal-btn-visit" onclick="animateToPage('${button.url}')">
-            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L8 8"/><path d="M12 9v4.5A1.5 1.5 0 0110.5 15h-8A1.5 1.5 0 011 13.5v-8A1.5 1.5 0 012.5 4H7"/></svg>
             ${visitText}
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L7 9"/><path d="M12 9v4a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1h4"/></svg>
           </button>
         </div>
       </div>
