@@ -131,6 +131,28 @@
       "tags": ["代码仓库"],
       "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
       "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories."
+    },
+    {
+      "name": "ToingOS 官网",
+      "name_en": "ToingOS Official",
+      "subtitle": "ningqi24.mysxl.cn",
+      "url": "https://ningqi24.mysxl.cn",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24",
+      "tags": ["Scratch", "OS&UI"],
+      "description": "ToingOS 官方网站，追寻 COLID OS 的质心之作。展示拓影操作系统的版本更新日志、功能特性与下载入口，持续迭代更新至 1.995 版本。",
+      "description_en": "Official site of ToingOS, a Scratch-based OS inspired by COLID OS. Features version changelog, feature highlights, and download links, updated to v1.995."
+    },
+    {
+      "name": "ningqi开发社",
+      "name_en": "ningqi Dev Studio",
+      "subtitle": "nqxz.mysxl.cn",
+      "url": "https://nqxz.mysxl.cn",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24",
+      "tags": ["下载"],
+      "description": "ningqi 的作品下载站，收录 NQ_OS、NQ_I_OS、NQ_i_V OS、拓影 OS、ToIngOS 等各代 Scratch 伪系统作品及其他项目的蓝奏云/123云盘下载链接。",
+      "description_en": "ningqi's download hub, hosting all generations of Scratch pseudo-OS projects including NQ_OS, NQ_I_OS, NQ_i_V OS, TuoyingOS, and ToIngOS via Lanzou/123 cloud drives."
     }
   ]
 }
