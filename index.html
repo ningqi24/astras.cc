@@ -2456,39 +2456,63 @@
     /* View toggle */
     .view-toggle {
       display: flex;
-      gap: 4px;
-      margin-left: 12px;
+      align-items: center;
+      margin-left: 8px;
+      position: relative;
     }
     .view-toggle-btn {
-      padding: 6px 10px;
-      border-radius: 6px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
       background: transparent;
-      border: 1px solid var(--text-secondary);
+      border: none;
       color: var(--text-secondary);
       cursor: pointer;
-      font-size: 13px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
     .view-toggle-btn.active {
-      border-color: var(--accent-color);
       color: var(--accent-color);
-      background: rgba(102, 204, 255, 0.1);
+      background: rgba(102, 204, 255, 0.12);
     }
     .view-toggle-btn:hover {
-      border-color: var(--accent-color);
       color: var(--accent-color);
+      background: rgba(102, 204, 255, 0.08);
     }
 
     /* Grid view */
     .horizontal-content.grid-view {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
       padding: 0 20px;
+    }
+    .horizontal-content.grid-view .filter-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .horizontal-content.grid-view .search-wrap {
+      width: 100%;
+      max-width: 400px;
+    }
+    .horizontal-content.grid-view .tags-bar {
+      flex-wrap: wrap;
     }
     .horizontal-content.grid-view .category-header {
       grid-column: 1 / -1;
-      margin-top: 16px;
+      margin-top: 24px;
+      margin-bottom: 4px;
+    }
+    .horizontal-content.grid-view .category-header:first-of-type {
+      margin-top: 8px;
+    }
+    .horizontal-content.grid-view .category-header-row {
+      grid-column: 1 / -1;
     }
     .horizontal-content.grid-view .card-group {
       display: contents;
@@ -2497,30 +2521,68 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 20px 16px;
+      padding: 28px 16px 18px;
       gap: 12px;
+      min-height: 150px;
+      position: relative;
+      justify-content: flex-start;
     }
     .horizontal-content.grid-view .h-card-icon {
       width: 56px;
       height: 56px;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+    .horizontal-content.grid-view .h-card-icon img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
     }
     .horizontal-content.grid-view .h-card-left {
       width: 100%;
+      align-items: center;
+      gap: 6px;
     }
     .horizontal-content.grid-view .h-card-title-wrap {
       justify-content: center;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .horizontal-content.grid-view .h-card-right {
-      width: 100%;
-      justify-content: center;
+    .horizontal-content.grid-view .h-card-title {
+      font-size: 14px;
+      font-weight: 600;
     }
     .horizontal-content.grid-view .h-card-subtitle {
       text-align: center;
+      font-size: 0.75rem;
     }
-    .horizontal-content.grid-view .h-card-title {
-      font-size: 14px;
+    .horizontal-content.grid-view .h-card-detail-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+    }
+    .horizontal-content.grid-view .h-card:hover .h-card-detail-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .horizontal-content.grid-view .fav-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+    }
+    .horizontal-content.grid-view .fav-btn.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .horizontal-content.grid-view .h-card:hover .fav-btn {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Favorite button */
@@ -2530,12 +2592,16 @@
       cursor: pointer;
       color: var(--text-secondary);
       padding: 4px;
-      border-radius: 4px;
+      border-radius: 6px;
       transition: all 0.2s;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .fav-btn:hover {
       color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.1);
     }
     .fav-btn.active {
       color: #ff6b6b;
@@ -2545,50 +2611,126 @@
     }
 
     /* Color theme picker */
-    .color-picker {
+    .color-picker-wrap {
+      position: relative;
+      margin-left: 4px;
+    }
+    .color-picker-toggle {
+      width: 36px;
+      height: 36px;
       display: flex;
-      gap: 8px;
       align-items: center;
-      margin-left: 12px;
+      justify-content: center;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .color-picker-toggle:hover {
+      color: var(--accent-color);
+      background: rgba(102, 204, 255, 0.08);
+    }
+    .color-picker-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--scrollbar-thumb);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 1001;
+      min-width: 180px;
+    }
+    .color-picker-panel.show {
+      display: block;
+      animation: fadeInUp 0.15s ease-out;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .color-picker-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .color-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
     .color-dot {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 10px;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      position: relative;
     }
     .color-dot:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
     .color-dot.active {
       border-color: var(--text-primary);
-      transform: scale(1.1);
+    }
+    .color-dot.active::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
     /* History section */
-    .history-section {
-      margin-bottom: 24px;
-    }
-    .history-clear-btn {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: all 0.2s;
-    }
-    .history-clear-btn:hover {
-      color: var(--accent-color);
-    }
     .category-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      margin-top: 8px;
+    }
+    .category-header-row .category-header {
+      margin: 0;
+    }
+    .history-clear-btn {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+      font-weight: 500;
+    }
+    .daylight-mode .history-clear-btn {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    .history-clear-btn:hover {
+      color: #ff6b6b;
+      border-color: rgba(255, 107, 107, 0.3);
+      background: rgba(255, 107, 107, 0.08);
     }
   </style>
   
@@ -2731,13 +2873,21 @@
     <div class="tabButtonTab">
       <div class="view-toggle" id="view-toggle">
         <button type="button" class="view-toggle-btn" id="view-list-btn" onclick="setView('list')" title="列表视图">
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>
         </button>
         <button type="button" class="view-toggle-btn" id="view-grid-btn" onclick="setView('grid')" title="网格视图">
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="4" height="4"/><rect x="9" y="3" width="4" height="4"/><rect x="3" y="9" width="4" height="4"/><rect x="9" y="9" width="4" height="4"/></svg>
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="4" height="4" rx="0.5"/><rect x="9" y="3" width="4" height="4" rx="0.5"/><rect x="3" y="9" width="4" height="4" rx="0.5"/><rect x="9" y="9" width="4" height="4" rx="0.5"/></svg>
         </button>
       </div>
-      <div class="color-picker" id="color-picker"></div>
+      <div class="color-picker-wrap" id="color-picker-wrap">
+        <button type="button" class="color-picker-toggle" id="color-picker-toggle" onclick="toggleColorPicker()" title="主题色">
+          <svg viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </button>
+        <div class="color-picker-panel" id="color-picker-panel">
+          <div class="color-picker-label" id="color-picker-label">主题色</div>
+          <div class="color-picker" id="color-picker"></div>
+        </div>
+      </div>
       <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()">
         <a href="javascript:void(0)" class="tabButton">夜间</a>
       </button>
@@ -3678,6 +3828,10 @@
     document.querySelectorAll('#theme-toggle-btn a.tabButton').forEach(el => {
       el.textContent = currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间'];
     });
+    const colorLabel = document.getElementById('color-picker-label');
+    if (colorLabel) {
+      colorLabel.textContent = currentLang === 'zh' ? '主题色' : 'Theme Color';
+    }
     document.querySelectorAll('.endby').forEach(el => {
       el.textContent = translations[currentLang]['Astras.CC'];
     });
@@ -3760,6 +3914,9 @@
     if (!event.target.closest('.custom-dropdown')) {
       document.querySelectorAll('.custom-dropdown-menu.show').forEach(el => el.classList.remove('show'));
     }
+    if (!event.target.closest('.color-picker-wrap')) {
+      closeColorPicker();
+    }
     if (!event.target.closest('.download-card') && !event.target.closest('.download-card-content')) {
       hideDownloadPanel();
     }
@@ -3768,6 +3925,7 @@
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeDetailModal();
+      closeColorPicker();
     }
   });
 
@@ -3868,6 +4026,21 @@
     localStorage.setItem('accentColor', colorName);
     document.documentElement.style.setProperty('--accent-color', color.value);
     renderColorPicker();
+    closeColorPicker();
+  }
+
+  function toggleColorPicker() {
+    const panel = document.getElementById('color-picker-panel');
+    if (panel) {
+      panel.classList.toggle('show');
+    }
+  }
+
+  function closeColorPicker() {
+    const panel = document.getElementById('color-picker-panel');
+    if (panel) {
+      panel.classList.remove('show');
+    }
   }
 
   function renderColorPicker() {
@@ -3879,7 +4052,10 @@
       dot.className = 'color-dot' + (color.name === currentAccentColor ? ' active' : '');
       dot.style.backgroundColor = color.value;
       dot.title = color.name;
-      dot.onclick = () => applyAccentColor(color.name);
+      dot.onclick = (e) => {
+        e.stopPropagation();
+        applyAccentColor(color.name);
+      };
       picker.appendChild(dot);
     });
   }
