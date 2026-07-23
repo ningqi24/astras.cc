@@ -181,25 +181,26 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      min-height: 72px;
-      padding: 14px 20px;
+      min-height: 56px;
+      padding: 12px 18px;
       background-color: rgba(34, 34, 34, 0.35);
-      border: none;
-      border-bottom: 1px solid var(--scrollbar-thumb);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
       user-select: none;
       text-align: left;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .h-card:last-child {
-      border-bottom: none;
+    .h-card:not(:last-child) {
+      margin-bottom: 8px;
     }
 
     .h-card:hover {
-      background-color: rgba(102, 204, 255, 0.12);
-      border-bottom-color: rgba(102, 204, 255, 0.3);
+      background-color: rgba(102, 204, 255, 0.1);
+      border-color: rgba(102, 204, 255, 0.25);
+      transform: translateY(-1px);
     }
 
     .h-card:hover .h-card-title {
@@ -208,6 +209,27 @@
 
     .h-card:hover .h-card-subtitle {
       color: rgba(102, 204, 255, 0.7);
+    }
+
+    .category-header {
+      width: 100%;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      margin-top: 8px;
+      padding-left: 4px;
+    }
+
+    .category-header:first-child {
+      margin-top: 0;
+    }
+
+    .card-group {
+      width: 100%;
+      margin-bottom: 24px;
     }
 
     .h-card-left {
@@ -696,17 +718,21 @@
     }
 
     #tabLogo {
-      height: 40px;
+      height: 36px;
       margin-top: auto;
       margin-bottom: auto;
-      margin-left: 30px;
+      margin-left: 24px;
+      cursor: pointer;
     }
 
     .tabButtonTab {
       margin-top: auto;
       margin-bottom: auto;
-      margin-right: 20px;
+      margin-right: 24px;
       height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .tabButton {
@@ -755,13 +781,13 @@
     }
 
     .daylight-mode .h-card {
-      background-color: rgba(255, 255, 255, 0.5);
-      border-bottom-color: #e0e0e0;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.05);
     }
 
     .daylight-mode .h-card:hover {
-      background-color: rgba(102, 204, 255, 0.05);
-      border-bottom-color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.06);
+      border-color: rgba(102, 204, 255, 0.25);
     }
 
     .daylight-mode .tab {
@@ -1854,13 +1880,8 @@
       }
 
       .h-card {
-        padding: 12px 15px;
-        min-height: 56px;
-      }
-
-      .h-card {
-        min-height: 64px;
-        padding: 12px 15px;
+        padding: 10px 14px;
+        min-height: 52px;
       }
 
       .h-card-title {
@@ -1876,8 +1897,14 @@
         padding: 1px 6px;
       }
 
-      .h-card-url {
-        font-size: 0.72rem;
+      .category-header {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .card-group {
+        margin-bottom: 18px;
       }
 
       .h-card-detail-btn {
@@ -2062,13 +2089,8 @@
       }
 
       .h-card {
-        padding: 10px 12px;
-        min-height: 52px;
-      }
-
-      .h-card {
-        min-height: 56px;
-        padding: 10px 12px;
+        padding: 9px 12px;
+        min-height: 48px;
       }
 
       .h-card-title {
@@ -2084,8 +2106,13 @@
         padding: 0 5px;
       }
 
-      .h-card-url {
-        font-size: 0.68rem;
+      .category-header {
+        font-size: 0.65rem;
+        margin-bottom: 6px;
+      }
+
+      .card-group {
+        margin-bottom: 14px;
       }
 
       .h-card-detail-btn {
@@ -2510,61 +2537,94 @@
     const container = document.getElementById('horizontal-content');
     if (!container || siteButtons.length === 0) return;
     container.innerHTML = '';
+
+    const categories = {
+      'astraeditor': { zh: 'AstraEditor 系列', en: 'AstraEditor' },
+      'tools': { zh: '在线工具', en: 'Online Tools' },
+      'creative': { zh: '创意项目', en: 'Creative Projects' },
+      'links': { zh: '相关链接', en: 'Related Links' }
+    };
+
+    function getCategory(button) {
+      const u = button.url.toLowerCase();
+      if (u.includes('editor') || u.includes('download')) return 'astraeditor';
+      if (u.includes('search') || u.includes('mail') || u.includes('sign') || u.includes('generator') || u.includes('chat') || u.includes('simplechat')) return 'tools';
+      if (u.includes('studio') || u.includes('os') || u.includes('ui') || u.includes('mysxl')) return 'creative';
+      return 'links';
+    }
+
+    const grouped = {};
     siteButtons.forEach((button, index) => {
-      const card = document.createElement('div');
-      card.className = 'h-card';
-      card.onclick = () => animateToPage(button.url);
-
-      const left = document.createElement('div');
-      left.className = 'h-card-left';
-
-      const titleWrap = document.createElement('div');
-      titleWrap.className = 'h-card-title-wrap';
-
-      const title = document.createElement('span');
-      title.className = 'h-card-title';
-      title.setAttribute('data-i18n', button.name);
-      title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
-
-      titleWrap.appendChild(title);
-
-      if (button.author) {
-        const authorBtn = document.createElement('a');
-        authorBtn.className = 'h-card-author';
-        authorBtn.href = button.author_url || '#';
-        authorBtn.target = '_blank';
-        authorBtn.rel = 'noopener noreferrer';
-        authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
-        authorBtn.innerHTML = '<svg viewBox="0 0 16 16" width="11" height="11" style="vertical-align:-1px;margin-right:3px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>' + button.author;
-        authorBtn.onclick = (e) => {
-          e.stopPropagation();
-          animateToPage(button.author_url);
-        };
-        titleWrap.appendChild(authorBtn);
-      }
-
-      left.appendChild(titleWrap);
-
-      const urlSpan = document.createElement('span');
-      urlSpan.className = 'h-card-url';
-      urlSpan.textContent = button.subtitle;
-
-      left.appendChild(urlSpan);
-
-      card.appendChild(left);
-
-      const detailBtn = document.createElement('button');
-      detailBtn.className = 'h-card-detail-btn';
-      detailBtn.title = currentLang === 'zh' ? '详情' : 'Details';
-      detailBtn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg>';
-      detailBtn.onclick = (e) => {
-        e.stopPropagation();
-        showDetailModal(index);
-      };
-
-      card.appendChild(detailBtn);
-      container.appendChild(card);
+      const cat = getCategory(button);
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push({ button, index });
     });
+
+    const order = ['astraeditor', 'tools', 'creative', 'links'];
+
+    order.forEach(catKey => {
+      if (!grouped[catKey]) return;
+
+      const header = document.createElement('div');
+      header.className = 'category-header';
+      header.textContent = currentLang === 'zh' ? categories[catKey].zh : categories[catKey].en;
+      container.appendChild(header);
+
+      const groupWrap = document.createElement('div');
+      groupWrap.className = 'card-group';
+
+      grouped[catKey].forEach(({ button, index }) => {
+        const card = document.createElement('div');
+        card.className = 'h-card';
+        card.onclick = () => animateToPage(button.url);
+
+        const left = document.createElement('div');
+        left.className = 'h-card-left';
+
+        const titleWrap = document.createElement('div');
+        titleWrap.className = 'h-card-title-wrap';
+
+        const title = document.createElement('span');
+        title.className = 'h-card-title';
+        title.setAttribute('data-i18n', button.name);
+        title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+
+        titleWrap.appendChild(title);
+
+        if (button.author) {
+          const authorBtn = document.createElement('a');
+          authorBtn.className = 'h-card-author';
+          authorBtn.href = button.author_url || '#';
+          authorBtn.target = '_blank';
+          authorBtn.rel = 'noopener noreferrer';
+          authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
+          authorBtn.innerHTML = '<svg viewBox="0 0 16 16" width="11" height="11" style="vertical-align:-1px;margin-right:3px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>' + button.author;
+          authorBtn.onclick = (e) => {
+            e.stopPropagation();
+            animateToPage(button.author_url);
+          };
+          titleWrap.appendChild(authorBtn);
+        }
+
+        left.appendChild(titleWrap);
+        card.appendChild(left);
+
+        const detailBtn = document.createElement('button');
+        detailBtn.className = 'h-card-detail-btn';
+        detailBtn.title = currentLang === 'zh' ? '详情' : 'Details';
+        detailBtn.innerHTML = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5"/><circle cx="8" cy="4.8" r="0.5" fill="currentColor" stroke="none"/></svg>';
+        detailBtn.onclick = (e) => {
+          e.stopPropagation();
+          showDetailModal(index);
+        };
+
+        card.appendChild(detailBtn);
+        groupWrap.appendChild(card);
+      });
+
+      container.appendChild(groupWrap);
+    });
+
     pointer.bind_targets_events();
   }
 
