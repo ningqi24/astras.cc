@@ -209,17 +209,60 @@
       color: rgba(102, 204, 255, 0.7);
     }
 
+    .h-card-title-wrap {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+      margin-right: 16px;
+      gap: 8px;
+    }
+
     .h-card-title {
       font-size: 1rem;
       font-weight: 500;
       color: var(--text-primary);
       transition: color 0.25s ease;
-      flex: 1;
       min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-right: 16px;
+    }
+
+    .h-card-author {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      background-color: rgba(102, 204, 255, 0.12);
+      border: 1px solid rgba(102, 204, 255, 0.25);
+      border-radius: 10px;
+      padding: 2px 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+
+    .h-card-author:hover {
+      background-color: rgba(102, 204, 255, 0.25);
+      border-color: var(--accent-color);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .daylight-mode .h-card-author {
+      background-color: rgba(102, 204, 255, 0.08);
+      border-color: rgba(102, 204, 255, 0.3);
+      color: var(--accent-color);
+    }
+
+    .daylight-mode .h-card-author:hover {
+      background-color: rgba(102, 204, 255, 0.15);
+      color: #0066aa;
     }
 
     .h-card-subtitle {
@@ -1420,7 +1463,16 @@
 
       .h-card-title {
         font-size: 0.9rem;
+      }
+
+      .h-card-title-wrap {
         margin-right: 12px;
+        gap: 6px;
+      }
+
+      .h-card-author {
+        font-size: 0.68rem;
+        padding: 2px 6px;
       }
 
       .h-card-subtitle {
@@ -1606,7 +1658,16 @@
 
       .h-card-title {
         font-size: 0.85rem;
+      }
+
+      .h-card-title-wrap {
         margin-right: 8px;
+        gap: 5px;
+      }
+
+      .h-card-author {
+        font-size: 0.62rem;
+        padding: 1px 5px;
       }
 
       .h-card-subtitle {
@@ -2003,14 +2064,37 @@
       const card = document.createElement('div');
       card.className = 'h-card';
       card.onclick = () => animateToPage(button.url);
+
+      const titleWrap = document.createElement('div');
+      titleWrap.className = 'h-card-title-wrap';
+
       const title = document.createElement('span');
       title.className = 'h-card-title';
       title.setAttribute('data-i18n', button.name);
       title.textContent = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+
+      titleWrap.appendChild(title);
+
+      if (button.author) {
+        const authorBtn = document.createElement('a');
+        authorBtn.className = 'h-card-author';
+        authorBtn.href = button.author_url || '#';
+        authorBtn.target = '_blank';
+        authorBtn.rel = 'noopener noreferrer';
+        authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
+        authorBtn.textContent = button.author;
+        authorBtn.onclick = (e) => {
+          e.stopPropagation();
+          animateToPage(button.author_url);
+        };
+        titleWrap.appendChild(authorBtn);
+      }
+
       const subtitle = document.createElement('span');
       subtitle.className = 'h-card-subtitle';
       subtitle.textContent = button.subtitle;
-      card.appendChild(title);
+
+      card.appendChild(titleWrap);
       card.appendChild(subtitle);
       container.appendChild(card);
     });

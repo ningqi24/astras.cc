@@ -4,73 +4,97 @@
       "name": "Minichat聊天 - Astras.cc",
       "name_en": "MiniChat - Astras.cc",
       "subtitle": "minichat.astras.cc",
-      "url": "https://minichat.astras.cc"
+      "url": "https://minichat.astras.cc",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "高速编号牌生成器 - NanGua-QWQ",
       "name_en": "High Speed Number Card Generator - NanGua-QWQ",
       "subtitle": "astras.cc/SignGenerator",
-      "url": "https://astras.cc/SignGenerator/"
+      "url": "https://astras.cc/SignGenerator/",
+      "author": "NanGua-QWQ",
+      "author_url": "https://github.com/NanGua-QWQ"
     },
     {
       "name": "一个发送邮件的网站与astras.cc",
       "name_en": "A send email website with astras.cc",
       "subtitle": "astras.cc/sendemail",
-      "url": "https://astras.cc/sendemail"
+      "url": "https://astras.cc/sendemail",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "官网-官方原版(.top)",
       "name_en": "Official - Original (.top)",
       "subtitle": "editors.astras.top",
-      "url": "https://editors.astras.top/"
+      "url": "https://editors.astras.top/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "官网-CC特制版(.cc)",
       "name_en": "Official - Special (.cc)",
       "subtitle": "editors.astras.cc",
-      "url": "https://editors.astras.cc/"
+      "url": "https://editors.astras.cc/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "AstraEditor下载站(.cc)",
       "name_en": "AstraEditor Download (.cc)",
       "subtitle": "download.astras.cc",
-      "url": "https://download.astras.cc/"
+      "url": "https://download.astras.cc/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "Search极简页",
       "name_en": "Simple Search Tab",
       "subtitle": "search.astras.cc",
-      "url": "https://search.astras.cc/"
+      "url": "https://search.astras.cc/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "COLID Studio",
       "name_en": "COLID Studio",
       "subtitle": "colid.mysxl.cn",
-      "url": "https://colid.mysxl.cn/"
+      "url": "https://colid.mysxl.cn/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "COLID NS UI for scratch",
       "name_en": "COLID NS UI for scratch",
       "subtitle": "colidns.mysxl.cn",
-      "url": "https://colidns.mysxl.cn/"
+      "url": "https://colidns.mysxl.cn/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "ToingOS/NQOS UI for scratch",
       "name_en": "ToingOS/NQOS UI for scratch",
       "subtitle": "ningqi24.mysxl.cn",
-      "url": "https://ningqi24.mysxl.cn/"
+      "url": "https://ningqi24.mysxl.cn/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "SimpleChatMini for scratch",
       "name_en": "SimpleChatMini for scratch",
       "subtitle": "simplechatmini.astras.cc",
-      "url": "https://simplechatmini.astras.cc/"
+      "url": "https://simplechatmini.astras.cc/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     },
     {
       "name": "ningqi-github",
       "name_en": "ningqi-github",
       "subtitle": "github.com/ningqi24",
-      "url": "https://github.com/ningqi24"
+      "url": "https://github.com/ningqi24",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24"
     }
   ]
 }
