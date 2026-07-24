@@ -787,9 +787,9 @@
             isDefault: true,
             apiUrl: 'https://api.astras.cc/sendemail',
             apiMethod: 'POST',
-            apiFormat: 'query',
+            apiFormat: 'form',
             apiHeaders: '{}',
-            apiTemplate: ''
+            apiTemplate: 'to={{to}}&subject={{subject}}&contenthtml={{content}}'
         };
 
         function loadConfigs() {
@@ -1050,7 +1050,9 @@
                 Object.assign(options.headers, headers);
             } catch (e) {}
 
+            // Build body
             let body = config.apiTemplate || '';
+            let hasTemplate = !!body;
 
             if (body) {
                 body = body
@@ -1058,44 +1060,56 @@
                     .replace(/\{\{subject\}\}/g, data.subject)
                     .replace(/\{\{content\}\}/g, data.content)
                     .replace(/\{\{from\}\}/g, data.from);
-            } else {
-                body = JSON.stringify({
-                    to: data.to,
-                    subject: data.subject,
-                    content: data.content,
-                    from: data.from
-                });
             }
 
-            if (config.apiFormat === 'query') {
-                if (config.apiMethod === 'GET') {
-                    const params = new URLSearchParams({
-                        to: data.to,
-                        subject: data.subject,
-                        contenthtml: data.content
-                    });
-                    url += (url.includes('?') ? '&' : '?') + params.toString();
-                } else {
-                    const params = new URLSearchParams({
-                        to: data.to,
-                        subject: data.subject,
-                        contenthtml: data.content
-                    });
-                    body = params.toString();
+            // Apply format-specific processing (only if no template)
+            if (!hasTemplate) {
+                if (config.apiFormat === 'query') {
+                    if (config.apiMethod === 'GET') {
+                        const params = new URLSearchParams({
+                            to: data.to,
+                            subject: data.subject,
+                            contenthtml: data.content
+                        });
+                        url += (url.includes('?') ? '&' : '?') + params.toString();
+                        body = null;
+                    } else {
+                        const params = new URLSearchParams({
+                            to: data.to,
+                            subject: data.subject,
+                            contenthtml: data.content
+                        });
+                        body = params.toString();
+                        options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                    }
+                } else if (config.apiFormat === 'form') {
+                    const form = new URLSearchParams();
+                    form.append('to', data.to);
+                    form.append('subject', data.subject);
+                    form.append('contenthtml', data.content);
+                    body = form.toString();
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                } else {
+                    body = JSON.stringify({
+                        to: data.to,
+                        subject: data.subject,
+                        content: data.content,
+                        from: data.from
+                    });
+                    options.headers['Content-Type'] = 'application/json';
                 }
-            } else if (config.apiFormat === 'form') {
-                const form = new URLSearchParams();
-                form.append('to', data.to);
-                form.append('subject', data.subject);
-                form.append('content', data.content);
-                body = form.toString();
-                options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
             } else {
-                options.headers['Content-Type'] = 'application/json';
+                // Has template - assume form-urlencoded for query/form formats, JSON for json format
+                if (config.apiFormat === 'form' || config.apiFormat === 'query') {
+                    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                } else if (config.apiFormat === 'json') {
+                    options.headers['Content-Type'] = 'application/json';
+                }
             }
 
-            options.body = body;
+            if (body) {
+                options.body = body;
+            }
 
             const response = await fetch(url, options);
             const text = await response.text();
