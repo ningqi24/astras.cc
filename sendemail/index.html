@@ -787,9 +787,9 @@
             isDefault: true,
             apiUrl: 'https://api.astras.cc/sendemail',
             apiMethod: 'POST',
-            apiFormat: 'form',
+            apiFormat: 'query',
             apiHeaders: '{}',
-            apiTemplate: 'to={{to}}&subject={{subject}}&contenthtml={{content}}'
+            apiTemplate: ''
         };
 
         function loadConfigs() {
@@ -1040,23 +1040,15 @@
             }
         }
 
-        // 表单提交方式，不受 CORS 限制
+        // 默认API：参数放URL查询字符串 + POST，不受CORS限制
         function sendViaForm(data) {
+            const apiUrl = `https://api.astras.cc/sendemail?to=${encodeURIComponent(data.to)}&subject=${encodeURIComponent(data.subject)}&contenthtml=${encodeURIComponent(data.content)}`;
+
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'https://api.astras.cc/sendemail';
+            form.action = apiUrl;
             form.target = 'sendResult';
 
-            const fields = { to: data.to, subject: data.subject, contenthtml: data.content };
-            for (const [key, val] of Object.entries(fields)) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = val;
-                form.appendChild(input);
-            }
-
-            // 创建隐藏 iframe 接收结果
             let iframe = document.getElementById('sendResultFrame');
             if (!iframe) {
                 iframe = document.createElement('iframe');
@@ -1069,13 +1061,12 @@
             iframe.onload = function() {
                 try {
                     const resultText = iframe.contentDocument?.body?.innerText || '';
-                    if (resultText.includes('success') || resultText.includes('200') || resultText.includes('ok')) {
+                    if (resultText.includes('success') || resultText.includes('200') || resultText.toLowerCase().includes('ok') || resultText.includes('发送成功')) {
                         showResult('success', i18n[currentLang].sendSuccess + resultText);
                     } else {
                         showResult('error', resultText || i18n[currentLang].sendFailed);
                     }
                 } catch (e) {
-                    // 跨域時無法讀取 iframe 內容，但仍表示請求已發出
                     showResult('success', i18n[currentLang].sendSuccess);
                 }
             };
