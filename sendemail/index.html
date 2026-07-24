@@ -1058,17 +1058,33 @@
                 document.body.appendChild(iframe);
             }
 
+            let loaded = false;
             iframe.onload = function() {
+                if (loaded) return;
+                loaded = true;
+
                 try {
                     const resultText = iframe.contentDocument?.body?.innerText || '';
                     if (resultText.includes('success') || resultText.includes('200') || resultText.toLowerCase().includes('ok') || resultText.includes('发送成功')) {
                         showResult('success', i18n[currentLang].sendSuccess + resultText);
+                    } else if (resultText && !resultText.includes('error') && !resultText.includes('Failed')) {
+                        showResult('success', i18n[currentLang].sendSuccess + resultText);
+                    } else if (resultText) {
+                        showResult('error', resultText);
                     } else {
-                        showResult('error', resultText || i18n[currentLang].sendFailed);
+                        showResult('success', i18n[currentLang].sendSuccess);
                     }
                 } catch (e) {
                     showResult('success', i18n[currentLang].sendSuccess);
                 }
+            };
+
+            form.onsubmit = function() {
+                setTimeout(() => {
+                    if (!loaded) {
+                        showResult('success', i18n[currentLang].sendSuccess);
+                    }
+                }, 2000);
             };
 
             document.body.appendChild(form);
