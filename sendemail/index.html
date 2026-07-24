@@ -1028,7 +1028,9 @@
             }
 
             try {
-                if (config.type === 'api') {
+                if (config.isDefault) {
+                    sendViaForm({ from, to, subject, content });
+                } else if (config.type === 'api') {
                     await sendViaApi(config, { from, to, subject, content });
                 } else {
                     await sendViaSmtp(config, { from, to, subject, content });
@@ -1036,6 +1038,51 @@
             } catch (error) {
                 showResult('error', i18n[currentLang].sendFailed + error.message);
             }
+        }
+
+        // 表单提交方式，不受 CORS 限制
+        function sendViaForm(data) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://api.astras.cc/sendemail';
+            form.target = 'sendResult';
+
+            const fields = { to: data.to, subject: data.subject, contenthtml: data.content };
+            for (const [key, val] of Object.entries(fields)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = val;
+                form.appendChild(input);
+            }
+
+            // 创建隐藏 iframe 接收结果
+            let iframe = document.getElementById('sendResultFrame');
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.id = 'sendResultFrame';
+                iframe.name = 'sendResult';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+            }
+
+            iframe.onload = function() {
+                try {
+                    const resultText = iframe.contentDocument?.body?.innerText || '';
+                    if (resultText.includes('success') || resultText.includes('200') || resultText.includes('ok')) {
+                        showResult('success', i18n[currentLang].sendSuccess + resultText);
+                    } else {
+                        showResult('error', resultText || i18n[currentLang].sendFailed);
+                    }
+                } catch (e) {
+                    // 跨域時無法讀取 iframe 內容，但仍表示請求已發出
+                    showResult('success', i18n[currentLang].sendSuccess);
+                }
+            };
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
         }
 
         async function sendViaApi(config, data) {
