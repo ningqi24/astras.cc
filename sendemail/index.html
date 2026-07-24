@@ -699,11 +699,17 @@
             const savedLang = localStorage.getItem('emailLang');
             if (savedLang && (savedLang === 'zh' || savedLang === 'en')) {
                 currentLang = savedLang;
+            } else {
+                const sysLang = navigator.language || navigator.userLanguage || 'zh';
+                currentLang = sysLang.startsWith('zh') ? 'zh' : 'en';
             }
 
             const savedTheme = localStorage.getItem('emailTheme');
             if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
                 currentTheme = savedTheme;
+            } else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                currentTheme = prefersDark ? 'dark' : 'light';
             }
 
             applyTheme();
