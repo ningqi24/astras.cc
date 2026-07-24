@@ -142,6 +142,28 @@
       "tags": ["工作室", "Scratch", "OS&UI"],
       "description": "ningqi 的个人作品展示站，收录了 ToingOS、NQ_OS 系列等 Scratch 操作系统作品及其它项目，提供蓝奏云下载链接。",
       "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud."
+    },
+    {
+      "name": "COLID-EG 官网",
+      "name_en": "COLID-EG Official",
+      "subtitle": "colid-eg.mysxl.cn",
+      "url": "https://colid-eg.mysxl.cn/",
+      "author": "COLID Studio",
+      "author_url": "https://colid-eg.mysxl.cn/",
+      "tags": ["Scratch", "OS&UI"],
+      "description": "COLID-EG 是基于 Pro APP Store 项目开发的操作系统架构，应用窗口部分完全由架构负责，开发者仅需完成应用部分。提供大窗口和小窗口两种示例程序，关键代码带有注释。后期将更新开发手册和教程视频。",
+      "description_en": "COLID-EG is an OS architecture based on the Pro APP Store project. The architecture handles the application window part, allowing developers to focus on the app itself. Offers two window size examples with commented key code. Development manuals and tutorials are planned."
+    },
+    {
+      "name": "COLID-EG APP Store",
+      "name_en": "COLID-EG APP Store",
+      "subtitle": "colid-eg-appstore.mysxl.cn",
+      "url": "https://colid-eg-appstore.mysxl.cn/",
+      "author": "COLID Studio",
+      "author_url": "https://colid-eg.mysxl.cn/",
+      "tags": ["Scratch", "OS&UI", "下载"],
+      "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
+      "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives."
     }
   ]
 }
