@@ -6,6 +6,32 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>邮件发送工具</title>
     <style>
+        :root {
+            --bg-primary: #0f1419;
+            --bg-secondary: #16181c;
+            --bg-tertiary: #0f1419;
+            --text-primary: #e7e9ea;
+            --text-secondary: #8b98a5;
+            --text-muted: #71767b;
+            --border-color: #2f3336;
+            --accent-color: #1d9bf0;
+            --success-color: #00ba7c;
+            --error-color: #f4212e;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f9fa;
+            --bg-tertiary: #ffffff;
+            --text-primary: #14171a;
+            --text-secondary: #536471;
+            --text-muted: #71767b;
+            --border-color: #e1e8ed;
+            --accent-color: #1d9bf0;
+            --success-color: #00ba7c;
+            --error-color: #f4212e;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,10 +40,11 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #0f1419;
+            background: var(--bg-primary);
             min-height: 100vh;
-            color: #e7e9ea;
+            color: var(--text-primary);
             padding: 20px;
+            transition: background 0.3s, color 0.3s;
         }
 
         .container {
@@ -32,7 +59,7 @@
             justify-content: space-between;
             margin-bottom: 24px;
             padding-bottom: 16px;
-            border-bottom: 1px solid #2f3336;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header h1 {
@@ -45,45 +72,31 @@
 
         .header-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 20px;
-            background: #16181c;
-            padding: 4px;
-            border-radius: 8px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px 16px;
+        .header-btn {
+            padding: 8px;
             background: transparent;
-            border: none;
-            color: #71767b;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            transition: all 0.2s;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .tab-btn:hover {
-            background: #1d1f23;
-        }
-
-        .tab-btn.active {
-            background: #1d9bf0;
-            color: #fff;
+        .header-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         /* Cards */
         .card {
-            background: #16181c;
-            border: 1px solid #2f3336;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 16px;
@@ -93,7 +106,7 @@
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
-            color: #e7e9ea;
+            color: var(--text-primary);
         }
 
         /* Form elements */
@@ -111,7 +124,7 @@
             display: block;
             font-size: 13px;
             font-weight: 500;
-            color: #8b98a5;
+            color: var(--text-secondary);
             margin-bottom: 6px;
         }
 
@@ -120,20 +133,20 @@
             padding: 10px 12px;
             font-size: 14px;
             font-family: inherit;
-            background: #0f1419;
-            border: 1px solid #2f3336;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            color: #e7e9ea;
+            color: var(--text-primary);
             outline: none;
             transition: border-color 0.15s;
         }
 
         input:focus, textarea:focus, select:focus {
-            border-color: #1d9bf0;
+            border-color: var(--accent-color);
         }
 
         input::placeholder, textarea::placeholder {
-            color: #536471;
+            color: var(--text-muted);
         }
 
         select {
@@ -162,30 +175,30 @@
         }
 
         .btn-primary {
-            background: #1d9bf0;
+            background: var(--accent-color);
             color: #fff;
         }
 
         .btn-primary:hover {
-            background: #1a8cd8;
+            opacity: 0.9;
         }
 
         .btn-secondary {
-            background: #2f3336;
-            color: #e7e9ea;
+            background: var(--border-color);
+            color: var(--text-primary);
         }
 
         .btn-secondary:hover {
-            background: #3c4146;
+            opacity: 0.8;
         }
 
         .btn-danger {
-            background: #f4212e;
+            background: var(--error-color);
             color: #fff;
         }
 
         .btn-danger:hover {
-            background: #dc1e2a;
+            opacity: 0.9;
         }
 
         .btn-full {
@@ -209,19 +222,19 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
-            background: #0f1419;
-            border: 1px solid #2f3336;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .config-item:hover {
-            border-color: #1d9bf0;
+            border-color: var(--accent-color);
         }
 
         .config-item.active {
-            border-color: #1d9bf0;
+            border-color: var(--accent-color);
             background: rgba(29, 155, 240, 0.1);
         }
 
@@ -233,12 +246,12 @@
 
         .config-name {
             font-weight: 500;
-            color: #e7e9ea;
+            color: var(--text-primary);
         }
 
         .config-type {
             font-size: 12px;
-            color: #71767b;
+            color: var(--text-muted);
         }
 
         .config-actions {
@@ -259,14 +272,14 @@
             display: block;
             background: rgba(0, 186, 124, 0.15);
             border: 1px solid rgba(0, 186, 124, 0.3);
-            color: #00ba7c;
+            color: var(--success-color);
         }
 
         .result.error {
             display: block;
             background: rgba(244, 33, 46, 0.15);
             border: 1px solid rgba(244, 33, 46, 0.3);
-            color: #f4212e;
+            color: var(--error-color);
         }
 
         /* Modal */
@@ -289,8 +302,8 @@
         }
 
         .modal {
-            background: #16181c;
-            border: 1px solid #2f3336;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             width: 100%;
             max-width: 500px;
@@ -303,7 +316,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            border-bottom: 1px solid #2f3336;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .modal-header h3 {
@@ -314,13 +327,13 @@
         .modal-close {
             background: none;
             border: none;
-            color: #71767b;
+            color: var(--text-muted);
             cursor: pointer;
             padding: 4px;
         }
 
         .modal-close:hover {
-            color: #e7e9ea;
+            color: var(--text-primary);
         }
 
         .modal-body {
@@ -332,7 +345,7 @@
             justify-content: flex-end;
             gap: 8px;
             padding: 16px 20px;
-            border-top: 1px solid #2f3336;
+            border-top: 1px solid var(--border-color);
         }
 
         /* Protocol badges */
@@ -347,7 +360,7 @@
 
         .badge-api {
             background: rgba(29, 155, 240, 0.2);
-            color: #1d9bf0;
+            color: var(--accent-color);
         }
 
         .badge-smtp {
@@ -384,22 +397,38 @@
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="M22 6l-10 7L2 6" />
                 </svg>
-                邮件发送工具
+                <span data-i18n="title">邮件发送工具</span>
             </h1>
             <div class="header-actions">
+                <button class="header-btn" id="langToggle" title="中文/English">
+                    <span data-i18n="langBtn">EN</span>
+                </button>
+                <button class="header-btn" id="themeToggle" title="日/夜间模式">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </button>
                 <button class="btn btn-secondary btn-sm" onclick="openConfigModal()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="3" />
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                     </svg>
-                    配置管理
+                    <span data-i18n="configBtn">配置管理</span>
                 </button>
             </div>
         </div>
 
         <!-- Config selector -->
         <div class="card">
-            <div class="card-title">选择发送方式</div>
+            <div class="card-title" data-i18n="selectConfig">选择发送方式</div>
             <div class="config-list" id="configList">
                 <!-- Dynamically rendered -->
             </div>
@@ -407,26 +436,26 @@
 
         <!-- Send form -->
         <div class="card">
-            <div class="card-title">邮件内容</div>
+            <div class="card-title" data-i18n="emailContent">邮件内容</div>
             <form id="emailForm">
                 <div class="form-group">
-                    <label for="from">发件人（显示名称）</label>
-                    <input type="text" id="from" placeholder="我的名字 &lt;me@example.com&gt;">
+                    <label for="from" data-i18n="sender">发件人（显示名称）</label>
+                    <input type="text" id="from" data-placeholder-i18n="senderPlaceholder" placeholder="我的名字 &lt;me@example.com&gt;">
                 </div>
 
                 <div class="form-group">
-                    <label for="to">收件人</label>
-                    <input type="email" id="to" placeholder="recipient@example.com" required>
+                    <label for="to" data-i18n="recipient">收件人</label>
+                    <input type="email" id="to" data-placeholder-i18n="recipientPlaceholder" placeholder="recipient@example.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="subject">主题</label>
-                    <input type="text" id="subject" placeholder="邮件主题" required>
+                    <label for="subject" data-i18n="subject">主题</label>
+                    <input type="text" id="subject" data-placeholder-i18n="subjectPlaceholder" placeholder="邮件主题" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="content">正文（支持 HTML）</label>
-                    <textarea id="content" rows="6" placeholder="邮件内容..."></textarea>
+                    <label for="content" data-i18n="content">正文（支持 HTML）</label>
+                    <textarea id="content" rows="6" data-placeholder-i18n="contentPlaceholder" placeholder="邮件内容..."></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-full">
@@ -434,7 +463,7 @@
                         <line x1="22" y1="2" x2="11" y2="13" />
                         <polygon points="22 2 15 22 11 13 2 9 22 2" />
                     </svg>
-                    发送邮件
+                    <span data-i18n="sendBtn">发送邮件</span>
                 </button>
             </form>
 
@@ -446,7 +475,7 @@
     <div class="modal-overlay" id="configModal">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="modalTitle">添加配置</h3>
+                <h3 id="modalTitle" data-i18n="addConfig">添加配置</h3>
                 <button class="modal-close" onclick="closeConfigModal()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18" />
@@ -456,27 +485,27 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="configName">配置名称</label>
-                    <input type="text" id="configName" placeholder="例如：我的邮箱">
+                    <label for="configName" data-i18n="configName">配置名称</label>
+                    <input type="text" id="configName" data-placeholder-i18n="configNamePlaceholder" placeholder="例如：我的邮箱">
                 </div>
 
                 <div class="form-group">
-                    <label for="configType">类型</label>
+                    <label for="configType" data-i18n="configType">类型</label>
                     <select id="configType" onchange="toggleConfigFields()">
-                        <option value="api">自定义 API</option>
-                        <option value="smtp">SMTP</option>
+                        <option value="api" data-i18n="configTypeApi">自定义 API</option>
+                        <option value="smtp" data-i18n="configTypeSmtp">SMTP</option>
                     </select>
                 </div>
 
                 <!-- API fields -->
                 <div id="apiFields">
                     <div class="form-group">
-                        <label for="apiUrl">API 地址</label>
+                        <label for="apiUrl" data-i18n="apiUrl">API 地址</label>
                         <input type="url" id="apiUrl" placeholder="https://api.example.com/send">
                     </div>
 
                     <div class="form-group">
-                        <label for="apiMethod">请求方法</label>
+                        <label for="apiMethod" data-i18n="apiMethod">请求方法</label>
                         <select id="apiMethod">
                             <option value="POST">POST</option>
                             <option value="GET">GET</option>
@@ -484,21 +513,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="apiFormat">参数格式</label>
+                        <label for="apiFormat" data-i18n="apiFormat">参数格式</label>
                         <select id="apiFormat">
-                            <option value="json">JSON (Body)</option>
-                            <option value="query">Query String</option>
-                            <option value="form">Form Data</option>
+                            <option value="json" data-i18n="apiFormatJson">JSON (Body)</option>
+                            <option value="query" data-i18n="apiFormatQuery">Query String</option>
+                            <option value="form" data-i18n="apiFormatForm">Form Data</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="apiHeaders">请求头（JSON 格式）</label>
+                        <label for="apiHeaders" data-i18n="apiHeaders">请求头（JSON 格式）</label>
                         <input type="text" id="apiHeaders" placeholder='{"Authorization": "Bearer xxx"}'>
                     </div>
 
                     <div class="form-group">
-                        <label for="apiTemplate">请求模板（使用 {{to}} {{subject}} {{content}} {{from}}）</label>
+                        <label for="apiTemplate" data-i18n="apiTemplate">请求模板（使用 {{to}} {{subject}} {{content}} {{from}}）</label>
                         <textarea id="apiTemplate" rows="4" placeholder='{"to": "{{to}}", "subject": "{{subject}}", "html": "{{content}}"}'></textarea>
                     </div>
                 </div>
@@ -507,58 +536,253 @@
                 <div id="smtpFields" class="hidden">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="smtpHost">SMTP 服务器</label>
+                            <label for="smtpHost" data-i18n="smtpHost">SMTP 服务器</label>
                             <input type="text" id="smtpHost" placeholder="smtp.gmail.com">
                         </div>
                         <div class="form-group">
-                            <label for="smtpPort">端口</label>
+                            <label for="smtpPort" data-i18n="smtpPort">端口</label>
                             <input type="number" id="smtpPort" placeholder="587" value="587">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="smtpUser">用户名</label>
+                            <label for="smtpUser" data-i18n="smtpUser">用户名</label>
                             <input type="text" id="smtpUser" placeholder="your@email.com">
                         </div>
                         <div class="form-group">
-                            <label for="smtpPass">密码</label>
+                            <label for="smtpPass" data-i18n="smtpPass">密码</label>
                             <input type="password" id="smtpPass" placeholder="••••••••">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="smtpSecure">安全协议</label>
+                        <label for="smtpSecure" data-i18n="smtpSecure">安全协议</label>
                         <select id="smtpSecure">
-                            <option value="none">无</option>
-                            <option value="ssl">SSL/TLS</option>
-                            <option value="starttls">STARTTLS</option>
+                            <option value="none" data-i18n="smtpSecureNone">无</option>
+                            <option value="ssl" data-i18n="smtpSecureSsl">SSL/TLS</option>
+                            <option value="starttls" data-i18n="smtpSecureStarttls">STARTTLS</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="smtpFrom">发件地址</label>
+                        <label for="smtpFrom" data-i18n="smtpFrom">发件地址</label>
                         <input type="email" id="smtpFrom" placeholder="your@email.com">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeConfigModal()">取消</button>
-                <button class="btn btn-primary" onclick="saveConfig()">保存</button>
+                <button class="btn btn-secondary" onclick="closeConfigModal()" data-i18n="cancelBtn">取消</button>
+                <button class="btn btn-primary" onclick="saveConfig()" data-i18n="saveBtn">保存</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Config storage
+        const i18n = {
+            zh: {
+                title: '邮件发送工具',
+                langBtn: 'EN',
+                configBtn: '配置管理',
+                selectConfig: '选择发送方式',
+                emailContent: '邮件内容',
+                sender: '发件人（显示名称）',
+                senderPlaceholder: '我的名字 <me@example.com>',
+                recipient: '收件人',
+                recipientPlaceholder: 'recipient@example.com',
+                subject: '主题',
+                subjectPlaceholder: '邮件主题',
+                content: '正文（支持 HTML）',
+                contentPlaceholder: '邮件内容...',
+                sendBtn: '发送邮件',
+                addConfig: '添加配置',
+                editConfig: '编辑配置',
+                configName: '配置名称',
+                configNamePlaceholder: '例如：我的邮箱',
+                configType: '类型',
+                configTypeApi: '自定义 API',
+                configTypeSmtp: 'SMTP',
+                apiUrl: 'API 地址',
+                apiMethod: '请求方法',
+                apiFormat: '参数格式',
+                apiFormatJson: 'JSON (Body)',
+                apiFormatQuery: 'Query String',
+                apiFormatForm: 'Form Data',
+                apiHeaders: '请求头（JSON 格式）',
+                apiTemplate: '请求模板（使用 {{to}} {{subject}} {{content}} {{from}}）',
+                smtpHost: 'SMTP 服务器',
+                smtpPort: '端口',
+                smtpUser: '用户名',
+                smtpPass: '密码',
+                smtpSecure: '安全协议',
+                smtpSecureNone: '无',
+                smtpSecureSsl: 'SSL/TLS',
+                smtpSecureStarttls: 'STARTTLS',
+                smtpFrom: '发件地址',
+                cancelBtn: '取消',
+                saveBtn: '保存',
+                editBtn: '编辑',
+                deleteBtn: '删除',
+                addNewConfig: '添加新配置',
+                builtIn: '（内置）',
+                confirmDelete: '确定要删除这个配置吗？',
+                enterConfigName: '请输入配置名称',
+                enterApiUrl: '请输入 API 地址',
+                enterSmtpHost: '请输入 SMTP 服务器',
+                selectConfigFirst: '未选择发送配置',
+                fillRecipientSubject: '请填写收件人和主题',
+                sendSuccess: '发送成功！服务器响应：',
+                sendFailed: '发送失败（',
+                smtpRequiresBackend: 'SMTP 需要后端支持'
+            },
+            en: {
+                title: 'Email Sender',
+                langBtn: '中文',
+                configBtn: 'Config',
+                selectConfig: 'Select Sender',
+                emailContent: 'Email Content',
+                sender: 'Sender (Display Name)',
+                senderPlaceholder: 'My Name <me@example.com>',
+                recipient: 'Recipient',
+                recipientPlaceholder: 'recipient@example.com',
+                subject: 'Subject',
+                subjectPlaceholder: 'Email Subject',
+                content: 'Body (HTML supported)',
+                contentPlaceholder: 'Email content...',
+                sendBtn: 'Send Email',
+                addConfig: 'Add Config',
+                editConfig: 'Edit Config',
+                configName: 'Config Name',
+                configNamePlaceholder: 'e.g. My Email',
+                configType: 'Type',
+                configTypeApi: 'Custom API',
+                configTypeSmtp: 'SMTP',
+                apiUrl: 'API URL',
+                apiMethod: 'Method',
+                apiFormat: 'Parameter Format',
+                apiFormatJson: 'JSON (Body)',
+                apiFormatQuery: 'Query String',
+                apiFormatForm: 'Form Data',
+                apiHeaders: 'Headers (JSON)',
+                apiTemplate: 'Request Template (use {{to}} {{subject}} {{content}} {{from}})',
+                smtpHost: 'SMTP Server',
+                smtpPort: 'Port',
+                smtpUser: 'Username',
+                smtpPass: 'Password',
+                smtpSecure: 'Security',
+                smtpSecureNone: 'None',
+                smtpSecureSsl: 'SSL/TLS',
+                smtpSecureStarttls: 'STARTTLS',
+                smtpFrom: 'From Address',
+                cancelBtn: 'Cancel',
+                saveBtn: 'Save',
+                editBtn: 'Edit',
+                deleteBtn: 'Delete',
+                addNewConfig: 'Add New Config',
+                builtIn: '(Built-in)',
+                confirmDelete: 'Are you sure you want to delete this config?',
+                enterConfigName: 'Please enter config name',
+                enterApiUrl: 'Please enter API URL',
+                enterSmtpHost: 'Please enter SMTP server',
+                selectConfigFirst: 'No sender config selected',
+                fillRecipientSubject: 'Please fill recipient and subject',
+                sendSuccess: 'Sent successfully! Server response:',
+                sendFailed: 'Send failed (',
+                smtpRequiresBackend: 'SMTP requires backend support'
+            }
+        };
+
+        let currentLang = 'zh';
+        let currentTheme = 'dark';
+
+        function loadSettings() {
+            const savedLang = localStorage.getItem('emailLang');
+            if (savedLang && (savedLang === 'zh' || savedLang === 'en')) {
+                currentLang = savedLang;
+            }
+
+            const savedTheme = localStorage.getItem('emailTheme');
+            if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+                currentTheme = savedTheme;
+            }
+
+            applyTheme();
+            applyLang();
+        }
+
+        function applyTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('emailTheme', currentTheme);
+
+            const themeToggle = document.getElementById('themeToggle');
+            if (currentTheme === 'dark') {
+                themeToggle.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                `;
+            } else {
+                themeToggle.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                `;
+            }
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme();
+        }
+
+        function applyLang() {
+            document.documentElement.lang = currentLang;
+            localStorage.setItem('emailLang', currentLang);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.textContent = i18n[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-placeholder-i18n]').forEach(el => {
+                const key = el.getAttribute('data-placeholder-i18n');
+                if (i18n[currentLang][key]) {
+                    el.placeholder = i18n[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('option[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.textContent = i18n[currentLang][key];
+                }
+            });
+
+            renderConfigList();
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+        }
+
         let configs = [];
         let activeConfigId = null;
         let editingConfigId = null;
 
-        // Default config
         const defaultConfig = {
             id: 'default',
-            name: 'Astras API（默认）',
+            name: currentLang === 'zh' ? 'Astras API（默认）' : 'Astras API (Default)',
             type: 'api',
             isDefault: true,
             apiUrl: 'https://api.astras.cc/sendemail',
@@ -568,7 +792,6 @@
             apiTemplate: ''
         };
 
-        // Load configs from localStorage
         function loadConfigs() {
             try {
                 const saved = localStorage.getItem('emailConfigs');
@@ -579,7 +802,6 @@
                 configs = [];
             }
 
-            // Always include default config
             if (!configs.find(c => c.id === 'default')) {
                 configs.unshift(defaultConfig);
             }
@@ -592,14 +814,12 @@
             }
         }
 
-        // Save configs to localStorage
         function saveConfigs() {
             const customConfigs = configs.filter(c => !c.isDefault);
             localStorage.setItem('emailConfigs', JSON.stringify(customConfigs));
             localStorage.setItem('activeEmailConfig', activeConfigId);
         }
 
-        // Render config list
         function renderConfigList() {
             const list = document.getElementById('configList');
             list.innerHTML = '';
@@ -614,13 +834,13 @@
                         <div class="config-name">${escapeHtml(config.name)}</div>
                         <div class="config-type">
                             <span class="badge badge-${config.type}">${config.type === 'api' ? 'API' : 'SMTP'}</span>
-                            ${config.isDefault ? '<span style="color: #71767b; margin-left: 6px;">（内置）</span>' : ''}
+                            ${config.isDefault ? `<span style="color: var(--text-muted); margin-left: 6px;">${i18n[currentLang].builtIn}</span>` : ''}
                         </div>
                     </div>
                     <div class="config-actions">
                         ${!config.isDefault ? `
-                            <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); editConfig('${config.id}')">编辑</button>
-                            <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteConfig('${config.id}')">删除</button>
+                            <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); editConfig('${config.id}')">${i18n[currentLang].editBtn}</button>
+                            <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteConfig('${config.id}')">${i18n[currentLang].deleteBtn}</button>
                         ` : ''}
                     </div>
                 `;
@@ -628,7 +848,6 @@
                 list.appendChild(item);
             });
 
-            // Add new config button
             const addBtn = document.createElement('div');
             addBtn.className = 'config-item';
             addBtn.style.borderStyle = 'dashed';
@@ -639,20 +858,18 @@
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
-                添加新配置
+                ${i18n[currentLang].addNewConfig}
             `;
             addBtn.onclick = () => openConfigModal();
             list.appendChild(addBtn);
         }
 
-        // Select config
         function selectConfig(id) {
             activeConfigId = id;
             saveConfigs();
             renderConfigList();
         }
 
-        // Open config modal
         function openConfigModal(id = null) {
             editingConfigId = id;
             const modal = document.getElementById('configModal');
@@ -661,7 +878,7 @@
             if (id) {
                 const config = configs.find(c => c.id === id);
                 if (config) {
-                    title.textContent = '编辑配置';
+                    title.textContent = i18n[currentLang].editConfig;
                     document.getElementById('configName').value = config.name;
                     document.getElementById('configType').value = config.type;
 
@@ -681,7 +898,7 @@
                     }
                 }
             } else {
-                title.textContent = '添加配置';
+                title.textContent = i18n[currentLang].addConfig;
                 clearConfigForm();
             }
 
@@ -689,20 +906,17 @@
             modal.classList.add('show');
         }
 
-        // Close config modal
         function closeConfigModal() {
             document.getElementById('configModal').classList.remove('show');
             editingConfigId = null;
         }
 
-        // Toggle config fields based on type
         function toggleConfigFields() {
             const type = document.getElementById('configType').value;
             document.getElementById('apiFields').classList.toggle('hidden', type !== 'api');
             document.getElementById('smtpFields').classList.toggle('hidden', type !== 'smtp');
         }
 
-        // Clear config form
         function clearConfigForm() {
             document.getElementById('configName').value = '';
             document.getElementById('configType').value = 'api';
@@ -719,13 +933,12 @@
             document.getElementById('smtpFrom').value = '';
         }
 
-        // Save config
         function saveConfig() {
             const name = document.getElementById('configName').value.trim();
             const type = document.getElementById('configType').value;
 
             if (!name) {
-                alert('请输入配置名称');
+                alert(i18n[currentLang].enterConfigName);
                 return;
             }
 
@@ -738,7 +951,7 @@
             if (type === 'api') {
                 const apiUrl = document.getElementById('apiUrl').value.trim();
                 if (!apiUrl) {
-                    alert('请输入 API 地址');
+                    alert(i18n[currentLang].enterApiUrl);
                     return;
                 }
                 config.apiUrl = apiUrl;
@@ -749,7 +962,7 @@
             } else {
                 const smtpHost = document.getElementById('smtpHost').value.trim();
                 if (!smtpHost) {
-                    alert('请输入 SMTP 服务器');
+                    alert(i18n[currentLang].enterSmtpHost);
                     return;
                 }
                 config.smtpHost = smtpHost;
@@ -760,7 +973,6 @@
                 config.smtpFrom = document.getElementById('smtpFrom').value;
             }
 
-            // Update or add
             if (editingConfigId) {
                 const idx = configs.findIndex(c => c.id === editingConfigId);
                 if (idx > -1) {
@@ -775,14 +987,12 @@
             renderConfigList();
         }
 
-        // Edit config
         function editConfig(id) {
             openConfigModal(id);
         }
 
-        // Delete config
         function deleteConfig(id) {
-            if (confirm('确定要删除这个配置吗？')) {
+            if (confirm(i18n[currentLang].confirmDelete)) {
                 configs = configs.filter(c => c.id !== id);
                 if (activeConfigId === id) {
                     activeConfigId = 'default';
@@ -792,20 +1002,18 @@
             }
         }
 
-        // Escape HTML
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Send email
         async function sendEmail(e) {
             e.preventDefault();
 
             const config = configs.find(c => c.id === activeConfigId);
             if (!config) {
-                showResult('error', '未选择发送配置');
+                showResult('error', i18n[currentLang].selectConfigFirst);
                 return;
             }
 
@@ -815,7 +1023,7 @@
             const content = document.getElementById('content').value;
 
             if (!to || !subject) {
-                showResult('error', '请填写收件人和主题');
+                showResult('error', i18n[currentLang].fillRecipientSubject);
                 return;
             }
 
@@ -826,11 +1034,10 @@
                     await sendViaSmtp(config, { from, to, subject, content });
                 }
             } catch (error) {
-                showResult('error', '发送失败：' + error.message);
+                showResult('error', i18n[currentLang].sendFailed + error.message);
             }
         }
 
-        // Send via API
         async function sendViaApi(config, data) {
             let url = config.apiUrl;
             let options = {
@@ -838,17 +1045,14 @@
                 headers: {}
             };
 
-            // Parse headers
             try {
                 const headers = JSON.parse(config.apiHeaders || '{}');
                 Object.assign(options.headers, headers);
             } catch (e) {}
 
-            // Build body
             let body = config.apiTemplate || '';
 
             if (body) {
-                // Replace template variables
                 body = body
                     .replace(/\{\{to\}\}/g, data.to)
                     .replace(/\{\{subject\}\}/g, data.subject)
@@ -897,16 +1101,13 @@
             const text = await response.text();
 
             if (response.ok) {
-                showResult('success', '发送成功！服务器响应：' + text);
+                showResult('success', i18n[currentLang].sendSuccess + text);
             } else {
-                showResult('error', '发送失败（' + response.status + '）：' + text);
+                showResult('error', i18n[currentLang].sendFailed + response.status + ')：' + text);
             }
         }
 
-        // Send via SMTP (requires backend proxy)
         async function sendViaSmtp(config, data) {
-            // SMTP requires a backend service
-            // For now, show a message that SMTP needs backend support
             const smtpProxyUrl = 'https://api.astras.cc/smtp-proxy';
 
             const response = await fetch(smtpProxyUrl, {
@@ -934,13 +1135,12 @@
             const text = await response.text();
 
             if (response.ok) {
-                showResult('success', '发送成功！服务器响应：' + text);
+                showResult('success', i18n[currentLang].sendSuccess + text);
             } else {
-                showResult('error', '发送失败（' + response.status + '）：' + text);
+                showResult('error', i18n[currentLang].sendFailed + response.status + ')：' + text);
             }
         }
 
-        // Show result
         function showResult(type, message) {
             const result = document.getElementById('result');
             result.className = 'result ' + type;
@@ -948,10 +1148,15 @@
             result.style.display = 'block';
         }
 
-        // Init
-        loadConfigs();
-        renderConfigList();
-        document.getElementById('emailForm').addEventListener('submit', sendEmail);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            loadConfigs();
+            renderConfigList();
+
+            document.getElementById('emailForm').addEventListener('submit', sendEmail);
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('langToggle').addEventListener('click', toggleLang);
+        });
     </script>
 
 </body>
