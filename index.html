@@ -3881,8 +3881,23 @@
     currentPlatform = '';
   }
 
-  let currentTheme = localStorage.getItem('selectedTheme') || 'light';
-  let currentLang = localStorage.getItem('selectedLang') || 'zh';
+  let savedTheme = localStorage.getItem('selectedTheme');
+  let savedLang = localStorage.getItem('selectedLang');
+  
+  let currentTheme;
+  if (savedTheme) {
+    currentTheme = savedTheme;
+  } else {
+    currentTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  
+  let currentLang;
+  if (savedLang) {
+    currentLang = savedLang;
+  } else {
+    const sysLang = navigator.language || navigator.userLanguage || 'zh';
+    currentLang = sysLang.startsWith('zh') ? 'zh' : 'en';
+  }
 
   function toggleTheme() {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
