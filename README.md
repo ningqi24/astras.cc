@@ -61,7 +61,6 @@ astras.cc/
 
 ## 本地运行 (Run Locally)
 
-```bash
 # 克隆仓库 / Clone the repository
 git clone https://github.com/ningqi24/astras.cc.git
 
