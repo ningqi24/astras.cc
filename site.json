@@ -175,6 +175,28 @@
       "tags": ["Scratch", "OS&UI", "下载"],
       "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
       "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives."
+    },
+    {
+      "name": "React Bits 组件库",
+      "name_en": "React Bits Component Library",
+      "subtitle": "reactbits.dev",
+      "url": "https://reactbits.dev/get-started/index/",
+      "author": "React Bits",
+      "author_url": "https://reactbits.dev/",
+      "tags": ["前端", "组件库", "React"],
+      "description": "React Bits 是一个开源的 React 组件库，提供大量精美的动画组件、UI 组件和模板，包含 Cursor Grid、Specular Button、Option Wheel、Curved Input、Line Sidebar 等创意组件，可直接复制代码在项目中使用。",
+      "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects."
+    },
+    {
+      "name": "Lucide 图标中文网",
+      "name_en": "Lucide Icons (Chinese)",
+      "subtitle": "lucide.nodejs.cn",
+      "url": "https://lucide.nodejs.cn/icons/",
+      "author": "Lucide",
+      "author_url": "https://lucide.dev/",
+      "tags": ["前端", "图标", "设计"],
+      "description": "Lucide 是由社区制作的开源图标工具包，提供美观且一致的 SVG 图标。中文网支持按类别（无障碍、动物、箭头、房屋、图表、设计、设备、表情等）浏览图标，可自定义颜色、描边宽度和尺寸，方便在项目中检索使用。",
+      "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects."
     }
   ]
 }
