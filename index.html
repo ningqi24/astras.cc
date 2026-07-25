@@ -3245,10 +3245,14 @@
 
     const cacheBust = '?v=' + Date.now();
     let iconUrl;
+    let fallbackIconUrl = '';
     if (urlObj && urlObj.hostname === 'github.com') {
       iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
     } else {
       iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
+      if (urlObj) {
+        fallbackIconUrl = urlObj.protocol + '//' + urlObj.hostname + '/favicon.ico' + cacheBust;
+      }
     }
 
     const iconWrap = document.createElement('div');
@@ -3256,8 +3260,18 @@
     const iconImg = document.createElement('img');
     iconImg.src = iconUrl;
     iconImg.alt = '';
+    iconImg.dataset.fallback = fallbackIconUrl;
+    iconImg.onload = function() {
+      if (this.naturalWidth === 0 && this.dataset.fallback && this.src !== this.dataset.fallback) {
+        this.src = this.dataset.fallback;
+      }
+    };
     iconImg.onerror = function() {
-      this.parentElement.style.display = 'none';
+      if (this.dataset.fallback && this.src !== this.dataset.fallback) {
+        this.src = this.dataset.fallback;
+      } else {
+        this.parentElement.style.display = 'none';
+      }
     };
     iconWrap.appendChild(iconImg);
     card.appendChild(iconWrap);
