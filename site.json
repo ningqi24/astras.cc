@@ -100,6 +100,17 @@
       "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system."
     },
     {
+      "name": "深海字体 CDN",
+      "name_en": "DeepSea Fonts CDN",
+      "subtitle": "fontscdn.deepsealab.cc.cd",
+      "url": "https://fontscdn.deepsealab.cc.cd/",
+      "author": "深海实验室",
+      "author_url": "https://fontscdn.deepsealab.cc.cd/",
+      "tags": ["工具"],
+      "description": "基于中文网字计划改编的中文字体 CDN 服务，提供大量中文字体的 CSS 引用链接，可一键复制并在网页中通过 link 标签引入使用。",
+      "description_en": "A Chinese fonts CDN service adapted from the Chinese Web Fonts project. Provides CSS links for a large number of Chinese fonts that can be easily copied and embedded via link tags in web pages."
+    },
+    {
       "name": "COLID NS UI - scratch",
       "name_en": "COLID NS UI - scratch",
       "subtitle": "colidns.mysxl.cn",
