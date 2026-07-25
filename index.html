@@ -3237,7 +3237,10 @@
   function createSiteCard(button, index) {
     const card = document.createElement('div');
     card.className = 'h-card';
-    card.onclick = () => animateToPage(button.url);
+    card.onclick = (e) => {
+      if (e.target.closest('.h-card-detail-btn') || e.target.closest('.fav-btn')) return;
+      animateToPage(button.url);
+    };
 
     let domain;
     let urlObj;
