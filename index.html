@@ -3551,10 +3551,14 @@
 
     const cacheBust = '?v=' + Date.now();
     let iconUrl;
+    let fallbackIconUrl = '';
     if (urlObj && urlObj.hostname === 'github.com') {
       iconUrl = 'https://github.githubassets.com/favicons/favicon.png' + cacheBust;
     } else {
       iconUrl = button.url.replace(/\/+$/, '') + '/favicon.ico' + cacheBust;
+      if (urlObj) {
+        fallbackIconUrl = urlObj.protocol + '//' + urlObj.hostname + '/favicon.ico' + cacheBust;
+      }
     }
 
     const visitText = currentLang === 'zh' ? '访问网站' : 'Visit Site';
