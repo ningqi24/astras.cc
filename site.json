@@ -133,8 +133,8 @@
       "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995."
     },
     {
-      "name": "ningqi-github",
-      "name_en": "ningqi-github",
+      "name": "ningqi's github homepage",
+      "name_en": "ningqi's github homepage",
       "subtitle": "github.com/ningqi24",
       "url": "https://github.com/ningqi24",
       "author": "ningqi",
