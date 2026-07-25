@@ -1,4 +1,3 @@
-```markdown
 # astras.cc
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -32,8 +31,6 @@
 
 ## 项目结构 (Project Structure)
 
-```
-
 astras.cc/
 ├── index.html          # 导航首页 / Main navigation page
 ├── site.json           # 资源链接配置（双语） / Resource configuration (bilingual)
@@ -49,7 +46,6 @@ astras.cc/
 ├── images/             # 图片资源 / Image assets
 └── LICENSE             # MIT 许可证 / MIT License
 
-```
 
 ---
 
@@ -74,7 +70,6 @@ cd astras.cc
 
 # 使用任意静态服务器，例如： / Use any static server, e.g.:
 python3 -m http.server 8080
-```
 
 然后在浏览器中访问 http://localhost:8080。
 Then open http://localhost:8080 in your browser.
