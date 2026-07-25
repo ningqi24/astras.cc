@@ -61,13 +61,13 @@ astras.cc/
 
 ## 本地运行 (Run Locally)
 
-# 克隆仓库 / Clone the repository
+ 克隆仓库 / Clone the repository
 git clone https://github.com/ningqi24/astras.cc.git
 
-# 进入项目目录 / Enter the project directory
+ 进入项目目录 / Enter the project directory
 cd astras.cc
 
-# 使用任意静态服务器，例如： / Use any static server, e.g.:
+ 使用任意静态服务器，例如： / Use any static server, e.g.:
 python3 -m http.server 8080
 
 然后在浏览器中访问 http://localhost:8080。
