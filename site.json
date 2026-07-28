@@ -264,6 +264,19 @@
       ],
       "description": "Cyberexplorer 的个人主页，展示个人项目与作品。",
       "description_en": "Cyberexplorer's personal homepage showcasing projects and works."
+    },
+    {
+      "name": "水渠大亨",
+      "name_en": "Water Canal Tycoon",
+      "subtitle": "astras.cc/waterworks",
+      "url": "https://astras.cc/waterworks/",
+      "author": "ningqi",
+      "author_url": "https://github.com/ningqi24",
+      "tags": [
+        "游戏"
+      ],
+      "description": "一款模拟建造水渠引导水流的沙盒游戏。用水平管、垂直管、可旋转弯管、十字管和大坝，将水源引到农田赚取金币。适配手机触屏，打开即玩。",
+      "description_en": "A sandbox game about building canals to guide water. Use horizontal pipes, vertical pipes, rotatable corners, cross pipes, and dams to channel water from sources to farms and earn coins. Mobile-friendly, play instantly."
     }
   ]
 }
