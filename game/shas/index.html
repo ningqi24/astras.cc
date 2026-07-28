@@ -34,6 +34,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .boss-hp-bar{width:180px;height:6px;background:rgba(0,0,0,0.6);border-radius:3px;overflow:hidden}
 .boss-hp-fill{height:100%;background:linear-gradient(90deg,#ff4050,#ff8040);border-radius:3px;width:0;transition:width 0.3s}
 
+/* 潮汐通知 */
+.tide-alert{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:30;pointer-events:none;opacity:0;transition:opacity 0.3s}
+.tide-alert.show{opacity:1}
+.tide-text{font-size:28px;font-weight:900;color:#ff6644;text-shadow:0 0 20px rgba(255,100,60,0.8),0 0 60px rgba(255,60,20,0.5);letter-spacing:6px;animation:tidePulse 0.6s ease-in-out infinite alternate}
+.tide-sub{font-size:13px;color:#ffaa88;text-align:center;margin-top:4px;text-shadow:0 0 10px rgba(255,100,60,0.5)}
+@keyframes tidePulse{0%{transform:scale(1);text-shadow:0 0 20px rgba(255,100,60,0.8),0 0 60px rgba(255,60,20,0.5)}100%{transform:scale(1.08);text-shadow:0 0 30px rgba(255,100,60,1),0 0 80px rgba(255,60,20,0.7)}}
+
 /* 暂停按钮 */
 .pause-btn{position:fixed;top:max(4px,var(--safe-top));right:max(8px,var(--safe-right));z-index:11;background:rgba(10,10,24,0.8);color:var(--text);border:1px solid rgba(255,255,255,0.12);border-radius:7px;padding:5px 10px;font-size:10px;cursor:pointer;display:flex;align-items:center;gap:3px;pointer-events:auto}
 
@@ -107,6 +114,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 </head>
 <body>
 <canvas id="gc"></canvas>
+
+<!-- 潮汐通知 -->
+<div class="tide-alert" id="tideAlert">
+  <div class="tide-text">潮 流 来 袭 ！</div>
+  <div class="tide-sub">怪物数量激增</div>
+</div>
 
 <!-- HUD -->
 <div class="hud-bar">
@@ -183,12 +196,14 @@ const goIcon=document.getElementById('goIcon');
 const bossIndicator=document.getElementById('bossIndicator'),bossHpFill=document.getElementById('bossHpFill'),bossNameTag=document.getElementById('bossNameTag');
 const joystickZone=document.getElementById('joystickZone'),joystickThumb=document.getElementById('joystickThumb');
 const pauseBtn=document.getElementById('pauseBtn');
+const tideAlert=document.getElementById('tideAlert');
 
 let W,H,dpr=1,gameState='playing',gameTime=480,isLandscape=true;
 let player,monsters=[],bullets=[],particles=[],effects=[],xpOrbs=[],gems=[];
-let boss=null,spawnTimer=0,spawnInterval=2.0,difficulty=1;
+let boss=null,spawnTimer=0,spawnInterval=1.2,difficulty=1;
 let killCount=0,gemCount=0,bossDefeated=0;
 let bossSpawnTimes=[360,240,120];
+let tideWaveTimes=[420,300,180],tideTriggered=0,tideActive=false,tideTimer=0;
 let camX=0,camY=0,joystickActive=false,joyCX=0,joyCY=0,joyDX=0,joyDY=0;
 
 player={x:800,y:600,r:14,speed:200,hp:100,maxHp:100,level:1,xp:0,xpToNext:30,skills:[],atkBonus:1,spdBonus:1,cdBonus:0,pickupBonus:0,hpBonus:0,xpBonus:0,_atkTimers:{},_bladeAngle:0,invulnTimer:0};
@@ -311,7 +326,7 @@ function initGame(){
   gameState='playing';gameTime=480;player.x=MAP_W/2;player.y=MAP_H/2;player.hp=100;player.maxHp=100;player.level=1;player.xp=0;player.xpToNext=30;
   player.skills=[{id:'missile',name:'追踪飞弹',type:'active',level:1,desc:'自动追踪最近敌人',icon:icons.missile}];
   player.atkBonus=1;player.spdBonus=1;player.cdBonus=0;player.pickupBonus=0;player.hpBonus=0;player.xpBonus=0;player._atkTimers={};player._bladeAngle=0;player.invulnTimer=0;
-  monsters=[];bullets=[];particles=[];effects=[];xpOrbs=[];gems=[];boss=null;spawnTimer=0;difficulty=1;killCount=0;gemCount=0;bossDefeated=0;
+  monsters=[];bullets=[];particles=[];effects=[];xpOrbs=[];gems=[];boss=null;spawnTimer=0;difficulty=1;killCount=0;gemCount=0;bossDefeated=0;tideTriggered=0;tideActive=false;tideTimer=0;
   bossIndicator.classList.remove('show');joyDX=0;joyDY=0;
   levelupOverlay.classList.remove('show');gameoverOverlay.classList.remove('show');
   pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>';
@@ -337,6 +352,7 @@ function togglePause(){
   if(gameState==='playing'){gameState='paused';pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="#d0d8e8"/></svg>'}
   else if(gameState==='paused'){gameState='playing';pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>'}
 }
+function showTideAlert(){tideAlert.classList.add('show');setTimeout(()=>tideAlert.classList.remove('show'),2500);}
 function restartGame(){initGame();lastT=performance.now();requestAnimationFrame(loop)}
 function damageTarget(target,dmg){target.hp-=dmg;for(let i=0;i<3;i++)particles.push({x:target.x,y:target.y,vx:(Math.random()-0.5)*120,vy:(Math.random()-0.5)*120,life:0.3,color:'#fff'});if(target.hp<=0)killTarget(target);}
 function killTarget(target){
@@ -360,7 +376,9 @@ function update(dt){
   gameTime-=dt;if(gameTime<=0){gameOver(true);return}
   let elapsed=480-gameTime;difficulty=Math.floor(elapsed/60)+1;
   if(!boss)for(let i=0;i<bossSpawnTimes.length;i++)if(gameTime<=bossSpawnTimes[i]&&bossDefeated===i){spawnBoss();break}
-  spawnTimer+=dt;let si=Math.max(0.4,spawnInterval*(1-difficulty*0.08));if(spawnTimer>=si){spawnTimer=0;spawnMonster();if(Math.random()<0.3)spawnMonster();}
+  for(let i=tideTriggered;i<tideWaveTimes.length;i++)if(gameTime<=tideWaveTimes[i]){tideActive=true;tideTimer=12;tideTriggered=i+1;showTideAlert();break}
+  if(tideActive){tideTimer-=dt;if(tideTimer<=0)tideActive=false;}
+  spawnTimer+=dt;let si=Math.max(0.4,spawnInterval*(1-difficulty*0.08));if(tideActive)si*=0.5;if(spawnTimer>=si){spawnTimer=0;spawnMonster();if(Math.random()<0.3)spawnMonster();if(tideActive)spawnMonster();}
   if(joyDX!==0||joyDY!==0){let mag=Math.hypot(joyDX,joyDY);player.x+=joyDX/mag*player.speed*player.spdBonus*dt;player.y+=joyDY/mag*player.speed*player.spdBonus*dt;}
   player.x=Math.max(player.r,Math.min(MAP_W-player.r,player.x));player.y=Math.max(player.r,Math.min(MAP_H-player.r,player.y));
   if(player.invulnTimer>0)player.invulnTimer-=dt;
