@@ -10,9 +10,10 @@
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'PingFang SC','Heiti SC',sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 #gc{display:block;position:fixed;top:0;left:0;width:100%;height:100%}
 .hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:6px 10px;gap:4px;z-index:2;pointer-events:none}
-.hud-item{background:rgba(10,10,20,0.85);border-radius:10px;padding:4px 10px;font-size:12px;color:var(--text);display:flex;align-items:center;gap:4px;font-weight:700}
+.hud-item{background:rgba(10,10,20,0.85);border-radius:10px;padding:4px 10px;font-size:12px;color:var(--text);display:flex;align-items:center;gap:5px;font-weight:700}
 .hud-val{font-size:15px}
 .hud-gold{color:var(--gold)}.hud-accent{color:var(--accent)}.hud-danger{color:var(--danger)}.hud-xp{color:var(--xp)}
+.hud-icon{width:16px;height:16px;flex-shrink:0}
 .xp-bar-wrap{position:fixed;top:48px;left:10px;right:10px;height:6px;background:rgba(10,10,20,0.7);border-radius:3px;z-index:2;overflow:hidden;pointer-events:none}
 .xp-bar{height:100%;background:linear-gradient(90deg,#40e080,#40b8ff);border-radius:3px;transition:width 0.2s;width:0}
 .level-tag{position:fixed;top:42px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--accent);font-weight:900;z-index:2;pointer-events:none;text-shadow:0 0 8px rgba(64,184,255,0.6)}
@@ -48,17 +49,34 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 </head>
 <body>
 <canvas id="gc"></canvas>
+
+<!-- HUD使用内联SVG图标 -->
 <div class="hud">
-  <div class="hud-item">❤️ <span class="hud-val hud-danger" id="hp">100</span></div>
-  <div class="hud-item">⏱️ <span class="hud-val hud-accent" id="timer">8:00</span></div>
-  <div class="hud-item">⚔️ <span class="hud-val" id="kills">0</span></div>
-  <div class="hud-item">💎 <span class="hud-val hud-gold" id="gem">0</span></div>
+  <div class="hud-item">
+    <svg class="hud-icon" viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.7 3 7.5c0 3 4 6.5 5 6.5s5-3.5 5-6.5C13 4.7 10.8 2 8 2z" fill="#ff4050"/></svg>
+    <span class="hud-val hud-danger" id="hp">100</span>
+  </div>
+  <div class="hud-item">
+    <svg class="hud-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#40b8ff" stroke-width="2"/><line x1="8" y1="4" x2="8" y2="8" stroke="#40b8ff" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="8" x2="11" y2="10" stroke="#40b8ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span class="hud-val hud-accent" id="timer">8:00</span>
+  </div>
+  <div class="hud-item">
+    <svg class="hud-icon" viewBox="0 0 16 16"><path d="M2 4l4-2v12l-4-2V4zM6 2l4 2v10l-4-2V2zM10 4l4-2v12l-4-2V4z" fill="#d0d8e8"/></svg>
+    <span class="hud-val" id="kills">0</span>
+  </div>
+  <div class="hud-item">
+    <svg class="hud-icon" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9 13,14 8,11 3,14 5,9 1,6 6,6" fill="#f0c040"/></svg>
+    <span class="hud-val hud-gold" id="gem">0</span>
+  </div>
 </div>
+
 <div class="xp-bar-wrap"><div class="xp-bar" id="xpBar"></div></div>
 <div class="level-tag" id="levelTag">Lv.1</div>
 <div class="boss-hp-bar" id="bossHpBar"><div class="boss-hp-fill" id="bossHpFill"></div></div>
 <div class="boss-name-tag" id="bossNameTag"></div>
-<button class="pause-btn" id="pauseBtn" onclick="togglePause()">⏸</button>
+<button class="pause-btn" id="pauseBtn" onclick="togglePause()">
+  <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>
+</button>
 
 <div class="levelup-overlay" id="levelupOverlay">
   <div class="levelup-title">⬆ 升级! Lv.<span id="luLevel"></span></div>
@@ -91,65 +109,24 @@ const bossHpBar=document.getElementById('bossHpBar'),bossHpFill=document.getElem
 const joystickZone=document.getElementById('joystickZone'),joystickThumb=document.getElementById('joystickThumb');
 const pauseBtn=document.getElementById('pauseBtn');
 
-let W,H,dpr=1;
-let gameState='playing'; // playing, paused, levelup, gameover
-let gameTime=480; // 8分钟倒计时
-let player,monsters,bullets,particles,effects,xpOrbs,gems;
-let boss=null;
-let spawnTimer=0,spawnInterval=2.0;
-let difficulty=1;
-let killCount=0,gemCount=0;
-let bossSpawnTimes=[360,240,120]; // 剩余时间 6min,4min,2min 出BOSS
-let bossDefeated=0;
-let camX=0,camY=0;
+let W,H,dpr=1,gameState='playing',gameTime=480;
+let player,monsters=[],bullets=[],particles=[],effects=[],xpOrbs=[],gems=[];
+let boss=null,spawnTimer=0,spawnInterval=2.0,difficulty=1;
+let killCount=0,gemCount=0,bossDefeated=0;
+let bossSpawnTimes=[360,240,120];
+let camX=0,camY=0,joystickActive=false,joyCX=0,joyCY=0,joyDX=0,joyDY=0;
 
-// 摇杆
-let joystickActive=false,joyCX=0,joyCY=0,joyDX=0,joyDY=0;
-
-// 玩家
-player={
-  x:800,y:600,r:14,speed:200,hp:100,maxHp:100,
-  level:1,xp:0,xpToNext:30,
-  skills:[], // {id,name,type,level,desc,icon}
-  atkBonus:1,spdBonus:1,cdBonus:0,pickupBonus:0,hpBonus:0,xpBonus:0,
-  atkTimer:0,atkCooldown:0.6,
-  invulnTimer:0
-};
-
-// 地图大小
+player={x:800,y:600,r:14,speed:200,hp:100,maxHp:100,level:1,xp:0,xpToNext:30,skills:[],atkBonus:1,spdBonus:1,cdBonus:0,pickupBonus:0,hpBonus:0,xpBonus:0,_atkTimers:{},_bladeAngle:0,invulnTimer:0};
 const MAP_W=1600,MAP_H=1200;
 
-// --- 技能定义 ---
-const activeSkills=[
-  {id:'missile',name:'追踪飞弹',icon:'🚀',desc:'自动追踪最近敌人',cd:0.7,dmg:12,count:1,proj:'missile',splash:0},
-  {id:'blade',name:'环绕刃',icon:'🔪',desc:'环绕玩家的刀刃',cd:0,dmg:18,count:2,proj:'blade',splash:0},
-  {id:'lightning',name:'闪电链',icon:'⚡',desc:'连锁闪电溅射',cd:1.5,dmg:22,count:1,proj:'lightning',splash:3},
-  {id:'fireAura',name:'火焰光环',icon:'🔥',desc:'周期性灼烧周围',cd:0.8,dmg:10,count:1,proj:'aura',splash:0},
-  {id:'iceShard',name:'冰锥散射',icon:'❄️',desc:'多方向发射冰锥',cd:0.9,dmg:8,count:4,proj:'ice',splash:0},
-  {id:'laser',name:'激光扫射',icon:'💫',desc:'穿透直线激光',cd:2.0,dmg:35,count:1,proj:'laser',splash:0},
-  {id:'poison',name:'毒雾弥漫',icon:'☠️',desc:'地面毒雾持续伤害',cd:3.0,dmg:6,count:1,proj:'poison',splash:0},
-  {id:'missileStorm',name:'飞弹风暴',icon:'💥',desc:'多发追踪飞弹',cd:1.2,dmg:8,count:5,proj:'missile',splash:0},
-  {id:'earthSpike',name:'地刺突袭',icon:'🗡️',desc:'随机位置地刺',cd:1.8,dmg:28,count:3,proj:'spike',splash:0},
-];
-const passiveSkills=[
-  {id:'atkUp',name:'攻击强化',icon:'⚔️',desc:'攻击力+20%',effect:'atk',value:0.2},
-  {id:'spdUp',name:'移速提升',icon:'💨',desc:'移速+12%',effect:'spd',value:0.12},
-  {id:'cdDown',name:'冷却缩减',icon:'⏳',desc:'冷却-10%',effect:'cd',value:-0.1},
-  {id:'pickupUp',name:'拾取扩大',icon:'🧲',desc:'拾取范围+25%',effect:'pickup',value:0.25},
-  {id:'hpUp',name:'生命上限',icon:'❤️',desc:'生命上限+25',effect:'hp',value:25},
-  {id:'xpUp',name:'经验加成',icon:'⭐',desc:'经验获取+25%',effect:'xp',value:0.25},
-  {id:'armor',name:'护甲',icon:'🛡️',desc:'受伤减免15%',effect:'armor',value:0.15},
-  {id:'regen',name:'生命回复',icon:'💚',desc:'每秒回复1HP',effect:'regen',value:1},
-];
+const activeSkills=[{id:'missile',name:'追踪飞弹',icon:'🚀',desc:'自动追踪最近敌人',cd:0.7,dmg:12,count:1,proj:'missile',splash:0},{id:'blade',name:'环绕刃',icon:'🔪',desc:'环绕玩家的刀刃',cd:0,dmg:18,count:2,proj:'blade',splash:0},{id:'lightning',name:'闪电链',icon:'⚡',desc:'连锁闪电溅射',cd:1.5,dmg:22,count:1,proj:'lightning',splash:3},{id:'fireAura',name:'火焰光环',icon:'🔥',desc:'周期性灼烧周围',cd:0.8,dmg:10,count:1,proj:'aura',splash:0},{id:'iceShard',name:'冰锥散射',icon:'❄️',desc:'多方向发射冰锥',cd:0.9,dmg:8,count:4,proj:'ice',splash:0},{id:'laser',name:'激光扫射',icon:'💫',desc:'穿透直线激光',cd:2.0,dmg:35,count:1,proj:'laser',splash:0},{id:'poison',name:'毒雾弥漫',icon:'☠️',desc:'地面毒雾持续伤害',cd:3.0,dmg:6,count:1,proj:'poison',splash:0},{id:'missileStorm',name:'飞弹风暴',icon:'💥',desc:'多发追踪飞弹',cd:1.2,dmg:8,count:5,proj:'missile',splash:0},{id:'earthSpike',name:'地刺突袭',icon:'🗡️',desc:'随机位置地刺',cd:1.8,dmg:28,count:3,proj:'spike',splash:0}];
+const passiveSkills=[{id:'atkUp',name:'攻击强化',icon:'⚔️',desc:'攻击力+20%',effect:'atk',value:0.2},{id:'spdUp',name:'移速提升',icon:'💨',desc:'移速+12%',effect:'spd',value:0.12},{id:'cdDown',name:'冷却缩减',icon:'⏳',desc:'冷却-10%',effect:'cd',value:-0.1},{id:'pickupUp',name:'拾取扩大',icon:'🧲',desc:'拾取范围+25%',effect:'pickup',value:0.25},{id:'hpUp',name:'生命上限',icon:'❤️',desc:'生命上限+25',effect:'hp',value:25},{id:'xpUp',name:'经验加成',icon:'⭐',desc:'经验获取+25%',effect:'xp',value:0.25},{id:'armor',name:'护甲',icon:'🛡️',desc:'受伤减免15%',effect:'armor',value:0.15},{id:'regen',name:'生命回复',icon:'💚',desc:'每秒回复1HP',effect:'regen',value:1}];
+const monsterTypes=[{name:'小虫',r:12,hp:20,speed:60,dmg:8,color:'#55cc44',xp:5,gem:0,type:'worm'},{name:'飞虫',r:10,hp:15,speed:100,dmg:6,color:'#ccaa22',xp:4,gem:0,type:'fly'},{name:'战士',r:16,hp:50,speed:50,dmg:15,color:'#cc4444',xp:10,gem:1,type:'warrior'},{name:'炮台',r:20,hp:80,speed:0,dmg:20,color:'#8844cc',xp:15,gem:2,shoots:true,type:'turret'}];
+const bossTypes=[{name:'巨型异虫',r:40,hp:400,speed:40,dmg:30,color:'#ff3366',xp:200,gem:20,type:'wormBoss'},{name:'机甲守卫',r:36,hp:550,speed:55,dmg:35,color:'#ff6633',xp:300,gem:30,type:'mechBoss'},{name:'外星首领',r:44,hp:700,speed:35,dmg:40,color:'#cc33ff',xp:400,gem:40,type:'alienBoss'}];
 
-function getSkillLevel(id){
-  for(let s of player.skills)if(s.id===id)return s.level;
-  return 0;
-}
+function getSkillLevel(id){for(let s of player.skills)if(s.id===id)return s.level;return 0}
 function addOrUpgradeSkill(id){
-  for(let s of player.skills){
-    if(s.id===id){s.level=Math.min(s.level+1,5);return s;}
-  }
+  for(let s of player.skills){if(s.id===id){s.level=Math.min(s.level+1,5);return s}}
   let def=activeSkills.find(a=>a.id===id)||passiveSkills.find(p=>p.id===id);
   if(!def)return null;
   let s={id:def.id,name:def.name,type:activeSkills.find(a=>a.id===id)?'active':'passive',level:1,desc:def.desc,icon:def.icon};
@@ -157,171 +134,330 @@ function addOrUpgradeSkill(id){
   if(s.type==='passive')applyPassive(def,1);
   return s;
 }
-function applyPassive(def,level){
-  let v=def.value*level;
-  switch(def.effect){
-    case 'atk':player.atkBonus+=def.value;break;
-    case 'spd':player.spdBonus+=def.value;break;
-    case 'cd':player.cdBonus+=def.value;break;
-    case 'pickup':player.pickupBonus+=def.value;break;
-    case 'hp':player.maxHp+=def.value;player.hp=Math.min(player.hp+def.value,player.maxHp);player.hpBonus+=def.value;break;
-    case 'xp':player.xpBonus+=def.value;break;
-  }
-}
-function getSkillDef(id){
-  return activeSkills.find(a=>a.id===id)||passiveSkills.find(p=>p.id===id);
-}
+function applyPassive(def,level){let v=def.value;switch(def.effect){case 'atk':player.atkBonus+=v;break;case 'spd':player.spdBonus+=v;break;case 'cd':player.cdBonus+=v;break;case 'pickup':player.pickupBonus+=v;break;case 'hp':player.maxHp+=v;player.hp=Math.min(player.hp+v,player.maxHp);player.hpBonus+=v;break;case 'xp':player.xpBonus+=v;break;}}
 function calcAtkDmg(base){return base*player.atkBonus}
 function calcCooldown(base){return base*(1-Math.min(player.cdBonus,0.6))}
 
-// 生成升级选项
 function genLevelupChoices(){
   let activeCount=player.skills.filter(s=>s.type==='active').length;
   let passiveCount=player.skills.filter(s=>s.type==='passive').length;
   let pool=[];
-  // 优先填充不满的技能
   if(activeCount<6)for(let a of activeSkills){if(getSkillLevel(a.id)<5)pool.push({...a,type:'active'});}
   if(passiveCount<6)for(let p of passiveSkills){if(getSkillLevel(p.id)<5)pool.push({...p,type:'passive'});}
-  if(pool.length===0){
-    for(let a of activeSkills){if(getSkillLevel(a.id)<5)pool.push({...a,type:'active'});}
-    for(let p of passiveSkills){if(getSkillLevel(p.id)<5)pool.push({...p,type:'passive'});}
-  }
-  // 随机选3个
-  let chosen=[];
-  let copy=[...pool];
-  for(let i=0;i<3&&copy.length>0;i++){
-    let idx=Math.floor(Math.random()*copy.length);
-    chosen.push(copy.splice(idx,1)[0]);
-  }
+  if(pool.length===0){for(let a of activeSkills)if(getSkillLevel(a.id)<5)pool.push({...a,type:'active'});for(let p of passiveSkills)if(getSkillLevel(p.id)<5)pool.push({...p,type:'passive'});}
+  let chosen=[],copy=[...pool];
+  for(let i=0;i<3&&copy.length>0;i++){let idx=Math.floor(Math.random()*copy.length);chosen.push(copy.splice(idx,1)[0])}
   return chosen;
 }
 
-// 怪物类型
-const monsterTypes=[
-  {name:'小虫',r:12,hp:20,speed:60,dmg:8,color:'#55cc44',xp:5,gem:0},
-  {name:'飞虫',r:10,hp:15,speed:100,dmg:6,color:'#ccaa22',xp:4,gem:0},
-  {name:'战士',r:16,hp:50,speed:50,dmg:15,color:'#cc4444',xp:10,gem:1},
-  {name:'炮台',r:20,hp:80,speed:0,dmg:20,color:'#8844cc',xp:15,gem:2,shoots:true},
-];
-
-const bossTypes=[
-  {name:'巨型异虫',r:40,hp:400,speed:40,dmg:30,color:'#ff3366',xp:200,gem:20},
-  {name:'机甲守卫',r:36,hp:550,speed:55,dmg:35,color:'#ff6633',xp:300,gem:30},
-  {name:'外星首领',r:44,hp:700,speed:35,dmg:40,color:'#cc33ff',xp:400,gem:40},
-];
-
 function spawnMonster(){
   if(monsters.length>80)return;
-  let edge=Math.floor(Math.random()*4);
-  let x,y;
-  if(edge===0){x=-30;y=Math.random()*MAP_H}
-  else if(edge===1){x=MAP_W+30;y=Math.random()*MAP_H}
-  else if(edge===2){x=Math.random()*MAP_W;y=-30}
-  else{x=Math.random()*MAP_W;y=MAP_H+30}
-
-  // 根据难度选怪物
-  let weights=[0.5,0.25,0.15,0.1];
-  if(difficulty>3){weights=[0.25,0.25,0.3,0.2]}
-  if(difficulty>5){weights=[0.15,0.2,0.35,0.3]}
-  let r=Math.random(),cum=0,ti=0;
-  for(let i=0;i<weights.length;i++){cum+=weights[i];if(r<cum){ti=i;break;}}
-  let mt=monsterTypes[ti];
-
-  let m={
-    x,y,r:mt.r,hp:mt.hp,maxHp:mt.hp,speed:mt.speed,dmg:mt.dmg,
-    color:mt.color,name:mt.name,xp:mt.xp,gem:mt.gem,
-    shoots:mt.shoots||false,shootTimer:0,
-    knockbackX:0,knockbackY:0,
-  };
-  // 难度加成
-  m.hp=Math.floor(m.hp*(1+(difficulty-1)*0.3));
-  m.maxHp=m.hp;
-  m.speed=Math.min(m.speed*(1+(difficulty-1)*0.1),180);
-  monsters.push(m);
+  let edge=Math.floor(Math.random()*4),x,y;
+  if(edge===0){x=-30;y=Math.random()*MAP_H}else if(edge===1){x=MAP_W+30;y=Math.random()*MAP_H}else if(edge===2){x=Math.random()*MAP_W;y=-30}else{x=Math.random()*MAP_W;y=MAP_H+30}
+  let weights=[0.5,0.25,0.15,0.1];if(difficulty>3)weights=[0.25,0.25,0.3,0.2];if(difficulty>5)weights=[0.15,0.2,0.35,0.3];
+  let r=Math.random(),cum=0,ti=0;for(let i=0;i<weights.length;i++){cum+=weights[i];if(r<cum){ti=i;break}}
+  let mt=monsterTypes[ti],hp=Math.floor(mt.hp*(1+(difficulty-1)*0.3));
+  monsters.push({x,y,r:mt.r,hp,maxHp:hp,speed:Math.min(mt.speed*(1+(difficulty-1)*0.1),180),dmg:mt.dmg,color:mt.color,name:mt.name,xp:mt.xp,gem:mt.gem,type:mt.type,shoots:mt.shoots||false,shootTimer:0,knockbackX:0,knockbackY:0});
 }
-
 function spawnBoss(){
   if(boss||bossDefeated>=3)return;
-  let bt=bossTypes[bossDefeated];
-  let edge=Math.floor(Math.random()*4);
-  let x,y;
-  if(edge===0){x=-50;y=MAP_H/2}
-  else if(edge===1){x=MAP_W+50;y=MAP_H/2}
-  else if(edge===2){x=MAP_W/2;y=-50}
-  else{x=MAP_W/2;y=MAP_H+50}
-  boss={
-    x,y,r:bt.r,hp:bt.hp,maxHp:bt.hp,speed:bt.speed,dmg:bt.dmg,
-    color:bt.color,name:bt.name,xp:bt.xp,gem:bt.gem,
-    knockbackX:0,knockbackY:0,phase:0,timer:0
-  };
-  bossHpBar.style.display='block';
-  bossNameTag.style.display='block';
-  bossNameTag.textContent=bt.name;
+  let bt=bossTypes[bossDefeated],edge=Math.floor(Math.random()*4),x,y;
+  if(edge===0){x=-50;y=MAP_H/2}else if(edge===1){x=MAP_W+50;y=MAP_H/2}else if(edge===2){x=MAP_W/2;y=-50}else{x=MAP_W/2;y=MAP_H+50}
+  boss={x,y,r:bt.r,hp:bt.hp,maxHp:bt.hp,speed:bt.speed,dmg:bt.dmg,color:bt.color,name:bt.name,xp:bt.xp,gem:bt.gem,type:bt.type,knockbackX:0,knockbackY:0,timer:0};
+  bossHpBar.style.display='block';bossNameTag.style.display='block';bossNameTag.textContent=bt.name;
 }
 
-// 技能攻击
-function skillAttack(skillDef,skLevel){
-  let lv=skLevel||1;
-  let cd=calcCooldown(skillDef.cd);
-  let dmg=calcAtkDmg(skillDef.dmg*(1+(lv-1)*0.3));
-  let count=skillDef.count+(lv-1);
-
-  switch(skillDef.proj){
-    case 'missile':
-      if(monsters.length===0&&!boss)return;
-      for(let i=0;i<count;i++){
-        let target=null;
-        if(boss&&Math.random()<0.6)target=boss;
-        else if(monsters.length>0)target=monsters[Math.floor(Math.random()*monsters.length)];
-        if(!target)continue;
-        let a=Math.atan2(target.y-player.y,target.x-player.x)+((Math.random()-0.5)*0.4);
-        bullets.push({x:player.x,y:player.y,vx:Math.cos(a)*350,vy:Math.sin(a)*350,dmg,life:3,color:'#ffe066',r:5,type:'missile'});
-      }
-      break;
-    case 'blade':
-      // blade是环绕的，在render中处理
-      break;
-    case 'lightning':
-      if(monsters.length===0&&!boss)return;
-      let lt=monsters[Math.floor(Math.random()*monsters.length)];
-      bullets.push({x:player.x,y:player.y,tx:lt.x,ty:lt.y,dmg,life:0.2,color:'#88ccff',r:3,type:'lightning',chain:skillDef.splash+lv-1});
-      break;
-    case 'aura':
-      effects.push({x:player.x,y:player.y,r:120*(1+(lv-1)*0.3),dmg,life:0.4,color:'#ff6622',type:'aura'});
-      break;
-    case 'ice':
-      for(let i=0;i<count;i++){
-        let a=(Math.PI*2/count)*i+Date.now()*0.001;
-        bullets.push({x:player.x,y:player.y,vx:Math.cos(a)*300,vy:Math.sin(a)*300,dmg,life:2,color:'#aaddff',r:4,type:'ice'});
-      }
-      break;
-    case 'laser':
-      let la=Math.atan2((monsters[0]||{y:player.y}).y-player.y,(monsters[0]||{x:player.x}).x-player.x);
-      for(let i=0;i<3;i++){
-        bullets.push({x:player.x,y:player.y,vx:Math.cos(la+(i-1)*0.2)*500,vy:Math.sin(la+(i-1)*0.2)*500,dmg,life:1.2,color:'#ff44aa',r:3,type:'laser',pierce:true});
-      }
-      break;
-    case 'poison':
-      for(let i=0;i<3;i++){
-        effects.push({
-          x:player.x+(Math.random()-0.5)*80,y:player.y+(Math.random()-0.5)*80,
-          r:60+lv*10,dmg:dmg*0.3,life:3+lv,color:'#66ee44',type:'poisonField'
-        });
-      }
-      break;
-    case 'spike':
-      for(let i=0;i<count;i++){
-        let sx=player.x+(Math.random()-0.5)*300,sy=player.y+(Math.random()-0.5)*300;
-        effects.push({x:sx,y:sy,r:30,dmg,life:0.5,color:'#ccaa66',type:'spike'});
-      }
-      break;
+function skillAttack(def,lv){
+  let cd=calcCooldown(def.cd),dmg=calcAtkDmg(def.dmg*(1+(lv-1)*0.3)),count=def.count+(lv-1);
+  switch(def.proj){
+    case 'missile':if(monsters.length||boss){for(let i=0;i<count;i++){let t=boss&&Math.random()<0.6?boss:monsters[Math.floor(Math.random()*monsters.length)]||{x:player.x+100,y:player.y};let a=Math.atan2(t.y-player.y,t.x-player.x)+((Math.random()-0.5)*0.4);bullets.push({x:player.x,y:player.y,vx:Math.cos(a)*350,vy:Math.sin(a)*350,dmg,life:3,color:'#ffe066',r:5,type:'missile'});}}break;
+    case 'lightning':if(monsters.length||boss){let lt=monsters[Math.floor(Math.random()*monsters.length)]||{x:player.x+100,y:player.y};bullets.push({x:player.x,y:player.y,tx:lt.x,ty:lt.y,dmg,life:0.2,color:'#88ccff',r:3,type:'lightning',chain:def.splash+lv-1});}break;
+    case 'aura':effects.push({x:player.x,y:player.y,r:120*(1+(lv-1)*0.3),dmg,life:0.4,color:'#ff6622',type:'aura'});break;
+    case 'ice':for(let i=0;i<count;i++){let a=(Math.PI*2/count)*i+Date.now()*0.001;bullets.push({x:player.x,y:player.y,vx:Math.cos(a)*300,vy:Math.sin(a)*300,dmg,life:2,color:'#aaddff',r:4,type:'ice'});}break;
+    case 'laser':let la=Math.atan2(((monsters[0]||{}).y||player.y)-player.y,((monsters[0]||{}).x||player.x+100)-player.x);for(let i=0;i<3;i++)bullets.push({x:player.x,y:player.y,vx:Math.cos(la+(i-1)*0.2)*500,vy:Math.sin(la+(i-1)*0.2)*500,dmg,life:1.2,color:'#ff44aa',r:3,type:'laser',pierce:true});break;
+    case 'poison':for(let i=0;i<3;i++)effects.push({x:player.x+(Math.random()-0.5)*80,y:player.y+(Math.random()-0.5)*80,r:60+lv*10,dmg:dmg*0.3,life:3+lv,color:'#66ee44',type:'poisonField'});break;
+    case 'spike':for(let i=0;i<count;i++){let sx=player.x+(Math.random()-0.5)*300,sy=player.y+(Math.random()-0.5)*300;effects.push({x:sx,y:sy,r:30,dmg,life:0.5,color:'#ccaa66',type:'spike'});}break;
   }
 }
 
-// 初始化
+// ====== 手绘SVG风格的绘制函数 ======
+
+function drawWorm(sx,sy,r,c1,c2){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/12;
+  // 身体 - 分段蠕虫
+  let body=ctx.createLinearGradient(0,-r,0,r);
+  body.addColorStop(0,c1);body.addColorStop(0.5,c2);body.addColorStop(1,c1);
+  ctx.fillStyle=body;
+  ctx.beginPath();ctx.ellipse(0,0,r*1.2,r*0.7,0,0,Math.PI*2);ctx.fill();
+  // 条纹
+  ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.lineWidth=s*1.5;
+  for(let i=-2;i<=2;i++){ctx.beginPath();ctx.arc(i*s*5,0,s*4,0,Math.PI*2);ctx.stroke();}
+  // 触角
+  ctx.strokeStyle=c2;ctx.lineWidth=s*1.5;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(-r*1.1,-r*0.2);ctx.quadraticCurveTo(-r*1.5,-r*1.2,-r*1.3,-r*1.5);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-r*1.0,-r*0.3);ctx.quadraticCurveTo(-r*1.2,-r*1.4,-r*0.9,-r*1.6);ctx.stroke();
+  // 眼睛
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-r*0.6,-r*0.15,s*4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#111';ctx.beginPath();ctx.arc(-r*0.6,-r*0.15,s*2,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawFly(sx,sy,r,c){
+  ctx.save();ctx.translate(sx,sy);
+  let t=Date.now()*0.01,s=r/10;
+  // 翅膀 - 快速扇动
+  ctx.fillStyle='rgba(255,255,255,0.5)';
+  let wingY=Math.sin(t*15)*s*2;
+  ctx.beginPath();ctx.ellipse(-s*2,-r*0.6+wingY,s*5,s*3,-0.3,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(s*2,-r*0.6-wingY,s*5,s*3,0.3,0,Math.PI*2);ctx.fill();
+  // 身体
+  ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(0,0,r*0.6,r*0.45,0,0,Math.PI*2);ctx.fill();
+  // 眼睛(复眼)
+  ctx.fillStyle='#ff0';ctx.beginPath();ctx.arc(-r*0.25,-s,s*3,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#111';ctx.beginPath();ctx.arc(-r*0.25,-s,s*1.5,0,Math.PI*2);ctx.fill();
+  // 尾刺
+  ctx.strokeStyle=c;ctx.lineWidth=s*2;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(r*0.5,0);ctx.lineTo(r*1.2,0);ctx.stroke();
+  ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(r*1.2,-s*2);ctx.lineTo(r*1.7,0);ctx.lineTo(r*1.2,s*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawWarrior(sx,sy,r,c){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/16;
+  // 腿
+  ctx.strokeStyle=c;ctx.lineWidth=s*3;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(-s*4,r*0.7);ctx.lineTo(-s*8,r*1.3);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(s*4,r*0.7);ctx.lineTo(s*8,r*1.3);ctx.stroke();
+  // 身体
+  ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(0,s*2,s*6,s*8,0,0,Math.PI*2);ctx.fill();
+  // 头
+  ctx.fillStyle=c;ctx.beginPath();ctx.arc(0,-s*6,s*7,0,Math.PI*2);ctx.fill();
+  // 头盔
+  ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=s*2;
+  ctx.beginPath();ctx.arc(0,-s*8,s*7,Math.PI*0.8,Math.PI*0.2);ctx.stroke();
+  // 眼睛
+  ctx.fillStyle='#ff0';ctx.beginPath();ctx.arc(-s*2.5,-s*8,s*2.5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ff0';ctx.beginPath();ctx.arc(s*2.5,-s*8,s*2.5,0,Math.PI*2);ctx.fill();
+  // 武器
+  ctx.strokeStyle='#ddd';ctx.lineWidth=s*2;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(s*10,-s*2);ctx.lineTo(s*16,-s*8);ctx.stroke();
+  ctx.fillStyle='#ff6644';ctx.beginPath();ctx.moveTo(s*16,-s*12);ctx.lineTo(s*20,-s*8);ctx.lineTo(s*16,-s*4);ctx.fill();
+  ctx.restore();
+}
+
+function drawTurret(sx,sy,r,c){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/20,a=Math.atan2(player.y-sy,player.x-sx);
+  // 底座
+  ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(0,0,s*14,s*6,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(0,s*2,s*10,s*4,0,0,Math.PI*2);ctx.fill();
+  // 炮管
+  ctx.save();ctx.rotate(a);
+  ctx.fillStyle='#aabbcc';ctx.fillRect(-s*2,-s*3,s*16,s*6);
+  ctx.fillStyle='#8899aa';ctx.fillRect(s*14,-s*4,s*4,s*8);
+  // 炮口火
+  ctx.fillStyle='#ff6622';ctx.beginPath();ctx.arc(s*18,0,s*3+Math.random()*2,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+  // 红灯
+  ctx.fillStyle='#ff3333';ctx.beginPath();ctx.arc(0,-s*2,s*3,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ff9999';ctx.beginPath();ctx.arc(-s*0.8,-s*2.5,s*1,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawWormBoss(sx,sy,r,c,t){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/40,wiggle=Math.sin(t*3)*s*3;
+  // 多节身体
+  for(let i=0;i<4;i++){
+    let bx=i*s*16-r*0.6,by=Math.sin(t*2+i)*s*5;
+    let seg=ctx.createLinearGradient(bx,by-s*10,bx,by+s*10);
+    seg.addColorStop(0,c);seg.addColorStop(1,'#991122');
+    ctx.fillStyle=seg;ctx.beginPath();ctx.ellipse(bx,by,s*10,s*8,0.1*i,0,Math.PI*2);ctx.fill();
+    // 尖刺
+    ctx.fillStyle='#ff6688';
+    for(let j=0;j<3;j++){let sp=Math.PI*2/3*j;ctx.beginPath();ctx.moveTo(bx+Math.cos(sp)*s*8,by+Math.sin(sp)*s*7);ctx.lineTo(bx+Math.cos(sp)*s*14,by+Math.sin(sp)*s*12);ctx.lineTo(bx+Math.cos(sp+0.2)*s*8,by+Math.sin(sp+0.2)*s*7);ctx.fill();}
+  }
+  // 头部
+  ctx.fillStyle=c;ctx.beginPath();ctx.arc(r*0.7+wiggle,0,s*14,0,Math.PI*2);ctx.fill();
+  // 大嘴
+  ctx.fillStyle='#440000';ctx.beginPath();ctx.arc(r*0.7+wiggle,s*5,s*10,0,Math.PI);ctx.fill();
+  // 牙齿
+  ctx.fillStyle='#fff';
+  for(let i=-3;i<=3;i++){ctx.beginPath();ctx.moveTo(r*0.7+wiggle+i*s*3,s*6);ctx.lineTo(r*0.7+wiggle+i*s*2,s*14);ctx.lineTo(r*0.7+wiggle+i*s*4,s*6);ctx.fill();}
+  // 眼睛
+  ctx.fillStyle='#ff0';ctx.beginPath();ctx.arc(r*0.7+wiggle-s*4,-s*6,s*6,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#f00';ctx.beginPath();ctx.arc(r*0.7+wiggle-s*4,-s*6,s*3,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawMechBoss(sx,sy,r,c){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/36;
+  // 腿
+  ctx.strokeStyle='#667788';ctx.lineWidth=s*5;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(-s*10,r*0.3);ctx.lineTo(-s*16,r*1.2);ctx.moveTo(-s*16,r*1.2);ctx.lineTo(-s*20,r*1.0);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(s*10,r*0.3);ctx.lineTo(s*16,r*1.2);ctx.moveTo(s*16,r*1.2);ctx.lineTo(s*20,r*1.0);ctx.stroke();
+  // 身体 - 机甲躯干
+  let bodyG=ctx.createLinearGradient(0,-s*8,0,s*8);
+  bodyG.addColorStop(0,'#889999');bodyG.addColorStop(1,'#445555');
+  ctx.fillStyle=bodyG;ctx.fillRect(-s*12,-s*10,s*24,s*20);
+  ctx.strokeStyle=c;ctx.lineWidth=s*2;ctx.strokeRect(-s*12,-s*10,s*24,s*20);
+  // 核心
+  let g=ctx.createRadialGradient(0,0,s*3,0,0,s*8);
+  g.addColorStop(0,'#fff');g.addColorStop(0.3,c);g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,s*8,0,Math.PI*2);ctx.fill();
+  // 头部
+  ctx.fillStyle='#556666';ctx.fillRect(-s*8,-s*18,s*16,s*10);
+  ctx.strokeStyle=c;ctx.lineWidth=s*1.5;ctx.strokeRect(-s*8,-s*18,s*16,s*10);
+  // 独眼
+  ctx.fillStyle='#f00';ctx.beginPath();ctx.arc(0,-s*14,s*4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*1,-s*15,s*1.5,0,Math.PI*2);ctx.fill();
+  // 手臂炮
+  ctx.fillStyle='#667788';ctx.fillRect(-s*18,-s*12,s*7,s*5);
+  ctx.fillStyle='#667788';ctx.fillRect(s*11,-s*12,s*7,s*5);
+  ctx.fillStyle='#ff4400';ctx.beginPath();ctx.arc(-s*20,-s*10,s*3,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#ff4400';ctx.beginPath();ctx.arc(s*20,-s*10,s*3,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawAlienBoss(sx,sy,r,c,t){
+  ctx.save();ctx.translate(sx,sy);
+  let s=r/44,lev=Math.sin(t*2)*s*3;
+  // 触手
+  for(let i=0;i<4;i++){
+    let a=Math.PI*2/4*i+t*0.5;
+    ctx.strokeStyle='rgba(180,100,255,0.6)';ctx.lineWidth=s*3;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(Math.cos(a)*s*8,Math.sin(a)*s*8);
+    ctx.quadraticCurveTo(Math.cos(a)*s*20,Math.sin(a)*s*20+lev,Math.cos(a)*s*30+lev,Math.sin(a)*s*28);
+    ctx.stroke();
+    ctx.fillStyle='rgba(200,150,255,0.5)';ctx.beginPath();ctx.arc(Math.cos(a)*s*30+lev,Math.sin(a)*s*28,s*4,0,Math.PI*2);ctx.fill();
+  }
+  // 身体
+  let g=ctx.createRadialGradient(0,0,s*4,0,0,s*14);
+  g.addColorStop(0,'#dd88ff');g.addColorStop(0.6,c);g.addColorStop(1,'#330066');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,s*14,0,Math.PI*2);ctx.fill();
+  // 光环
+  ctx.strokeStyle='rgba(200,100,255,0.3)';ctx.lineWidth=s*2;ctx.setLineDash([s*3,s*2]);
+  ctx.beginPath();ctx.arc(0,0,s*18,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  // 三眼
+  for(let i=-1;i<=1;i++){
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(i*s*4,-s*2,s*3,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#f0f';ctx.beginPath();ctx.arc(i*s*4,-s*2,s*1.5,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawPlayer(px,py,r,t){
+  ctx.save();ctx.translate(px,py);
+  let s=r/14,bob=Math.sin(t*5+(joyDX+joyDY)*2)*s*1.5;
+  // 喷气背包
+  ctx.fillStyle='#334455';ctx.beginPath();ctx.ellipse(0,s*3,s*5,s*4,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#40b8ff';ctx.beginPath();ctx.arc(0,s*5,s*2,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#80d8ff';ctx.beginPath();ctx.arc(0,s*5,s*1,0,Math.PI*2);ctx.fill();
+  // 身体 - 太空服
+  ctx.fillStyle='#5588aa';
+  ctx.beginPath();ctx.ellipse(0,-s*2,s*6,s*8,0,0,Math.PI*2);ctx.fill();
+  // 腰带
+  ctx.strokeStyle='#aaccdd';ctx.lineWidth=s*2;
+  ctx.beginPath();ctx.ellipse(0,-s*2,s*6,s*3,0,0,Math.PI*2);ctx.stroke();
+  // 腿
+  ctx.strokeStyle='#446688';ctx.lineWidth=s*3;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(-s*3,-s*8);ctx.lineTo(-s*5,-s*13+bob);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(s*3,-s*8);ctx.lineTo(s*5,-s*13-bob);ctx.stroke();
+  // 头盔
+  let helm=ctx.createRadialGradient(s*1,-s*9,s*2,0,-s*8,s*8);
+  helm.addColorStop(0,'rgba(255,255,255,0.4)');helm.addColorStop(0.5,'#aaddff');helm.addColorStop(1,'#4488aa');
+  ctx.fillStyle=helm;ctx.beginPath();ctx.arc(0,-s*10,s*7,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#cceeff';ctx.lineWidth=s*1.5;ctx.stroke();
+  // 面罩反光
+  ctx.fillStyle='rgba(255,255,255,0.3)';ctx.beginPath();ctx.arc(-s*2,-s*12,s*3,-0.5,0.5);ctx.fill();
+  // 眼睛（在面罩内）
+  ctx.fillStyle='#112233';ctx.beginPath();ctx.arc(-s*2,-s*10,s*1.8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#112233';ctx.beginPath();ctx.arc(s*2,-s*10,s*1.8,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*2.5,-s*10.5,s*0.7,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s*1.5,-s*10.5,s*0.7,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function drawMissile(x,y,vx,vy,r){
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(vy,vx));
+  let s=r/5;
+  ctx.fillStyle='#ffe066';ctx.beginPath();ctx.moveTo(r*2,0);ctx.lineTo(-r,s*3);ctx.lineTo(-r*0.5,0);ctx.lineTo(-r,-s*3);ctx.fill();
+  ctx.fillStyle='#ff9933';ctx.beginPath();ctx.arc(-r*0.8,0,s*2.5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,200,50,0.6)';ctx.beginPath();ctx.moveTo(r*2.2,0);ctx.lineTo(r*0.5,s*1.5);ctx.lineTo(r*0.5,-s*1.5);ctx.fill();
+  ctx.restore();
+}
+
+function drawIceShard(x,y,vx,vy,r){
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(vy,vx));
+  let s=r/4;
+  let g=ctx.createLinearGradient(-r,0,r,0);
+  g.addColorStop(0,'rgba(180,220,255,0.9)');g.addColorStop(1,'rgba(100,180,255,0.6)');
+  ctx.fillStyle=g;ctx.beginPath();
+  ctx.moveTo(r*2,0);ctx.lineTo(0,s*3);ctx.lineTo(-r,s*2);ctx.lineTo(-r*0.5,0);
+  ctx.lineTo(-r,-s*2);ctx.lineTo(0,-s*3);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=1;ctx.stroke();
+  ctx.restore();
+}
+
+function drawLaserBolt(x,y,vx,vy,r){
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(vy,vx));
+  let g=ctx.createLinearGradient(-r*3,0,r*2,0);
+  g.addColorStop(0,'rgba(255,70,170,0.1)');g.addColorStop(0.3,'#ff44aa');g.addColorStop(0.7,'#ff88cc');g.addColorStop(1,'rgba(255,136,204,0.3)');
+  ctx.fillStyle=g;ctx.fillRect(-r*3,-r*0.7,r*5,r*1.4);
+  ctx.fillStyle='#fff';ctx.fillRect(-r*0.8,-r*0.3,r*2,r*0.6);
+  ctx.restore();
+}
+
+function drawBlade(x,y,a,r){
+  ctx.save();ctx.translate(x,y);ctx.rotate(a+Math.PI/2);
+  let g=ctx.createLinearGradient(0,-r*1.2,0,r*0.3);
+  g.addColorStop(0,'#ffffff');g.addColorStop(0.2,'#ddeeff');g.addColorStop(1,'#6699bb');
+  ctx.fillStyle=g;ctx.beginPath();
+  ctx.moveTo(0,-r*1.2);ctx.bezierCurveTo(r*0.4,-r*0.8,r*0.5,r*0.2,0,r*0.5);
+  ctx.bezierCurveTo(-r*0.5,r*0.2,-r*0.4,-r*0.8,0,-r*1.2);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;ctx.stroke();
+  ctx.restore();
+}
+
+function drawXpOrb(x,y){
+  let s=3+Math.sin(Date.now()*0.01+x)*0.5;
+  ctx.save();ctx.translate(x,y);ctx.rotate(Date.now()*0.002);
+  // 星形
+  let g=ctx.createRadialGradient(0,0,s*0.5,0,0,s*2);
+  g.addColorStop(0,'#ffffff');g.addColorStop(0.4,'#40e080');g.addColorStop(1,'rgba(64,224,128,0)');
+  ctx.fillStyle=g;ctx.beginPath();
+  for(let i=0;i<5;i++){let a=Math.PI*2/5*i-Math.PI/2,ax=Math.cos(a)*s*2,ay=Math.sin(a)*s*2,bx=Math.cos(a+Math.PI/5)*s,by=Math.sin(a+Math.PI/5)*s;if(i===0)ctx.moveTo(ax,ay);else ctx.lineTo(ax,ay);ctx.lineTo(bx,by);}
+  ctx.closePath();ctx.fill();
+  ctx.restore();
+}
+
+function drawGem(x,y){
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);
+  let g=ctx.createLinearGradient(-4,-4,4,4);
+  g.addColorStop(0,'#fff8c0');g.addColorStop(0.3,'#f0c040');g.addColorStop(1,'#b08020');
+  ctx.fillStyle=g;ctx.fillRect(-4,-4,8,8);
+  ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=0.8;ctx.strokeRect(-4,-4,8,8);
+  // 高光
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.beginPath();ctx.moveTo(-2,-4);ctx.lineTo(2,-4);ctx.lineTo(-4,2);ctx.lineTo(-4,-2);ctx.fill();
+  ctx.restore();
+}
+
+function drawSpike(x,y,r){
+  ctx.save();ctx.translate(x,y);
+  let s=r/30;
+  ctx.fillStyle='#998866';ctx.beginPath();
+  ctx.moveTo(0,-r);ctx.lineTo(s*6,-s*8);ctx.lineTo(s*12,-r*0.5);ctx.lineTo(s*8,s*3);
+  ctx.lineTo(0,r);ctx.lineTo(-s*8,s*3);ctx.lineTo(-s*12,-r*0.5);ctx.lineTo(-s*6,-s*8);ctx.fill();
+  ctx.fillStyle='#bba988';ctx.beginPath();ctx.moveTo(0,-r);ctx.lineTo(s*3,-s*6);ctx.lineTo(-s*3,-s*6);ctx.fill();
+  ctx.restore();
+}
+
+// ====== 初始化=====
 function initGame(){
-  W=window.innerWidth;H=window.innerHeight;
-  dpr=Math.min(window.devicePixelRatio||1,2);
+  W=window.innerWidth;H=window.innerHeight;dpr=Math.min(window.devicePixelRatio||1,2);
   canvas.width=W*dpr;canvas.height=H*dpr;
   ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);
   gameState='playing';gameTime=480;
@@ -329,15 +465,13 @@ function initGame(){
   player.level=1;player.xp=0;player.xpToNext=30;
   player.skills=[{id:'missile',name:'追踪飞弹',type:'active',level:1,desc:'自动追踪最近敌人',icon:'🚀'}];
   player.atkBonus=1;player.spdBonus=1;player.cdBonus=0;player.pickupBonus=0;player.hpBonus=0;player.xpBonus=0;
-  player.atkTimer=0;player.atkCooldown=0.6;player.invulnTimer=0;
+  player._atkTimers={};player._bladeAngle=0;player.invulnTimer=0;
   monsters=[];bullets=[];particles=[];effects=[];xpOrbs=[];gems=[];
-  boss=null;spawnTimer=0;spawnInterval=2.0;difficulty=1;
-  killCount=0;gemCount=0;bossDefeated=0;
+  boss=null;spawnTimer=0;difficulty=1;killCount=0;gemCount=0;bossDefeated=0;
   bossHpBar.style.display='none';bossNameTag.style.display='none';
   joyDX=0;joyDY=0;
-  levelupOverlay.classList.remove('show');
-  gameoverOverlay.classList.remove('show');
-  pauseBtn.textContent='⏸';
+  levelupOverlay.classList.remove('show');gameoverOverlay.classList.remove('show');
+  pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>';
   updateUI();
 }
 
@@ -349,10 +483,7 @@ function updateUI(){
   document.getElementById('timer').textContent=m+':'+String(s).padStart(2,'0');
   xpBar.style.width=(player.xp/player.xpToNext*100)+'%';
   levelTag.textContent='Lv.'+player.level;
-  if(boss){
-    bossHpFill.style.width=(boss.hp/boss.maxHp*100)+'%';
-    bossNameTag.textContent=boss.name;
-  }
+  if(boss){bossHpFill.style.width=(boss.hp/boss.maxHp*100)+'%';bossNameTag.textContent=boss.name;}
 }
 
 function gameOver(win){
@@ -366,423 +497,195 @@ function gameOver(win){
 }
 
 function togglePause(){
-  if(gameState==='playing'){gameState='paused';pauseBtn.textContent='▶'}
-  else if(gameState==='paused'){gameState='playing';pauseBtn.textContent='⏸'}
+  if(gameState==='playing'){gameState='paused';pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="#d0d8e8"/></svg>'}
+  else if(gameState==='paused'){gameState='playing';pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>'}
 }
-
 function restartGame(){initGame();lastT=performance.now();requestAnimationFrame(loop)}
 
-// 伤害
 function damageTarget(target,dmg){
   target.hp-=dmg;
   for(let i=0;i<3;i++)particles.push({x:target.x,y:target.y,vx:(Math.random()-0.5)*120,vy:(Math.random()-0.5)*120,life:0.3,color:'#fff'});
   if(target.hp<=0)killTarget(target);
 }
 function killTarget(target){
-  // 掉落
   let xpVal=target.xp*(1+player.xpBonus);
-  for(let i=0;i<Math.ceil(xpVal/5);i++){
-    xpOrbs.push({x:target.x+(Math.random()-0.5)*20,y:target.y+(Math.random()-0.5)*20,vx:(Math.random()-0.5)*60,vy:(Math.random()-0.5)*60,life:15,value:5});
-  }
-  if(target.gem>0){
-    for(let i=0;i<target.gem;i++)gems.push({x:target.x+(Math.random()-0.5)*20,y:target.y+(Math.random()-0.5)*20});
-  }
-  // 爆炸粒子
+  for(let i=0;i<Math.ceil(xpVal/5);i++)xpOrbs.push({x:target.x+(Math.random()-0.5)*20,y:target.y+(Math.random()-0.5)*20,vx:(Math.random()-0.5)*60,vy:(Math.random()-0.5)*60,life:15,value:5});
+  if(target.gem>0)for(let i=0;i<target.gem;i++)gems.push({x:target.x+(Math.random()-0.5)*20,y:target.y+(Math.random()-0.5)*20});
   for(let i=0;i<8;i++)particles.push({x:target.x,y:target.y,vx:(Math.random()-0.5)*200,vy:(Math.random()-0.5)*200,life:0.5,color:target.color});
 }
-
 function gainXp(amount){
   player.xp+=amount;
-  while(player.xp>=player.xpToNext&&gameState==='playing'){
-    player.xp-=player.xpToNext;
-    player.level++;
-    player.xpToNext=Math.floor(player.xpToNext*1.25);
-    // 升级弹窗
-    showLevelup();
-  }
+  while(player.xp>=player.xpToNext&&gameState==='playing'){player.xp-=player.xpToNext;player.level++;player.xpToNext=Math.floor(player.xpToNext*1.25);showLevelup();}
   updateUI();
 }
-
 function showLevelup(){
-  gameState='levelup';
-  luLevel.textContent=player.level;
-  let choices=genLevelupChoices();
-  levelupCards.innerHTML='';
-  for(let c of choices){
-    let lv=getSkillLevel(c.id);
-    let card=document.createElement('div');
-    card.className='levelup-card';
-    card.innerHTML=`
-      <div class="card-icon">${c.icon}</div>
-      <div class="card-name">${c.name}</div>
-      <div class="card-type">${c.type==='active'?'主动':'被动'}</div>
-      <div class="card-desc">${c.desc}</div>
-      <div class="card-rank">${lv>0?'Lv.'+(lv+1):'新技能'}</div>
-    `;
-    card.onclick=()=>{
-      addOrUpgradeSkill(c.id);
-      levelupOverlay.classList.remove('show');
-      gameState='playing';
-      updateUI();
-    };
-    levelupCards.appendChild(card);
-  }
+  gameState='levelup';luLevel.textContent=player.level;
+  let choices=genLevelupChoices();levelupCards.innerHTML='';
+  for(let c of choices){let lv=getSkillLevel(c.id);let card=document.createElement('div');card.className='levelup-card';
+    card.innerHTML=`<div class="card-icon">${c.icon}</div><div class="card-name">${c.name}</div><div class="card-type">${c.type==='active'?'主动':'被动'}</div><div class="card-desc">${c.desc}</div><div class="card-rank">${lv>0?'Lv.'+(lv+1):'新技能'}</div>`;
+    card.onclick=()=>{addOrUpgradeSkill(c.id);levelupOverlay.classList.remove('show');gameState='playing';updateUI();};
+    levelupCards.appendChild(card);}
   levelupOverlay.classList.add('show');
 }
 
-// 游戏循环
 function update(dt){
   if(gameState!=='playing')return;
-  gameTime-=dt;
-  if(gameTime<=0){gameOver(true);return}
-
-  // 难度
-  let elapsed=480-gameTime;
-  difficulty=Math.floor(elapsed/60)+1;
-
-  // BOSS检查
-  for(let bt of bossSpawnTimes){
-    if(gameTime<=bt&&gameTime+dt>bt&&!boss&&bossDefeated<3){
-      // 检查时间点
-    }
-  }
-  if(!boss){
-    for(let i=0;i<bossSpawnTimes.length;i++){
-      if(gameTime<=bossSpawnTimes[i]&&bossDefeated===i){
-        spawnBoss();break;
-      }
-    }
-  }
-
-  // 生成怪物
-  spawnTimer+=dt;
-  let si=spawnInterval*(1-difficulty*0.08);
-  si=Math.max(0.4,si);
+  gameTime-=dt;if(gameTime<=0){gameOver(true);return}
+  let elapsed=480-gameTime;difficulty=Math.floor(elapsed/60)+1;
+  if(!boss)for(let i=0;i<bossSpawnTimes.length;i++){if(gameTime<=bossSpawnTimes[i]&&bossDefeated===i){spawnBoss();break}}
+  spawnTimer+=dt;let si=Math.max(0.4,spawnInterval*(1-difficulty*0.08));
   if(spawnTimer>=si){spawnTimer=0;spawnMonster();if(Math.random()<0.3)spawnMonster();}
 
-  // 玩家移动
-  if(joyDX!==0||joyDY!==0){
-    let mag=Math.hypot(joyDX,joyDY);
-    player.x+=joyDX/mag*player.speed*player.spdBonus*dt;
-    player.y+=joyDY/mag*player.speed*player.spdBonus*dt;
-  }
-  player.x=Math.max(player.r,Math.min(MAP_W-player.r,player.x));
-  player.y=Math.max(player.r,Math.min(MAP_H-player.r,player.y));
-
-  // 无敌计时
+  if(joyDX!==0||joyDY!==0){let mag=Math.hypot(joyDX,joyDY);player.x+=joyDX/mag*player.speed*player.spdBonus*dt;player.y+=joyDY/mag*player.speed*player.spdBonus*dt;}
+  player.x=Math.max(player.r,Math.min(MAP_W-player.r,player.x));player.y=Math.max(player.r,Math.min(MAP_H-player.r,player.y));
   if(player.invulnTimer>0)player.invulnTimer-=dt;
 
   // 技能攻击
-  for(let sk of player.skills){
-    if(sk.type!=='active')continue;
-    let def=activeSkills.find(a=>a.id===sk.id);
-    if(!def)continue;
-    if(!player._atkTimers)player._atkTimers={};
-    if(!player._atkTimers[sk.id])player._atkTimers[sk.id]=0;
-    player._atkTimers[sk.id]+=dt;
-    let cd=calcCooldown(def.cd);
-    if(player._atkTimers[sk.id]>=cd){
-      player._atkTimers[sk.id]-=cd;
-      skillAttack(def,sk.level);
-    }
-  }
+  for(let sk of player.skills){if(sk.type!=='active')continue;let def=activeSkills.find(a=>a.id===sk.id);if(!def)continue;
+    player._atkTimers[sk.id]=player._atkTimers[sk.id]||0;player._atkTimers[sk.id]+=dt;
+    let cd=calcCooldown(def.cd);if(player._atkTimers[sk.id]>=cd){player._atkTimers[sk.id]-=cd;skillAttack(def,sk.level);}}
+  // 环绕刃
+  for(let sk of player.skills){if(sk.id!=='blade')continue;
+    player._bladeAngle=(player._bladeAngle||0)+dt*3;
+    let def=activeSkills.find(a=>a.id==='blade'),count=def.count+(sk.level-1),dmg=calcAtkDmg(def.dmg*(1+(sk.level-1)*0.3));
+    for(let i=0;i<count;i++){let a=player._bladeAngle+(Math.PI*2/count)*i,bx=player.x+Math.cos(a)*50,by=player.y+Math.sin(a)*50;
+      for(let m of monsters)if(Math.hypot(m.x-bx,m.y-by)<m.r+12)damageTarget(m,dmg*dt);
+      if(boss&&Math.hypot(boss.x-bx,boss.y-by)<boss.r+12)damageTarget(boss,dmg*dt);}}
+  // 回复
+  for(let sk of player.skills)if(sk.id==='regen')player.hp=Math.min(player.maxHp,player.hp+sk.level*dt);
 
-  // 环绕刃伤害
-  for(let sk of player.skills){
-    if(sk.id!=='blade')continue;
-    if(!player._bladeAngle)player._bladeAngle=0;
-    player._bladeAngle+=dt*3;
-    let def=activeSkills.find(a=>a.id==='blade');
-    let count=def.count+(sk.level-1);
-    let dmg=calcAtkDmg(def.dmg*(1+(sk.level-1)*0.3));
-    for(let i=0;i<count;i++){
-      let a=player._bladeAngle+(Math.PI*2/count)*i;
-      let bx=player.x+Math.cos(a)*50,by=player.y+Math.sin(a)*50;
-      for(let m of monsters){
-        if(Math.hypot(m.x-bx,m.y-by)<m.r+12){damageTarget(m,dmg*dt);}
-      }
-      if(boss&&Math.hypot(boss.x-bx,boss.y-by)<boss.r+12)damageTarget(boss,dmg*dt);
-    }
-  }
-
-  // 生命回复
-  for(let sk of player.skills){
-    if(sk.id==='regen')player.hp=Math.min(player.maxHp,player.hp+sk.level*dt);
-  }
-
-  // 更新子弹
-  for(let i=bullets.length-1;i>=0;i--){
-    let b=bullets[i];
-    if(b.type==='lightning'){
-      b.life-=dt;
-      if(b.life<=0){bullets.splice(i,1);continue}
-      // 闪电直接伤害
-      let hit=false;
-      for(let m of monsters){if(Math.hypot(m.x-b.tx,m.y-b.ty)<m.r+20){damageTarget(m,b.dmg);hit=true;break}}
+  // 子弹
+  for(let i=bullets.length-1;i>=0;i--){let b=bullets[i];
+    if(b.type==='lightning'){b.life-=dt;if(b.life<=0){bullets.splice(i,1);continue}
+      let hit=false;for(let m of monsters)if(Math.hypot(m.x-b.tx,m.y-b.ty)<m.r+20){damageTarget(m,b.dmg);hit=true;break}
       if(!hit&&boss&&Math.hypot(boss.x-b.tx,boss.y-b.ty)<boss.r+20)damageTarget(boss,b.dmg);
-      if(hit&&b.chain>0){
-        let next=null,minD=200;
-        for(let m of monsters){let d=Math.hypot(m.x-b.tx,m.y-b.ty);if(d>20&&d<minD){minD=d;next=m;}}
-        if(next){bullets.push({x:b.tx,y:b.ty,tx:next.x,ty:next.y,dmg:b.dmg*0.7,life:0.2,color:'#88ccff',r:3,type:'lightning',chain:b.chain-1});}
-      }
-      bullets.splice(i,1);continue;
-    }
+      if(hit&&b.chain>0){let next=null,minD=200;for(let m of monsters){let d=Math.hypot(m.x-b.tx,m.y-b.ty);if(d>20&&d<minD){minD=d;next=m;}}if(next)bullets.push({x:b.tx,y:b.ty,tx:next.x,ty:next.y,dmg:b.dmg*0.7,life:0.2,color:'#88ccff',r:3,type:'lightning',chain:b.chain-1});}
+      bullets.splice(i,1);continue;}
     b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;
     if(b.life<=0||b.x<-50||b.x>MAP_W+50||b.y<-50||b.y>MAP_H+50){bullets.splice(i,1);continue}
-    let hitMonster=false;
-    for(let m of monsters){
-      if(Math.hypot(m.x-b.x,m.y-b.y)<m.r+b.r){
-        damageTarget(m,b.dmg);
-        if(!b.pierce){hitMonster=true;break}
-      }
-    }
-    if(boss&&!hitMonster&&Math.hypot(boss.x-b.x,boss.y-b.y)<boss.r+b.r){
-      damageTarget(boss,b.dmg);
-      if(!b.pierce)hitMonster=true;
-    }
-    if(hitMonster){bullets.splice(i,1);continue}
-  }
+    let hitM=false;for(let m of monsters)if(Math.hypot(m.x-b.x,m.y-b.y)<m.r+b.r){damageTarget(m,b.dmg);if(!b.pierce){hitM=true;break}}
+    if(boss&&!hitM&&Math.hypot(boss.x-b.x,boss.y-b.y)<boss.r+b.r){damageTarget(boss,b.dmg);if(!b.pierce)hitM=true;}
+    if(hitM){bullets.splice(i,1);continue}}
 
-  // 更新效果
-  for(let i=effects.length-1;i>=0;i--){
-    let e=effects[i];
-    e.life-=dt;
-    if(e.life<=0){effects.splice(i,1);continue}
-    if(e.type==='aura'||e.type==='poisonField'){
-      for(let m of monsters){
-        if(Math.hypot(m.x-e.x,m.y-e.y)<m.r+e.r)damageTarget(m,e.dmg*dt);
-      }
-      if(boss&&Math.hypot(boss.x-e.x,boss.y-e.y)<boss.r+e.r)damageTarget(boss,e.dmg*dt);
-    }
-  }
+  // 效果
+  for(let i=effects.length-1;i>=0;i--){let e=effects[i];e.life-=dt;if(e.life<=0){effects.splice(i,1);continue}
+    if(e.type==='aura'||e.type==='poisonField'){for(let m of monsters)if(Math.hypot(m.x-e.x,m.y-e.y)<m.r+e.r)damageTarget(m,e.dmg*dt);
+      if(boss&&Math.hypot(boss.x-e.x,boss.y-e.y)<boss.r+e.r)damageTarget(boss,e.dmg*dt);}}
 
-  // 更新怪物
-  for(let i=monsters.length-1;i>=0;i--){
-    let m=monsters[i];
+  // 怪物
+  for(let i=monsters.length-1;i>=0;i--){let m=monsters[i];
     if(m.hp<=0){killCount++;killTarget(m);monsters.splice(i,1);continue}
-    // 击退衰减
     m.knockbackX*=0.9;m.knockbackY*=0.9;
-    // 向玩家移动
-    if(m.speed>0){
-      let dx=player.x-m.x,dy=player.y-m.y;
-      let d=Math.hypot(dx,dy)||1;
-      m.x+=(dx/d*m.speed+m.knockbackX)*dt;
-      m.y+=(dy/d*m.speed+m.knockbackY)*dt;
-    }
-    m.x=Math.max(-30,Math.min(MAP_W+30,m.x));
-    m.y=Math.max(-30,Math.min(MAP_H+30,m.y));
-    // 碰撞玩家
-    if(player.invulnTimer<=0&&Math.hypot(m.x-player.x,m.y-player.y)<player.r+m.r){
-      player.hp-=m.dmg;
-      player.invulnTimer=0.3;
-      if(player.hp<=0){gameOver(false);return}
-    }
-  }
+    if(m.speed>0){let dx=player.x-m.x,dy=player.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=(dx/d*m.speed+m.knockbackX)*dt;m.y+=(dy/d*m.speed+m.knockbackY)*dt;}
+    m.x=Math.max(-30,Math.min(MAP_W+30,m.x));m.y=Math.max(-30,Math.min(MAP_H+30,m.y));
+    if(player.invulnTimer<=0&&Math.hypot(m.x-player.x,m.y-player.y)<player.r+m.r){player.hp-=m.dmg;player.invulnTimer=0.3;if(player.hp<=0){gameOver(false);return}}}
 
-  // 更新BOSS
-  if(boss){
-    boss.timer+=dt;
-    if(boss.hp<=0){
-      for(let i=0;i<20;i++)particles.push({x:boss.x,y:boss.y,vx:(Math.random()-0.5)*300,vy:(Math.random()-0.5)*300,life:1,color:boss.color});
-      // 掉落大量经验和宝石
+  // BOSS
+  if(boss){boss.timer+=dt;
+    if(boss.hp<=0){for(let i=0;i<20;i++)particles.push({x:boss.x,y:boss.y,vx:(Math.random()-0.5)*300,vy:(Math.random()-0.5)*300,life:1,color:boss.color});
       for(let i=0;i<Math.ceil(boss.xp/3);i++)xpOrbs.push({x:boss.x+(Math.random()-0.5)*50,y:boss.y+(Math.random()-0.5)*50,vx:(Math.random()-0.5)*80,vy:(Math.random()-0.5)*80,life:20,value:5});
       for(let i=0;i<boss.gem;i++)gems.push({x:boss.x+(Math.random()-0.5)*40,y:boss.y+(Math.random()-0.5)*40});
-      killCount+=10;gemCount+=boss.gem;
-      boss=null;bossDefeated++;
-      bossHpBar.style.display='none';bossNameTag.style.display='none';
-    }else{
-      let dx=player.x-boss.x,dy=player.y-boss.y,d=Math.hypot(dx,dy)||1;
-      boss.x+=dx/d*boss.speed*dt+boss.knockbackX*dt;
-      boss.y+=dy/d*boss.speed*dt+boss.knockbackY*dt;
+      killCount+=10;gemCount+=boss.gem;boss=null;bossDefeated++;bossHpBar.style.display='none';bossNameTag.style.display='none';
+    }else{let dx=player.x-boss.x,dy=player.y-boss.y,d=Math.hypot(dx,dy)||1;boss.x+=dx/d*boss.speed*dt+boss.knockbackX*dt;boss.y+=dy/d*boss.speed*dt+boss.knockbackY*dt;
       boss.knockbackX*=0.9;boss.knockbackY*=0.9;
-      if(player.invulnTimer<=0&&d<player.r+boss.r){
-        player.hp-=boss.dmg;
-        player.invulnTimer=0.3;
-        if(player.hp<=0){gameOver(false);return}
-      }
-    }
-  }
+      if(player.invulnTimer<=0&&d<player.r+boss.r){player.hp-=boss.dmg;player.invulnTimer=0.3;if(player.hp<=0){gameOver(false);return}}}}
 
   // 经验球
-  let pickupRange=80*(1+player.pickupBonus);
-  for(let i=xpOrbs.length-1;i>=0;i--){
-    let o=xpOrbs[i];
-    o.life-=dt;
-    if(o.life<=0){xpOrbs.splice(i,1);continue}
-    let d=Math.hypot(o.x-player.x,o.y-player.y);
-    if(d<pickupRange){
-      o.x+=(player.x-o.x)*8*dt;o.y+=(player.y-o.y)*8*dt;
-    }
-    if(d<player.r+8){gainXp(o.value);xpOrbs.splice(i,1);continue}
-  }
-  // 宝石
-  for(let i=gems.length-1;i>=0;i--){
-    let g=gems[i];
-    let d=Math.hypot(g.x-player.x,g.y-player.y);
-    if(d<pickupRange){g.x+=(player.x-g.x)*6*dt;g.y+=(player.y-g.y)*6*dt}
-    if(d<player.r+8){gemCount++;gems.splice(i,1);continue}
-  }
+  let pr=80*(1+player.pickupBonus);
+  for(let i=xpOrbs.length-1;i>=0;i--){let o=xpOrbs[i];o.life-=dt;if(o.life<=0){xpOrbs.splice(i,1);continue}
+    let d=Math.hypot(o.x-player.x,o.y-player.y);if(d<pr){o.x+=(player.x-o.x)*8*dt;o.y+=(player.y-o.y)*8*dt;}
+    if(d<player.r+8){gainXp(o.value);xpOrbs.splice(i,1);continue}}
+  for(let i=gems.length-1;i>=0;i--){let g=gems[i],d=Math.hypot(g.x-player.x,g.y-player.y);
+    if(d<pr){g.x+=(player.x-g.x)*6*dt;g.y+=(player.y-g.y)*6*dt}if(d<player.r+8){gemCount++;gems.splice(i,1);continue}}
 
-  // 粒子
-  for(let i=particles.length-1;i>=0;i--){
-    let p=particles[i];
-    p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;
-    if(p.life<=0)particles.splice(i,1);
-  }
+  for(let i=particles.length-1;i>=0;i--){let p=particles[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0)particles.splice(i,1);}
 
-  // 摄像机
   let tx=player.x-W/2,ty=player.y-H/2;
   camX+=((Math.max(0,Math.min(MAP_W-W,tx)))-camX)*0.06;
   camY+=((Math.max(0,Math.min(MAP_H-H,ty)))-camY)*0.06;
-
   updateUI();
 }
 
 function render(){
   ctx.clearRect(0,0,W,H);
-
-  // 飞船地板 - 网格
-  let bgGrad=ctx.createLinearGradient(0,0,0,H);
-  bgGrad.addColorStop(0,'#0c1420');bgGrad.addColorStop(1,'#080c14');
-  ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
-
-  // 地板网格
+  // 背景
+  let bgG=ctx.createLinearGradient(0,0,0,H);bgG.addColorStop(0,'#0c1420');bgG.addColorStop(1,'#080c14');
+  ctx.fillStyle=bgG;ctx.fillRect(0,0,W,H);
+  // 网格
   ctx.strokeStyle='rgba(40,60,90,0.2)';ctx.lineWidth=1;
   let gs=60,sx=-(camX%gs),sy=-(camY%gs);
   for(let x=sx;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
   for(let y=sy;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-
-  // 地图边界
-  ctx.strokeStyle='rgba(100,140,200,0.3)';ctx.lineWidth=4;
-  ctx.strokeRect(-camX,-camY,MAP_W,MAP_H);
-
-  // 地板装饰
-  let dx=-(camX%120),dy=-(camY%120);
-  ctx.fillStyle='rgba(30,50,80,0.15)';
-  for(let x=dx;x<W;x+=120)for(let y=dy;y<H;y+=120){
-    ctx.fillRect(x+40,y+40,40,40);
-  }
+  ctx.strokeStyle='rgba(100,140,200,0.3)';ctx.lineWidth=4;ctx.strokeRect(-camX,-camY,MAP_W,MAP_H);
+  // 地板
+  let dx=-(camX%120),dy=-(camY%120);ctx.fillStyle='rgba(30,50,80,0.15)';
+  for(let x=dx;x<W;x+=120)for(let y=dy;y<H;y+=120)ctx.fillRect(x+40,y+40,40,40);
 
   // 毒雾
-  for(let e of effects){
-    if(e.type!=='poisonField')continue;
-    let sx=e.x-camX,sy=e.y-camY;
-    let g=ctx.createRadialGradient(sx,sy,0,sx,sy,e.r);
-    g.addColorStop(0,'rgba(50,200,50,0.3)');g.addColorStop(1,'rgba(50,200,50,0)');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sx,sy,e.r,0,Math.PI*2);ctx.fill();
-  }
-
+  for(let e of effects)if(e.type==='poisonField'){
+    let g=ctx.createRadialGradient(e.x-camX,e.y-camY,0,e.x-camX,e.y-camY,e.r);
+    g.addColorStop(0,'rgba(50,200,50,0.25)');g.addColorStop(1,'rgba(50,200,50,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(e.x-camX,e.y-camY,e.r,0,Math.PI*2);ctx.fill();}
   // 火焰光环
-  for(let e of effects){
-    if(e.type!=='aura')continue;
-    let sx=e.x-camX,sy=e.y-camY;
-    let g=ctx.createRadialGradient(sx,sy,e.r*0.3,sx,sy,e.r);
-    g.addColorStop(0,'rgba(255,80,20,0.4)');g.addColorStop(1,'rgba(255,40,0,0)');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sx,sy,e.r,0,Math.PI*2);ctx.fill();
-  }
+  for(let e of effects)if(e.type==='aura'){
+    let g=ctx.createRadialGradient(e.x-camX,e.y-camY,e.r*0.3,e.x-camX,e.y-camY,e.r);
+    g.addColorStop(0,'rgba(255,80,20,0.35)');g.addColorStop(1,'rgba(255,40,0,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(e.x-camX,e.y-camY,e.r,0,Math.PI*2);ctx.fill();}
+  // 地刺
+  for(let e of effects)if(e.type==='spike')drawSpike(e.x-camX,e.y-camY,e.r);
 
   // 经验球
-  for(let o of xpOrbs){
-    let sx=o.x-camX,sy=o.y-camY;
-    ctx.fillStyle='#40e080';ctx.beginPath();ctx.arc(sx,sy,3+Math.sin(Date.now()*0.01+o.x)*0.5,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='rgba(64,224,128,0.4)';ctx.beginPath();ctx.arc(sx,sy,6,0,Math.PI*2);ctx.fill();
-  }
-
+  for(let o of xpOrbs)drawXpOrb(o.x-camX,o.y-camY);
   // 宝石
-  for(let g of gems){
-    let sx=g.x-camX,sy=g.y-camY;
-    ctx.fillStyle='#f0c040';ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx-1,sy-1,2,0,Math.PI*2);ctx.fill();
-  }
+  for(let g of gems)drawGem(g.x-camX,g.y-camY);
 
   // 怪物
   for(let m of monsters){
-    let sx=m.x-camX,sy=m.y-camY;
-    if(sx<-30||sx>W+30||sy<-30||sy>H+30)continue;
-    // 阴影
-    ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.arc(sx+2,sy+2,m.r,0,Math.PI*2);ctx.fill();
-    // 身体
-    ctx.fillStyle=m.color;ctx.beginPath();ctx.arc(sx,sy,m.r,0,Math.PI*2);ctx.fill();
-    // 眼睛
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx-3,sy-3,m.r*0.4,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#000';ctx.beginPath();ctx.arc(sx-3,sy-3,m.r*0.2,0,Math.PI*2);ctx.fill();
-    // HP条
-    if(m.hp<m.maxHp){
-      ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(sx-m.r,sy-m.r-8,m.r*2,4);
-      ctx.fillStyle='#ff4050';ctx.fillRect(sx-m.r,sy-m.r-8,m.r*2*(m.hp/m.maxHp),4);
+    let sx=m.x-camX,sy=m.y-camY;if(sx<-40||sx>W+40||sy<-40||sy>H+40)continue;
+    switch(m.type){
+      case 'worm':drawWorm(sx,sy,m.r,'#3a8a3a','#55cc44');break;
+      case 'fly':drawFly(sx,sy,m.r,'#ccaa22');break;
+      case 'warrior':drawWarrior(sx,sy,m.r,'#cc4444');break;
+      case 'turret':drawTurret(sx,sy,m.r,'#8844cc');break;
     }
+    if(m.hp<m.maxHp){ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(sx-m.r,sy-m.r-8,m.r*2,4);ctx.fillStyle='#ff4050';ctx.fillRect(sx-m.r,sy-m.r-8,m.r*2*(m.hp/m.maxHp),4);}
   }
 
   // BOSS
   if(boss){
     let sx=boss.x-camX,sy=boss.y-camY;
-    // 光晕
-    let g=ctx.createRadialGradient(sx,sy,boss.r*0.6,sx,sy,boss.r*1.6);
-    g.addColorStop(0,'rgba(255,50,50,0.3)');g.addColorStop(1,'rgba(255,50,50,0)');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sx,sy,boss.r*1.6,0,Math.PI*2);ctx.fill();
-    // 身体
-    ctx.fillStyle=boss.color;ctx.beginPath();ctx.arc(sx,sy,boss.r,0,Math.PI*2);ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=3;ctx.stroke();
-    // 眼睛
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx-10,sy-8,boss.r*0.3,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#000';ctx.beginPath();ctx.arc(sx-10,sy-8,boss.r*0.15,0,Math.PI*2);ctx.fill();
-    // 名字
-    ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.textAlign='center';
-    ctx.fillText(boss.name,sx,sy-boss.r-8);
+    switch(boss.type){
+      case 'wormBoss':drawWormBoss(sx,sy,boss.r,'#ff3366',boss.timer);break;
+      case 'mechBoss':drawMechBoss(sx,sy,boss.r,'#ff6633');break;
+      case 'alienBoss':drawAlienBoss(sx,sy,boss.r,'#cc33ff',boss.timer);break;
+    }
   }
 
   // 子弹
   for(let b of bullets){
     if(b.type==='lightning'){
-      ctx.strokeStyle=b.color;ctx.lineWidth=2;
-      ctx.beginPath();ctx.moveTo(b.x-camX,b.y-camY);ctx.lineTo(b.tx-camX,b.ty-camY);ctx.stroke();
-    }else{
-      let sx=b.x-camX,sy=b.y-camY;
-      ctx.fillStyle=b.color;ctx.beginPath();ctx.arc(sx,sy,b.r,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle='rgba(255,255,255,0.4)';ctx.beginPath();ctx.arc(sx-1,sy-1,b.r*0.5,0,Math.PI*2);ctx.fill();
-    }
+      ctx.strokeStyle='#88ccff';ctx.lineWidth=2;ctx.beginPath();
+      ctx.moveTo(b.x-camX,b.y-camY);ctx.lineTo(b.tx-camX,b.ty-camY);ctx.stroke();
+    }else if(b.type==='missile'){drawMissile(b.x-camX,b.y-camY,b.vx,b.vy,b.r);}
+    else if(b.type==='ice'){drawIceShard(b.x-camX,b.y-camY,b.vx,b.vy,b.r);}
+    else if(b.type==='laser'){drawLaserBolt(b.x-camX,b.y-camY,b.vx,b.vy,b.r);}
   }
 
   // 环绕刃
-  for(let sk of player.skills){
-    if(sk.id!=='blade')continue;
-    let def=activeSkills.find(a=>a.id==='blade');
-    let count=def.count+(sk.level-1);
+  for(let sk of player.skills)if(sk.id==='blade'){
+    let def=activeSkills.find(a=>a.id==='blade'),count=def.count+(sk.level-1);
     for(let i=0;i<count;i++){
       let a=(player._bladeAngle||0)+(Math.PI*2/count)*i;
-      let bx=player.x+Math.cos(a)*50-camX,by=player.y+Math.sin(a)*50-camY;
-      ctx.save();ctx.translate(bx,by);ctx.rotate(a+Math.PI/2);
-      ctx.fillStyle='#cceeff';ctx.beginPath();
-      ctx.moveTo(0,-14);ctx.lineTo(4,10);ctx.lineTo(-4,10);ctx.closePath();ctx.fill();
-      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,-6,3,0,Math.PI*2);ctx.fill();
-      ctx.restore();
-    }
+      drawBlade(player.x+Math.cos(a)*50-camX,player.y+Math.sin(a)*50-camY,a,16);}
   }
 
   // 粒子
-  for(let p of particles){
-    let a=p.life;
-    ctx.globalAlpha=a;
-    ctx.fillStyle=p.color;ctx.beginPath();
-    ctx.arc(p.x-camX,p.y-camY,3*a,0,Math.PI*2);ctx.fill();
-  }
+  for(let p of particles){ctx.globalAlpha=p.life;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x-camX,p.y-camY,3*p.life,0,Math.PI*2);ctx.fill();}
   ctx.globalAlpha=1;
 
   // 玩家
-  let px=player.x-camX,py=player.y-camY;
-  // 无敌闪烁
-  if(player.invulnTimer>0&&Math.floor(player.invulnTimer*20)%2===0){}else{
-    // 光晕
-    let pg=ctx.createRadialGradient(px,py,player.r*0.2,px,py,player.r*1.8);
-    pg.addColorStop(0,'rgba(64,184,255,0.2)');pg.addColorStop(1,'rgba(64,184,255,0)');
-    ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,player.r*1.8,0,Math.PI*2);ctx.fill();
-    // 身体
-    ctx.fillStyle='#40b8ff';ctx.beginPath();ctx.arc(px,py,player.r,0,Math.PI*2);ctx.fill();
-    ctx.strokeStyle='#80d8ff';ctx.lineWidth=2;ctx.stroke();
-    // 眼睛
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px-4,py-3,5,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#0a0a14';ctx.beginPath();ctx.arc(px-5,py-3,2.5,0,Math.PI*2);ctx.fill();
-  }
+  if(!(player.invulnTimer>0&&Math.floor(player.invulnTimer*20)%2===0))
+    drawPlayer(player.x-camX,player.y-camY,player.r,Date.now()*0.001);
 
   // 小地图
   let mmW=70,mmH=50,mmX=W-mmW-6,mmY=H-mmH-6;
@@ -791,66 +694,25 @@ function render(){
   let mx=mmW/MAP_W,my=mmH/MAP_H;
   ctx.fillStyle='#40b8ff';ctx.beginPath();ctx.arc(mmX+player.x*mx,mmY+player.y*my,2.5,0,Math.PI*2);ctx.fill();
   for(let m of monsters){ctx.fillStyle=m.color;ctx.fillRect(mmX+m.x*mx-1,mmY+m.y*my-1,2,2);}
-  if(boss){ctx.fillStyle='#ff3366';ctx.beginPath();ctx.arc(mmX+boss.x*mx,mmY+boss.y*my,4,0,Math.PI*2);ctx.fill();}
+  if(boss){ctx.fillStyle=boss.color;ctx.beginPath();ctx.arc(mmX+boss.x*mx,mmY+boss.y*my,4,0,Math.PI*2);ctx.fill();}
   ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.strokeRect(mmX+camX*mx,mmY+camY*my,W*mx,H*my);
 }
 
 // 摇杆
 function setupJoystick(){
-  joystickZone.addEventListener('touchstart',e=>{
-    e.preventDefault();joystickActive=true;
-    let t=e.touches[0],r=joystickZone.getBoundingClientRect();
-    joyCX=r.left+r.width/2;joyCY=r.top+r.height/2;
-    updateJoystick(t.clientX,t.clientY);
-  },{passive:false});
-  joystickZone.addEventListener('touchmove',e=>{
-    e.preventDefault();if(!joystickActive)return;
-    updateJoystick(e.touches[0].clientX,e.touches[0].clientY);
-  },{passive:false});
-  joystickZone.addEventListener('touchend',e=>{
-    e.preventDefault();joystickActive=false;joyDX=0;joyDY=0;
-    joystickThumb.style.transform='translate(0,0)';
-  },{passive:false});
-  joystickZone.addEventListener('touchcancel',()=>{
-    joystickActive=false;joyDX=0;joyDY=0;
-    joystickThumb.style.transform='translate(0,0)';
-  });
-  // 键盘
-  let keys={};
-  window.addEventListener('keydown',e=>{keys[e.key]=true});
-  window.addEventListener('keyup',e=>{keys[e.key]=false});
-  setInterval(()=>{
-    if(!gameState||gameState==='levelup')return;
-    if(keys['w']||keys['ArrowUp'])joyDY=-1;
-    else if(keys['s']||keys['ArrowDown'])joyDY=1;
-    else joyDY=0;
-    if(keys['a']||keys['ArrowLeft'])joyDX=-1;
-    else if(keys['d']||keys['ArrowRight'])joyDX=1;
-    else joyDX=0;
-  },30);
+  joystickZone.addEventListener('touchstart',e=>{e.preventDefault();joystickActive=true;let t=e.touches[0],r=joystickZone.getBoundingClientRect();joyCX=r.left+r.width/2;joyCY=r.top+r.height/2;updateJoystick(t.clientX,t.clientY);},{passive:false});
+  joystickZone.addEventListener('touchmove',e=>{e.preventDefault();if(!joystickActive)return;updateJoystick(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+  joystickZone.addEventListener('touchend',e=>{e.preventDefault();joystickActive=false;joyDX=0;joyDY=0;joystickThumb.style.transform='translate(0,0)';},{passive:false});
+  joystickZone.addEventListener('touchcancel',()=>{joystickActive=false;joyDX=0;joyDY=0;joystickThumb.style.transform='translate(0,0)';});
+  let keys={};window.addEventListener('keydown',e=>{keys[e.key]=true});window.addEventListener('keyup',e=>{keys[e.key]=false});
+  setInterval(()=>{if(!gameState||gameState==='levelup')return;if(keys['w']||keys['ArrowUp'])joyDY=-1;else if(keys['s']||keys['ArrowDown'])joyDY=1;else joyDY=0;if(keys['a']||keys['ArrowLeft'])joyDX=-1;else if(keys['d']||keys['ArrowRight'])joyDX=1;else joyDX=0;},30);
 }
-function updateJoystick(cx,cy){
-  let dx=cx-joyCX,dy=cy-joyCY,dist=Math.hypot(dx,dy),maxR=42;
-  if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR}
-  joyDX=dx/maxR;joyDY=dy/maxR;
-  joystickThumb.style.transform=`translate(${dx}px,${dy}px)`;
-}
+function updateJoystick(cx,cy){let dx=cx-joyCX,dy=cy-joyCY,dist=Math.hypot(dx,dy),maxR=42;if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR}joyDX=dx/maxR;joyDY=dy/maxR;joystickThumb.style.transform=`translate(${dx}px,${dy}px)`;}
 
 let lastT=0;
-function loop(t){
-  let dt=Math.min((t-lastT)/1000,0.1);
-  lastT=t;
-  if(dt>0){update(dt);render();}
-  if(gameState!=='gameover')requestAnimationFrame(loop);
-}
-
-window.restartGame=restartGame;
-window.togglePause=togglePause;
-
-setupJoystick();
-initGame();
-lastT=performance.now();
-requestAnimationFrame(loop);
+function loop(t){let dt=Math.min((t-lastT)/1000,0.1);lastT=t;if(dt>0){update(dt);render();}if(gameState!=='gameover')requestAnimationFrame(loop);}
+window.restartGame=restartGame;window.togglePause=togglePause;
+setupJoystick();initGame();lastT=performance.now();requestAnimationFrame(loop);
 })();
 </script>
 </body>
