@@ -360,6 +360,21 @@
       border-radius: 4px;
     }
 
+    .h-card-icon-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: 8px;
+    }
+
     .h-card-title-wrap {
       display: flex;
       align-items: center;
@@ -2538,6 +2553,10 @@
       height: 32px;
       border-radius: 8px;
     }
+    .horizontal-content.grid-view .h-card-icon-fallback {
+      font-size: 20px;
+      border-radius: 14px;
+    }
     .horizontal-content.grid-view .h-card-left {
       width: 100%;
       align-items: center;
@@ -2798,6 +2817,10 @@
         height: 26px;
         border-radius: 6px;
       }
+      .horizontal-content.grid-view .h-card-icon-fallback {
+        font-size: 16px;
+        border-radius: 10px;
+      }
       .horizontal-content.grid-view .h-card-title {
         font-size: 12px;
       }
@@ -2855,6 +2878,10 @@
       .horizontal-content.grid-view .h-card-icon img {
         width: 22px;
         height: 22px;
+      }
+      .horizontal-content.grid-view .h-card-icon-fallback {
+        font-size: 13px;
+        border-radius: 8px;
       }
     }
   </style>
@@ -3279,7 +3306,12 @@
       if (this.dataset.fallback && this.src !== this.dataset.fallback) {
         this.src = this.dataset.fallback;
       } else {
-        this.parentElement.style.display = 'none';
+        const name = currentLang === 'zh' ? button.name : (button.name_en || button.name);
+        const letters = name.replace(/[^a-zA-Z\u4e00-\u9fff]/g, '').slice(0, 2).toUpperCase();
+        const fallbackDiv = document.createElement('div');
+        fallbackDiv.className = 'h-card-icon-fallback';
+        fallbackDiv.textContent = letters || '?';
+        this.parentElement.replaceChild(fallbackDiv, this);
       }
     };
     iconWrap.appendChild(iconImg);
