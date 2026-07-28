@@ -104,7 +104,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   .boss-indicator{top:max(52px,calc(46px + var(--safe-top)))}
   .boss-hp-bar{width:240px;height:8px}
   .boss-name-tag{font-size:11px}
-  .rotate-hint.show{display:none}
+  .rotate-hint.show{display:none!important}
 }
 @media (orientation:portrait) and (max-width:500px){
   /* 竖屏小屏保持紧凑 */
@@ -336,10 +336,14 @@ function initGame(){
   updateUI();
 }
 function checkOrientation(){
-  let mq=window.matchMedia('(orientation:landscape)');
-  isLandscape=mq.matches;
-  if(isLandscape){rotateHint.classList.remove('show')}else{rotateHint.classList.add('show')}
-  return isLandscape;
+  let land=false;
+  try{land=screen.orientation&&screen.orientation.type?screen.orientation.type.startsWith('landscape'):false}catch(e){}
+  if(!land&&typeof window.orientation!=='undefined')land=Math.abs(window.orientation)===90;
+  if(!land)land=window.matchMedia('(orientation:landscape)').matches;
+  if(!land)land=window.innerWidth>window.innerHeight;
+  isLandscape=land;
+  if(land){rotateHint.classList.remove('show');rotateHint.style.display='none'}else{rotateHint.classList.add('show');rotateHint.style.display='flex'}
+  return land;
 }
 function updateUI(){
   document.getElementById('hp').textContent=Math.ceil(player.hp);document.getElementById('kills').textContent=killCount;document.getElementById('gem').textContent=gemCount;
@@ -451,7 +455,8 @@ window.restartGame=restartGame;window.togglePause=togglePause;
 function onResize(){checkOrientation();W=window.innerWidth;H=window.innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
 window.addEventListener('resize',onResize);
 window.addEventListener('orientationchange',()=>setTimeout(onResize,100));
-window.matchMedia('(orientation:landscape)').addEventListener('change',e=>{isLandscape=e.matches;if(isLandscape)rotateHint.classList.remove('show');else rotateHint.classList.add('show');onResize();});
+try{window.matchMedia('(orientation:landscape)').addEventListener('change',e=>{isLandscape=e.matches;if(isLandscape){rotateHint.classList.remove('show');rotateHint.style.display='none'}else{rotateHint.classList.add('show');rotateHint.style.display='flex'}onResize();})}catch(e){}
+setInterval(checkOrientation,2000);
 setupJoystick();initGame();lastT=performance.now();requestAnimationFrame(loop);
 })();
 </script>
