@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, viewport-fit=cover">
+<title>鲨鲨幸存者</title>
+<style>
+  :root {--bg:#0a1628;--panel:#111d33;--gold:#f5c842;--danger:#ff4757;--accent:#4dc9f6;--text:#e0e8f0;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'PingFang SC','Heiti SC',sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+  body{display:flex;flex-direction:column;align-items:center}
+  .hud{width:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 14px;gap:10px;flex-shrink:0}
+  .hud-item{display:flex;align-items:center;gap:6px;color:var(--text);font-size:14px;font-weight:700;background:var(--panel);padding:6px 14px;border-radius:20px}
+  .hud-val{color:var(--accent);font-size:18px}
+  .hud-danger{color:var(--danger)}
+  .buffs{display:flex;gap:4px}
+  .buff-dot{width:10px;height:10px;border-radius:50%;background:#333;transition:0.3s}
+  .buff-dot.active.speed{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .buff-dot.active.shield{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+  canvas{display:block;width:100%;flex:1;min-height:0}
+  .game-over-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:10}
+  .game-over-overlay.show{display:flex}
+  .go-panel{background:var(--panel);border-radius:20px;padding:30px 24px;text-align:center;max-width:320px;width:90%}
+  .go-panel h2{color:var(--danger);font-size:28px;margin-bottom:8px}
+  .go-panel .score{color:var(--gold);font-size:42px;font-weight:900;margin:8px 0}
+  .go-panel .stat{color:var(--text);font-size:14px;margin:4px 0}
+  .go-panel button{background:var(--accent);color:#000;border:none;padding:12px 40px;border-radius:25px;font-size:18px;font-weight:700;margin-top:16px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .go-panel button:active{transform:scale(0.95)}
+  .tip-bar{color:#8899aa;font-size:11px;text-align:center;padding:4px 0 6px;flex-shrink:0;min-height:20px}
+  .joystick-zone{position:fixed;bottom:20px;left:20px;width:120px;height:120px;z-index:5}
+  .joystick-base{width:100%;height:100%;border-radius:50%;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15)}
+  .joystick-thumb{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.25);position:absolute;top:35px;left:35px;transition:transform 0.05s}
+</style>
+</head>
+<body>
+
+<div class="hud">
+  <div class="hud-item">⏱️ <span class="hud-val" id="timer">00:00</span></div>
+  <div class="hud-item">🦈 <span class="hud-val hud-danger" id="sharkCount">1</span></div>
+  <div class="hud-item buffs">
+    <span style="font-size:11px;margin-right:4px">道具</span>
+    <div class="buff-dot" id="buffSpeed"></div>
+    <div class="buff-dot" id="buffShield"></div>
+  </div>
+</div>
+
+<canvas id="gc"></canvas>
+
+<div class="tip-bar" id="tipBar">滑动摇杆移动角色，躲避鲨鱼 🦈</div>
+
+<div class="game-over-overlay" id="gameOverOverlay">
+  <div class="go-panel">
+    <h2>🦈 被吃掉了！</h2>
+    <div class="score" id="finalScore">00:00</div>
+    <div class="stat" id="finalStats"></div>
+    <button onclick="restartGame()">再来一局</button>
+  </div>
+</div>
+
+<div class="joystick-zone" id="joystickZone">
+  <div class="joystick-base">
+    <div class="joystick-thumb" id="joystickThumb"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+const canvas=document.getElementById('gc'),ctx=canvas.getContext('2d');
+const timerEl=document.getElementById('timer'),sharkCountEl=document.getElementById('sharkCount');
+const tipBar=document.getElementById('tipBar'),gameOverOverlay=document.getElementById('gameOverOverlay');
+const finalScore=document.getElementById('finalScore'),finalStats=document.getElementById('finalStats');
+const joystickZone=document.getElementById('joystickZone'),joystickThumb=document.getElementById('joystickThumb');
+const buffSpeed=document.getElementById('buffSpeed'),buffShield=document.getElementById('buffShield');
+
+let W,H,dpr=1;
+let gameRunning=true,gameTime=0,score=0;
+let player,sharks,obstacles,items,particles;
+let nextSharkTime,itemSpawnTime;
+let joystickActive=false,joyCX=0,joyCY=0,joyDX=0,joyDY=0;
+
+// 地图
+const MAP_W=1600,MAP_H=1200;
+let camX=0,camY=0;
+
+// 玩家
+player={x:MAP_W/2,y:MAP_H/2,r:14,speed:220,hasShield:false,shieldTimer:0,speedBoost:0};
+
+// 道具类型
+const ITEM_SPEED=0,ITEM_SHIELD=1;
+const itemDefs=[
+  {name:'加速',color:'#f5c842',icon:'⚡',duration:4},
+  {name:'护盾',color:'#4dc9f6',icon:'🛡️',duration:8}
+];
+
+function spawnItem(){
+  const t=Math.random()<0.55?ITEM_SPEED:ITEM_SHIELD;
+  let x,y,ok;
+  for(let i=0;i<50;i++){
+    x=80+Math.random()*(MAP_W-160);y=80+Math.random()*(MAP_H-160);
+    ok=true;
+    for(let o of obstacles){if(dist(x,y,o.x,o.y)<o.r+40){ok=false;break;}}
+    if(ok)break;
+  }
+  items.push({x,y,r:12,type:t,life:15});
+}
+
+function spawnShark(){
+  let x,y,ok,edge=Math.floor(Math.random()*4);
+  for(let i=0;i<50;i++){
+    if(edge===0){x=-40;y=Math.random()*MAP_H}
+    else if(edge===1){x=MAP_W+40;y=Math.random()*MAP_H}
+    else if(edge===2){x=Math.random()*MAP_W;y=-40}
+    else{x=Math.random()*MAP_W;y=MAP_H+40}
+    ok=dist(x,y,player.x,player.y)>300;
+    if(ok)break;
+  }
+  sharks.push({
+    x,y,r:22,
+    speed:130+Math.random()*40,
+    state:'patrol',
+    patrolTarget:{x:Math.random()*MAP_W,y:Math.random()*MAP_H},
+    patrolTimer:0,
+    chaseTimer:0,
+    lossTimer:0
+  });
+}
+
+function dist(a,b,c,d){return Math.hypot((c??d?.x)-a,(d?d.y:b)-b)}
+
+function initGame(){
+  W=window.innerWidth;H=window.innerHeight;
+  dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);
+  gameRunning=true;gameTime=0;score=0;
+  player.x=MAP_W/2;player.y=MAP_H/2;player.hasShield=false;player.shieldTimer=0;player.speedBoost=0;
+  sharks=[];obstacles=[];items=[];particles=[];
+  joystickActive=false;joyDX=0;joyDY=0;
+  nextSharkTime=8;itemSpawnTime=3;
+
+  // 障碍物
+  for(let i=0;i<35;i++){
+    let x=60+Math.random()*(MAP_W-120),y=60+Math.random()*(MAP_H-120);
+    if(dist(x,y,MAP_W/2,MAP_H/2)<150)continue;
+    obstacles.push({x,y,r:22+Math.random()*30,variant:Math.floor(Math.random()*3)});
+  }
+
+  // 初始鲨鱼
+  spawnShark();
+  spawnItem();
+  spawnItem();
+
+  updateUI();
+  gameOverOverlay.classList.remove('show');
+}
+
+function updateUI(){
+  let m=Math.floor(gameTime/60),s=Math.floor(gameTime%60);
+  timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  sharkCountEl.textContent=sharks.length;
+  buffSpeed.className='buff-dot'+(player.speedBoost>0?' active speed':'');
+  buffShield.className='buff-dot'+(player.hasShield?' active shield':'');
+}
+
+function update(dt){
+  if(!gameRunning)return;
+  gameTime+=dt;
+
+  // 玩家移动
+  if(joyDX!==0||joyDY!==0){
+    let mag=Math.hypot(joyDX,joyDY);
+    let nx=joyDX/mag,ny=joyDY/mag;
+    let spd=player.speed*(player.speedBoost>0?1.8:1);
+    player.x+=nx*spd*dt;
+    player.y+=ny*spd*dt;
+  }
+  player.x=Math.max(player.r,Math.min(MAP_W-player.r,player.x));
+  player.y=Math.max(player.r,Math.min(MAP_H-player.r,player.y));
+
+  // 碰撞障碍物
+  for(let o of obstacles){
+    let d=dist(player.x,player.y,o.x,o.y);
+    if(d<player.r+o.r){
+      let a=Math.atan2(player.y-o.y,player.x-o.x);
+      player.x=o.x+Math.cos(a)*(player.r+o.r);
+      player.y=o.y+Math.sin(a)*(player.r+o.r);
+    }
+  }
+
+  // 护盾计时
+  if(player.shieldTimer>0){
+    player.shieldTimer-=dt;
+    if(player.shieldTimer<=0)player.hasShield=false;
+  }
+  // 加速计时
+  if(player.speedBoost>0){
+    player.speedBoost-=dt;
+  }
+
+  // 鲨鱼AI
+  for(let sh of sharks){
+    let dToPlayer=dist(sh.x,sh.y,player.x,player.y);
+    if(sh.state==='patrol'){
+      let dToTarget=dist(sh.x,sh.y,sh.patrolTarget.x,sh.patrolTarget.y);
+      if(dToTarget<30){sh.patrolTarget={x:Math.random()*MAP_W,y:Math.random()*MAP_H};sh.patrolTimer=0;}
+      let a=Math.atan2(sh.patrolTarget.y-sh.y,sh.patrolTarget.x-sh.x);
+      sh.x+=Math.cos(a)*sh.speed*0.5*dt;
+      sh.y+=Math.sin(a)*sh.speed*0.5*dt;
+      sh.patrolTimer+=dt;
+      if(dToPlayer<280||sh.patrolTimer>4+Math.random()*3){
+        sh.state='chase';sh.chaseTimer=0;
+      }
+    }else if(sh.state==='chase'){
+      let a=Math.atan2(player.y-sh.y,player.x-sh.x);
+      sh.x+=Math.cos(a)*sh.speed*dt;
+      sh.y+=Math.sin(a)*sh.speed*dt;
+      sh.chaseTimer+=dt;
+      if(dToPlayer>450){sh.lossTimer+=dt;if(sh.lossTimer>2){sh.state='patrol';sh.patrolTarget={x:sh.x+Math.random()*200-100,y:sh.y+Math.random()*200-100};sh.lossTimer=0;}}
+      else sh.lossTimer=0;
+    }
+    sh.x=Math.max(-50,Math.min(MAP_W+50,sh.x));
+    sh.y=Math.max(-50,Math.min(MAP_H+50,sh.y));
+  }
+
+  // 鲨鱼碰撞玩家
+  for(let sh of sharks){
+    if(dist(sh.x,sh.y,player.x,player.y)<player.r+sh.r-4){
+      if(player.hasShield){
+        player.hasShield=false;player.shieldTimer=0;
+        // 击退鲨鱼
+        let a=Math.atan2(sh.y-player.y,sh.x-player.x);
+        sh.x+=Math.cos(a)*120;sh.y+=Math.sin(a)*120;
+        sh.state='patrol';sh.patrolTarget={x:sh.x+Math.random()*200-100,y:sh.y+Math.random()*200-100};
+        for(let i=0;i<12;i++)particles.push({x:player.x,y:player.y,vx:(Math.random()-0.5)*200,vy:(Math.random()-0.5)*200,life:0.8,color:'#4dc9f6'});
+      }else{
+        gameOver();
+        return;
+      }
+    }
+  }
+
+  // 道具收集
+  for(let i=items.length-1;i>=0;i--){
+    let it=items[i];
+    it.life-=dt;
+    if(it.life<=0){items.splice(i,1);continue;}
+    if(dist(player.x,player.y,it.x,it.y)<player.r+it.r){
+      if(it.type===ITEM_SPEED){player.speedBoost=itemDefs[ITEM_SPEED].duration}
+      else if(it.type===ITEM_SHIELD){player.hasShield=true;player.shieldTimer=itemDefs[ITEM_SHIELD].duration}
+      for(let j=0;j<8;j++)particles.push({x:it.x,y:it.y,vx:(Math.random()-0.5)*150,vy:(Math.random()-0.5)*150,life:0.5,color:itemDefs[it.type].color});
+      items.splice(i,1);
+    }
+  }
+
+  // 新鲨鱼
+  if(gameTime>=nextSharkTime&&sharks.length<8){
+    spawnShark();
+    nextSharkTime=gameTime+15+Math.random()*5;
+  }
+
+  // 道具刷新
+  if(gameTime>=itemSpawnTime&&items.length<5){
+    spawnItem();
+    itemSpawnTime=gameTime+8+Math.random()*6;
+  }
+
+  // 粒子
+  for(let i=particles.length-1;i>=0;i--){
+    let p=particles[i];
+    p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;
+    if(p.life<=0)particles.splice(i,1);
+  }
+
+  // 摄像机
+  let tx=player.x-W/2,ty=player.y-H/2;
+  camX+=((Math.max(0,Math.min(MAP_W-W,tx)))-camX)*0.08;
+  camY+=((Math.max(0,Math.min(MAP_H-H,ty)))-camY)*0.08;
+
+  updateUI();
+}
+
+function gameOver(){
+  gameRunning=false;
+  let m=Math.floor(gameTime/60),s=Math.floor(gameTime%60);
+  finalScore.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  finalStats.textContent='鲨鱼数量: '+sharks.length+' | 收集道具: '+(gameTime>0?'若干':'0');
+  gameOverOverlay.classList.add('show');
+  joyDX=0;joyDY=0;joystickActive=false;
+  joystickThumb.style.transform='translate(0,0)';
+}
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+
+  // 海底背景
+  let bgGrad=ctx.createLinearGradient(0,0,0,H);
+  bgGrad.addColorStop(0,'#0a2030');bgGrad.addColorStop(1,'#0a1628');
+  ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
+
+  // 网格
+  ctx.strokeStyle='rgba(30,80,120,0.15)';ctx.lineWidth=1;
+  let gs=80;
+  let sx=-(camX%gs),sy=-(camY%gs);
+  for(let x=sx;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=sy;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+
+  // 地图边界
+  ctx.strokeStyle='rgba(255,100,80,0.5)';ctx.lineWidth=3;ctx.setLineDash([10,6]);
+  ctx.strokeRect(-camX,-camY,MAP_W,MAP_H);ctx.setLineDash([]);
+
+  // 障碍物
+  for(let o of obstacles){
+    let sx=o.x-camX,sy=o.y-camY;
+    if(sx<-o.r||sx>W+o.r||sy<-o.r||sy>H+o.r)continue;
+    let g=ctx.createRadialGradient(sx,sy,o.r*0.3,sx,sy,o.r);
+    g.addColorStop(0,'#3a5a4a');g.addColorStop(0.6,'#1a3a2a');g.addColorStop(1,'#0a2010');
+    ctx.fillStyle=g;ctx.beginPath();
+    if(o.variant===0)ctx.arc(sx,sy,o.r,0,Math.PI*2);
+    else if(o.variant===1){ctx.moveTo(sx,sy-o.r);ctx.lineTo(sx+o.r*0.8,sy+o.r*0.6);ctx.lineTo(sx-o.r*0.8,sy+o.r*0.6);ctx.closePath();}
+    else{ctx.ellipse(sx,sy,o.r,o.r*0.65,0,0,Math.PI*2);}
+    ctx.fill();
+    ctx.strokeStyle='rgba(100,180,140,0.2)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+
+  // 道具
+  for(let it of items){
+    let sx=it.x-camX,sy=it.y-camY;
+    let pulse=1+Math.sin(gameTime*4)*0.15;
+    let alpha=0.6+(it.life<5?it.life/5*0.4:0.4);
+    let g=ctx.createRadialGradient(sx,sy,0,sx,sy,it.r*pulse);
+    g.addColorStop(0,itemDefs[it.type].color);g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(sx,sy,it.r*pulse*1.5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=itemDefs[it.type].color;ctx.font='16px sans-serif';ctx.textAlign='center';
+    ctx.fillText(itemDefs[it.type].icon,sx,sy+5);
+  }
+
+  // 鲨鱼
+  for(let sh of sharks){
+    let sx=sh.x-camX,sy=sh.y-camY;
+    // 身体
+    ctx.fillStyle='#556677';ctx.beginPath();
+    ctx.ellipse(sx,sy,sh.r,sh.r*0.55,0,0,Math.PI*2);ctx.fill();
+    // 背鳍
+    ctx.fillStyle='#445566';ctx.beginPath();
+    ctx.moveTo(sx,sy-sh.r*0.4);ctx.lineTo(sx-sh.r*0.4,sy-sh.r*1.0);ctx.lineTo(sx+sh.r*0.2,sy-sh.r*0.35);ctx.fill();
+    // 尾鳍
+    ctx.beginPath();ctx.moveTo(sx+sh.r*0.6,sy);ctx.lineTo(sx+sh.r*1.1,sy-sh.r*0.4);ctx.lineTo(sx+sh.r*1.1,sy+sh.r*0.4);ctx.fill();
+    // 眼睛
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(sx-sh.r*0.15,sy-sh.r*0.1,sh.r*0.18,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#000';ctx.beginPath();ctx.arc(sx-sh.r*0.2,sy-sh.r*0.12,sh.r*0.08,0,Math.PI*2);ctx.fill();
+    // 牙齿
+    ctx.fillStyle='#fff';
+    for(let t=-1;t<=1;t+=2){ctx.fillRect(sx+sh.r*0.35,sy+sh.r*0.1*t,sh.r*0.25,sh.r*0.06);}
+    // 状态指示
+    if(sh.state==='chase'){ctx.fillStyle='rgba(255,60,60,0.6)';ctx.beginPath();ctx.arc(sx,sy,sh.r+6,0,Math.PI*2);ctx.fill();}
+  }
+
+  // 玩家
+  let px=player.x-camX,py=player.y-camY;
+  // 护盾光环
+  if(player.hasShield){
+    let sa=1+Math.sin(gameTime*6)*0.1;
+    ctx.strokeStyle=`rgba(77,201,246,${0.5+Math.sin(gameTime*8)*0.3})`;ctx.lineWidth=3;
+    ctx.beginPath();ctx.arc(px,py,player.r*sa+8,0,Math.PI*2);ctx.stroke();
+  }
+  // 加速拖尾
+  if(player.speedBoost>0){
+    ctx.fillStyle='rgba(245,200,66,0.3)';ctx.beginPath();ctx.arc(px-joyDX*8,py-joyDY*8,player.r*0.6,0,Math.PI*2);ctx.fill();
+  }
+  // 身体
+  let pg=ctx.createRadialGradient(px-2,py-2,player.r*0.2,px,py,player.r);
+  pg.addColorStop(0,'#ff8844');pg.addColorStop(0.6,'#ee5522');pg.addColorStop(1,'#cc3311');
+  ctx.fillStyle=pg;ctx.beginPath();ctx.arc(px,py,player.r,0,Math.PI*2);ctx.fill();
+  // 眼睛
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px-3,py-4,player.r*0.35,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#111';ctx.beginPath();ctx.arc(px-4,py-4,player.r*0.18,0,Math.PI*2);ctx.fill();
+  // 微笑
+  ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.beginPath();
+  ctx.arc(px+2,py,player.r*0.3,0.2,Math.PI-0.2);ctx.stroke();
+
+  // 粒子
+  for(let p of particles){
+    let a=p.life;
+    ctx.fillStyle=p.color.replace(')',`,${a})`).replace('rgb','rgba');
+    if(p.color.startsWith('#')){ctx.globalAlpha=a;ctx.fillStyle=p.color;}
+    ctx.beginPath();ctx.arc(p.x-camX,p.y-camY,3*a,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+
+  // 小地图
+  let mmW=80,mmH=60,mmX=W-mmW-10,mmY=H-mmH-10;
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
+  ctx.fillRect(mmX,mmY,mmW,mmH);ctx.strokeRect(mmX,mmY,mmW,mmH);
+  let sx2=mmX,mx=mmW/MAP_W,my=mmH/MAP_H;
+  // 玩家点
+  ctx.fillStyle='#ff6622';ctx.beginPath();ctx.arc(sx2+player.x*mx,mmY+player.y*my,3,0,Math.PI*2);ctx.fill();
+  // 鲨鱼点
+  for(let sh of sharks){ctx.fillStyle='#8899aa';ctx.beginPath();ctx.arc(sx2+sh.x*mx,mmY+sh.y*my,2,0,Math.PI*2);ctx.fill();}
+  // 道具点
+  for(let it of items){ctx.fillStyle=itemDefs[it.type].color;ctx.beginPath();ctx.arc(sx2+it.x*mx,mmY+it.y*my,1.5,0,Math.PI*2);ctx.fill();}
+  // 视口框
+  ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1;
+  ctx.strokeRect(sx2+camX*mx,mmY+camY*my,W*mx,H*my);
+}
+
+// 摇杆
+function setupJoystick(){
+  joystickZone.addEventListener('touchstart',e=>{
+    e.preventDefault();joystickActive=true;
+    let t=e.touches[0];let r=joystickZone.getBoundingClientRect();
+    joyCX=r.left+r.width/2;joyCY=r.top+r.height/2;
+    updateJoystick(t.clientX,t.clientY);
+  },{passive:false});
+  joystickZone.addEventListener('touchmove',e=>{
+    e.preventDefault();if(!joystickActive)return;
+    updateJoystick(e.touches[0].clientX,e.touches[0].clientY);
+  },{passive:false});
+  joystickZone.addEventListener('touchend',e=>{
+    e.preventDefault();joystickActive=false;joyDX=0;joyDY=0;
+    joystickThumb.style.transform='translate(0,0)';
+  },{passive:false});
+  joystickZone.addEventListener('touchcancel',e=>{
+    joystickActive=false;joyDX=0;joyDY=0;
+    joystickThumb.style.transform='translate(0,0)';
+  });
+  // 键盘支持
+  let keys={};
+  window.addEventListener('keydown',e=>{keys[e.key]=true});
+  window.addEventListener('keyup',e=>{keys[e.key]=false});
+  setInterval(()=>{
+    if(keys['w']||keys['ArrowUp']){joyDY=-1}
+    else if(keys['s']||keys['ArrowDown']){joyDY=1}
+    else joyDY=0;
+    if(keys['a']||keys['ArrowLeft']){joyDX=-1}
+    else if(keys['d']||keys['ArrowRight']){joyDX=1}
+    else joyDX=0;
+  },30);
+}
+
+function updateJoystick(cx,cy){
+  let dx=cx-joyCX,dy=cy-joyCY;
+  let dist=Math.hypot(dx,dy),maxR=45;
+  if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR;}
+  joyDX=dx/maxR;joyDY=dy/maxR;
+  joystickThumb.style.transform=`translate(${dx}px,${dy}px)`;
+}
+
+// 游戏循环
+let lastT=0;
+function loop(t){
+  let dt=Math.min((t-lastT)/1000,0.1);
+  lastT=t;
+  if(dt>0){update(dt);render();}
+  if(gameRunning)requestAnimationFrame(loop);
+}
+
+window.restartGame=function(){
+  initGame();
+  lastT=performance.now();
+  requestAnimationFrame(loop);
+};
+
+window.addEventListener('resize',()=>{initGame()});
+
+setupJoystick();
+initGame();
+lastT=performance.now();
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
