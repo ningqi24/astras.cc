@@ -3484,15 +3484,23 @@
 
     const categories = {
       'astraeditor': { zh: 'AstraEditor 系列', en: 'AstraEditor' },
+      'games': { zh: '游戏', en: 'Games' },
       'tools': { zh: '在线工具', en: 'Online Tools' },
       'creative': { zh: '创意项目', en: 'Creative Projects' },
       'links': { zh: '相关链接', en: 'Related Links' }
     };
 
     function getCategory(button) {
+      const tags = button.tags || [];
       const u = button.url.toLowerCase();
-      if (u.includes('editor') || u.includes('download')) return 'astraeditor';
-      if (u.includes('search') || u.includes('mail') || u.includes('sign') || u.includes('generator') || u.includes('chat') || u.includes('simplechat')) return 'tools';
+      if (tags.includes('游戏')) return 'games';
+      if (tags.includes('编辑器') || u.includes('editor')) return 'astraeditor';
+      if (tags.includes('下载') && u.includes('download')) return 'astraeditor';
+      if (tags.includes('工具') || tags.includes('下载') || tags.includes('图标') || tags.includes('设计')) return 'tools';
+      if (u.includes('search') || u.includes('mail') || u.includes('sign') || u.includes('generator') || u.includes('font') || u.includes('cdn')) return 'tools';
+      if (tags.includes('前端') || tags.includes('组件库') || tags.includes('React')) return 'tools';
+      if (u.includes('chat') || u.includes('simplechat')) return 'creative';
+      if (tags.includes('Scratch') || tags.includes('OS&UI') || tags.includes('工作室') || tags.includes('社交') || tags.includes('组件')) return 'creative';
       if (u.includes('studio') || u.includes('os') || u.includes('ui') || u.includes('mysxl')) return 'creative';
       return 'links';
     }
@@ -3504,7 +3512,7 @@
       grouped[cat].push({ button, index });
     });
 
-    const order = ['astraeditor', 'tools', 'creative', 'links'];
+    const order = ['astraeditor', 'games', 'tools', 'creative', 'links'];
 
     order.forEach(catKey => {
       if (!grouped[catKey]) return;
