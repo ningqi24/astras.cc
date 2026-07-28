@@ -12,6 +12,13 @@
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'PingFang SC','Heiti SC',sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 #gc{display:block;position:fixed;top:0;left:0;width:100%;height:100%}
 
+/* ====== 旋转提示 ====== */
+.rotate-hint{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+.rotate-hint.show{display:flex}
+.rotate-hint svg{width:72px;height:72px;margin-bottom:20px;animation:spinHint 1.5s ease-in-out infinite}
+@keyframes spinHint{0%,100%{transform:rotate(0deg)}50%{transform:rotate(90deg)}}
+.rotate-hint p{color:#88aacc;font-size:17px;font-weight:700;letter-spacing:2px}
+
 /* ====== 顶部 HUD 条 ====== */
 .hud-bar{position:fixed;top:max(4px,var(--safe-top));left:max(8px,var(--safe-left));right:max(8px,var(--safe-right));display:flex;align-items:center;justify-content:space-between;gap:6px;z-index:10;pointer-events:none}
 .hud-left{display:flex;align-items:center;gap:6px}
@@ -111,6 +118,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 <body>
 <canvas id="gc"></canvas>
 
+<!-- 旋转提示 -->
+<div class="rotate-hint" id="rotateHint">
+  <svg viewBox="0 0 64 64"><rect x="12" y="8" width="40" height="48" rx="6" fill="none" stroke="#88aacc" stroke-width="3"/><rect x="16" y="12" width="32" height="40" rx="3" fill="rgba(136,170,204,0.1)"/></svg>
+  <p>请旋转手机横屏游玩</p>
+</div>
+
 <!-- HUD -->
 <div class="hud-bar">
   <div class="hud-left">
@@ -185,7 +198,7 @@ const goTitle=document.getElementById('goTitle'),goScore=document.getElementById
 const goIcon=document.getElementById('goIcon');
 const bossIndicator=document.getElementById('bossIndicator'),bossHpFill=document.getElementById('bossHpFill'),bossNameTag=document.getElementById('bossNameTag');
 const joystickZone=document.getElementById('joystickZone'),joystickThumb=document.getElementById('joystickThumb');
-const pauseBtn=document.getElementById('pauseBtn');
+const pauseBtn=document.getElementById('pauseBtn'),rotateHint=document.getElementById('rotateHint');
 
 let W,H,dpr=1,gameState='playing',gameTime=480,isLandscape=true;
 let player,monsters=[],bullets=[],particles=[],effects=[],xpOrbs=[],gems=[];
@@ -309,6 +322,7 @@ function drawGem(x,y){ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);let g=
 function drawSpike(x,y,r){ctx.save();ctx.translate(x,y);let s=r/30;ctx.fillStyle='#998866';ctx.beginPath();ctx.moveTo(0,-r);ctx.lineTo(s*6,-s*8);ctx.lineTo(s*12,-r*0.5);ctx.lineTo(s*8,s*3);ctx.lineTo(0,r);ctx.lineTo(-s*8,s*3);ctx.lineTo(-s*12,-r*0.5);ctx.lineTo(-s*6,-s*8);ctx.fill();ctx.fillStyle='#bba988';ctx.beginPath();ctx.moveTo(0,-r);ctx.lineTo(s*3,-s*6);ctx.lineTo(-s*3,-s*6);ctx.fill();ctx.restore();}
 
 function initGame(){
+  checkOrientation();
   W=window.innerWidth;H=window.innerHeight;dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);
   mmCanvas.width=128;mmCanvas.height=92;
   gameState='playing';gameTime=480;player.x=MAP_W/2;player.y=MAP_H/2;player.hp=100;player.maxHp=100;player.level=1;player.xp=0;player.xpToNext=30;
@@ -319,6 +333,15 @@ function initGame(){
   levelupOverlay.classList.remove('show');gameoverOverlay.classList.remove('show');
   pauseBtn.innerHTML='<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>';
   updateUI();
+}
+function checkOrientation(){
+  let land=false;
+  try{if(screen.orientation&&screen.orientation.type)land=screen.orientation.type.startsWith('landscape')}catch(e){}
+  if(!land)land=window.matchMedia('(orientation:landscape)').matches;
+  if(!land)land=window.innerWidth>window.innerHeight;
+  isLandscape=land;
+  if(land){rotateHint.classList.remove('show')}else{rotateHint.classList.add('show')}
+  return land;
 }
 function updateUI(){
   document.getElementById('hp').textContent=Math.ceil(player.hp);document.getElementById('kills').textContent=killCount;document.getElementById('gem').textContent=gemCount;
@@ -427,8 +450,11 @@ function updateJoystick(cx,cy){let dx=cx-joyCX,dy=cy-joyCY,dist=Math.hypot(dx,dy
 let lastT=0;
 function loop(t){let dt=Math.min((t-lastT)/1000,0.1);lastT=t;if(dt>0){update(dt);render();}if(gameState!=='gameover')requestAnimationFrame(loop);}
 window.restartGame=restartGame;window.togglePause=togglePause;
-function onResize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
+function onResize(){checkOrientation();W=window.innerWidth;H=window.innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
 window.addEventListener('resize',onResize);
+window.addEventListener('orientationchange',()=>setTimeout(onResize,100));
+try{window.matchMedia('(orientation:landscape)').addEventListener('change',onResize)}catch(e){}
+setInterval(checkOrientation,1500);
 setupJoystick();initGame();lastT=performance.now();requestAnimationFrame(loop);
 })();
 </script>
