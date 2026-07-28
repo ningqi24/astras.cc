@@ -81,7 +81,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .go-panel button:active{transform:scale(0.94)}
 
 /* ====== 横屏优化 ====== */
-@media (orientation:landscape) and (min-width:500px){
+@media (orientation:landscape){
   .hud-bar{top:max(2px,var(--safe-top));left:max(10px,var(--safe-left));right:max(10px,var(--safe-right));gap:8px}
   .hud-item{padding:4px 10px;font-size:12px;gap:5px}
   .hud-val{font-size:15px}
@@ -336,8 +336,10 @@ function initGame(){
   updateUI();
 }
 function checkOrientation(){
-  isLandscape=window.innerWidth>window.innerHeight;
+  let mq=window.matchMedia('(orientation:landscape)');
+  isLandscape=mq.matches;
   if(isLandscape){rotateHint.classList.remove('show')}else{rotateHint.classList.add('show')}
+  return isLandscape;
 }
 function updateUI(){
   document.getElementById('hp').textContent=Math.ceil(player.hp);document.getElementById('kills').textContent=killCount;document.getElementById('gem').textContent=gemCount;
@@ -446,7 +448,10 @@ function updateJoystick(cx,cy){let dx=cx-joyCX,dy=cy-joyCY,dist=Math.hypot(dx,dy
 let lastT=0;
 function loop(t){let dt=Math.min((t-lastT)/1000,0.1);lastT=t;if(dt>0){update(dt);render();}if(gameState!=='gameover')requestAnimationFrame(loop);}
 window.restartGame=restartGame;window.togglePause=togglePause;
-window.addEventListener('resize',()=>{checkOrientation();W=window.innerWidth;H=window.innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);});
+function onResize(){checkOrientation();W=window.innerWidth;H=window.innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(1,0,0,1,0,0);ctx.scale(dpr,dpr);}
+window.addEventListener('resize',onResize);
+window.addEventListener('orientationchange',()=>setTimeout(onResize,100));
+window.matchMedia('(orientation:landscape)').addEventListener('change',e=>{isLandscape=e.matches;if(isLandscape)rotateHint.classList.remove('show');else rotateHint.classList.add('show');onResize();});
 setupJoystick();initGame();lastT=performance.now();requestAnimationFrame(loop);
 })();
 </script>
