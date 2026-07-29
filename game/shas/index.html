@@ -5,111 +5,121 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1,viewport-fit=cover">
 <title>鲨鲨幸存者</title>
 <style>
+/* ============ FOUNDATION ============ */
 @font-face{font-family:'Game';src:local('PingFang SC'),local('Microsoft YaHei'),local('Arial'),sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{width:100%;height:100%;overflow:hidden;background:#0a0a2e;font-family:'Game','PingFang SC','Microsoft YaHei',sans-serif;user-select:none;-webkit-user-select:none;touch-action:none;}
+html,body{width:100%;height:100%;overflow:hidden;background:#0e0e2a;font-family:'Game','PingFang SC','Microsoft YaHei',sans-serif;user-select:none;-webkit-user-select:none;touch-action:none;}
 
 #game-container{width:100vw;height:100vh;position:relative;display:flex;justify-content:center;align-items:center;}
 
-/* Landscape enforcement */
-#landscape-warning{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#1a1a4e 0%,#0a0a2e 100%);z-index:9999;flex-direction:column;justify-content:center;align-items:center;color:#ff6b9d;font-size:18px;text-align:center;font-family:'Game','PingFang SC',sans-serif;}
-#landscape-warning .icon{font-size:48px;margin-bottom:16px;animation:rotate 2s infinite;}
-@keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+/* ============ LANDSCAPE WARNING ============ */
+#landscape-warning{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#15153a 0%,#0e0e2a 100%);z-index:9999;flex-direction:column;justify-content:center;align-items:center;color:#ff7099;font-size:18px;text-align:center;font-family:'Game','PingFang SC',sans-serif;}
+#landscape-warning .lw-icon{margin-bottom:18px;animation:spin-soft 2.5s ease-in-out infinite;}
+#landscape-warning .lw-icon svg{width:48px;height:48px;}
+@keyframes spin-soft{0%{transform:rotate(0deg);}50%{transform:rotate(90deg);}100%{transform:rotate(0deg);}}
+#landscape-warning .lw-sub{color:#4488ff;font-size:14px;margin-top:6px;}
 @media(orientation:portrait){#landscape-warning{display:flex;}}
 @media(orientation:landscape){#landscape-warning{display:none;}}
 
 canvas{display:block;}
 
-/* HUD - top bar cartoon style */
-#hud{position:absolute;top:0;left:0;right:0;pointer-events:none;z-index:10;padding:6px 12px;display:flex;justify-content:space-between;align-items:flex-start;}
+/* ============ SHARED TOKENS ============ */
+/* Primary accent: #4488ff blue | Secondary: #ffcc00 gold | Danger: #ff5580 pink-rose | Success: #22cc77 */
+/* Shape system: all-soft rounded, radius 14px base */
 
-.hud-item{background:rgba(0,0,0,0.55);border-radius:12px;padding:4px 10px;border:2px solid rgba(255,255,255,0.2);backdrop-filter:blur(4px);}
-.hud-timer{color:#fff;font-size:15px;font-weight:bold;letter-spacing:1px;}
-.hud-wave{color:#ffcc00;font-size:12px;font-weight:bold;}
-.hud-level{color:#00e5ff;font-size:14px;font-weight:bold;}
-.hud-kills{color:#ff6b9d;font-size:11px;font-weight:bold;}
-.hud-boss-warn{color:#ff3333;font-size:12px;font-weight:bold;animation:blink2 0.5s infinite;display:none;}
-@keyframes blink2{50%{opacity:0.2;}}
+/* ============ HUD ============ */
+#hud{position:absolute;top:0;left:0;right:0;pointer-events:none;z-index:10;padding:8px 14px;display:flex;justify-content:space-between;align-items:flex-start;}
 
-/* HP Bar */
-#hp-bar-wrap{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:10;display:flex;align-items:center;gap:6px;}
-.hp-heart{color:#ff4466;font-size:16px;text-shadow:0 0 6px #ff4466;}
-#hp-outer{width:180px;height:10px;background:rgba(0,0,0,0.5);border-radius:5px;overflow:hidden;border:1px solid rgba(255,255,255,0.3);}
-#hp-inner{height:100%;background:linear-gradient(90deg,#ff4466,#ff8899);transition:width 0.2s;border-radius:5px;}
+.hud-item{background:rgba(10,10,35,0.65);border-radius:14px;padding:5px 12px;border:1.5px solid rgba(255,255,255,0.15);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+.hud-timer{color:#fff;font-size:16px;font-weight:700;letter-spacing:1.5px;}
+.hud-wave{color:#ffcc00;font-size:12px;font-weight:700;}
+.hud-level{color:#4488ff;font-size:14px;font-weight:700;}
+.hud-kills{color:#ff7099;font-size:11px;font-weight:700;}
+.hud-boss-warn{color:#ff3355;font-size:12px;font-weight:700;animation:blink2 0.5s infinite;display:none;}
+@keyframes blink2{50%{opacity:0.15;}}
 
-/* XP Bar */
-#xp-bar-wrap{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:10;display:flex;align-items:center;gap:6px;}
-.xp-star{color:#ffcc00;font-size:12px;text-shadow:0 0 4px #ffcc00;}
-#xp-outer{width:180px;height:6px;background:rgba(0,0,0,0.5);border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,0.2);}
-#xp-inner{height:100%;background:linear-gradient(90deg,#ffcc00,#ffaa00);transition:width 0.2s;border-radius:3px;}
+/* ============ HP / XP BARS ============ */
+#hp-bar-wrap{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:10;display:flex;align-items:center;gap:8px;}
+#hp-bar-wrap .hp-icon svg{width:16px;height:16px;}
+#hp-outer{width:180px;height:10px;background:rgba(0,0,0,0.5);border-radius:14px;overflow:hidden;border:1.5px solid rgba(255,255,255,0.2);}
+#hp-inner{height:100%;background:linear-gradient(90deg,#ff5580,#ff7099);transition:width 0.25s ease;border-radius:14px;}
 
-/* Mobile Joystick */
+#xp-bar-wrap{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:10;display:flex;align-items:center;gap:8px;}
+#xp-bar-wrap .xp-icon svg{width:12px;height:12px;}
+#xp-outer{width:180px;height:6px;background:rgba(0,0,0,0.5);border-radius:14px;overflow:hidden;border:1.5px solid rgba(255,255,255,0.15);}
+#xp-inner{height:100%;background:linear-gradient(90deg,#ffcc00,#ffaa00);transition:width 0.25s ease;border-radius:14px;}
+
+/* ============ MOBILE JOYSTICK ============ */
 #joystick-zone{position:absolute;bottom:60px;left:60px;width:120px;height:120px;z-index:50;pointer-events:all;}
-#joystick-base{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.12);border:3px solid rgba(255,255,255,0.3);position:relative;}
-#joystick-thumb{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.4);position:absolute;top:35px;left:35px;box-shadow:0 0 12px rgba(255,255,255,0.3);transition:transform 0.05s;}
+#joystick-base{width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.1);border:2.5px solid rgba(255,255,255,0.25);position:relative;}
+#joystick-thumb{width:52px;height:52px;border-radius:50%;background:rgba(68,136,255,0.45);position:absolute;top:34px;left:34px;box-shadow:0 0 16px rgba(68,136,255,0.3);transition:transform 0.06s;}
 
-/* Level Up Modal */
-#levelup-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(2px);}
+/* ============ LEVEL UP MODAL ============ */
+#levelup-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(8,8,28,0.82);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);}
 #levelup-modal.active{display:flex;}
 
-.levelup-title{color:#ffcc00;font-size:26px;margin-bottom:16px;text-shadow:0 0 16px rgba(255,204,0,0.5);letter-spacing:3px;font-weight:bold;}
+.levelup-title{color:#ffcc00;font-size:28px;margin-bottom:18px;text-shadow:0 0 18px rgba(255,204,0,0.4);letter-spacing:4px;font-weight:800;}
 
-.levelup-choices{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:700px;}
+.levelup-choices{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:700px;}
 
-.choice-card{width:150px;background:rgba(20,20,60,0.92);border:3px solid rgba(255,255,255,0.15);border-radius:16px;padding:10px;cursor:pointer;transition:all 0.15s;text-align:center;backdrop-filter:blur(4px);}
-.choice-card:active,.choice-card:hover{border-color:#00e5ff;box-shadow:0 0 20px rgba(0,229,255,0.5);transform:scale(1.05);}
-.choice-icon{width:44px;height:44px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;}
-.choice-icon svg{width:38px;height:38px;}
-.choice-name{color:#fff;font-size:13px;font-weight:bold;margin-bottom:3px;}
-.choice-tag{display:inline-block;font-size:8px;padding:1px 6px;border-radius:6px;margin-bottom:4px;font-weight:bold;text-transform:uppercase;}
-.choice-tag.active{background:rgba(0,229,255,0.3);color:#00e5ff;}
-.choice-tag.passive{background:rgba(255,204,0,0.3);color:#ffcc00;}
-.choice-desc{color:#aaa;font-size:9px;line-height:1.3;}
-.choice-lvl{color:#00ff88;font-size:10px;margin-top:3px;font-weight:bold;}
+.choice-card{width:152px;background:rgba(18,18,50,0.92);border:2px solid rgba(255,255,255,0.12);border-radius:16px;padding:12px 10px;cursor:pointer;transition:all 0.18s ease;text-align:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+.choice-card:active,.choice-card:hover{border-color:#4488ff;box-shadow:0 0 24px rgba(68,136,255,0.45);transform:scale(1.06);background:rgba(24,24,62,0.94);}
+.choice-icon{width:46px;height:46px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;}
+.choice-icon svg{width:40px;height:40px;}
+.choice-name{color:#fff;font-size:13px;font-weight:700;margin-bottom:3px;}
+.choice-tag{display:inline-block;font-size:8px;padding:2px 8px;border-radius:14px;margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.choice-tag.active{background:rgba(68,136,255,0.25);color:#4488ff;}
+.choice-tag.passive{background:rgba(255,204,0,0.22);color:#ffcc00;}
+.choice-desc{color:#b0b0c0;font-size:9px;line-height:1.4;margin-bottom:5px;}
+.choice-lvl{color:#22cc77;font-size:10px;font-weight:700;}
 
-/* Game Over */
-#gameover-screen{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(4px);}
-#gameover-screen.active{display:flex;}
-.go-title{font-size:32px;font-weight:bold;letter-spacing:4px;margin-bottom:10px;text-shadow:0 0 20px currentColor;}
-.go-title.win{color:#ffcc00;}
-.go-title.lose{color:#ff4466;}
-.go-stats{color:#ccc;font-size:13px;margin-bottom:16px;text-align:center;line-height:1.8;}
-.go-stats b{color:#00e5ff;}
-.go-btn{background:linear-gradient(180deg,#4488ff,#2266cc);border:none;color:#fff;padding:10px 30px;font-family:inherit;font-size:15px;cursor:pointer;border-radius:20px;font-weight:bold;letter-spacing:1px;box-shadow:0 4px 12px rgba(68,136,255,0.4);}
-.go-btn:active{transform:scale(0.95);}
-
-/* Boss Announce */
+/* ============ BOSS ANNOUNCE ============ */
 #boss-announce{display:none;position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);z-index:150;pointer-events:none;text-align:center;}
 #boss-announce.active{display:block;animation:bossFade 2.5s forwards;}
-#boss-announce .ba-text{color:#ff3333;font-size:38px;font-weight:bold;text-shadow:0 0 30px #ff3333,0 0 60px #ff0000;letter-spacing:6px;}
-#boss-announce .ba-sub{color:#ffcc00;font-size:15px;font-weight:bold;margin-top:6px;}
+#boss-announce .ba-text{color:#ff3355;font-size:40px;font-weight:800;text-shadow:0 0 30px rgba(255,51,85,0.7),0 0 60px rgba(255,0,0,0.4);letter-spacing:6px;}
+#boss-announce .ba-sub{color:#ffcc00;font-size:16px;font-weight:700;margin-top:8px;}
 @keyframes bossFade{0%{opacity:0;transform:translate(-50%,-50%) scale(0.4);}15%{opacity:1;transform:translate(-50%,-50%) scale(1.1);}25%{transform:translate(-50%,-50%) scale(1);}70%{opacity:1;}100%{opacity:0;}}
 
-#pause-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,0.4);font-size:13px;pointer-events:none;z-index:5;display:none;}
+/* ============ GAME OVER ============ */
+#gameover-screen{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,8,26,0.88);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
+#gameover-screen.active{display:flex;}
+.go-title{font-size:36px;font-weight:800;letter-spacing:6px;margin-bottom:14px;}
+.go-title.win{color:#ffcc00;text-shadow:0 0 28px rgba(255,204,0,0.5);}
+.go-title.lose{color:#ff5580;text-shadow:0 0 28px rgba(255,85,128,0.5);}
+.go-stats{color:#c0c0d0;font-size:14px;margin-bottom:20px;text-align:center;line-height:2;}
+.go-stats b{color:#4488ff;font-weight:700;}
+.go-btn{background:linear-gradient(180deg,#4488ff,#3366dd);border:none;color:#fff;padding:12px 36px;font-family:inherit;font-size:16px;cursor:pointer;border-radius:14px;font-weight:700;letter-spacing:2px;box-shadow:0 4px 16px rgba(68,136,255,0.4);transition:transform 0.1s ease;}
+.go-btn:active{transform:scale(0.96);}
 
-/* Weapon slots indicator */
-#weapon-slots{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:10;pointer-events:none;}
-.wpn-slot{width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.wpn-slot svg{width:20px;height:20px;}
-.wpn-slot .lvl{position:absolute;bottom:-2px;right:-2px;background:#ffcc00;color:#000;font-size:7px;font-weight:bold;width:12px;height:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+/* ============ PAUSE ============ */
+#pause-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(255,255,255,0.35);font-size:14px;pointer-events:none;z-index:5;display:none;font-weight:700;letter-spacing:2px;}
+
+/* ============ WEAPON SLOTS ============ */
+#weapon-slots{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:10;pointer-events:none;}
+.wpn-slot{width:30px;height:30px;border-radius:10px;background:rgba(10,10,35,0.6);border:1.5px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+.wpn-slot svg{width:22px;height:22px;}
+.wpn-slot .lvl{position:absolute;bottom:-2px;right:-2px;background:#ffcc00;color:#0e0e2a;font-size:7px;font-weight:800;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.2);}
 </style>
 </head>
 <body>
 
 <div id="landscape-warning">
-  <div class="icon">&#8635;</div>
-  请横屏使用<br><span style="color:#00e5ff;font-size:14px;">旋转设备获得最佳体验</span>
+  <div class="lw-icon">
+    <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="6" stroke="#4488ff" stroke-width="2.5"/><path d="M26 10V8a4 4 0 0 0-8 0v2" stroke="#ff7099" stroke-width="2.5" stroke-linecap="round"/><path d="M24 20v8M24 32v1" stroke="#ffcc00" stroke-width="3" stroke-linecap="round"/></svg>
+  </div>
+  <div>请横屏使用</div>
+  <div class="lw-sub">旋转设备获得最佳体验</div>
 </div>
 
 <div id="game-container">
   <canvas id="game"></canvas>
-  
+
   <div id="hud">
-    <div style="display:flex;flex-direction:column;gap:3px;">
+    <div style="display:flex;flex-direction:column;gap:4px;">
       <div class="hud-item hud-timer" id="hud-timer">00:00</div>
       <div class="hud-item hud-wave" id="hud-wave">波次 1</div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end;">
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
       <div class="hud-item hud-level" id="hud-level">Lv.1</div>
       <div class="hud-item hud-kills" id="hud-kills">击杀 0</div>
       <div class="hud-item hud-boss-warn" id="hud-boss-warn">BOSS来袭!</div>
@@ -119,11 +129,15 @@ canvas{display:block;}
   <div id="weapon-slots"></div>
 
   <div id="hp-bar-wrap">
-    <span class="hp-heart">&#9829;</span>
+    <span class="hp-icon">
+      <svg viewBox="0 0 24 24" fill="#ff5580"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </span>
     <div id="hp-outer"><div id="hp-inner" style="width:100%"></div></div>
   </div>
   <div id="xp-bar-wrap">
-    <span class="xp-star">&#9733;</span>
+    <span class="xp-icon">
+      <svg viewBox="0 0 24 24" fill="#ffcc00"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+    </span>
     <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
   </div>
 
@@ -137,7 +151,7 @@ canvas{display:block;}
 </div>
 
 <div id="levelup-modal">
-  <div class="levelup-title">&#11088; 升级! &#11088;</div>
+  <div class="levelup-title">升级!</div>
   <div class="levelup-choices" id="levelup-choices"></div>
 </div>
 
@@ -161,33 +175,33 @@ const WAVE_INTERVAL=90;
 const BOSS_INTERVAL=150;
 const BOSS_COUNT=3;
 
-// ============ SIMPLE SVG ICONS (cartoon style) ============
+// ============ SVG ICONS ============
 const icons={
-  katana:`<svg viewBox="0 0 48 48"><rect x="22" y="2" width="4" height="28" rx="2" fill="#ddd"/><rect x="20" y="28" width="8" height="4" rx="2" fill="#aaa"/><circle cx="24" cy="42" r="3" fill="#777"/><rect x="7" y="3" width="5" height="18" rx="2" fill="#bbb" transform="rotate(-18,9,12)"/></svg>`,
-  kunai:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,12 24,8 29,12" fill="#ccc"/><rect x="22" y="12" width="4" height="18" rx="1" fill="#999"/><rect x="10" y="26" width="28" height="10" rx="4" fill="#666"/></svg>`,
-  staff:`<svg viewBox="0 0 48 48"><rect x="21" y="6" width="6" height="34" rx="3" fill="#e55"/><rect x="10" y="4" width="28" height="7" rx="3" fill="#f77"/><rect x="14" y="2" width="20" height="4" rx="2" fill="#f99"/></svg>`,
-  revolver:`<svg viewBox="0 0 48 48"><rect x="26" y="12" width="16" height="12" rx="4" fill="#888"/><rect x="8" y="15" width="18" height="6" rx="2" fill="#aaa"/><circle cx="42" cy="18" r="6" fill="#666"/><circle cx="42" cy="18" r="3" fill="#444"/></svg>`,
-  thunder:`<svg viewBox="0 0 48 48"><polygon points="25,2 18,22 26,18 20,44 32,24 23,28" fill="#0dd"/><rect x="6" y="40" width="36" height="5" rx="2" fill="#0aa"/></svg>`,
-  lightning:`<svg viewBox="0 0 48 48"><polygon points="25,2 13,24 23,20 15,44 36,22 24,26" fill="#fd0"/></svg>`,
-  timeField:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#0dd" stroke-width="2.5" stroke-dasharray="8,5"/><circle cx="24" cy="24" r="8" fill="rgba(0,221,221,0.15)" stroke="#0dd" stroke-width="1.5"/><line x1="24" y1="24" x2="24" y2="12" stroke="#0dd" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="24" x2="30" y2="24" stroke="#0dd" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-  bomb:`<svg viewBox="0 0 48 48"><circle cx="24" cy="26" r="16" fill="#444"/><circle cx="24" cy="26" r="10" fill="#555"/><rect x="22" y="4" width="4" height="8" rx="1" fill="#777"/><circle cx="24" cy="4" r="5" fill="#f90"/></svg>`,
-  poison:`<svg viewBox="0 0 48 48"><rect x="12" y="22" width="24" height="22" rx="5" fill="#4a4"/><rect x="8" y="12" width="32" height="14" rx="4" fill="#3a3"/><circle cx="18" cy="18" r="3" fill="#0f0"/><circle cx="30" cy="18" r="3" fill="#0f0"/><line x1="24" y1="8" x2="24" y2="4" stroke="#4a4" stroke-width="3" stroke-linecap="round"/></svg>`,
-  volleyball:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" fill="#f80"/><path d="M11,14 Q24,8 37,14" fill="none" stroke="#fff" stroke-width="2"/><path d="M11,34 Q24,40 37,34" fill="none" stroke="#fff" stroke-width="2"/><path d="M14,11 Q20,24 14,37" fill="none" stroke="#fff" stroke-width="2"/></svg>`,
-  spear:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,20 24,32 29,20" fill="#d90"/><rect x="22" y="0" width="4" height="8" rx="2" fill="#d90"/><rect x="17" y="30" width="14" height="5" rx="2" fill="#975"/></svg>`,
-  hammer:`<svg viewBox="0 0 48 48"><rect x="12" y="6" width="24" height="18" rx="5" fill="#999"/><rect x="20" y="2" width="8" height="8" rx="2" fill="#777"/><rect x="18" y="24" width="12" height="22" rx="3" fill="#b97"/></svg>`,
-  brick:`<svg viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="22" rx="4" fill="#d55"/><rect x="5" y="5" width="12" height="11" rx="2" fill="#b44"/><rect x="19" y="5" width="12" height="11" rx="2" fill="#c44"/><rect x="33" y="5" width="10" height="11" rx="2" fill="#b44"/></svg>`,
-  fireWheel:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15" fill="none" stroke="#f80" stroke-width="3.5"/><circle cx="24" cy="24" r="6" fill="#f40"/><line x1="24" y1="9" x2="24" y2="3" stroke="#f80" stroke-width="2.5" stroke-linecap="round"/><line x1="39" y1="24" x2="45" y2="24" stroke="#f80" stroke-width="2.5" stroke-linecap="round"/><line x1="9" y1="24" x2="3" y2="24" stroke="#f80" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-  xpScroll:`<svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="3" fill="#da5"/><rect x="14" y="10" width="20" height="16" rx="2" fill="#fc7"/><line x1="18" y1="16" x2="30" y2="16" stroke="#b84" stroke-width="1.5"/><line x1="18" y1="22" x2="28" y2="22" stroke="#b84" stroke-width="1.5"/></svg>`,
-  helmet:`<svg viewBox="0 0 48 48"><path d="M8,36 Q8,8 24,6 Q40,8 40,36 Z" fill="#777"/><rect x="10" y="30" width="28" height="8" rx="2" fill="#666"/><rect x="6" y="20" width="10" height="15" rx="3" fill="#888"/></svg>`,
-  bullet:`<svg viewBox="0 0 48 48"><polygon points="6,24 30,8 34,24 30,40" fill="#999"/><circle cx="34" cy="24" r="7" fill="#bb0"/><circle cx="34" cy="24" r="3.5" fill="#fe0"/></svg>`,
-  cube:`<svg viewBox="0 0 48 48"><polygon points="24,5 40,16 40,34 24,45 8,34 8,16" fill="#0aa" stroke="#0dd" stroke-width="2"/><polygon points="24,5 40,16 24,27 8,16" fill="rgba(0,221,221,0.25)" stroke="#0dd" stroke-width="1.5"/></svg>`,
-  bombPack:`<svg viewBox="0 0 48 48"><rect x="10" y="14" width="28" height="26" rx="4" fill="#664"/><rect x="14" y="8" width="20" height="10" rx="3" fill="#775"/><circle cx="20" cy="30" r="5" fill="#444"/><circle cx="32" cy="28" r="5" fill="#444"/></svg>`,
-  jade:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="#0a0"/><circle cx="24" cy="24" r="9" fill="rgba(0,255,0,0.2)"/><path d="M24,7 L28,16 L24,19 L20,16 Z" fill="#0e0"/></svg>`,
-  magnet:`<svg viewBox="0 0 48 48"><rect x="8" y="12" width="12" height="26" rx="4" fill="#e55"/><rect x="28" y="12" width="12" height="26" rx="4" fill="#55e"/><line x1="20" y1="25" x2="28" y2="25" stroke="#fff" stroke-width="3"/></svg>`,
-  headphone:`<svg viewBox="0 0 48 48"><path d="M6,36 Q6,10 24,8 Q42,10 42,36" fill="none" stroke="#99f" stroke-width="3.5"/><rect x="4" y="30" width="12" height="15" rx="6" fill="#77f"/><rect x="32" y="30" width="12" height="15" rx="6" fill="#77f"/></svg>`,
-  shoe:`<svg viewBox="0 0 48 48"><path d="M6,32 Q6,18 18,14 L38,14 Q46,14 46,24 Q46,32 38,32 L20,32 Q10,34 6,42 Z" fill="#99a"/><path d="M38,14 L44,8 L46,12" fill="#778"/></svg>`,
-  ribbon:`<svg viewBox="0 0 48 48"><path d="M6,4 L24,18 L42,4" fill="none" stroke="#f5f" stroke-width="3"/><path d="M10,4 L24,22" fill="none" stroke="#f5f" stroke-width="2"/><path d="M38,4 L24,22" fill="none" stroke="#f5f" stroke-width="2"/></svg>`,
-  pill:`<svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="14" ry="20" fill="#e55"/><ellipse cx="24" cy="16" rx="6" ry="4" fill="rgba(255,255,255,0.35)"/></svg>`
+  katana:`<svg viewBox="0 0 48 48"><rect x="22" y="2" width="4" height="28" rx="2" fill="#e8e8e8"/><rect x="20" y="28" width="8" height="4" rx="2" fill="#b0b0b0"/><circle cx="24" cy="42" r="3" fill="#888"/><rect x="7" y="3" width="5" height="18" rx="2" fill="#ccc" transform="rotate(-18,9,12)"/></svg>`,
+  kunai:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,12 24,8 29,12" fill="#d0d0d0"/><rect x="22" y="12" width="4" height="18" rx="1" fill="#aaa"/><rect x="10" y="26" width="28" height="10" rx="4" fill="#777"/></svg>`,
+  staff:`<svg viewBox="0 0 48 48"><rect x="21" y="6" width="6" height="34" rx="3" fill="#ee5555"/><rect x="10" y="4" width="28" height="7" rx="3" fill="#ff7777"/><rect x="14" y="2" width="20" height="4" rx="2" fill="#ffaaaa"/></svg>`,
+  revolver:`<svg viewBox="0 0 48 48"><rect x="26" y="12" width="16" height="12" rx="4" fill="#999"/><rect x="8" y="15" width="18" height="6" rx="2" fill="#bbb"/><circle cx="42" cy="18" r="6" fill="#777"/><circle cx="42" cy="18" r="3" fill="#555"/></svg>`,
+  thunder:`<svg viewBox="0 0 48 48"><polygon points="25,2 18,22 26,18 20,44 32,24 23,28" fill="#00dddd"/><rect x="6" y="40" width="36" height="5" rx="2" fill="#00aaaa"/></svg>`,
+  lightning:`<svg viewBox="0 0 48 48"><polygon points="25,2 13,24 23,20 15,44 36,22 24,26" fill="#ffdd00"/></svg>`,
+  timeField:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#00dddd" stroke-width="2.5" stroke-dasharray="8,5"/><circle cx="24" cy="24" r="8" fill="rgba(0,221,221,0.15)" stroke="#00dddd" stroke-width="1.5"/><line x1="24" y1="24" x2="24" y2="12" stroke="#00dddd" stroke-width="2.5" stroke-linecap="round"/><line x1="24" y1="24" x2="30" y2="24" stroke="#00dddd" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  bomb:`<svg viewBox="0 0 48 48"><circle cx="24" cy="26" r="16" fill="#555"/><circle cx="24" cy="26" r="10" fill="#666"/><rect x="22" y="4" width="4" height="8" rx="1" fill="#888"/><circle cx="24" cy="4" r="5" fill="#ff9900"/></svg>`,
+  poison:`<svg viewBox="0 0 48 48"><rect x="12" y="22" width="24" height="22" rx="5" fill="#44aa44"/><rect x="8" y="12" width="32" height="14" rx="4" fill="#33aa33"/><circle cx="18" cy="18" r="3" fill="#00ff00"/><circle cx="30" cy="18" r="3" fill="#00ff00"/><line x1="24" y1="8" x2="24" y2="4" stroke="#44aa44" stroke-width="3" stroke-linecap="round"/></svg>`,
+  volleyball:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" fill="#ff8800"/><path d="M11,14 Q24,8 37,14" fill="none" stroke="#fff" stroke-width="2"/><path d="M11,34 Q24,40 37,34" fill="none" stroke="#fff" stroke-width="2"/><path d="M14,11 Q20,24 14,37" fill="none" stroke="#fff" stroke-width="2"/></svg>`,
+  spear:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,20 24,32 29,20" fill="#dd9900"/><rect x="22" y="0" width="4" height="8" rx="2" fill="#dd9900"/><rect x="17" y="30" width="14" height="5" rx="2" fill="#997755"/></svg>`,
+  hammer:`<svg viewBox="0 0 48 48"><rect x="12" y="6" width="24" height="18" rx="5" fill="#aaa"/><rect x="20" y="2" width="8" height="8" rx="2" fill="#888"/><rect x="18" y="24" width="12" height="22" rx="3" fill="#bb9977"/></svg>`,
+  brick:`<svg viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="22" rx="4" fill="#dd5555"/><rect x="5" y="5" width="12" height="11" rx="2" fill="#bb4444"/><rect x="19" y="5" width="12" height="11" rx="2" fill="#cc4444"/><rect x="33" y="5" width="10" height="11" rx="2" fill="#bb4444"/></svg>`,
+  fireWheel:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15" fill="none" stroke="#ff8800" stroke-width="3.5"/><circle cx="24" cy="24" r="6" fill="#ff4400"/><line x1="24" y1="9" x2="24" y2="3" stroke="#ff8800" stroke-width="2.5" stroke-linecap="round"/><line x1="39" y1="24" x2="45" y2="24" stroke="#ff8800" stroke-width="2.5" stroke-linecap="round"/><line x1="9" y1="24" x2="3" y2="24" stroke="#ff8800" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  xpScroll:`<svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="36" rx="3" fill="#ddaa55"/><rect x="14" y="10" width="20" height="16" rx="2" fill="#ffcc77"/><line x1="18" y1="16" x2="30" y2="16" stroke="#bb8844" stroke-width="1.5"/><line x1="18" y1="22" x2="28" y2="22" stroke="#bb8844" stroke-width="1.5"/></svg>`,
+  helmet:`<svg viewBox="0 0 48 48"><path d="M8,36 Q8,8 24,6 Q40,8 40,36 Z" fill="#888"/><rect x="10" y="30" width="28" height="8" rx="2" fill="#777"/><rect x="6" y="20" width="10" height="15" rx="3" fill="#999"/></svg>`,
+  bullet:`<svg viewBox="0 0 48 48"><polygon points="6,24 30,8 34,24 30,40" fill="#aaa"/><circle cx="34" cy="24" r="7" fill="#bbbb00"/><circle cx="34" cy="24" r="3.5" fill="#ffee00"/></svg>`,
+  cube:`<svg viewBox="0 0 48 48"><polygon points="24,5 40,16 40,34 24,45 8,34 8,16" fill="#00aaaa" stroke="#00dddd" stroke-width="2"/><polygon points="24,5 40,16 24,27 8,16" fill="rgba(0,221,221,0.25)" stroke="#00dddd" stroke-width="1.5"/></svg>`,
+  bombPack:`<svg viewBox="0 0 48 48"><rect x="10" y="14" width="28" height="26" rx="4" fill="#665544"/><rect x="14" y="8" width="20" height="10" rx="3" fill="#776655"/><circle cx="20" cy="30" r="5" fill="#555"/><circle cx="32" cy="28" r="5" fill="#555"/></svg>`,
+  jade:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="#00aa00"/><circle cx="24" cy="24" r="9" fill="rgba(0,255,0,0.2)"/><path d="M24,7 L28,16 L24,19 L20,16 Z" fill="#00ee00"/></svg>`,
+  magnet:`<svg viewBox="0 0 48 48"><rect x="8" y="12" width="12" height="26" rx="4" fill="#ee5555"/><rect x="28" y="12" width="12" height="26" rx="4" fill="#5555ee"/><line x1="20" y1="25" x2="28" y2="25" stroke="#fff" stroke-width="3"/></svg>`,
+  headphone:`<svg viewBox="0 0 48 48"><path d="M6,36 Q6,10 24,8 Q42,10 42,36" fill="none" stroke="#9999ff" stroke-width="3.5"/><rect x="4" y="30" width="12" height="15" rx="6" fill="#7777ff"/><rect x="32" y="30" width="12" height="15" rx="6" fill="#7777ff"/></svg>`,
+  shoe:`<svg viewBox="0 0 48 48"><path d="M6,32 Q6,18 18,14 L38,14 Q46,14 46,24 Q46,32 38,32 L20,32 Q10,34 6,42 Z" fill="#99aaa"/><path d="M38,14 L44,8 L46,12" fill="#778888"/></svg>`,
+  ribbon:`<svg viewBox="0 0 48 48"><path d="M6,4 L24,18 L42,4" fill="none" stroke="#ff55ff" stroke-width="3"/><path d="M10,4 L24,22" fill="none" stroke="#ff55ff" stroke-width="2"/><path d="M38,4 L24,22" fill="none" stroke="#ff55ff" stroke-width="2"/></svg>`,
+  pill:`<svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="14" ry="20" fill="#ee5555"/><ellipse cx="24" cy="16" rx="6" ry="4" fill="rgba(255,255,255,0.35)"/></svg>`
 };
 
 // ============ WEAPON DEFS ============
@@ -345,7 +359,7 @@ canvas.addEventListener('click',e=>{
     cards.forEach((card,i)=>{
       const cr=card.getBoundingClientRect();
       const crx=cr.left-rect.left,cry=cr.top-rect.top;
-      if(mx>=crx&&mx<=crx+cr.width&&my>=cry&&my<=cry+cr.height)selectUpgrade(i);
+      if(mx>=crx&&mx<=crx+cr.width&&my>=cry&&my<=cr.height)selectUpgrade(i);
     });
   }
 });
@@ -532,14 +546,14 @@ function renderLevelUpChoices(){
     if(c.type==='weapon_upgrade'){
       const w=c.weapon;const d=weaponDefs[w.id];isvg=icons[d.icon];name=d.name;tag='主动技能';tagCls='active';
       desc=w.level+1>=6?`超武: ${d.superName}`:`Lv${w.level+1} - ${d.desc}`;
-      lvl=w.level+1>=6?'✦ 超武':`Lv${w.level}→Lv${w.level+1}`;
+      lvl=w.level+1>=6?'✦ 超武':`Lv${w.level} → Lv${w.level+1}`;
     }else if(c.type==='new_weapon'){
       const d=weaponDefs[c.weaponId];isvg=icons[d.icon];name=d.name;tag='新主动';tagCls='active';desc=d.desc;lvl='获得新技能';
     }else if(c.type==='new_passive'){
       const d=passiveDefs[c.passiveId];isvg=icons[d.icon];name=d.name;tag='被动道具';tagCls='passive';desc=d.desc;lvl='获得新道具';
     }else if(c.type==='passive_upgrade'){
       const p=c.passive;const d=passiveDefs[p.id];isvg=icons[d.icon];name=d.name;tag='被动升级';tagCls='passive';
-      desc=`效果提升至 ${Math.round(d.value*(p.level+1)*100)}%`;lvl=`Lv${p.level}→Lv${p.level+1}`;
+      desc=`效果提升至 ${Math.round(d.value*(p.level+1)*100)}%`;lvl=`Lv${p.level} → Lv${p.level+1}`;
     }
     card.innerHTML=`<div class="choice-icon">${isvg}</div><span class="choice-tag ${tagCls}">${tag}</span><div class="choice-name">${name}</div><div class="choice-desc">${desc}</div><div class="choice-lvl">${lvl}</div>`;
     card.addEventListener('click',()=>selectUpgrade(i));
@@ -712,7 +726,7 @@ function updateWeaponSlots(){
   let html='';
   player.weapons.forEach(w=>{
     const d=weaponDefs[w.id];
-    html+=`<div class="wpn-slot" style="position:relative">${icons[d.icon]}<span class="lvl">${w.level>=6?'S':w.level}</span></div>`;
+    html+=`<div class="wpn-slot">${icons[d.icon]}<span class="lvl">${w.level>=6?'S':w.level}</span></div>`;
   });
   slots.innerHTML=html;
 }
@@ -721,7 +735,7 @@ function updateWeaponSlots(){
 function drawBackground(){
   // Colorful space background
   const grad=ctx.createLinearGradient(0,0,0,canvas.height);
-  grad.addColorStop(0,'#0a0a3e');grad.addColorStop(0.5,'#1a1a5e');grad.addColorStop(1,'#0a0a2e');
+  grad.addColorStop(0,'#0e0e30');grad.addColorStop(0.5,'#18184a');grad.addColorStop(1,'#0e0e2a');
   ctx.fillStyle=grad;ctx.fillRect(0,0,canvas.width,canvas.height);
 
   // Stars
@@ -736,16 +750,16 @@ function drawBackground(){
 
   // Grid (subtle)
   ctx.save();ctx.translate(-camera.x,-camera.y);
-  ctx.strokeStyle='rgba(100,150,255,0.08)';ctx.lineWidth=1;
+  ctx.strokeStyle='rgba(100,150,255,0.06)';ctx.lineWidth=1;
   const sx=Math.floor(camera.x/TILE)*TILE,sy=Math.floor(camera.y/TILE)*TILE;
   for(let x=sx;x<camera.x+canvas.width+TILE;x+=TILE){ctx.beginPath();ctx.moveTo(x,camera.y);ctx.lineTo(x,camera.y+canvas.height);ctx.stroke();}
   for(let y=sy;y<camera.y+canvas.height+TILE;y+=TILE){ctx.beginPath();ctx.moveTo(camera.x,y);ctx.lineTo(camera.x+canvas.width,y);ctx.stroke();}
 
   // Map border - cartoon purple
-  ctx.strokeStyle='rgba(120,80,255,0.4)';ctx.lineWidth=4;ctx.strokeRect(2,2,MAP_W-4,MAP_H-4);
+  ctx.strokeStyle='rgba(120,80,255,0.35)';ctx.lineWidth=4;ctx.strokeRect(2,2,MAP_W-4,MAP_H-4);
 
   // Decorative space elements
-  ctx.fillStyle='rgba(100,80,255,0.04)';
+  ctx.fillStyle='rgba(100,80,255,0.03)';
   for(let i=0;i<6;i++){
     const dx=(i*250+100)%MAP_W,dy=(i*180+200)%MAP_H;
     ctx.fillRect(dx,dy,rand(40,100),rand(30,80));
@@ -762,14 +776,14 @@ function drawMonster(m){
   const s=m.size;
 
   if(m.isBoss){
-    // Boss - big threatening cartoon monster
+    // Boss
     ctx.shadowColor=m.color;ctx.shadowBlur=15;
     ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.fill();
     ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.arc(0,0,s*0.6,0,Math.PI*2);ctx.fill();
     // Angry eyes
     ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.2,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.2,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#000';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#0e0e2a';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
     // Horns
     ctx.fillStyle=m.color;
@@ -780,8 +794,8 @@ function drawMonster(m){
     // Boss HP bar
     const bw=100,bh=7,bx=-bw/2,by=-s-18;
     ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(bx-1,by-1,bw+2,bh+2);
-    ctx.fillStyle='#444';ctx.fillRect(bx,by,bw,bh);
-    ctx.fillStyle='#ff3333';ctx.fillRect(bx,by,bw*(m.hp/m.maxHp),bh);
+    ctx.fillStyle='#333';ctx.fillRect(bx,by,bw,bh);
+    ctx.fillStyle='#ff3355';ctx.fillRect(bx,by,bw*(m.hp/m.maxHp),bh);
     ctx.fillStyle='#fff';ctx.font='bold 9px Game,PingFang SC,sans-serif';ctx.textAlign='center';
     ctx.fillText(m.name,bx+bw/2,by-4);
   }else{
@@ -790,16 +804,15 @@ function drawMonster(m){
       case 'slime':
         ctx.beginPath();ctx.ellipse(0,s*0.2,s,s*0.7,0,Math.PI,0);ctx.fill();
         ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.fill();
-        // Eyes
         ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.25,0,Math.PI*2);ctx.fill();
         ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.25,0,Math.PI*2);ctx.fill();
-        ctx.fillStyle='#222';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.12,0,Math.PI*2);ctx.fill();
+        ctx.fillStyle='#1a1a2e';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.12,0,Math.PI*2);ctx.fill();
         ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.12,0,Math.PI*2);ctx.fill();
         break;
       case 'skull':
         ctx.beginPath();ctx.arc(0,-s*0.1,s*0.65,0,Math.PI*2);ctx.fill();
         ctx.fillRect(-s*0.35,s*0.15,s*0.7,s*0.5);
-        ctx.fillStyle='#111';ctx.beginPath();ctx.arc(-s*0.2,-s*0.05,s*0.15,0,Math.PI*2);ctx.fill();
+        ctx.fillStyle='#1a1a2e';ctx.beginPath();ctx.arc(-s*0.2,-s*0.05,s*0.15,0,Math.PI*2);ctx.fill();
         ctx.beginPath();ctx.arc(s*0.2,-s*0.05,s*0.15,0,Math.PI*2);ctx.fill();
         break;
       case 'bat':
@@ -845,7 +858,6 @@ function render(){
     ctx.fillStyle='#ffcc00';ctx.shadowColor='#ffcc00';ctx.shadowBlur=10;
     ctx.fillRect(cx-14,cy-10,28,20);ctx.fillStyle='#cc8800';
     ctx.fillRect(cx-12,cy-6,24,6);
-    // Sparkle
     ctx.fillStyle='#fff';
     ctx.beginPath();ctx.arc(cx-8,cy-8,2,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(cx+8,cy-4,1.5,0,Math.PI*2);ctx.fill();
@@ -900,24 +912,18 @@ function render(){
   // Body shadow
   ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(px,py+2,13,5,0,0,Math.PI*2);ctx.fill();
 
-  // Body - shark shape (blue)
   const bodyColor='#4499ff';
   ctx.fillStyle=bodyColor;ctx.strokeStyle='#2277dd';ctx.lineWidth=2.5;
 
   // Shark body
   ctx.beginPath();
-  // Head
   ctx.arc(px,py-6,9,Math.PI*0.15,Math.PI*0.85);
-  // Body right side
   ctx.quadraticCurveTo(px+10,py+4,px+3,py+12);
-  // Tail
   ctx.lineTo(px+12,py+16);
   ctx.lineTo(px+2,py+12);
-  // Bottom
   ctx.lineTo(px-2,py+12);
   ctx.lineTo(px-12,py+16);
   ctx.lineTo(px-3,py+12);
-  // Left side
   ctx.quadraticCurveTo(px-10,py+4,px-9,py-6);
   ctx.closePath();
   ctx.fill();ctx.stroke();
