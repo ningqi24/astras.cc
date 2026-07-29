@@ -7,107 +7,226 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>鲨鲨幸存者</title>
 <style>
-:root{--bg:#0a0a14;--panel:#141428;--gold:#f0c040;--danger:#ff4050;--accent:#40b8ff;--text:#d0d8e8;--xp:#40e080;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px)}
+:root{
+  --bg:#050510;
+  --panel:rgba(8,8,28,0.92);
+  --cyan:#00e5ff;
+  --pink:#ff2d95;
+  --gold:#ffd740;
+  --danger:#ff3060;
+  --xp:#00ff88;
+  --text:#c8d8f0;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'PingFang SC','Heiti SC',sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'SF Pro','PingFang SC','Heiti SC',sans-serif;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 #gc{display:block;position:fixed;top:0;left:0;width:100%;height:100%}
 
-/* ====== 顶部 HUD 条 ====== */
-.hud-bar{position:fixed;top:max(4px,var(--safe-top));left:max(8px,var(--safe-left));right:max(8px,var(--safe-right));display:flex;align-items:center;justify-content:space-between;gap:6px;z-index:10;pointer-events:none}
-.hud-left{display:flex;align-items:center;gap:6px}
-.hud-center{display:flex;flex-direction:column;align-items:center;flex:1;max-width:280px;margin:0 auto}
-.hud-right{display:flex;align-items:center;gap:6px}
-.hud-item{background:rgba(10,10,24,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:3px 8px;font-size:11px;color:var(--text);display:flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap}
-.hud-val{font-size:13px}
-.hud-gold{color:var(--gold)}.hud-accent{color:var(--accent)}.hud-danger{color:var(--danger)}.hud-xp{color:var(--xp)}
-.hud-icon{width:14px;height:14px;flex-shrink:0}
+/* ====== 顶部 HUD ====== */
+.hud-bar{
+  position:fixed;top:max(6px,var(--safe-top));left:max(10px,var(--safe-left));right:max(10px,var(--safe-right));
+  display:flex;align-items:center;justify-content:space-between;gap:8px;z-index:10;pointer-events:none;
+}
+.hud-left,.hud-right{display:flex;align-items:center;gap:6px}
+.hud-center{display:flex;flex-direction:column;align-items:center;flex:1;max-width:300px;margin:0 auto}
+.hud-item{
+  background:rgba(6,6,24,0.88);border:1px solid rgba(0,229,255,0.15);
+  border-radius:6px;padding:4px 9px;font-size:10px;color:var(--text);
+  display:flex;align-items:center;gap:5px;font-weight:700;white-space:nowrap;
+  box-shadow:0 0 10px rgba(0,229,255,0.04),inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.hud-val{font-size:13px;letter-spacing:1px}
+.hud-gold{color:var(--gold);text-shadow:0 0 8px rgba(255,215,64,0.4)}
+.hud-cyan{color:var(--cyan);text-shadow:0 0 8px rgba(0,229,255,0.4)}
+.hud-pink{color:var(--pink);text-shadow:0 0 8px rgba(255,45,149,0.4)}
+.hud-xp{color:var(--xp)}
+.hud-icon{width:14px;height:14px;flex-shrink:0;opacity:0.9}
 
-/* XP 条 + 等级 */
-.xp-bar-wrap{width:100%;height:5px;background:rgba(10,10,24,0.8);border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
-.xp-bar{height:100%;background:linear-gradient(90deg,#40e080,#40b8ff);border-radius:2px;transition:width 0.2s;width:0}
-.level-tag{font-size:9px;color:var(--accent);font-weight:900;text-shadow:0 0 6px rgba(64,184,255,0.5);margin-top:1px;white-space:nowrap}
+/* XP 条 */
+.xp-bar-wrap{
+  width:100%;height:4px;background:rgba(6,6,24,0.8);border-radius:2px;overflow:hidden;
+  border:1px solid rgba(0,229,255,0.1);box-shadow:0 0 8px rgba(0,229,255,0.05);
+}
+.xp-bar{
+  height:100%;background:linear-gradient(90deg,#00ff88,#00e5ff);border-radius:2px;
+  transition:width 0.25s;width:0;box-shadow:0 0 8px rgba(0,229,255,0.5);
+}
+.level-tag{
+  font-size:9px;color:var(--cyan);font-weight:900;margin-top:2px;
+  text-shadow:0 0 10px rgba(0,229,255,0.6);letter-spacing:0.5px;
+}
 
 /* BOSS HP */
-.boss-indicator{position:fixed;top:max(50px,calc(44px + var(--safe-top)));left:50%;transform:translateX(-50%);z-index:10;display:none;flex-direction:column;align-items:center;gap:2px;pointer-events:none}
+.boss-indicator{
+  position:fixed;top:max(52px,calc(44px + var(--safe-top)));left:50%;transform:translateX(-50%);
+  z-index:10;display:none;flex-direction:column;align-items:center;gap:3px;pointer-events:none;
+}
 .boss-indicator.show{display:flex}
-.boss-name-tag{font-size:10px;color:var(--danger);font-weight:700;text-shadow:0 0 6px rgba(255,64,80,0.6)}
-.boss-hp-bar{width:180px;height:6px;background:rgba(0,0,0,0.6);border-radius:3px;overflow:hidden}
-.boss-hp-fill{height:100%;background:linear-gradient(90deg,#ff4050,#ff8040);border-radius:3px;width:0;transition:width 0.3s}
+.boss-name-tag{
+  font-size:10px;color:var(--pink);font-weight:700;
+  text-shadow:0 0 10px rgba(255,45,149,0.7);letter-spacing:2px;text-transform:uppercase;
+}
+.boss-hp-bar{
+  width:200px;height:6px;background:rgba(0,0,0,0.6);border-radius:3px;overflow:hidden;
+  border:1px solid rgba(255,45,149,0.15);
+}
+.boss-hp-fill{
+  height:100%;background:linear-gradient(90deg,#ff3060,#ff2d95,#ff3060);
+  border-radius:3px;width:0;transition:width 0.3s;
+  box-shadow:0 0 12px rgba(255,45,149,0.6);
+}
 
-/* 潮汐通知 */
-.tide-alert{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:30;pointer-events:none;opacity:0;transition:opacity 0.3s}
+/* 潮汐 */
+.tide-alert{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:30;pointer-events:none;
+  opacity:0;transition:opacity 0.3s;
+}
 .tide-alert.show{opacity:1}
-.tide-text{font-size:28px;font-weight:900;color:#ff6644;text-shadow:0 0 20px rgba(255,100,60,0.8),0 0 60px rgba(255,60,20,0.5);letter-spacing:6px;animation:tidePulse 0.6s ease-in-out infinite alternate}
-.tide-sub{font-size:13px;color:#ffaa88;text-align:center;margin-top:4px;text-shadow:0 0 10px rgba(255,100,60,0.5)}
-@keyframes tidePulse{0%{transform:scale(1);text-shadow:0 0 20px rgba(255,100,60,0.8),0 0 60px rgba(255,60,20,0.5)}100%{transform:scale(1.08);text-shadow:0 0 30px rgba(255,100,60,1),0 0 80px rgba(255,60,20,0.7)}}
+.tide-text{
+  font-size:30px;font-weight:900;color:#ff6644;
+  text-shadow:0 0 24px rgba(255,100,60,0.9),0 0 60px rgba(255,60,20,0.6),0 0 100px rgba(255,50,10,0.3);
+  letter-spacing:8px;animation:tidePulse 0.5s ease-in-out infinite alternate;
+}
+.tide-sub{
+  font-size:13px;color:#ffaa88;text-align:center;margin-top:6px;
+  text-shadow:0 0 12px rgba(255,100,60,0.6);letter-spacing:3px;
+}
+@keyframes tidePulse{
+  0%{transform:scale(1);text-shadow:0 0 24px rgba(255,100,60,0.9),0 0 60px rgba(255,60,20,0.6)}
+  100%{transform:scale(1.06);text-shadow:0 0 36px rgba(255,100,60,1),0 0 90px rgba(255,60,20,0.8)}
+}
 
-/* 暂停按钮 */
-.pause-btn{position:fixed;top:max(4px,var(--safe-top));right:max(8px,var(--safe-right));z-index:11;background:rgba(10,10,24,0.8);color:var(--text);border:1px solid rgba(255,255,255,0.12);border-radius:7px;padding:5px 10px;font-size:10px;cursor:pointer;display:flex;align-items:center;gap:3px;pointer-events:auto}
+/* 暂停 */
+.pause-btn{
+  position:fixed;top:max(6px,var(--safe-top));right:max(10px,var(--safe-right));z-index:11;
+  background:rgba(6,6,24,0.85);border:1px solid rgba(0,229,255,0.15);
+  border-radius:6px;padding:5px 9px;font-size:10px;cursor:pointer;
+  display:flex;align-items:center;gap:3px;pointer-events:auto;
+  color:var(--cyan);box-shadow:0 0 10px rgba(0,229,255,0.06);
+}
 
 /* 摇杆 */
 .joystick-zone{position:fixed;bottom:18%;left:50%;transform:translateX(-50%);width:100px;height:100px;z-index:10}
-.joystick-base{width:100%;height:100%;border-radius:50%;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.1)}
-.joystick-thumb{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);position:absolute;top:30px;left:30px;transition:transform 0.03s}
+.joystick-base{
+  width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,0.06),rgba(6,6,24,0.4));
+  border:2px solid rgba(0,229,255,0.15);box-shadow:0 0 24px rgba(0,229,255,0.06),inset 0 0 24px rgba(0,229,255,0.03);
+}
+.joystick-thumb{
+  width:40px;height:40px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.3),rgba(0,229,255,0.15));
+  border:1px solid rgba(0,229,255,0.3);box-shadow:0 0 14px rgba(0,229,255,0.2);
+  position:absolute;top:30px;left:30px;transition:transform 0.03s;
+}
 
 /* 小地图 */
-.minimap{position:fixed;bottom:max(14px,var(--safe-bottom));right:max(8px,var(--safe-right));width:64px;height:46px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:6px;z-index:10;pointer-events:none}
+.minimap{
+  position:fixed;bottom:max(14px,var(--safe-bottom));right:max(10px,var(--safe-right));
+  width:64px;height:46px;background:rgba(6,6,20,0.8);
+  border:1px solid rgba(0,229,255,0.12);border-radius:6px;z-index:10;pointer-events:none;
+  box-shadow:0 0 12px rgba(0,229,255,0.04);
+}
 
-/* 升级弹窗 */
-.levelup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.72);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20}
+/* ====== 升级弹窗 ====== */
+.levelup-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(2,2,10,0.82);display:none;flex-direction:column;align-items:center;
+  justify-content:center;z-index:20;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
 .levelup-overlay.show{display:flex}
-.levelup-title{color:var(--gold);font-size:20px;font-weight:900;margin-bottom:2px;text-shadow:0 0 16px rgba(240,192,64,0.5);display:flex;align-items:center;gap:5px}
-.levelup-sub{color:#889;font-size:11px;margin-bottom:12px}
+.levelup-title{
+  color:var(--gold);font-size:22px;font-weight:900;margin-bottom:2px;
+  text-shadow:0 0 18px rgba(255,215,64,0.5),0 0 36px rgba(255,215,64,0.2);
+  display:flex;align-items:center;gap:6px;letter-spacing:1px;
+}
+.levelup-sub{color:#668;font-size:11px;margin-bottom:14px;letter-spacing:2px}
 .levelup-cards{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px;padding:0 8px}
-.levelup-card{background:var(--panel);border:2px solid rgba(255,255,255,0.08);border-radius:12px;width:90px;padding:10px 6px;text-align:center;cursor:pointer;transition:0.15s;-webkit-tap-highlight-color:transparent}
-.levelup-card:active{transform:scale(0.93);border-color:var(--accent)}
-.levelup-card .card-icon{display:flex;justify-content:center;align-items:center;height:28px;margin-bottom:3px}
-.levelup-card .card-icon svg{width:24px;height:24px}
-.levelup-card .card-name{color:var(--text);font-size:10px;font-weight:700;margin-bottom:1px}
-.levelup-card .card-type{font-size:8px;color:#889;margin-bottom:2px}
-.levelup-card .card-desc{font-size:8px;color:#aaa;line-height:1.2}
-.levelup-card .card-rank{color:var(--accent);font-size:9px;font-weight:700;margin-top:3px}
+.levelup-card{
+  background:linear-gradient(135deg,rgba(10,10,36,0.95),rgba(4,4,20,0.98));
+  border:1px solid rgba(0,229,255,0.12);border-radius:12px;width:92px;
+  padding:12px 6px 10px;text-align:center;cursor:pointer;
+  transition:all 0.15s;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.02);
+  position:relative;overflow:hidden;
+}
+.levelup-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),transparent);
+}
+.levelup-card:active{
+  transform:scale(0.93);border-color:var(--cyan);
+  box-shadow:0 0 20px rgba(0,229,255,0.2),0 4px 16px rgba(0,0,0,0.3);
+}
+.levelup-card .card-icon{display:flex;justify-content:center;align-items:center;height:30px;margin-bottom:4px}
+.levelup-card .card-icon svg{width:26px;height:26px;filter:drop-shadow(0 0 4px rgba(0,229,255,0.3))}
+.levelup-card .card-name{color:var(--text);font-size:10px;font-weight:700;margin-bottom:2px}
+.levelup-card .card-type{
+  font-size:8px;color:#556;margin-bottom:3px;letter-spacing:1px;
+  background:rgba(0,229,255,0.05);display:inline-block;padding:1px 6px;border-radius:3px;
+}
+.levelup-card .card-desc{font-size:8px;color:#889;line-height:1.3}
+.levelup-card .card-rank{
+  color:var(--cyan);font-size:9px;font-weight:700;margin-top:4px;
+  text-shadow:0 0 6px rgba(0,229,255,0.3);
+}
 
-/* 游戏结束 */
-.gameover-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.78);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20}
+/* ====== 游戏结束 ====== */
+.gameover-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(2,2,10,0.85);display:none;flex-direction:column;
+  align-items:center;justify-content:center;z-index:20;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
 .gameover-overlay.show{display:flex}
-.go-panel{background:var(--panel);border-radius:16px;padding:24px 18px;text-align:center;max-width:280px;width:85%}
-.go-icon{margin-bottom:6px}
-.go-icon svg{width:36px;height:36px}
-.go-panel h2{font-size:22px;margin-bottom:4px}
-.go-win{color:var(--gold)}.go-lose{color:var(--danger)}
-.go-panel .score{color:var(--accent);font-size:32px;font-weight:900;margin:4px 0}
-.go-panel .stat{color:var(--text);font-size:11px;margin:2px 0}
-.go-panel button{background:var(--accent);color:#000;border:none;padding:10px 32px;border-radius:20px;font-size:15px;font-weight:700;margin-top:12px;cursor:pointer}
-.go-panel button:active{transform:scale(0.94)}
+.go-panel{
+  background:linear-gradient(135deg,rgba(8,8,30,0.96),rgba(3,3,15,0.98));
+  border:1px solid rgba(0,229,255,0.12);border-radius:18px;padding:28px 20px;
+  text-align:center;max-width:290px;width:85%;
+  box-shadow:0 8px 40px rgba(0,0,0,0.5),0 0 30px rgba(0,229,255,0.04);
+}
+.go-icon{margin-bottom:8px}
+.go-icon svg{width:40px;height:40px;filter:drop-shadow(0 0 10px currentColor)}
+.go-panel h2{font-size:24px;margin-bottom:4px;letter-spacing:1px}
+.go-win{color:var(--gold);text-shadow:0 0 14px rgba(255,215,64,0.5)}
+.go-lose{color:var(--pink);text-shadow:0 0 14px rgba(255,45,149,0.5)}
+.go-panel .score{color:var(--cyan);font-size:36px;font-weight:900;margin:8px 0;text-shadow:0 0 16px rgba(0,229,255,0.4)}
+.go-panel .stat{color:#889;font-size:11px;margin:4px 0;letter-spacing:0.5px}
+.go-panel button{
+  background:linear-gradient(135deg,#00e5ff,#0088cc);color:#000;border:none;
+  padding:10px 36px;border-radius:24px;font-size:15px;font-weight:700;
+  margin-top:14px;cursor:pointer;box-shadow:0 0 18px rgba(0,229,255,0.3);
+  letter-spacing:1px;transition:0.1s;
+}
+.go-panel button:active{transform:scale(0.94);box-shadow:0 0 28px rgba(0,229,255,0.5)}
 
 /* ====== 横屏优化 ====== */
 @media (orientation:landscape){
-  .hud-bar{top:max(2px,var(--safe-top));left:max(10px,var(--safe-left));right:max(10px,var(--safe-right));gap:8px}
-  .hud-item{padding:4px 10px;font-size:12px;gap:5px}
-  .hud-val{font-size:15px}
+  .hud-bar{top:max(4px,var(--safe-top));left:max(12px,var(--safe-left));right:max(12px,var(--safe-right));gap:10px}
+  .hud-item{padding:5px 12px;font-size:11px;gap:6px}
+  .hud-val{font-size:14px}
   .hud-icon{width:16px;height:16px}
-  .hud-center{max-width:360px}
-  .xp-bar-wrap{height:6px}
+  .hud-center{max-width:380px}
+  .xp-bar-wrap{height:5px}
   .level-tag{font-size:10px}
   .joystick-zone{width:120px;height:120px}
   .joystick-thumb{width:46px;height:46px;top:37px;left:37px}
   .minimap{width:76px;height:54px;bottom:max(12px,var(--safe-bottom));right:max(12px,var(--safe-right));border-radius:7px}
-  .pause-btn{padding:6px 14px;font-size:11px;top:max(2px,var(--safe-top))}
-  .levelup-card{width:105px;padding:12px 8px;border-radius:14px}
-  .levelup-card .card-icon{height:32px}
+  .pause-btn{padding:6px 14px;font-size:11px;top:max(4px,var(--safe-top))}
+  .levelup-card{width:108px;padding:14px 8px 12px;border-radius:14px}
+  .levelup-card .card-icon{height:34px}
   .levelup-card .card-icon svg{width:28px;height:28px}
   .levelup-card .card-name{font-size:11px}
   .levelup-card .card-type{font-size:9px}
   .levelup-card .card-desc{font-size:9px}
-  .levelup-title{font-size:24px}
-  .levelup-sub{font-size:12px}
-  .boss-indicator{top:max(52px,calc(46px + var(--safe-top)))}
-  .boss-hp-bar{width:240px;height:8px}
-  .boss-name-tag{font-size:11px}
+  .levelup-title{font-size:26px}.levelup-sub{font-size:12px}
+  .boss-indicator{top:max(54px,calc(46px + var(--safe-top)))}
+  .boss-hp-bar{width:260px;height:7px}.boss-name-tag{font-size:11px}
 }
 @media (min-width:768px){
-  .levelup-cards{max-width:500px;gap:12px}
-  .levelup-card{width:120px}
+  .levelup-cards{max-width:520px;gap:12px}
+  .levelup-card{width:124px}
   .joystick-zone{width:130px;height:130px}
 }
 </style>
@@ -125,12 +244,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 <div class="hud-bar">
   <div class="hud-left">
     <div class="hud-item">
-      <svg class="hud-icon" viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.7 3 7.5c0 3 4 6.5 5 6.5s5-3.5 5-6.5C13 4.7 10.8 2 8 2z" fill="#ff4050"/></svg>
-      <span class="hud-val hud-danger" id="hp">100</span>
+      <svg class="hud-icon" viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.7 3 7.5c0 3 4 6.5 5 6.5s5-3.5 5-6.5C13 4.7 10.8 2 8 2z" fill="#ff3060"/></svg>
+      <span class="hud-val hud-pink" id="hp">100</span>
     </div>
     <div class="hud-item">
-      <svg class="hud-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#40b8ff" stroke-width="2"/><line x1="8" y1="4" x2="8" y2="8" stroke="#40b8ff" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="8" x2="11" y2="10" stroke="#40b8ff" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span class="hud-val hud-accent" id="timer">8:00</span>
+      <svg class="hud-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#00e5ff" stroke-width="2"/><line x1="8" y1="3.5" x2="8" y2="8" stroke="#00e5ff" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="8" x2="11" y2="10" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="hud-val hud-cyan" id="timer">8:00</span>
     </div>
   </div>
   <div class="hud-center">
@@ -139,11 +258,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
   </div>
   <div class="hud-right">
     <div class="hud-item">
-      <svg class="hud-icon" viewBox="0 0 16 16"><path d="M2 4l4-2v12l-4-2V4zM6 2l4 2v10l-4-2V2zM10 4l4-2v12l-4-2V4z" fill="#d0d8e8"/></svg>
+      <svg class="hud-icon" viewBox="0 0 16 16"><path d="M2 4l4-2v12l-4-2V4zM6 2l4 2v10l-4-2V2zM10 4l4-2v12l-4-2V4z" fill="#c8d8f0"/></svg>
       <span class="hud-val" id="kills">0</span>
     </div>
     <div class="hud-item">
-      <svg class="hud-icon" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9 13,14 8,11 3,14 5,9 1,6 6,6" fill="#f0c040"/></svg>
+      <svg class="hud-icon" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9 13,14 8,11 3,14 5,9 1,6 6,6" fill="#ffd740"/></svg>
       <span class="hud-val hud-gold" id="gem">0</span>
     </div>
   </div>
@@ -156,15 +275,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 </div>
 
 <button class="pause-btn" id="pauseBtn" onclick="togglePause()">
-  <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#d0d8e8"/></svg>
+  <svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="3" height="10" rx="1" fill="#00e5ff"/><rect x="8" y="1" width="3" height="10" rx="1" fill="#00e5ff"/></svg>
 </button>
 
 <div class="levelup-overlay" id="levelupOverlay">
   <div class="levelup-title">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4l-8 12h16z" fill="#f0c040"/><rect x="11" y="10" width="2" height="8" fill="#f0c040"/></svg>
-    升级! Lv.<span id="luLevel"></span>
+    <svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,2 15,8 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,8" fill="#ffd740"/></svg>
+    升级 Lv.<span id="luLevel"></span>
   </div>
-  <div class="levelup-sub">选择一个技能</div>
+  <div class="levelup-sub">选择技能强化</div>
   <div class="levelup-cards" id="levelupCards"></div>
 </div>
 
@@ -174,7 +293,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
     <h2 id="goTitle"></h2>
     <div class="score" id="goScore"></div>
     <div class="stat" id="goStats"></div>
-    <button onclick="restartGame()">再来一局</button>
+    <button onclick="restartGame()">再 来 一 局</button>
   </div>
 </div>
 
@@ -208,7 +327,6 @@ let camX=0,camY=0,joystickActive=false,joyCX=0,joyCY=0,joyDX=0,joyDY=0;
 
 player={x:800,y:600,r:14,speed:200,hp:100,maxHp:100,level:1,xp:0,xpToNext:30,skills:[],atkBonus:1,spdBonus:1,cdBonus:0,pickupBonus:0,hpBonus:0,xpBonus:0,_atkTimers:{},_bladeAngle:0,invulnTimer:0};
 const MAP_W=1600,MAP_H=1200;
-
 const icons={
   missile:'<svg viewBox="0 0 24 24"><path d="M20 4l-2 14-6-6-6 6L4 4z" fill="#ffe066"/><circle cx="5" cy="5" r="3" fill="#ff9933"/><path d="M20 4l-4 1 3 3z" fill="#ffcc44"/></svg>',
   blade:'<svg viewBox="0 0 24 24"><path d="M12 2C9 10 18 14 22 12C18 10 15 4 12 2z" fill="#ddeeff" stroke="#6699bb" stroke-width="1"/><circle cx="12" cy="6" r="2" fill="#fff"/></svg>',
