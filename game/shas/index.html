@@ -271,7 +271,7 @@ function genLevelupChoices(){
   let chosen=[],copy=[...pool];for(let i=0;i<3&&copy.length;i++)chosen.push(copy.splice(Math.floor(Math.random()*copy.length),1)[0]);
   return chosen;
 }
-const monsterTypes=[{name:'小虫',r:12,hp:20,speed:60,dmg:8,color:'#55cc44',xp:5,gem:0,type:'worm'},{name:'飞虫',r:10,hp:15,speed:100,dmg:6,color:'#ccaa22',xp:4,gem:0,type:'fly'},{name:'战士',r:16,hp:50,speed:50,dmg:15,color:'#cc4444',xp:10,gem:1,type:'warrior'},{name:'炮台',r:20,hp:80,speed:0,dmg:20,color:'#8844cc',xp:15,gem:2,shoots:true,type:'turret'}];
+const monsterTypes=[{name:'小虫',r:12,hp:20,speed:42,dmg:8,color:'#55cc44',xp:5,gem:0,type:'worm'},{name:'飞虫',r:10,hp:15,speed:70,dmg:6,color:'#ccaa22',xp:4,gem:0,type:'fly'},{name:'战士',r:16,hp:50,speed:35,dmg:15,color:'#cc4444',xp:10,gem:1,type:'warrior'},{name:'炮台',r:20,hp:80,speed:0,dmg:20,color:'#8844cc',xp:15,gem:2,shoots:true,type:'turret'}];
 const bossTypes=[{name:'巨型异虫',r:40,hp:400,speed:40,dmg:30,color:'#ff3366',xp:200,gem:20,type:'wormBoss'},{name:'机甲守卫',r:36,hp:550,speed:55,dmg:35,color:'#ff6633',xp:300,gem:30,type:'mechBoss'},{name:'外星首领',r:44,hp:700,speed:35,dmg:40,color:'#cc33ff',xp:400,gem:40,type:'alienBoss'}];
 
 let _spawnAngle=Math.random()*Math.PI*2;
