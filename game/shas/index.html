@@ -436,7 +436,7 @@ function setupJoystick(){
   joystickZone.addEventListener('touchend',e=>{e.preventDefault();joystickActive=false;joyDX=0;joyDY=0;joystickThumb.style.transform='translate(0,0)';},{passive:false});
   joystickZone.addEventListener('touchcancel',()=>{joystickActive=false;joyDX=0;joyDY=0;joystickThumb.style.transform='translate(0,0)';});
   let keys={};window.addEventListener('keydown',e=>{keys[e.key]=true});window.addEventListener('keyup',e=>{keys[e.key]=false});
-  setInterval(()=>{if(!gameState||gameState==='levelup')return;if(keys['w']||keys['ArrowUp'])joyDY=-1;else if(keys['s']||keys['ArrowDown'])joyDY=1;else joyDY=0;if(keys['a']||keys['ArrowLeft'])joyDX=-1;else if(keys['d']||keys['ArrowRight'])joyDX=1;else joyDX=0;},30);
+  setInterval(()=>{if(!gameState||gameState==='levelup')return;let kUp=keys['w']||keys['ArrowUp'],kDown=keys['s']||keys['ArrowDown'],kLeft=keys['a']||keys['ArrowLeft'],kRight=keys['d']||keys['ArrowRight'];if(!(kUp||kDown||kLeft||kRight))return;if(kUp)joyDY=-1;else if(kDown)joyDY=1;else joyDY=0;if(kLeft)joyDX=-1;else if(kRight)joyDX=1;else joyDX=0;},30);
 }
 function updateJoystick(cx,cy){let dx=cx-joyCX,dy=cy-joyCY,dist=Math.hypot(dx,dy),maxR=42;if(dist>maxR){dx=dx/dist*maxR;dy=dy/dist*maxR}joyDX=dx/maxR;joyDY=dy/maxR;joystickThumb.style.transform=`translate(${dx}px,${dy}px)`;}
 
