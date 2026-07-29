@@ -274,10 +274,14 @@ function genLevelupChoices(){
 const monsterTypes=[{name:'小虫',r:12,hp:20,speed:60,dmg:8,color:'#55cc44',xp:5,gem:0,type:'worm'},{name:'飞虫',r:10,hp:15,speed:100,dmg:6,color:'#ccaa22',xp:4,gem:0,type:'fly'},{name:'战士',r:16,hp:50,speed:50,dmg:15,color:'#cc4444',xp:10,gem:1,type:'warrior'},{name:'炮台',r:20,hp:80,speed:0,dmg:20,color:'#8844cc',xp:15,gem:2,shoots:true,type:'turret'}];
 const bossTypes=[{name:'巨型异虫',r:40,hp:400,speed:40,dmg:30,color:'#ff3366',xp:200,gem:20,type:'wormBoss'},{name:'机甲守卫',r:36,hp:550,speed:55,dmg:35,color:'#ff6633',xp:300,gem:30,type:'mechBoss'},{name:'外星首领',r:44,hp:700,speed:35,dmg:40,color:'#cc33ff',xp:400,gem:40,type:'alienBoss'}];
 
+let _spawnAngle=Math.random()*Math.PI*2;
 function spawnMonster(){
   if(monsters.length>80)return;
-  let edge=Math.floor(Math.random()*4),x,y;
-  if(edge===0){x=-30;y=Math.random()*MAP_H}else if(edge===1){x=MAP_W+30;y=Math.random()*MAP_H}else if(edge===2){x=Math.random()*MAP_W;y=-30}else{x=Math.random()*MAP_W;y=MAP_H+30}
+  let dist=Math.max(W,H)*0.7+Math.random()*150;
+  _spawnAngle+=(Math.PI*2/6)*(0.7+Math.random()*0.6);
+  let x=player.x+Math.cos(_spawnAngle)*dist;
+  let y=player.y+Math.sin(_spawnAngle)*dist;
+  x=Math.max(0,Math.min(MAP_W,x));y=Math.max(0,Math.min(MAP_H,y));
   let weights=[0.5,0.25,0.15,0.1];if(difficulty>3)weights=[0.25,0.25,0.3,0.2];if(difficulty>5)weights=[0.15,0.2,0.35,0.3];
   let r=Math.random(),cum=0,ti=0;for(let i=0;i<weights.length;i++){cum+=weights[i];if(r<cum){ti=i;break}}
   let mt=monsterTypes[ti];
