@@ -1022,18 +1022,40 @@ function render(){
     const ex=e.x-camera.x,ey=e.y-camera.y;
     ctx.save();
     switch(e.type){
-      case 'slash':case 'thrust':
+      case 'slash':
+        ctx.save();
+        const sweepLen=e.range*Math.min(e.life/0.15,1);
+        const endX=ex+e.dx*sweepLen,endY=ey+e.dy*sweepLen;
+        const midX=(ex+endX)/2,midY=(ey+endY)/2;
+        const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
+        const pnx=-e.dy/len,pny=e.dx/len;
+        const f=Math.min(e.life/0.15,1);
+        // 3-layer anime slash crescents (月牙)
+        const layers=[
+          {bulge:75,fill:`rgba(224,247,250,${0.35*f})`,stroke:`rgba(0,0,0,${0.4*f})`,lw:4},
+          {bulge:55,fill:`rgba(224,247,250,${0.7*f})`,stroke:`rgba(0,0,0,${0.8*f})`,lw:5},
+          {bulge:38,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
+        ];
+        for(const l of layers){
+          const cx=midX+pnx*l.bulge,cy=midY+pny*l.bulge;
+          ctx.fillStyle=l.fill;ctx.strokeStyle=l.stroke;ctx.lineWidth=l.lw;
+          ctx.beginPath();
+          ctx.moveTo(ex,ey);
+          ctx.quadraticCurveTo(cx,cy,endX,endY);
+          ctx.quadraticCurveTo(midX-pnx*l.bulge,midY-pny*l.bulge,ex,ey);
+          ctx.fill();ctx.stroke();
+        }
+        ctx.restore();break;
+      case 'thrust':
         ctx.save();ctx.globalAlpha=e.life/0.2;
         ctx.strokeStyle=e.color;ctx.lineWidth=6-(e.life*20);
         ctx.beginPath();
-        // Draw arc sweep for slash
-        const sweepLen=e.range*(e.life/0.2);
+        const tSweepLen=e.range*(e.life/0.2);
         ctx.moveTo(ex,ey);
-        ctx.lineTo(ex+e.dx*sweepLen,ey+e.dy*sweepLen);
+        ctx.lineTo(ex+e.dx*tSweepLen,ey+e.dy*tSweepLen);
         ctx.stroke();
-        // Glow
         ctx.strokeStyle='#fff';ctx.lineWidth=2-(e.life*8);
-        ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+e.dx*sweepLen,ey+e.dy*sweepLen);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+e.dx*tSweepLen,ey+e.dy*tSweepLen);ctx.stroke();
         ctx.restore();break;
       case 'lightning':
         ctx.strokeStyle=e.color;ctx.lineWidth=3;
