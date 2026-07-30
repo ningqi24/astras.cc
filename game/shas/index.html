@@ -30,22 +30,29 @@ canvas{display:block;position:absolute;inset:0;}
 #hud{position:absolute;top:10px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:space-between;align-items:flex-start;}
 
 /* Left cluster */
-#hud-left{display:flex;flex-direction:column;gap:4px;min-width:160px;}
+#hud-left{display:flex;flex-direction:column;gap:3px;min-width:160px;}
 
 .hud-panel{background:#f8f9fa;border:6px solid #000;border-radius:24px;padding:6px 12px;display:inline-flex;align-items:center;gap:6px;}
 
-/* Shark head icon + HP hearts */
+/* Shark head icon + HP hearts + XP bar combined */
 #hp-cluster{display:flex;align-items:center;gap:4px;}
-#hp-cluster .shark-icon svg{width:22px;height:22px;}
-#hp-hearts{display:flex;gap:3px;}
-.hp-heart{width:16px;height:16px;background:#ff6b6b;border:2.5px solid #000;border-radius:4px;transition:background 0.15s;}
+#hp-cluster .shark-icon svg{width:20px;height:20px;}
+#hp-hearts{display:flex;gap:2px;}
+.hp-heart{width:13px;height:13px;background:#ff6b6b;border:2px solid #000;border-radius:3px;transition:background 0.15s;}
 .hp-heart.empty{background:#ddd;}
 
-/* XP bar row */
-#xp-row{display:flex;align-items:center;gap:5px;}
-#xp-row .xp-label{font-size:11px;font-weight:900;color:#fca311;line-height:1;}
-#xp-outer{width:100px;height:10px;background:#e0e0e0;border:3px solid #000;border-radius:20px;overflow:hidden;}
+/* Combined bar row: XP bar below hearts */
+#hud-bars{display:flex;flex-direction:column;gap:2px;}
+#xp-bar-row{display:flex;align-items:center;gap:4px;}
+#xp-bar-row .xp-label{font-size:10px;font-weight:900;color:#fca311;line-height:1;}
+#xp-outer{flex:1;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
 #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
+
+/* HP bar below */
+#hp-bar-row{display:flex;align-items:center;gap:4px;}
+#hp-bar-row .hp-label{font-size:10px;font-weight:900;color:#ff6b6b;line-height:1;}
+#hp-outer{flex:1;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
+#hp-inner{height:100%;background:#ff6b6b;transition:width 0.2s ease;border-radius:20px;}
 
 /* Right cluster */
 #hud-right{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
@@ -56,25 +63,25 @@ canvas{display:block;position:absolute;inset:0;}
 #wave-announce.show{display:block;animation:waveIn 0.4s ease-out;}
 @keyframes waveIn{0%{transform:translateX(-50%) scale(0.5);opacity:0;}100%{transform:translateX(-50%) scale(1);opacity:1;}}
 
-/* Minimap */
-#minimap{position:absolute;top:10px;right:10px;width:80px;height:60px;border:6px solid #000;border-radius:20px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
+/* Minimap - bottom right */
+#minimap{position:absolute;bottom:16px;right:16px;width:80px;height:60px;border:5px solid #000;border-radius:16px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
 #minimap canvas{position:static;width:100%;height:100%;}
 
 /* ============ WEAPON SLOTS - BOTTOM ============ */
-#weapon-slots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;pointer-events:none;}
-.wpn-slot{width:52px;height:52px;border-radius:20px;border:6px solid #000;background:#f8f9fa;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.wpn-slot svg{width:36px;height:36px;}
-.wpn-slot .lvl{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-radius:50%;border:3px solid #000;background:#fca311;color:#000;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+#weapon-slots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;pointer-events:none;}
+.wpn-slot{width:38px;height:38px;border-radius:14px;border:5px solid #000;background:#f8f9fa;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.wpn-slot svg{width:26px;height:26px;}
+.wpn-slot .lvl{position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;border-radius:50%;border:2.5px solid #000;background:#fca311;color:#000;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;}
 .wpn-slot .cd-mask{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);pointer-events:none;}
 
-/* Passive buff icons floating */
-#passive-buffs{position:absolute;bottom:80px;left:50%;transform:translateX(-80px);display:flex;gap:4px;z-index:10;pointer-events:none;}
+/* Passive buff icons - right side middle */
+#passive-buffs{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:10;pointer-events:none;}
 .passive-icon{width:24px;height:24px;border:3px solid #000;border-radius:8px;background:#4cc9f0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;}
 
 /* ============ MOBILE JOYSTICK ============ */
-#joystick-zone{position:absolute;bottom:80px;left:40px;width:130px;height:130px;z-index:50;pointer-events:all;}
-#joystick-base{width:130px;height:130px;border-radius:50%;border:6px solid #000;background:rgba(248,249,250,0.15);position:relative;}
-#joystick-thumb{width:56px;height:56px;border-radius:50%;background:rgba(76,201,240,0.55);border:5px solid #000;position:absolute;top:37px;left:37px;transition:transform 0.04s;}
+#joystick-zone{position:absolute;bottom:70px;left:30px;width:130px;height:130px;z-index:50;pointer-events:all;}
+#joystick-base{width:130px;height:130px;border-radius:50%;border:5px solid rgba(0,0,0,0.3);background:rgba(255,255,255,0.08);position:relative;}
+#joystick-thumb{width:54px;height:54px;border-radius:50%;background:rgba(76,201,240,0.35);border:4px solid rgba(0,0,0,0.3);position:absolute;top:38px;left:38px;transition:transform 0.04s;}
 
 /* ============ LEVEL UP MODAL ============ */
 #levelup-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(27,28,43,0.85);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
@@ -160,17 +167,23 @@ canvas{display:block;position:absolute;inset:0;}
 
   <!-- HUD Top Bar -->
   <div id="hud">
-    <div id="hud-left">
+    <div id="hud-left" class="hud-panel">
       <div id="hp-cluster">
         <span class="shark-icon">
           <svg viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="20" ry="18" fill="#4cc9f0" stroke="#000" stroke-width="5"/><circle cx="16" cy="20" r="5" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="18" cy="18" r="2.5" fill="#000"/><circle cx="32" cy="20" r="5" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="30" cy="18" r="2.5" fill="#000"/><path d="M18 32 Q24 40 30 32" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><polygon points="24,2 20,8 24,6 28,8" fill="#4cc9f0" stroke="#000" stroke-width="4"/></svg>
         </span>
         <div id="hp-hearts"></div>
       </div>
-      <div id="xp-row" class="hud-panel">
-        <span class="xp-label">XP</span>
-        <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
-        <span class="xp-label" style="color:#1b1c2b;font-size:10px;" id="lv-label">Lv.1</span>
+      <div id="hud-bars">
+        <div id="hp-bar-row">
+          <span class="hp-label">HP</span>
+          <div id="hp-outer"><div id="hp-inner" style="width:100%"></div></div>
+        </div>
+        <div id="xp-bar-row">
+          <span class="xp-label">XP</span>
+          <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
+          <span class="xp-label" style="color:#1b1c2b;font-size:9px;" id="lv-label">Lv.1</span>
+        </div>
       </div>
     </div>
     <div id="hud-right">
@@ -254,7 +267,7 @@ canvas{display:block;position:absolute;inset:0;}
 const MAP_W=1600,MAP_H=1200;
 const TILE=40;
 const TOTAL_TIME=480;
-const WAVE_INTERVAL=90;
+const WAVE_INTERVAL=35;
 const BOSS_INTERVAL=150;
 const BOSS_COUNT=3;
 
@@ -338,7 +351,7 @@ function loadSprites(){
 
 // ============ WEAPON DEFS ============
 const weaponDefs={
-  katana:{name:'武士刀',icon:'katana',desc:'朝移动方向横扫',color:'#e8e8e8',cd:0.8,type:'melee',superName:'燎原百斩',superDesc:'360度全屏斩击'},
+  katana:{name:'武士刀',icon:'katana',desc:'横扫剑气斩击',color:'#e8e8e8',cd:0.8,type:'melee',superName:'燎原百斩',superDesc:'全屏剑气洪流'},
   kunai:{name:'苦无',icon:'kunai',desc:'朝最近敌人发射',color:'#ccc',cd:0.6,type:'projectile',superName:'相位苦无',superDesc:'穿透所有敌人'},
   staff:{name:'金箍棒',icon:'staff',desc:'扇形范围攻击',color:'#f77',cd:1.0,type:'melee',superName:'定海神针',superDesc:'超大扇形范围'},
   revolver:{name:'六发左轮',icon:'revolver',desc:'6发连续射击',color:'#bb0',cd:0.5,type:'projectile',superName:'午时已到',superDesc:'12发连射'},
@@ -568,10 +581,17 @@ function fireWeapon(w){
   switch(w.id){
     case 'katana':{
       const dir=player.lastDir;const ang=Math.atan2(dir.y,dir.x);
-      const count=isSuper?8:3;
-      for(let i=0;i<count;i++){
-        const a=ang-Math.PI/3+(Math.PI*2/3)*i/(count-1);
-        effects.push({x:player.x+Math.cos(a)*20,y:player.y+Math.sin(a)*20,dx:Math.cos(a),dy:Math.sin(a),life:0.15,range:range,dmg:dmg,color:'#e8e8e8',type:'slash'});
+      // Wide sweeping slash wave - front and back arcs
+      const waveCount=isSuper?14:7;
+      for(let i=0;i<waveCount;i++){
+        const spread=Math.PI*0.7; // wide arc
+        const a=ang-spread/2+spread*i/(waveCount-1);
+        effects.push({
+          x:player.x,y:player.y,
+          dx:Math.cos(a),dy:Math.sin(a),
+          life:0.2,range:range,dmg:dmg,
+          color:'#e8e8e8',type:'slash'
+        });
       }
       break;
     }
@@ -809,6 +829,14 @@ function update(dt){
   const ew=Math.floor(timer/WAVE_INTERVAL)+1;
   if(ew>waveNum){waveNum=ew;spawnWave();if(Math.random()<0.3)chests.push({x:rand(100,MAP_W-100),y:rand(100,MAP_H-100)});}
 
+  // Continuous spawn when monster count low
+  const minAlive=5+waveNum*2;
+  if(!bossActive&&monsters.filter(m=>!m.isBoss).length<minAlive){
+    const types=Object.keys(monsterTypes);
+    const t=types[randInt(0,Math.min(waveNum-1,types.length-1))];
+    for(let i=0;i<randInt(2,4);i++)spawnMonster(t);
+  }
+
   const eb=Math.floor(timer/BOSS_INTERVAL);
   if(eb>bossDefeated&&eb<=BOSS_COUNT&&!bossActive)spawnBoss(eb);
 
@@ -902,8 +930,9 @@ function updateHUD(){
   document.getElementById('hud-energy').textContent=Math.floor(timer*2+player.kills*3);
   document.getElementById('lv-label').textContent='Lv.'+player.level;
   document.getElementById('xp-inner').style.width=(player.xp/player.xpToNext*100)+'%';
+  document.getElementById('hp-inner').style.width=(player.hp/player.maxHp*100)+'%';
 
-  // Hearts
+  // Hearts compact
   const hearts=document.getElementById('hp-hearts');
   const totalHearts=10;
   const hpPerHeart=player.maxHp/totalHearts;
@@ -942,20 +971,20 @@ function updatePassiveBuffs(){
 
 // ============ RENDER ============
 function drawBackground(){
-  // Deep space purple gradient (#2b2e4a to #1b1c2b)
+  // Deep space purple gradient
   const grad=ctx.createLinearGradient(0,0,0,canvas.height);
   grad.addColorStop(0,'#2b2e4a');grad.addColorStop(0.5,'#232540');grad.addColorStop(1,'#1b1c2b');
   ctx.fillStyle=grad;ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // Stars
-  ctx.fillStyle='#fff';
-  for(let i=0;i<100;i++){
-    const sx=(i*137.5+500)%canvas.width,sy=(i*97.3+300)%canvas.height;
-    const twinkle=Math.sin(Date.now()*0.002+i)*0.5+0.5;
-    ctx.globalAlpha=0.2+twinkle*0.4;
-    ctx.beginPath();ctx.arc(sx,sy,(i%3)+1,0,Math.PI*2);ctx.fill();
-  }
-  ctx.globalAlpha=1;
+  // Clip to map bounds - hide outside area
+  ctx.save();
+  ctx.beginPath();
+  const mapLeft=Math.max(0,-camera.x);
+  const mapTop=Math.max(0,-camera.y);
+  const mapRight=Math.min(canvas.width,MAP_W-camera.x);
+  const mapBottom=Math.min(canvas.height,MAP_H-camera.y);
+  ctx.rect(mapLeft,mapTop,mapRight-mapLeft,mapBottom-mapTop);
+  ctx.clip();
 
   // Grid
   ctx.save();ctx.translate(-camera.x,-camera.y);
@@ -967,23 +996,20 @@ function drawBackground(){
   // Map border
   ctx.strokeStyle='rgba(76,201,240,0.4)';ctx.lineWidth=4;ctx.strokeRect(2,2,MAP_W-4,MAP_H-4);
 
-  // Decorative nebula blotches
-  ctx.fillStyle='rgba(76,201,240,0.02)';
-  for(let i=0;i<6;i++){
-    const dx=(i*250+100)%MAP_W,dy=(i*180+200)%MAP_H;
-    ctx.beginPath();ctx.arc(dx,dy,rand(30,60),0,Math.PI*2);ctx.fill();
-  }
-  ctx.restore();
+  ctx.restore(); // Grid translate
+  ctx.restore(); // Clip
 }
 
 function drawMonster(m){
   if(!monsterImg)return;
   ctx.save();ctx.translate(m.x-camera.x,m.y-camera.y);
   const s=m.size;
-  const scale=m.isBoss?s*2.5/500:s*2/500;
+  const scale=m.isBoss?s*3.5/500:s*3/500;
   const w=500*scale,h=500*scale;
   if(m.hitFlash>0&&Math.floor(m.hitFlash*30)%2===0)ctx.globalAlpha=0.5;
+  ctx.imageSmoothingEnabled=false;
   ctx.drawImage(monsterImg,-w/2,-h/2,w,h);
+  ctx.imageSmoothingEnabled=true;
   ctx.globalAlpha=1;
 
   // HP bar above monster
@@ -1001,7 +1027,8 @@ function drawMonster(m){
 
 function render(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  camera.x=player.x-canvas.width/2;camera.y=player.y-canvas.height/2;
+  camera.x=clamp(player.x-canvas.width/2,0,MAP_W-canvas.width);
+  camera.y=clamp(player.y-canvas.height/2,0,MAP_H-canvas.height);
   drawBackground();
 
   // XP orbs
@@ -1026,8 +1053,18 @@ function render(){
     ctx.save();
     switch(e.type){
       case 'slash':case 'thrust':
-        ctx.strokeStyle=e.color;ctx.lineWidth=4;
-        ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+e.dx*e.range,ey+e.dy*e.range);ctx.stroke();break;
+        ctx.save();ctx.globalAlpha=e.life/0.2;
+        ctx.strokeStyle=e.color;ctx.lineWidth=6-(e.life*20);
+        ctx.beginPath();
+        // Draw arc sweep for slash
+        const sweepLen=e.range*(e.life/0.2);
+        ctx.moveTo(ex,ey);
+        ctx.lineTo(ex+e.dx*sweepLen,ey+e.dy*sweepLen);
+        ctx.stroke();
+        // Glow
+        ctx.strokeStyle='#fff';ctx.lineWidth=2-(e.life*8);
+        ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+e.dx*sweepLen,ey+e.dy*sweepLen);ctx.stroke();
+        ctx.restore();break;
       case 'lightning':
         ctx.strokeStyle=e.color;ctx.lineWidth=3;
         ctx.beginPath();ctx.moveTo(ex,ey);let lx=ex,ly=ey;
@@ -1066,7 +1103,7 @@ function render(){
   if(player.invuln>0&&Math.floor(player.invuln*20)%2===0)ctx.globalAlpha=0.4;
   if(player.hitFlash>0)ctx.globalAlpha=0.6;
   if(playerImg){
-    const pScale=0.16;
+    const pScale=0.22;
     const pw=500*pScale,ph=500*pScale;
     ctx.save();ctx.translate(px,py);
     const ang=Math.atan2(player.lastDir.y,player.lastDir.x);
