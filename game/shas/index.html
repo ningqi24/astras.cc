@@ -1027,24 +1027,23 @@ function render(){
         const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
         const pnx=-e.dy/len,pny=e.dx/len;
         const f=Math.min(e.life/0.15,1);
-        const gap=60;
+        const bulge=sweepLen*0.65;
         // forward crescent (white) + backward crescent (blue trail)
         const crescents=[
-          {dir:1,bulge:50,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
-          {dir:-1,bulge:45,fill:`rgba(224,247,250,${0.6*f})`,stroke:`rgba(0,0,0,${0.6*f})`,lw:5},
+          {dir:1,bulgeMul:1.0,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
+          {dir:-1,bulgeMul:0.9,fill:`rgba(224,247,250,${0.6*f})`,stroke:`rgba(0,0,0,${0.6*f})`,lw:5},
         ];
         for(const c of crescents){
-          const startDist=c.dir*gap;
-          const endDist=c.dir*(gap+sweepLen);
-          const sx=ex+e.dx*startDist,sy=ey+e.dy*startDist;
-          const ex2=ex+e.dx*endDist,ey2=ey+e.dy*endDist;
+          const b=bulge*c.bulgeMul;
+          const sx=ex,sy=ey;
+          const ex2=ex+e.dx*sweepLen*c.dir,ey2=ey+e.dy*sweepLen*c.dir;
           const mx=(sx+ex2)/2,my=(sy+ey2)/2;
-          const cx=mx+pnx*c.bulge,cy=my+pny*c.bulge;
+          const cx=mx+pnx*b,cy=my+pny*b;
           ctx.fillStyle=c.fill;ctx.strokeStyle=c.stroke;ctx.lineWidth=c.lw;
           ctx.beginPath();
           ctx.moveTo(sx,sy);
           ctx.quadraticCurveTo(cx,cy,ex2,ey2);
-          ctx.quadraticCurveTo(mx-pnx*c.bulge,my-pny*c.bulge,sx,sy);
+          ctx.quadraticCurveTo(mx-pnx*b,my-pny*b,sx,sy);
           ctx.fill();ctx.stroke();
         }
         }break;
