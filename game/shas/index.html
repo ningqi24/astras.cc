@@ -1022,24 +1022,22 @@ function render(){
     const ex=e.x-camera.x,ey=e.y-camera.y;
     ctx.save();
     switch(e.type){
-      case 'slash':
-        ctx.save();
+      case 'slash':{
         const sweepLen=e.range*Math.min(e.life/0.15,1);
-        const endX=ex+e.dx*sweepLen,endY=ey+e.dy*sweepLen;
-        const midX=(ex+endX)/2,midY=(ey+endY)/2;
         const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
         const pnx=-e.dy/len,pny=e.dx/len;
         const f=Math.min(e.life/0.15,1);
-        const gap=60; // distance from player center
-        // 2 crescents: one forward, one backward
+        const gap=60;
+        // forward crescent (white) + backward crescent (blue trail)
         const crescents=[
           {dir:1,bulge:50,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
           {dir:-1,bulge:45,fill:`rgba(224,247,250,${0.6*f})`,stroke:`rgba(0,0,0,${0.6*f})`,lw:5},
         ];
         for(const c of crescents){
-          const offset=c.dir*gap;
-          const sx=ex+e.dx*offset,sy=ey+e.dy*offset;
-          const ex2=ex+e.dx*(offset+sweepLen),ey2=ey+e.dy*(offset+sweepLen);
+          const startDist=c.dir*gap;
+          const endDist=c.dir*(gap+sweepLen);
+          const sx=ex+e.dx*startDist,sy=ey+e.dy*startDist;
+          const ex2=ex+e.dx*endDist,ey2=ey+e.dy*endDist;
           const mx=(sx+ex2)/2,my=(sy+ey2)/2;
           const cx=mx+pnx*c.bulge,cy=my+pny*c.bulge;
           ctx.fillStyle=c.fill;ctx.strokeStyle=c.stroke;ctx.lineWidth=c.lw;
@@ -1049,7 +1047,7 @@ function render(){
           ctx.quadraticCurveTo(mx-pnx*c.bulge,my-pny*c.bulge,sx,sy);
           ctx.fill();ctx.stroke();
         }
-        ctx.restore();break;
+        }break;
       case 'thrust':
         ctx.save();ctx.globalAlpha=e.life/0.2;
         ctx.strokeStyle=e.color;ctx.lineWidth=6-(e.life*20);
