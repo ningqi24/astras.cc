@@ -27,7 +27,15 @@ canvas{display:block;position:absolute;inset:0;}
 /* 6-10px black outline on all UI, no gradients, big rounded corners 20-30px */
 
 /* ============ HUD - TOP BAR ============ */
-#hud{position:absolute;top:10px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:space-between;align-items:flex-start;}
+
+/* Progress bar - top center */
+#progress-bar-wrap{position:absolute;top:4px;left:50%;transform:translateX(-50%);width:60%;max-width:500px;z-index:20;pointer-events:none;}
+#progress-bar{width:100%;height:6px;background:#e0e0e0;border:3px solid #000;border-radius:10px;overflow:hidden;position:relative;}
+#progress-fill{height:100%;background:#fca311;transition:width 0.3s ease;border-radius:10px;}
+.progress-boss-marker{position:absolute;top:-3px;width:2.5px;height:12px;background:#e63946;z-index:2;}
+.progress-boss-label{position:absolute;top:8px;font-size:9px;font-weight:900;color:#e63946;transform:translateX(-50%);text-shadow:1px 1px 0 #000;white-space:nowrap;}
+
+#hud{position:absolute;top:22px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:space-between;align-items:flex-start;}
 
 /* Left cluster */
 #hud-left{display:flex;flex-direction:column;gap:3px;min-width:160px;}
@@ -76,7 +84,7 @@ canvas{display:block;position:absolute;inset:0;}
 
 /* Passive buff icons - right side middle */
 #passive-buffs{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:10;pointer-events:none;}
-.passive-icon{width:24px;height:24px;border:3px solid #000;border-radius:8px;background:#4cc9f0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;}
+.passive-icon{padding:3px 8px;border:3px solid #000;border-radius:10px;background:#4cc9f0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;white-space:nowrap;}
 
 /* ============ MOBILE JOYSTICK ============ */
 #joystick-zone{position:absolute;bottom:70px;left:30px;width:130px;height:130px;z-index:50;pointer-events:all;}
@@ -87,21 +95,21 @@ canvas{display:block;position:absolute;inset:0;}
 #levelup-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(27,28,43,0.85);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
 #levelup-modal.active{display:flex;}
 
-.levelup-title{font-size:36px;font-weight:900;color:#fca311;margin-bottom:20px;letter-spacing:6px;text-shadow:3px 3px 0 #000;}
+.levelup-title{font-size:24px;font-weight:900;color:#fca311;margin-bottom:12px;letter-spacing:4px;text-shadow:2px 2px 0 #000;}
 
-.levelup-choices{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.levelup-choices{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
 
-.choice-card{width:160px;background:#31344e;border:8px solid #000;border-radius:28px;padding:14px 10px;cursor:pointer;transition:all 0.12s ease;text-align:center;position:relative;}
-.choice-card:hover,.choice-card:active{border-color:#4cc9f0;box-shadow:0 0 24px rgba(76,201,240,0.7);transform:scale(1.1);}
+.choice-card{width:130px;background:#31344e;border:6px solid #000;border-radius:22px;padding:10px 8px;cursor:pointer;transition:all 0.12s ease;text-align:center;position:relative;}
+.choice-card:hover,.choice-card:active{border-color:#4cc9f0;box-shadow:0 0 18px rgba(76,201,240,0.7);transform:scale(1.08);}
 .choice-card.selected{border-color:#fca311;background:#4a3d1a;}
-.choice-icon{width:50px;height:50px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;}
-.choice-icon svg{width:44px;height:44px;}
-.choice-name{color:#fff;font-size:14px;font-weight:900;margin-bottom:3px;}
-.choice-tag{display:inline-block;font-size:9px;padding:3px 10px;border-radius:14px;margin-bottom:6px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border:3px solid #000;}
+.choice-icon{width:36px;height:36px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;}
+.choice-icon svg{width:32px;height:32px;}
+.choice-name{color:#fff;font-size:11px;font-weight:900;margin-bottom:2px;}
+.choice-tag{display:inline-block;font-size:8px;padding:2px 8px;border-radius:12px;margin-bottom:4px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border:2.5px solid #000;}
 .choice-tag.active{background:#4cc9f0;color:#000;}
 .choice-tag.passive{background:#fca311;color:#000;}
-.choice-desc{color:#ccc;font-size:10px;line-height:1.4;margin-bottom:4px;}
-.choice-lvl{color:#4cc9f0;font-size:11px;font-weight:900;}
+.choice-desc{color:#ccc;font-size:9px;line-height:1.3;margin-bottom:3px;}
+.choice-lvl{color:#4cc9f0;font-size:10px;font-weight:900;}
 
 /* Selected state overlay */
 .choice-card .check-mark{display:none;position:absolute;inset:0;border-radius:20px;background:rgba(76,201,240,0.2);border:6px solid #4cc9f0;justify-content:center;align-items:center;font-size:28px;color:#4cc9f0;font-weight:900;}
@@ -165,6 +173,14 @@ canvas{display:block;position:absolute;inset:0;}
 <div id="game-container">
   <canvas id="game"></canvas>
 
+  <!-- Progress Bar -->
+  <div id="progress-bar-wrap">
+    <div id="progress-bar">
+      <div id="progress-fill" style="width:0%"></div>
+      <div id="progress-markers"></div>
+    </div>
+  </div>
+
   <!-- HUD Top Bar -->
   <div id="hud">
     <div id="hud-left" class="hud-panel">
@@ -175,10 +191,6 @@ canvas{display:block;position:absolute;inset:0;}
         <div id="hp-hearts"></div>
       </div>
       <div id="hud-bars">
-        <div id="hp-bar-row">
-          <span class="hp-label">HP</span>
-          <div id="hp-outer"><div id="hp-inner" style="width:100%"></div></div>
-        </div>
         <div id="xp-bar-row">
           <span class="xp-label">XP</span>
           <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
@@ -930,7 +942,9 @@ function updateHUD(){
   document.getElementById('hud-energy').textContent=Math.floor(timer*2+player.kills*3);
   document.getElementById('lv-label').textContent='Lv.'+player.level;
   document.getElementById('xp-inner').style.width=(player.xp/player.xpToNext*100)+'%';
-  document.getElementById('hp-inner').style.width=(player.hp/player.maxHp*100)+'%';
+
+  // Progress bar
+  document.getElementById('progress-fill').style.width=(timer/TOTAL_TIME*100)+'%';
 
   // Hearts compact
   const hearts=document.getElementById('hp-hearts');
@@ -963,8 +977,7 @@ function updatePassiveBuffs(){
   let html='';
   player.passiveItems.forEach(p=>{
     const d=passiveDefs[p.id];
-    const firstLetter=d.name[0];
-    html+=`<div class="passive-icon">${firstLetter}</div>`;
+    html+=`<div class="passive-icon">${d.name}</div>`;
   });
   buffs.innerHTML=html;
 }
@@ -1003,8 +1016,7 @@ function drawBackground(){
 function drawMonster(m){
   if(!monsterImg)return;
   ctx.save();ctx.translate(m.x-camera.x,m.y-camera.y);
-  const s=m.size;
-  const scale=m.isBoss?s*3.5/500:s*3/500;
+  const scale=m.isBoss?0.5:0.22;
   const w=500*scale,h=500*scale;
   if(m.hitFlash>0&&Math.floor(m.hitFlash*30)%2===0)ctx.globalAlpha=0.5;
   ctx.imageSmoothingEnabled=false;
@@ -1106,12 +1118,16 @@ function render(){
     const pScale=0.22;
     const pw=500*pScale,ph=500*pScale;
     ctx.save();ctx.translate(px,py);
-    const ang=Math.atan2(player.lastDir.y,player.lastDir.x);
-    ctx.rotate(ang+Math.PI/2);
     ctx.drawImage(playerImg,-pw/2,-ph/2,pw,ph);
     ctx.restore();
   }
   ctx.globalAlpha=1;
+
+  // HP bar below player
+  const hpBarW=80,hpBarH=5,hpBarY=py+60;
+  ctx.fillStyle='#000';ctx.fillRect(px-hpBarW/2-1,hpBarY-1,hpBarW+2,hpBarH+2);
+  ctx.fillStyle='#e63946';ctx.fillRect(px-hpBarW/2,hpBarY,hpBarW*(player.hp/player.maxHp),hpBarH);
+  ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.strokeRect(px-hpBarW/2,hpBarY,hpBarW,hpBarH);
 
   // Minimap
   drawMinimap();
@@ -1143,6 +1159,13 @@ function startGame(){
   document.getElementById('levelup-modal').classList.remove('active');
   document.getElementById('pause-panel').classList.remove('active');
   document.getElementById('hp-warning').classList.remove('active');
+  // Init boss markers on progress bar
+  const markers=document.getElementById('progress-markers');
+  markers.innerHTML='';
+  for(let i=1;i<=BOSS_COUNT;i++){
+    const pct=(BOSS_INTERVAL*i)/TOTAL_TIME*100;
+    markers.innerHTML+=`<div class="progress-boss-marker" style="left:${pct}%"></div><div class="progress-boss-label" style="left:${pct}%">BOSS${i}</div>`;
+  }
   updateHUD();spawnWave();
 }
 function restartGame(){startGame();}
