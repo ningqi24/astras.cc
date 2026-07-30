@@ -204,6 +204,55 @@ const icons={
   pill:`<svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="14" ry="20" fill="#ee5555"/><ellipse cx="24" cy="16" rx="6" ry="4" fill="rgba(255,255,255,0.35)"/></svg>`
 };
 
+// ============ SVG SPRITES (Image objects) ============
+let monsterImg=null,playerImg=null;
+const monsterSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <ellipse cx="250" cy="395" rx="70" ry="16" fill="#5e5e73" opacity="0.7"/>
+  <path d="M 165 240 C 165 170, 195 140, 250 140 C 305 140, 335 170, 335 240 C 335 320, 325 385, 250 385 C 175 385, 165 320, 165 240 Z" fill="#85cf5a" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <ellipse cx="250" cy="305" rx="55" ry="60" fill="#f4d06b" stroke="#000" stroke-width="7"/>
+  <ellipse cx="150" cy="285" rx="20" ry="18" fill="#85cf5a" stroke="#000" stroke-width="8" transform="rotate(-25 150 285)"/>
+  <ellipse cx="350" cy="285" rx="20" ry="18" fill="#85cf5a" stroke="#000" stroke-width="8" transform="rotate(25 350 285)"/>
+  <ellipse cx="205" cy="385" rx="16" ry="12" fill="#85cf5a" stroke="#000" stroke-width="8"/>
+  <ellipse cx="295" cy="385" rx="16" ry="12" fill="#85cf5a" stroke="#000" stroke-width="8"/>
+  <ellipse cx="165" cy="225" rx="16" ry="16" fill="#f28b9c"/>
+  <ellipse cx="205" cy="195" rx="30" ry="28" fill="white" stroke="#000" stroke-width="7"/>
+  <path d="M 170 178 Q 205 188 240 178" fill="none" stroke="#000" stroke-width="14" stroke-linecap="round"/>
+  <ellipse cx="295" cy="195" rx="30" ry="28" fill="white" stroke="#000" stroke-width="7"/>
+  <path d="M 260 178 Q 295 188 330 178" fill="none" stroke="#000" stroke-width="14" stroke-linecap="round"/>
+  <path d="M 288 220 A 6 6 0 0 1 302 220 C 302 235, 295 248, 295 248 C 295 248, 288 235, 288 220 Z" fill="white" stroke="#000" stroke-width="6" stroke-linejoin="round"/>
+  <line x1="235" y1="245" x2="265" y2="245" stroke="#000" stroke-width="7" stroke-linecap="round"/>
+</svg>`;
+const playerSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <ellipse cx="250" cy="390" rx="90" ry="18" fill="#5e5e73" opacity="0.7"/>
+  <ellipse cx="250" cy="270" rx="100" ry="105" fill="#4b8cf1" stroke="#000" stroke-width="8"/>
+  <path d="M 200 290 L 300 290 C 330 300, 340 340, 320 380 C 290 395, 210 395, 180 380 C 160 340, 170 300, 200 290 Z" fill="#6d904f" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <ellipse cx="200" cy="385" rx="22" ry="14" fill="#3d3d4a" stroke="#000" stroke-width="8"/>
+  <ellipse cx="300" cy="385" rx="22" ry="14" fill="#3d3d4a" stroke="#000" stroke-width="8"/>
+  <path d="M 195 260 Q 250 280 305 260 L 295 295 Q 250 310 205 295 Z" fill="#e74c3c" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M 165 180 Q 250 155 335 180" fill="none" stroke="#1c1c1c" stroke-width="18" stroke-linecap="round"/>
+  <path d="M 165 180 L 140 150 L 150 180 L 130 195 Z" fill="#1c1c1c" stroke="#000" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M 175 195 Q 200 210 250 210 Q 300 210 325 195 L 310 175 Q 280 190 250 190 Q 220 190 190 175 Z" fill="#2ecc71" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <ellipse cx="195" cy="225" rx="32" ry="30" fill="#fff" stroke="#000" stroke-width="8"/>
+  <circle cx="205" cy="215" r="10" fill="#000"/>
+  <ellipse cx="305" cy="225" rx="32" ry="30" fill="#fff" stroke="#000" stroke-width="8"/>
+  <circle cx="295" cy="215" r="10" fill="#000"/>
+  <polyline points="230,260 245,242 260,260 275,242 290,260" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="160" cy="310" rx="18" ry="25" fill="#6d904f" stroke="#000" stroke-width="8" transform="rotate(25 160 310)"/>
+  <ellipse cx="340" cy="310" rx="18" ry="25" fill="#6d904f" stroke="#000" stroke-width="8" transform="rotate(-25 340 310)"/>
+  <polygon points="300,320 360,280 370,295 310,335" fill="#a67c52" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="360,275 440,210 430,240 365,295" fill="#7f8fa6" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="360,275 365,295 430,240" fill="#c8d6e5" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="305,325 235,390 220,365 295,305" fill="#7f8fa6" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="305,325 295,305 220,365" fill="#c8d6e5" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
+</svg>`;
+
+function loadSprites(){
+  monsterImg=new Image();
+  monsterImg.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(monsterSvg);
+  playerImg=new Image();
+  playerImg.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(playerSvg);
+}
+
 // ============ WEAPON DEFS ============
 const weaponDefs={
   katana:{name:'武士刀',icon:'katana',desc:'朝移动方向横扫',color:'#e8e8e8',cd:0.8,type:'melee',superName:'燎原百斩',superDesc:'360度全屏斩击'},
@@ -768,75 +817,21 @@ function drawBackground(){
 }
 
 function drawMonster(m){
+  if(!monsterImg)return;
   ctx.save();ctx.translate(m.x-camera.x,m.y-camera.y);
-
-  if(m.hitFlash>0&&Math.floor(m.hitFlash*30)%2===0)ctx.fillStyle='#fff';
-  else ctx.fillStyle=m.color;
-
   const s=m.size;
-
+  const scale=m.isBoss?s*2.5/500:s*2/500;
+  const w=500*scale,h=500*scale;
+  if(m.hitFlash>0&&Math.floor(m.hitFlash*30)%2===0)ctx.globalAlpha=0.5;
+  ctx.drawImage(monsterImg,-w/2,-h/2,w,h);
+  ctx.globalAlpha=1;
   if(m.isBoss){
-    // Boss
-    ctx.shadowColor=m.color;ctx.shadowBlur=15;
-    ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.arc(0,0,s*0.6,0,Math.PI*2);ctx.fill();
-    // Angry eyes
-    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.2,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.2,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#0e0e2a';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
-    // Horns
-    ctx.fillStyle=m.color;
-    ctx.beginPath();ctx.moveTo(-s*0.5,-s*0.6);ctx.lineTo(-s*0.7,-s*1.2);ctx.lineTo(-s*0.3,-s*0.6);ctx.fill();
-    ctx.beginPath();ctx.moveTo(s*0.5,-s*0.6);ctx.lineTo(s*0.7,-s*1.2);ctx.lineTo(s*0.3,-s*0.6);ctx.fill();
-    ctx.shadowBlur=0;
-
-    // Boss HP bar
-    const bw=100,bh=7,bx=-bw/2,by=-s-18;
+    const bw=100,bh=7,bx=-bw/2,by=-h/2-12;
     ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(bx-1,by-1,bw+2,bh+2);
     ctx.fillStyle='#333';ctx.fillRect(bx,by,bw,bh);
     ctx.fillStyle='#ff3355';ctx.fillRect(bx,by,bw*(m.hp/m.maxHp),bh);
     ctx.fillStyle='#fff';ctx.font='bold 9px Game,PingFang SC,sans-serif';ctx.textAlign='center';
     ctx.fillText(m.name,bx+bw/2,by-4);
-  }else{
-    // Normal monsters - cute cartoon style
-    switch(m.type){
-      case 'slime':
-        ctx.beginPath();ctx.ellipse(0,s*0.2,s,s*0.7,0,Math.PI,0);ctx.fill();
-        ctx.beginPath();ctx.arc(0,0,s,0,Math.PI*2);ctx.fill();
-        ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.25,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.25,0,Math.PI*2);ctx.fill();
-        ctx.fillStyle='#1a1a2e';ctx.beginPath();ctx.arc(-s*0.3,-s*0.15,s*0.12,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.3,-s*0.15,s*0.12,0,Math.PI*2);ctx.fill();
-        break;
-      case 'skull':
-        ctx.beginPath();ctx.arc(0,-s*0.1,s*0.65,0,Math.PI*2);ctx.fill();
-        ctx.fillRect(-s*0.35,s*0.15,s*0.7,s*0.5);
-        ctx.fillStyle='#1a1a2e';ctx.beginPath();ctx.arc(-s*0.2,-s*0.05,s*0.15,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.2,-s*0.05,s*0.15,0,Math.PI*2);ctx.fill();
-        break;
-      case 'bat':
-        ctx.beginPath();ctx.moveTo(0,-s);ctx.quadraticCurveTo(-s*1.3,-s*0.3,-s*0.7,0);ctx.quadraticCurveTo(-s*0.2,s*0.2,0,s*0.3);
-        ctx.quadraticCurveTo(s*0.2,s*0.2,s*0.7,0);ctx.quadraticCurveTo(s*1.3,-s*0.3,0,-s);ctx.fill();
-        ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.2,-s*0.2,s*0.12,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.2,-s*0.2,s*0.12,0,Math.PI*2);ctx.fill();
-        break;
-      case 'golem':
-        ctx.fillRect(-s*0.55,-s*0.4,s*1.1,s*0.9);
-        ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.arc(-s*0.15,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.15,-s*0.15,s*0.1,0,Math.PI*2);ctx.fill();
-        break;
-      case 'ghost':
-        ctx.globalAlpha=0.8;
-        ctx.beginPath();ctx.arc(0,-s*0.2,s*0.55,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.moveTo(-s*0.5,-s*0.05);ctx.quadraticCurveTo(-s*0.55,s*0.4,-s*0.35,s*0.45);
-        ctx.quadraticCurveTo(-s*0.15,s*0.3,0,s*0.5);ctx.quadraticCurveTo(s*0.15,s*0.3,s*0.35,s*0.45);
-        ctx.quadraticCurveTo(s*0.55,s*0.4,s*0.5,-s*0.05);ctx.fill();
-        ctx.globalAlpha=1;
-        ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(-s*0.2,-s*0.2,s*0.12,0,Math.PI*2);ctx.fill();
-        ctx.beginPath();ctx.arc(s*0.2,-s*0.2,s*0.12,0,Math.PI*2);ctx.fill();
-        break;
-    }
   }
   ctx.restore();
 }
@@ -905,68 +900,18 @@ function render(){
   particles.forEach(p=>{ctx.fillStyle=p.color;ctx.globalAlpha=p.life/0.5;ctx.beginPath();ctx.arc(p.x-camera.x+rand(-2,2),p.y-camera.y+rand(-2,2),p.size*p.life*2,0,Math.PI*2);ctx.fill();});
   ctx.globalAlpha=1;
 
-  // ===== PLAYER - CUTE SHARK =====
+  // ===== PLAYER =====
   const px=player.x-camera.x,py=player.y-camera.y;
   if(player.invuln>0&&Math.floor(player.invuln*20)%2===0)ctx.globalAlpha=0.4;
-
-  // Body shadow
-  ctx.fillStyle='rgba(0,0,0,0.3)';ctx.beginPath();ctx.ellipse(px,py+2,13,5,0,0,Math.PI*2);ctx.fill();
-
-  const bodyColor='#4499ff';
-  ctx.fillStyle=bodyColor;ctx.strokeStyle='#2277dd';ctx.lineWidth=2.5;
-
-  // Shark body
-  ctx.beginPath();
-  ctx.arc(px,py-6,9,Math.PI*0.15,Math.PI*0.85);
-  ctx.quadraticCurveTo(px+10,py+4,px+3,py+12);
-  ctx.lineTo(px+12,py+16);
-  ctx.lineTo(px+2,py+12);
-  ctx.lineTo(px-2,py+12);
-  ctx.lineTo(px-12,py+16);
-  ctx.lineTo(px-3,py+12);
-  ctx.quadraticCurveTo(px-10,py+4,px-9,py-6);
-  ctx.closePath();
-  ctx.fill();ctx.stroke();
-
-  // Dorsal fin
-  ctx.fillStyle='#3388ee';
-  ctx.beginPath();ctx.moveTo(px,py-12);ctx.lineTo(px-4,py-20);ctx.lineTo(px+4,py-20);ctx.closePath();ctx.fill();
-  ctx.strokeStyle='#2277dd';ctx.lineWidth=1.5;ctx.stroke();
-  ctx.fillStyle=bodyColor;ctx.strokeStyle='#2277dd';ctx.lineWidth=2.5;
-
-  // Belly (white)
-  ctx.fillStyle='#eef8ff';
-  ctx.beginPath();ctx.ellipse(px,py+2,6,7,0,0,Math.PI*2);ctx.fill();
-
-  // Eyes
-  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px-3.5,py-8,3.5,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(px+3.5,py-8,3.5,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle='#111';ctx.beginPath();ctx.arc(px-2.5,py-7.5,2,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(px+4.5,py-7.5,2,0,Math.PI*2);ctx.fill();
-  // Eye shine
-  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px-1.5,py-8.5,0.8,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(px+5.5,py-8.5,0.8,0,Math.PI*2);ctx.fill();
-
-  // Mouth
-  ctx.strokeStyle='#1155aa';ctx.lineWidth=1.5;
-  ctx.beginPath();ctx.arc(px,py-3,3,0.1,Math.PI-0.1);ctx.stroke();
-
-  // Cheek blush
-  ctx.fillStyle='rgba(255,100,130,0.5)';ctx.beginPath();ctx.arc(px-6,py-5,2,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(px+6,py-5,2,0,Math.PI*2);ctx.fill();
-
-  // Katana in hand
-  ctx.strokeStyle='#ddd';ctx.lineWidth=3;ctx.shadowColor='#fff';ctx.shadowBlur=5;
-  ctx.beginPath();
-  ctx.moveTo(px+player.lastDir.x*4,py+player.lastDir.y*4-2);
-  ctx.lineTo(px+player.lastDir.x*24,py+player.lastDir.y*24-2);
-  ctx.stroke();
-  ctx.strokeStyle='#999';ctx.lineWidth=1.5;ctx.shadowBlur=0;
-  ctx.beginPath();
-  ctx.moveTo(px+player.lastDir.x*4-1,py+player.lastDir.y*4);
-  ctx.lineTo(px+player.lastDir.x*24-1,py+player.lastDir.y*24);
-  ctx.stroke();
-
+  if(playerImg){
+    const pScale=0.16;
+    const pw=500*pScale,ph=500*pScale;
+    ctx.save();ctx.translate(px,py);
+    const angle=Math.atan2(player.lastDir.y,player.lastDir.x);
+    ctx.rotate(angle+Math.PI/2);
+    ctx.drawImage(playerImg,-pw/2,-ph/2,pw,ph);
+    ctx.restore();
+  }
   ctx.shadowBlur=0;ctx.globalAlpha=1;
 }
 
@@ -979,6 +924,7 @@ function gameLoop(ts){
 }
 
 function startGame(){
+  if(!monsterImg||!playerImg)loadSprites();
   player.x=MAP_W/2;player.y=MAP_H/2;
   player.hp=100;player.maxHp=100;
   player.xp=0;player.xpToNext=30;player.level=1;player.speed=180;
