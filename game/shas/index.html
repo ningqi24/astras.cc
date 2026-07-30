@@ -1023,27 +1023,29 @@ function render(){
     ctx.save();
     switch(e.type){
       case 'slash':{
+        // SVG-style deep crescent (cubic bezier, concave front edge)
         const sweepLen=e.range*Math.min(e.life/0.15,1);
         const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
-        const pnx=-e.dy/len,pny=e.dx/len;
+        const pnx=-e.dy/len,pny=e.dx/len; // perpendicular "up"
         const f=Math.min(e.life/0.15,1);
-        const bulge=sweepLen*0.65;
-        // forward crescent (white) + backward crescent (blue trail)
-        const crescents=[
-          {dir:1,bulgeMul:1.0,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
-          {dir:-1,bulgeMul:0.9,fill:`rgba(224,247,250,${0.6*f})`,stroke:`rgba(0,0,0,${0.6*f})`,lw:5},
+        const hh=sweepLen*0.5; // half-height along perpendicular
+        // 3-layer crescents: blue trail, white trail, main white
+        const layers=[
+          {bm:0.80,fm:0.50,fill:`rgba(200,240,255,${0.5*f})`,stroke:`rgba(0,0,0,${0.5*f})`,lw:4},
+          {bm:0.90,fm:0.50,fill:`rgba(255,255,255,${0.9*f})`,stroke:`rgba(0,0,0,${0.8*f})`,lw:5},
+          {bm:1.00,fm:0.57,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:7},
         ];
-        for(const c of crescents){
-          const b=bulge*c.bulgeMul;
-          const sx=ex,sy=ey;
-          const ex2=ex+e.dx*sweepLen*c.dir,ey2=ey+e.dy*sweepLen*c.dir;
-          const mx=(sx+ex2)/2,my=(sy+ey2)/2;
-          const cx=mx+pnx*b,cy=my+pny*b;
-          ctx.fillStyle=c.fill;ctx.strokeStyle=c.stroke;ctx.lineWidth=c.lw;
+        for(const l of layers){
+          const bBack=hh*l.bm,bFront=hh*l.fm;
+          const tX=ex+pnx*hh,tY=ey+pny*hh; // top
+          const bX=ex-pnx*hh,bY=ey-pny*hh; // bottom
+          ctx.fillStyle=l.fill;ctx.strokeStyle=l.stroke;ctx.lineWidth=l.lw;
           ctx.beginPath();
-          ctx.moveTo(sx,sy);
-          ctx.quadraticCurveTo(cx,cy,ex2,ey2);
-          ctx.quadraticCurveTo(mx-pnx*b,my-pny*b,sx,sy);
+          ctx.moveTo(tX,tY);
+          // back edge: convex, bulges away from attack
+          ctx.bezierCurveTo(tX-e.dx*bBack,tY-e.dy*bBack,bX-e.dx*bBack,bY-e.dy*bBack,bX,bY);
+          // front edge: concave, cuts toward attack
+          ctx.bezierCurveTo(bX-e.dx*bFront,bY-e.dy*bFront,tX-e.dx*bFront,tY-e.dy*bFront,tX,tY);
           ctx.fill();ctx.stroke();
         }
         }break;
