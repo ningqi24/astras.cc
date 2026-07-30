@@ -1030,19 +1030,21 @@ function render(){
         const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
         const pnx=-e.dy/len,pny=e.dx/len;
         const f=Math.min(e.life/0.15,1);
-        // 3-layer anime slash crescents (月牙)
-        const layers=[
-          {bulge:75,fill:`rgba(224,247,250,${0.35*f})`,stroke:`rgba(0,0,0,${0.4*f})`,lw:4},
-          {bulge:55,fill:`rgba(224,247,250,${0.7*f})`,stroke:`rgba(0,0,0,${0.8*f})`,lw:5},
-          {bulge:38,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
+        // 2 crescents: one forward, one backward
+        const crescents=[
+          {dir:1,bulge:50,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:6},
+          {dir:-1,bulge:45,fill:`rgba(224,247,250,${0.6*f})`,stroke:`rgba(0,0,0,${0.6*f})`,lw:5},
         ];
-        for(const l of layers){
-          const cx=midX+pnx*l.bulge,cy=midY+pny*l.bulge;
-          ctx.fillStyle=l.fill;ctx.strokeStyle=l.stroke;ctx.lineWidth=l.lw;
+        for(const c of crescents){
+          const sx=ex-e.dx*sweepLen*c.dir*0.5,sy=ey-e.dy*sweepLen*c.dir*0.5;
+          const ex2=ex+e.dx*sweepLen*c.dir*0.5,ey2=ey+e.dy*sweepLen*c.dir*0.5;
+          const mx=(sx+ex2)/2,my=(sy+ey2)/2;
+          const cx=mx+pnx*c.bulge,cy=my+pny*c.bulge;
+          ctx.fillStyle=c.fill;ctx.strokeStyle=c.stroke;ctx.lineWidth=c.lw;
           ctx.beginPath();
-          ctx.moveTo(ex,ey);
-          ctx.quadraticCurveTo(cx,cy,endX,endY);
-          ctx.quadraticCurveTo(midX-pnx*l.bulge,midY-pny*l.bulge,ex,ey);
+          ctx.moveTo(sx,sy);
+          ctx.quadraticCurveTo(cx,cy,ex2,ey2);
+          ctx.quadraticCurveTo(mx-pnx*c.bulge,my-pny*c.bulge,sx,sy);
           ctx.fill();ctx.stroke();
         }
         ctx.restore();break;
