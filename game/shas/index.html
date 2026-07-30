@@ -38,29 +38,13 @@ canvas{display:block;position:absolute;inset:0;}
 #hud{position:absolute;top:22px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:space-between;align-items:flex-start;}
 
 /* Left cluster */
-#hud-left{display:flex;flex-direction:column;gap:3px;min-width:160px;}
+#hud-left{display:flex;flex-direction:column;gap:0;min-width:80px;}
 
-.hud-panel{background:#f8f9fa;border:6px solid #000;border-radius:24px;padding:6px 12px;display:inline-flex;align-items:center;gap:6px;}
+.hud-panel{background:#f8f9fa;border:6px solid #000;border-radius:24px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px;}
 
-/* Shark head icon + HP hearts + XP bar combined */
-#hp-cluster{display:flex;align-items:center;gap:4px;}
-#hp-cluster .shark-icon svg{width:20px;height:20px;}
-#hp-hearts{display:flex;gap:2px;}
-.hp-heart{width:13px;height:13px;background:#ff6b6b;border:2px solid #000;border-radius:3px;transition:background 0.15s;}
-.hp-heart.empty{background:#ddd;}
-
-/* Combined bar row: XP bar below hearts */
-#hud-bars{display:flex;flex-direction:column;gap:2px;}
-#xp-bar-row{display:flex;align-items:center;gap:4px;}
-#xp-bar-row .xp-label{font-size:10px;font-weight:900;color:#fca311;line-height:1;}
-#xp-outer{flex:1;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
+/* XP bar line */
+#xp-outer{width:100px;height:6px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
 #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
-
-/* HP bar below */
-#hp-bar-row{display:flex;align-items:center;gap:4px;}
-#hp-bar-row .hp-label{font-size:10px;font-weight:900;color:#ff6b6b;line-height:1;}
-#hp-outer{flex:1;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
-#hp-inner{height:100%;background:#ff6b6b;transition:width 0.2s ease;border-radius:20px;}
 
 /* Right cluster */
 #hud-right{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
@@ -184,19 +168,7 @@ canvas{display:block;position:absolute;inset:0;}
   <!-- HUD Top Bar -->
   <div id="hud">
     <div id="hud-left" class="hud-panel">
-      <div id="hp-cluster">
-        <span class="shark-icon">
-          <svg viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="20" ry="18" fill="#4cc9f0" stroke="#000" stroke-width="5"/><circle cx="16" cy="20" r="5" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="18" cy="18" r="2.5" fill="#000"/><circle cx="32" cy="20" r="5" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="30" cy="18" r="2.5" fill="#000"/><path d="M18 32 Q24 40 30 32" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/><polygon points="24,2 20,8 24,6 28,8" fill="#4cc9f0" stroke="#000" stroke-width="4"/></svg>
-        </span>
-        <div id="hp-hearts"></div>
-      </div>
-      <div id="hud-bars">
-        <div id="xp-bar-row">
-          <span class="xp-label">XP</span>
-          <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
-          <span class="xp-label" style="color:#1b1c2b;font-size:9px;" id="lv-label">Lv.1</span>
-        </div>
-      </div>
+      <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
     </div>
     <div id="hud-right">
       <div class="hud-panel">
@@ -940,22 +912,8 @@ function update(dt){
 function updateHUD(){
   document.getElementById('hud-timer').textContent=formatTime(timer);
   document.getElementById('hud-energy').textContent=Math.floor(timer*2+player.kills*3);
-  document.getElementById('lv-label').textContent='Lv.'+player.level;
   document.getElementById('xp-inner').style.width=(player.xp/player.xpToNext*100)+'%';
-
-  // Progress bar
   document.getElementById('progress-fill').style.width=(timer/TOTAL_TIME*100)+'%';
-
-  // Hearts compact
-  const hearts=document.getElementById('hp-hearts');
-  const totalHearts=10;
-  const hpPerHeart=player.maxHp/totalHearts;
-  let html='';
-  for(let i=0;i<totalHearts;i++){
-    const filled=player.hp>i*hpPerHeart;
-    html+=`<div class="hp-heart${filled?'':' empty'}"></div>`;
-  }
-  hearts.innerHTML=html;
 
   updateWeaponSlots();
   updatePassiveBuffs();
@@ -1121,13 +1079,13 @@ function render(){
     ctx.drawImage(playerImg,-pw/2,-ph/2,pw,ph);
     ctx.restore();
   }
-  ctx.globalAlpha=1;
-
-  // HP bar below player
+  // HP bar under player
   const hpBarW=80,hpBarH=5,hpBarY=py+60;
-  ctx.fillStyle='#000';ctx.fillRect(px-hpBarW/2-1,hpBarY-1,hpBarW+2,hpBarH+2);
-  ctx.fillStyle='#e63946';ctx.fillRect(px-hpBarW/2,hpBarY,hpBarW*(player.hp/player.maxHp),hpBarH);
-  ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.strokeRect(px-hpBarW/2,hpBarY,hpBarW,hpBarH);
+  ctx.fillStyle='#000';
+  ctx.fillRect(px-hpBarW/2,hpBarY-hpBarH/2,hpBarW,hpBarH);
+  ctx.fillStyle='#ff4444';
+  ctx.fillRect(px-hpBarW/2+1,hpBarY-hpBarH/2+1,(hpBarW-2)*(player.hp/player.maxHp),hpBarH-2);
+  ctx.globalAlpha=1;
 
   // Minimap
   drawMinimap();
