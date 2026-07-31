@@ -453,6 +453,78 @@
       color: #e67e22;
     }
 
+    .h-card-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      flex-shrink: 0;
+      font-size: 0.68rem;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 1px 7px;
+      white-space: nowrap;
+      line-height: 1.5;
+      cursor: default;
+      user-select: none;
+      border: 1px solid transparent;
+    }
+    .h-card-verified.fresh {
+      color: #4ade80;
+      background-color: rgba(74, 222, 128, 0.12);
+      border-color: rgba(74, 222, 128, 0.28);
+    }
+    .h-card-verified.stale {
+      color: #fbbf24;
+      background-color: rgba(251, 191, 36, 0.12);
+      border-color: rgba(251, 191, 36, 0.28);
+    }
+    .h-card-verified.expired {
+      color: #f87171;
+      background-color: rgba(248, 113, 113, 0.12);
+      border-color: rgba(248, 113, 113, 0.28);
+    }
+    .h-card-verified.unverified {
+      color: var(--text-secondary);
+      background-color: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .daylight-mode .h-card-verified.unverified {
+      background-color: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .h-card-note {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      opacity: 0.85;
+    }
+
+    .detail-modal-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 3px 10px;
+      border: 1px solid transparent;
+      cursor: default;
+    }
+    .detail-modal-note {
+      margin: 6px 0 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      opacity: 0.92;
+    }
+
     .h-card-url {
       font-size: 0.78rem;
       color: var(--text-secondary);
@@ -3276,6 +3348,24 @@
     });
   }
 
+  function getVerifiedStatus(verifiedDate) {
+    const STALE_DAYS = 90, EXPIRE_DAYS = 180;
+    const now = new Date();
+    const d = verifiedDate ? new Date(verifiedDate) : null;
+    if (!d || isNaN(d.getTime())) {
+      return { cls: 'unverified', label: currentLang === 'zh' ? '未测' : 'Untested', title: currentLang === 'zh' ? '未亲测' : 'Not personally tested' };
+    }
+    const days = Math.floor((now - d) / 86400000);
+    const ym = (d.getFullYear()) + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    if (days <= STALE_DAYS) {
+      return { cls: 'fresh', label: ym, title: currentLang === 'zh' ? '亲测于 ' + verifiedDate : 'Verified on ' + verifiedDate };
+    } else if (days <= EXPIRE_DAYS) {
+      return { cls: 'stale', label: currentLang === 'zh' ? '待复核' : 'Stale', title: currentLang === 'zh' ? '上次亲测 ' + ym + '，已超 90 天，待复核' : 'Verified ' + ym + ', >90d, needs recheck' };
+    } else {
+      return { cls: 'expired', label: currentLang === 'zh' ? '长期未复核' : 'Outdated', title: currentLang === 'zh' ? '上次亲测 ' + ym + '，已超 180 天' : 'Verified ' + ym + ', >180d, outdated' };
+    }
+  }
+
   function createSiteCard(button, index) {
     const card = document.createElement('div');
     card.className = 'h-card';
@@ -3365,7 +3455,22 @@
       });
     }
 
+    const verified = getVerifiedStatus(button.verified_date);
+    const verifiedEl = document.createElement('span');
+    verifiedEl.className = 'h-card-verified ' + verified.cls;
+    verifiedEl.title = verified.title;
+    verifiedEl.innerHTML = '<svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l3 3 7-7"/></svg><span>' + verified.label + '</span>';
+    titleWrap.appendChild(verifiedEl);
+
     left.appendChild(titleWrap);
+
+    if (button.note) {
+      const noteEl = document.createElement('div');
+      noteEl.className = 'h-card-note';
+      noteEl.textContent = currentLang === 'zh' ? button.note : (button.note_en || button.note);
+      left.appendChild(noteEl);
+    }
+
     card.appendChild(left);
 
     const rightActions = document.createElement('div');
@@ -3647,6 +3752,21 @@
         </div>`;
     }
 
+    const verifiedLabel = currentLang === 'zh' ? '实测状态' : 'Verified Status';
+    const v = getVerifiedStatus(button.verified_date);
+    const noteLabel = currentLang === 'zh' ? '主观点评' : 'Editor Note';
+    const noteText = currentLang === 'zh' ? (button.note || '') : (button.note_en || button.note || '');
+    const verifiedHtml = `
+      <div class="detail-modal-section">
+        <div class="detail-modal-section-label">${verifiedLabel}</div>
+        <div class="detail-modal-verified h-card-verified ${v.cls}" title="${v.title}">${v.title}</div>
+      </div>`;
+    const noteHtml = noteText ? `
+      <div class="detail-modal-section">
+        <div class="detail-modal-section-label">${noteLabel}</div>
+        <p class="detail-modal-note">${noteText}</p>
+      </div>` : '';
+
     modal.innerHTML = `
       <div class="detail-modal">
         <button class="detail-modal-close" onclick="closeDetailModal()">
@@ -3666,6 +3786,8 @@
         </div>
         <div class="detail-modal-body">
           ${creatorsHtml}
+          ${verifiedHtml}
+          ${noteHtml}
           ${tagsHtml}
           <div class="detail-modal-section">
             <div class="detail-modal-section-label">${urlLabel}</div>

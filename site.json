@@ -12,7 +12,10 @@
         "编辑器"
       ],
       "description": "AstraEditor 的官方网站（.top 域名），同样提供增强型造型编辑器、更多插件和自定义主题，内容与 .cc 版本一致。",
-      "description_en": "The official website of AstraEditor on the .top domain, offering the same enhanced costume editor, more addons, and custom themes as the .cc version."
+      "description_en": "The official website of AstraEditor on the .top domain, offering the same enhanced costume editor, more addons, and custom themes as the .cc version.",
+      "verified_date": "2026-07-31",
+      "note": "Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。",
+      "note_en": "Scratch-derivative editor, CN-maintained, open-source on GitHub. Trustworthy."
     },
     {
       "name": "AstraEditor 非官方定制官网(.cc)",
@@ -26,7 +29,10 @@
         "编辑器"
       ],
       "description": "AstraEditor 是一款基于 Scratch 的增强型造型编辑器，提供更好的造型编辑器、更多插件和自定义主题，让编程速度「快如闪电」。这是部署在 .cc 域名上的特制版本。",
-      "description_en": "AstraEditor is an enhanced Scratch costume editor with a better paint editor, more addons, and custom themes for lightning-fast coding. This is the special version deployed on the .cc domain."
+      "description_en": "AstraEditor is an enhanced Scratch costume editor with a better paint editor, more addons, and custom themes for lightning-fast coding. This is the special version deployed on the .cc domain.",
+      "verified_date": "2026-07-31",
+      "note": "AstraEditor 官网镜像，个人维护，fork 自官方仓库。",
+      "note_en": "Mirror of AstraEditor official, personal fork for UX tweaks."
     },
     {
       "name": "COLID NS UI - scratch",
@@ -40,7 +46,10 @@
         "OS&UI"
       ],
       "description": "COLID CE 出品的 NS UI 界面重制项目，旨在让 COLID OS 焕然一新。采用 CC-BY-4.0 开源协议，包含 NS 2.6UI 等版本，兼容部分原版拓展应用。",
-      "description_en": "A UI redesign project by COLID CE, aiming to refresh COLID OS with a new look. Released under CC-BY-4.0 license, includes versions like NS 2.6UI, compatible with select original extensions."
+      "description_en": "A UI redesign project by COLID CE, aiming to refresh COLID OS with a new look. Released under CC-BY-4.0 license, includes versions like NS 2.6UI, compatible with select original extensions.",
+      "verified_date": "2026-07-31",
+      "note": "Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。",
+      "note_en": "Scratch-based OS mock, open-source (CC-BY-4.0), study only."
     },
     {
       "name": "COLID Studio",
@@ -55,7 +64,10 @@
         "工作室"
       ],
       "description": "COLID 创意工作室官方网站。使用 Scratch 图形化编程制作操作系统，产品包括 COLID OS（支持窗口拖动、窗口堆叠、任务栏、拓展程序）和 Arc Os 移动端系统。",
-      "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system."
+      "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system.",
+      "verified_date": "2026-07-31",
+      "note": "Scratch 仿 OS，开源协议未知，B站有信誉背书，mysxl 免费建站。",
+      "note_en": "Scratch OS project, license unknown, Bilibili-backed, on mysxl."
     },
     {
       "name": "COLID-EG APP Store",
@@ -70,7 +82,10 @@
         "下载"
       ],
       "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
-      "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives."
+      "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives.",
+      "verified_date": "2026-07-31",
+      "note": "COLID 社区应用商店下载站，Scratch 制，仅供学习，mysxl 免费建站。",
+      "note_en": "COLID app store downloads, Scratch-made, study only, on mysxl."
     },
     {
       "name": "COLID-EG 官网",
@@ -84,7 +99,10 @@
         "OS&UI"
       ],
       "description": "COLID-EG 是基于 Pro APP Store 项目开发的操作系统架构，应用窗口部分完全由架构负责，开发者仅需完成应用部分。提供大窗口和小窗口两种示例程序，关键代码带有注释。后期将更新开发手册和教程视频。",
-      "description_en": "COLID-EG is an OS architecture based on the Pro APP Store project. The architecture handles the application window part, allowing developers to focus on the app itself. Offers two window size examples with commented key code. Development manuals and tutorials are planned."
+      "description_en": "COLID-EG is an OS architecture based on the Pro APP Store project. The architecture handles the application window part, allowing developers to focus on the app itself. Offers two window size examples with commented key code. Development manuals and tutorials are planned.",
+      "verified_date": "2026-07-31",
+      "note": "COLID 社区应用商店主页，Scratch 制，仅供学习，mysxl 免费建站。",
+      "note_en": "COLID app store homepage, Scratch-made, study only, on mysxl."
     },
     {
       "name": "ToingOS/NQOS UI - scratch",
@@ -98,7 +116,10 @@
         "OS&UI"
       ],
       "description": "ToingOS 是 Ning Qi.24 用 Scratch 制作的操作系统，追寻 COLID OS 的质心之作。包含锁屏登录、桌面壁纸、音量/网络/蓝牙控制、设置面板、WLAN 面板、音乐应用、Dock 栏等功能，持续迭代更新至 1.995 版本。",
-      "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995."
+      "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995.",
+      "verified_date": "2026-07-31",
+      "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
+      "note_en": "Author's early Scratch work, scattered like a draft, on mysxl."
     },
     {
       "name": "Minichat聊天 - Astras.cc",
@@ -111,7 +132,10 @@
         "社交"
       ],
       "description": "MiniChat 是一款轻量级在线聊天室（当前版本 4.0.0）。支持注册登录、全局聊天、自定义头像、桌面通知与提示音、@提醒、主题与语言切换等丰富功能。",
-      "description_en": "MiniChat is a lightweight online chat room (currently v4.0.0). Features include registration/login, global chat, custom avatars, desktop notifications and sounds, @mentions, theme and language switching, and more."
+      "description_en": "MiniChat is a lightweight online chat room (currently v4.0.0). Features include registration/login, global chat, custom avatars, desktop notifications and sounds, @mentions, theme and language switching, and more.",
+      "verified_date": "2026-07-31",
+      "note": "需注册且满13岁，有隐私政策，运营规模小，GitHub 开源。",
+      "note_en": "Reg required (13+), has privacy policy, small-scale, open-source."
     },
     {
       "name": "SimpleChatMini - scratch",
@@ -126,7 +150,10 @@
         "组件"
       ],
       "description": "基于 Scratch 的简易聊天 UI 组件，使用 WebGL 渲染，可在 Scratch 项目中嵌入聊天界面。",
-      "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects."
+      "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects.",
+      "verified_date": "2026-07-31",
+      "note": "个人维护的 Scratch 打包项目，仅供学习。",
+      "note_en": "Personal Scratch bundled project, study only."
     },
     {
       "name": "AstraEditor 下载站(.cc)",
@@ -140,7 +167,10 @@
         "工具"
       ],
       "description": "AstraEditor 各平台客户端下载站。提供大陆地区 GitHub 代理加速下载（按省份分配 ghproxy 节点），并附带 Chrome/Edge 并行下载提速指南。",
-      "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips."
+      "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips.",
+      "verified_date": "2026-07-31",
+      "note": "第三方代下，ghproxy 加速，速度尚可，GitHub 开源。",
+      "note_en": "Third-party download mirror, ghproxy accelerated, open-source."
     },
     {
       "name": "Search 极简页",
@@ -153,7 +183,10 @@
         "工具"
       ],
       "description": "一个极简风格的搜索引擎首页，界面干净清爽，专注于快速搜索。",
-      "description_en": "A minimalist search engine homepage with a clean interface focused on quick searching."
+      "description_en": "A minimalist search engine homepage with a clean interface focused on quick searching.",
+      "verified_date": "2026-07-31",
+      "note": "Via 聚合搜索，含谷歌必应百度360等，无后端，GitHub 开源。",
+      "note_en": "Via aggregated search (Google/Bing/Baidu/360), no backend, open-source."
     },
     {
       "name": "深海字体 CDN",
@@ -166,7 +199,10 @@
         "工具"
       ],
       "description": "基于中文网字计划改编的中文字体 CDN 服务，提供大量中文字体的 CSS 引用链接，可一键复制并在网页中通过 link 标签引入使用。",
-      "description_en": "A Chinese fonts CDN service adapted from the Chinese Web Fonts project. Provides CSS links for a large number of Chinese fonts that can be easily copied and embedded via link tags in web pages."
+      "description_en": "A Chinese fonts CDN service adapted from the Chinese Web Fonts project. Provides CSS links for a large number of Chinese fonts that can be easily copied and embedded via link tags in web pages.",
+      "verified_date": "2026-07-31",
+      "note": ".cc.cd 后缀虽不正规，字体丰富，对国内用户友好，体验尚可。",
+      "note_en": ".cc.cd suffix looks odd, but rich fonts, CN-friendly, works fine."
     },
     {
       "name": "用域名发送邮件 - Astras.cc",
@@ -179,7 +215,10 @@
         "工具"
       ],
       "description": "使用自定义域名发送邮件的在线工具。填写收件人、主题和内容（支持 HTML 格式）即可发送邮件。",
-      "description_en": "An online tool to send emails with a custom domain. Simply fill in the recipient, subject, and content (HTML supported) to send."
+      "description_en": "An online tool to send emails with a custom domain. Simply fill in the recipient, subject, and content (HTML supported) to send.",
+      "verified_date": "2026-07-31",
+      "note": "支持 API/SMTP 发信，有免费测试接口，个人自用尚可，GitHub 开源。",
+      "note_en": "API/SMTP sending, free test endpoint, for personal use, open-source."
     },
     {
       "name": "高速编号牌生成器 - NanGua-QWQ",
@@ -192,7 +231,10 @@
         "工具"
       ],
       "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
-      "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export."
+      "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
+      "verified_date": "2026-07-31",
+      "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。",
+      "note_en": "Personal, open-source, best tool for highway signs, CN-friendly."
     },
     {
       "name": "Lucide 图标中文网",
@@ -207,7 +249,10 @@
         "设计"
       ],
       "description": "Lucide 是由社区制作的开源图标工具包，提供美观且一致的 SVG 图标。中文网支持按类别（无障碍、动物、箭头、房屋、图表、设计、设备、表情等）浏览图标，可自定义颜色、描边宽度和尺寸，方便在项目中检索使用。",
-      "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects."
+      "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects.",
+      "verified_date": "2026-07-31",
+      "note": "知名开源图标库国内汉化站，好评但 UI 不多。",
+      "note_en": "Popular icon library, CN localized, praised but sparse UI."
     },
     {
       "name": "React Bits 组件库",
@@ -222,7 +267,10 @@
         "React"
       ],
       "description": "React Bits 是一个开源的 React 组件库，提供大量精美的动画组件、UI 组件和模板，包含 Cursor Grid、Specular Button、Option Wheel、Curved Input、Line Sidebar 等创意组件，可直接复制代码在项目中使用。",
-      "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects."
+      "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects.",
+      "verified_date": "2026-07-31",
+      "note": "高质量 React 动效组件库，GitHub 44.6k 星，开源免费。",
+      "note_en": "High-quality React animation library, 44.6k stars, free & open-source."
     },
     {
       "name": "鲨鲨幸存者",
@@ -235,7 +283,10 @@
         "游戏"
       ],
       "description": "一款模拟建造水渠引导水流的沙盒游戏。用水平管、垂直管、可旋转弯管、十字管和大坝，将水源引到农田赚取金币。适配手机触屏，打开即玩。",
-      "description_en": "A sandbox game about building canals to guide water. Use horizontal pipes, vertical pipes, rotatable corners, cross pipes, and dams to channel water from sources to farms and earn coins. Mobile-friendly, play instantly."
+      "description_en": "A sandbox game about building canals to guide water. Use horizontal pipes, vertical pipes, rotatable corners, cross pipes, and dams to channel water from sources to farms and earn coins. Mobile-friendly, play instantly.",
+      "verified_date": "2026-07-31",
+      "note": "小游戏，强制横屏，适合打发时间。",
+      "note_en": "Mini game, forced landscape, good for killing time."
     },
     {
       "name": "Cyberexplorer's World",
@@ -248,7 +299,10 @@
         "个人主页"
       ],
       "description": "Cyberexplorer 的个人主页，展示个人项目与作品。",
-      "description_en": "Cyberexplorer's personal homepage showcasing projects and works."
+      "description_en": "Cyberexplorer's personal homepage showcasing projects and works.",
+      "verified_date": "2026-07-31",
+      "note": "个人博客，.cn 域名安全可靠，诸多作品，B站可查。",
+      "note_en": "Personal blog, .cn domain safe, many works, findable on Bilibili."
     },
     {
       "name": "ningqi's github homepage",
@@ -261,7 +315,10 @@
         "代码仓库"
       ],
       "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
-      "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories."
+      "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories.",
+      "verified_date": "2026-07-31",
+      "note": "作者本尊，年度546次贡献，astras.cc/minichat 等均开源于此。",
+      "note_en": "The author, 546 contributions/yr, astras.cc/minichat open-sourced here."
     },
     {
       "name": "ningqi开发社",
@@ -276,7 +333,10 @@
         "OS&UI"
       ],
       "description": "ningqi 的个人作品展示站，收录了 ToingOS、NQ_OS 系列等 Scratch 操作系统作品及其它项目，提供蓝奏云下载链接。",
-      "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud."
+      "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud.",
+      "verified_date": "2026-07-31",
+      "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
+      "note_en": "Author's early Scratch work, scattered like a draft, on mysxl."
     }
   ]
 }
