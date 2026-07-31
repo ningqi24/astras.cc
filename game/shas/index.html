@@ -880,7 +880,7 @@ function update(dt){
 
   // Collision
   for(let p of projectiles){if(p.life<=0)continue;
-    for(let i=monsters.length-1;i>=0;i--){const m=monsters[i];if(dist(p,m)<m.size+5){
+    for(let i=monsters.length-1;i>=0;i--){const m=monsters[i];const hitR=m.size+Math.max(p.size*0.6,5);if(dist(p,m)<hitR){
       let dmg=p.dmg;if(p.crit)dmg*=2;m.hp-=dmg;m.hitFlash=0.1;
       if(!p.penetrate){p.life=0;if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});}break;}
     }}
