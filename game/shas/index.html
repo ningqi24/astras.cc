@@ -384,7 +384,7 @@ const canvas=document.getElementById('game');
 const ctx=canvas.getContext('2d');
 
 let gameState='idle';
-let camera={x:0,y:0};
+let camera={x:0,y:0},shakeAmount=0;
 let player={
   x:MAP_W/2,y:MAP_H/2,
   hp:100,maxHp:100,
@@ -564,19 +564,21 @@ function fireWeapon(w){
 
   switch(w.id){
     case 'katana':{
-      const dir=player.lastDir;const ang=Math.atan2(dir.y,dir.x);
-      // Wide sweeping slash wave - front and back arcs
-      const waveCount=isSuper?14:7;
-      for(let i=0;i<waveCount;i++){
-        const spread=Math.PI*0.7; // wide arc
-        const a=ang-spread/2+spread*i/(waveCount-1);
-        effects.push({
-          x:player.x,y:player.y,
-          dx:Math.cos(a),dy:Math.sin(a),
-          life:0.2,range:range,dmg:dmg,
-          color:'#e8e8e8',type:'slash'
-        });
-      }
+      const dir = player.lastDir;
+      const ang = Math.atan2(dir.y, dir.x);
+      
+      // 【已修复】不再生成14个扇面，而是只生成1道月牙剑气向前横扫
+      effects.push({
+        x: player.x + Math.cos(ang) * 30, // 从角色身前发出
+        y: player.y + Math.sin(ang) * 30,
+        dx: Math.cos(ang),
+        dy: Math.sin(ang),
+        life: 0.35,         // 持续时间，决定飞多远
+        range: range * 1.5, // 长度/范围变大
+        dmg: dmg,
+        color: '#e8e8e8',
+        type: 'slash'
+      });
       break;
     }
     case 'kunai':{
@@ -759,7 +761,7 @@ function levelUp(){
 function damagePlayer(dmg){
   if(player.invuln>0)return;
   dmg*=(1-player.dmgReduction);const actual=Math.ceil(dmg*10)/10;
-  player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;
+  player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
 
   // Floating damage number
   const dmgEl=document.createElement('div');dmgEl.className='dmg-float';
@@ -839,6 +841,7 @@ function update(dt){
 
   if(player.invuln>0)player.invuln-=dt;
   if(player.hitFlash>0)player.hitFlash-=dt;
+  if(shakeAmount>0){shakeAmount=Math.max(0,shakeAmount-dt*30);}
   if(player.regen>0)player.hp=Math.min(player.hp+player.regen*dt,player.maxHp);
 
   // HP Warning
@@ -889,7 +892,7 @@ function update(dt){
   monsters.forEach(m=>{const a=angle(m,player);let spd=m.speed;for(let e of effects){if(e.type==='timeField'&&dist(e,m)<e.range)spd*=0.5;}m.x+=Math.cos(a)*spd*dt*60;m.y+=Math.sin(a)*spd*dt*60;});
 
   // Damage player
-  monsters.forEach(m=>{if(dist(m,player)<m.size+12)damagePlayer(m.dmg*dt);});
+  monsters.forEach(m=>{if(dist(m,player)<m.size+12)damagePlayer(m.dmg*dt*60);});
 
   // XP pickup
   for(let i=xpOrbs.length-1;i>=0;i--){const o=xpOrbs[i];const d=dist(player,o);
@@ -999,6 +1002,9 @@ function render(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   camera.x=clamp(player.x-canvas.width/2,0,MAP_W-canvas.width);
   camera.y=clamp(player.y-canvas.height/2,0,MAP_H-canvas.height);
+  const shakeX=shakeAmount>0?(Math.random()-0.5)*shakeAmount*2:0;
+  const shakeY=shakeAmount>0?(Math.random()-0.5)*shakeAmount*2:0;
+  camera.x+=shakeX;camera.y+=shakeY;
   drawBackground();
 
   // XP orbs
@@ -1156,6 +1162,7 @@ function startGame(){
   player.atkBonus=0;player.dmgReduction=0;player.cdReduction=0;player.rangeBonus=0;
   player.durationBonus=0;player.speedBonus=0;player.bulletSpeedBonus=0;player.xpBonus=0;
   player.regen=0;player.maxHpBonus=0;player.invuln=0;player.kills=0;
+  shakeAmount=0;
   player.lastDir={x:0,y:-1};
   monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];
   timer=0;waveNum=1;bossDefeated=0;bossActive=null;
