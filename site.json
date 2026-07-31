@@ -63,8 +63,7 @@
       "author_url": "https://colid.mysxl.cn/",
       "tags": [
         "Scratch",
-        "OS&UI",
-        "工作室"
+        "OS&UI"
       ],
       "description": "COLID 创意工作室官方网站。使用 Scratch 图形化编程制作操作系统，产品包括 COLID OS（支持窗口拖动、窗口堆叠、任务栏、拓展程序）和 Arc Os 移动端系统。",
       "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system.",
@@ -82,7 +81,6 @@
       "author_url": "https://colid-eg.mysxl.cn/",
       "tags": [
         "Scratch",
-        "OS&UI",
         "下载"
       ],
       "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
@@ -154,8 +152,7 @@
       "author_url": "https://github.com/ningqi24",
       "tags": [
         "Scratch",
-        "社交",
-        "组件"
+        "社交"
       ],
       "description": "基于 Scratch 的简易聊天 UI 组件，使用 WebGL 渲染，可在 Scratch 项目中嵌入聊天界面。",
       "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects.",
@@ -172,8 +169,8 @@
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
       "tags": [
-        "下载",
-        "工具"
+        "Scratch",
+        "下载"
       ],
       "description": "AstraEditor 各平台客户端下载站。提供大陆地区 GitHub 代理加速下载（按省份分配 ghproxy 节点），并附带 Chrome/Edge 并行下载提速指南。",
       "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips.",
@@ -258,9 +255,7 @@
       "author": "Lucide",
       "author_url": "https://lucide.dev/",
       "tags": [
-        "前端",
-        "图标",
-        "设计"
+        "前端"
       ],
       "description": "Lucide 是由社区制作的开源图标工具包，提供美观且一致的 SVG 图标。中文网支持按类别（无障碍、动物、箭头、房屋、图表、设计、设备、表情等）浏览图标，可自定义颜色、描边宽度和尺寸，方便在项目中检索使用。",
       "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects.",
@@ -277,9 +272,7 @@
       "author": "React Bits",
       "author_url": "https://reactbits.dev/",
       "tags": [
-        "前端",
-        "组件库",
-        "React"
+        "前端"
       ],
       "description": "React Bits 是一个开源的 React 组件库，提供大量精美的动画组件、UI 组件和模板，包含 Cursor Grid、Specular Button、Option Wheel、Curved Input、Line Sidebar 等创意组件，可直接复制代码在项目中使用。",
       "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects.",
@@ -313,7 +306,7 @@
       "author": "Cyberexplorer",
       "author_url": "https://cyberneko.cn/",
       "tags": [
-        "个人主页"
+        "个人作品"
       ],
       "description": "Cyberexplorer 的个人主页，展示个人项目与作品。",
       "description_en": "Cyberexplorer's personal homepage showcasing projects and works.",
@@ -330,7 +323,7 @@
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
       "tags": [
-        "代码仓库"
+        "个人作品"
       ],
       "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
       "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories.",
@@ -347,7 +340,6 @@
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
       "tags": [
-        "工作室",
         "Scratch",
         "OS&UI"
       ],
@@ -366,9 +358,7 @@
       "author": "Project N.E.K.O. 团队",
       "author_url": "",
       "tags": [
-        "个人作品",
-        "二次元",
-        "创意工具"
+        "二次元"
       ],
       "description": "面向二次元用户的虚拟角色互动平台，猫娘主题。",
       "description_en": "A virtual character interactive platform for anime-style users with cat-girl theme.",
@@ -385,9 +375,7 @@
       "author": "Corona Studio 团队",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "开发团队",
-        "MC团队"
+        "MC"
       ],
       "description": "以 Minecraft 为核心的开发团队，日冕工作室官方站。",
       "description_en": "Minecraft-focused development team, Corona Studio official site.",
@@ -404,9 +392,7 @@
       "author": "晓游 nicepkg",
       "author_url": "",
       "tags": [
-        "工具",
-        "资源下载",
-        "开发工具"
+        "工具"
       ],
       "description": "浏览器优先的资源发现与桌面传输枢纽，资源检索工具。",
       "description_en": "Browser-first resource discovery and desktop handoff hub.",
@@ -423,9 +409,7 @@
       "author": "nicepkg 小明实验室",
       "author_url": "",
       "tags": [
-        "工具",
-        "编辑器",
-        "创意工具"
+        "工具"
       ],
       "description": "Windows 桌面美化工作室，提供桌面主题定制工具。",
       "description_en": "Windows desktop makeover studio & customization tool.",
@@ -442,8 +426,7 @@
       "author": "在下莫老师",
       "author_url": "",
       "tags": [
-        "个人作品",
-        "资源下载"
+        "资源"
       ],
       "description": "莫老师的个人资源分享站，中文资源汇总。",
       "description_en": "莫老师s personal Chinese resource sharing hub.",
@@ -460,9 +443,7 @@
       "author": "Cylorine Studio 团队",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "开发团队",
-        "MC团队"
+        "MC"
       ],
       "description": "专注 Minecraft 相关内容开发与探索的组织，Cylorine 官方站。",
       "description_en": "Minecraft content dev & exploration organization, Cylorine official site.",
@@ -479,9 +460,8 @@
       "author": "ChunkBase 团队",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "工具",
-        "MC工具"
+        "MC",
+        "工具"
       ],
       "description": "Minecraft 种子查图、模组、应用与教程集合站，MC 玩家必备。",
       "description_en": "Minecraft seed map apps, mods & tutorials. Essential for MC players.",
@@ -498,9 +478,8 @@
       "author": "Minecraft Search 团队",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "工具",
-        "MC工具"
+        "MC",
+        "工具"
       ],
       "description": "Minecraft 物品/生物/方块 ID 与合成表搜索站，快速查配方。",
       "description_en": "Minecraft items, mobs, blocks & recipes search engine.",
@@ -517,9 +496,8 @@
       "author": "Garbage Human Studio",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "工具",
-        "MC启动器"
+        "MC",
+        "工具"
       ],
       "description": "基于 Modrinth 生态的免费开源 Minecraft 启动器，支持模组整合。",
       "description_en": "Free & open-source Minecraft launcher built on Modrinth ecosystem.",
@@ -536,8 +514,7 @@
       "author": "WormWaker",
       "author_url": "",
       "tags": [
-        "个人作品",
-        "博客"
+        "个人作品"
       ],
       "description": "WormWaker 的个人博客与产品展示站，分享独立开发作品。",
       "description_en": "WormWakers personal blog & indie product showcase.",
@@ -554,9 +531,8 @@
       "author": "OCEAN / ecylt",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "工具",
-        "MC指令"
+        "MC",
+        "工具"
       ],
       "description": "Minecraft 指令图形化生成工具，复杂命令拼接可视化。",
       "description_en": "Minecraft visual command generator for complex command building.",
@@ -573,9 +549,8 @@
       "author": "bu_xu_yao",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "编辑器",
-        "MC数据包"
+        "MC",
+        "编辑器"
       ],
       "description": "浏览器内 Minecraft 数据包编辑器，图形化编辑 data pack。",
       "description_en": "In-browser Minecraft data pack visual editor.",
@@ -592,9 +567,8 @@
       "author": "KitMC Team",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "工具",
-        "MC数据包"
+        "MC",
+        "工具"
       ],
       "description": "Minecraft 数据包可视化制作工具，拖拽式编辑，低门槛造数据包。",
       "description_en": "Visual Minecraft datapack maker with drag-and-drop, low-barrier.",
@@ -611,9 +585,8 @@
       "author": "MCPlugin Team",
       "author_url": "",
       "tags": [
-        "Minecraft",
-        "开发工具",
-        "MC插件"
+        "MC",
+        "工具"
       ],
       "description": "Minecraft 插件开发框架与文档站，Paper/Spigot 插件快速上手。",
       "description_en": "Minecraft plugin dev framework & docs for Paper/Spigot rapid onboarding.",
