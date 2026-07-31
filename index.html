@@ -4,8 +4,26 @@
   <meta charset="utf-8">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astras.CC Homepage</title>
+  <title>Astras.CC - AstraEditor 资源聚合站 | Scratch 工具导航</title>
+  <meta name="description" content="astras.cc 是一个聚合 AstraEditor、Scratch 衍生项目、前端工具与个人作品的个人精选导航站。收录 20+ 个亲测可用资源，含编辑器、OS UI、聊天、字体 CDN、组件库等。">
+  <meta name="keywords" content="AstraEditor,Scratch,Scratch编辑器,工具导航,聚合站,资源大全,前端组件库,Scratch OS,COLID,ToingOS">
+  <meta name="author" content="ningqi">
+  <meta name="robots" content="index, follow">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Astras.CC">
+  <meta property="og:title" content="Astras.CC - AstraEditor 资源聚合站">
+  <meta property="og:description" content="个人精选导航站，收录 20+ 个亲测可用的 AstraEditor、Scratch 衍生项目与前端工具。">
+  <meta property="og:url" content="https://astras.cc/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Astras.CC - AstraEditor 资源聚合站">
+  <meta name="twitter:description" content="个人精选导航站，收录 20+ 个亲测可用的 AstraEditor、Scratch 衍生项目与前端工具。">
   <style>
     :root {
       --sf-img-1: url("images/logo.svg");
@@ -2958,7 +2976,7 @@
     }
   </style>
   
-  <link rel="canonical" href="https://editors.astras.cc/">
+  <link rel="canonical" href="https://astras.cc/">
   <meta http-equiv="content-security-policy" content="default-src 'none'; connect-src 'self'; font-src 'self' data:; img-src 'self' data: https:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;">
   <style>
     .loading {
@@ -3141,6 +3159,8 @@
         </span>
         <br>
         <a class="end-disclaimer" href="/disclaimer/" rel="noopener" style="font-size:small;color:var(--accent-color);text-decoration:none;border-bottom:1px dashed var(--accent-color);">免责声明</a>
+        <span style="font-size:small;color:var(--text-secondary);margin:0 4px;">·</span>
+        <a class="end-about" href="/about/" rel="noopener" style="font-size:small;color:var(--accent-color);text-decoration:none;border-bottom:1px dashed var(--accent-color);">关于本站</a>
       </div>
       <div>
         <a id="qq-button" class="tabButton" href="https://qm.qq.com/q/ynYzV85oHY"><img src="images/qq.png" width="20" height="20" alt="QQ"></a><br>
@@ -4128,6 +4148,7 @@
       '夜间': '日间',
       '日间': '夜间',
       '免责声明': '免责声明',
+      '关于本站': '关于本站',
       'EN': 'EN'
     },
     en: {
@@ -4145,6 +4166,7 @@
       '夜间': 'Day Mode',
       '日间': 'Night Mode',
       '免责声明': 'Disclaimer',
+      '关于本站': 'About',
       'EN': '中文'
     }
   };
@@ -4178,6 +4200,9 @@
     });
     document.querySelectorAll('.end-disclaimer').forEach(el => {
       el.textContent = translations[currentLang]['免责声明'];
+    });
+    document.querySelectorAll('.end-about').forEach(el => {
+      el.textContent = translations[currentLang]['关于本站'];
     });
     renderSiteButtons();
   }
@@ -4504,5 +4529,53 @@
       }
     });
   }</script>
+
+  <noscript>
+    <div style="max-width:800px;margin:40px auto;padding:0 20px;font-family:sans-serif;color:#eee;background:#111;min-height:100vh">
+      <h1>Astras.CC - AstraEditor 资源聚合站</h1>
+      <p>astras.cc 是一个聚合 AstraEditor、Scratch 衍生项目、前端工具与个人作品的个人精选导航站。收录 20+ 个亲测可用资源，含编辑器、OS UI、聊天、字体 CDN、组件库等。</p>
+      <p>本站需要 JavaScript 运行，请在浏览器中启用 JavaScript 以获得完整体验。以下是收录资源列表：</p>
+      <h2>AstraEditor 编辑器</h2>
+      <ul>
+        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.top%2F">AstraEditor 官网</a> - Scratch 衍生编辑器，GitHub 开源</li>
+        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.cc%2F">AstraEditor 镜像(.cc)</a> - fork 自官方仓库</li>
+        <li><a href="/go/?u=https%3A%2F%2Fdownload.astras.cc%2F">AstraEditor 下载站</a> - ghproxy 加速下载</li>
+      </ul>
+      <h2>Scratch OS & UI 项目</h2>
+      <ul>
+        <li><a href="/go/?u=https%3A%2F%2Fcolidns.mysxl.cn%2F">COLID NS UI</a> - CC-BY-4.0 开源</li>
+        <li><a href="/go/?u=https%3A%2F%2Fcolid.mysxl.cn%2F">COLID Studio</a> - Scratch 仿 OS 官网</li>
+        <li><a href="/go/?u=https%3A%2F%2Fcolid-eg-appstore.mysxl.cn%2F">COLID-EG APP Store</a> - 应用商店下载站</li>
+        <li><a href="/go/?u=https%3A%2F%2Fcolid-eg.mysxl.cn%2F">COLID-EG 官网</a> - 应用商店项目主页</li>
+        <li><a href="/go/?u=https%3A%2F%2Fningqi24.mysxl.cn%2F">ToingOS/NQOS UI</a> - 作者早期 Scratch 作品</li>
+        <li><a href="/go/?u=https%3A%2F%2Fnqxz.mysxl.cn%2F">ningqi 开发社</a> - 个人作品展示站</li>
+      </ul>
+      <h2>聊天与社交</h2>
+      <ul>
+        <li><a href="/go/?u=https%3A%2F%2Fminichat.astras.cc">MiniChat 聊天</a> - 轻量级在线聊天室</li>
+        <li><a href="/go/?u=https%3A%2F%2Fsimplechatmini.astras.cc%2F">SimpleChatMini</a> - Scratch 聊天 UI 组件</li>
+      </ul>
+      <h2>工具</h2>
+      <ul>
+        <li><a href="/go/?u=https%3A%2F%2Fsearch.astras.cc%2F">Astras Search</a> - 聚合搜索页</li>
+        <li><a href="/go/?u=https%3A%2F%2Ffontscdn.deepsealab.cc.cd%2F">深海字体 CDN</a> - 中文字体 CDN 服务</li>
+        <li><a href="/sendemail">用域名发送邮件</a> - 自定义域名发信工具</li>
+        <li><a href="/SignGenerator/">高速编号牌生成器</a> - 中国高速公路编号牌生成</li>
+        <li><a href="/go/?u=https%3A%2F%2Flucide.nodejs.cn%2Ficons%2F">Lucide 图标中文网</a> - 开源 SVG 图标库</li>
+        <li><a href="/go/?u=https%3A%2F%2Freactbits.dev%2Fget-started%2Findex%2F">React Bits</a> - React 动效组件库</li>
+      </ul>
+      <h2>游戏与个人主页</h2>
+      <ul>
+        <li><a href="/game/shas/">鲨鲨幸存者</a> - 沙盒小游戏</li>
+        <li><a href="/go/?u=https%3A%2F%2Fcyberneko.cn%2F">Cyberexplorer's World</a> - 个人博客</li>
+        <li><a href="/go/?u=https%3A%2F%2Fgithub.com%2Fningqi24">ningqi's GitHub</a> - 作者代码仓库</li>
+      </ul>
+      <p style="margin-top:30px;font-size:0.85em;color:#888">
+        <a href="/disclaimer/">免责声明</a> ·
+        <a href="/about/">关于本站</a> ·
+        <a href="https://github.com/ningqi24/astras.cc/issues/new" rel="nofollow noopener noreferrer">反馈</a>
+      </p>
+    </div>
+  </noscript>
 </body>
 </html>

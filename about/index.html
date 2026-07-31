@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="关于 astras.cc：个人维护的 AstraEditor 与 Scratch 衍生项目聚合导航站，由 ningqi 运营。">
+  <title>关于本站 · About · Astras.CC</title>
+  <link rel="canonical" href="https://astras.cc/about/">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Astras.CC">
+  <meta property="og:title" content="关于本站 · About · Astras.CC">
+  <meta property="og:description" content="个人维护的 AstraEditor 与 Scratch 衍生项目聚合导航站，由 ningqi 运营。">
+  <meta property="og:url" content="https://astras.cc/about/">
+
+  <style>
+    :root {
+      --bg-color: #111;
+      --bg-secondary: #222;
+      --text-primary: #eee;
+      --text-secondary: #888;
+      --accent-color: #66ccff;
+      --border-color: rgba(255,255,255,0.08);
+      --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #f8f8f8;
+        --bg-secondary: #f0f0f0;
+        --text-primary: #333;
+        --text-secondary: #666;
+        --border-color: rgba(0,0,0,0.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-weight: 500;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 32px;
+      padding: 6px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .back-link:hover {
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .lang-toggle {
+      float: right;
+      margin-top: -56px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
+    .lang-toggle:hover { border-color: var(--accent-color); color: var(--accent-color); }
+    section {
+      margin-bottom: 36px;
+      padding: 24px;
+      background-color: rgba(34,34,34,0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+    }
+    @media (prefers-color-scheme: light) {
+      section { background-color: rgba(255,255,255,0.6); }
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2 .icon { font-size: 1.2rem; }
+    p { margin: 0 0 12px; font-size: 0.92rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { margin: 8px 0 12px; padding-left: 22px; }
+    li { margin-bottom: 6px; font-size: 0.92rem; }
+    a.inline {
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent-color);
+    }
+    a.inline:hover { opacity: 0.8; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+    .contact-card:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(102,204,255,0.06);
+      transform: translateY(-1px);
+    }
+    .contact-card .ico {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(102,204,255,0.1);
+      color: var(--accent-color);
+    }
+    .contact-card .info { line-height: 1.4; }
+    .contact-card .label { font-size: 0.78rem; color: var(--text-secondary); }
+    .contact-card .value { font-size: 0.9rem; font-weight: 600; }
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .stat {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+    .stat .num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+    .stat .desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .updated {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    [data-lang] { display: none; }
+    html[lang="zh"] [data-lang="zh"] { display: block; }
+    html[lang="en"] [data-lang="en"] { display: block; }
+    @media (max-width: 600px) {
+      .wrap { padding: 40px 16px 60px; }
+      h1 { font-size: 1.5rem; }
+      .lang-toggle { margin-top: -48px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/" class="back-link" rel="noopener">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13L5 8l5-5"/></svg>
+      <span data-lang="zh">返回首页</span>
+      <span data-lang="en">Back to Home</span>
+    </a>
+    <h1 data-lang="zh">关于本站</h1>
+    <h1 data-lang="en">About</h1>
+    <p class="subtitle" data-lang="zh">最后更新：2026-07 · astras.cc 由 ningqi 个人维护</p>
+    <p class="subtitle" data-lang="en">Last updated: 2026-07 · Maintained by ningqi</p>
+    <button class="lang-toggle" onclick="toggleLang()">EN</button>
+
+    <section data-lang="zh">
+      <h2><span class="icon">①</span> 这是什么站</h2>
+      <p>astras.cc 是一个<strong>个人精选聚合导航站</strong>，收录 AstraEditor、Scratch 衍生项目（OS / UI）、前端工具与个人作品。所有链接均由站长亲自访问验证，非机器采集。</p>
+      <p>本站不生产原创工具，仅做索引与点评。每个收录条目附带"亲测时间"与"主观点评"，帮助用户快速判断是否值得访问。</p>
+      <div class="stats-row">
+        <div class="stat"><div class="num">20+</div><div class="desc">收录资源</div></div>
+        <div class="stat"><div class="num">100%</div><div class="desc">亲测覆盖</div></div>
+        <div class="stat"><div class="num">1</div><div class="desc">维护人员</div></div>
+      </div>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">①</span> What is this site</h2>
+      <p>astras.cc is a <strong>personal curated aggregation hub</strong>, indexing AstraEditor, Scratch derivative projects (OS / UI), frontend tools, and personal works. All links are personally verified by the site owner — no automated scraping.</p>
+      <p>This site does not produce original tools; it only indexes and reviews. Each entry includes a "verified date" and "editor note" to help users quickly decide if it's worth visiting.</p>
+      <div class="stats-row">
+        <div class="stat"><div class="num">20+</div><div class="desc">Resources</div></div>
+        <div class="stat"><div class="num">100%</div><div class="desc">Verified</div></div>
+        <div class="stat"><div class="num">1</div><div class="desc">Maintainer</div></div>
+      </div>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">②</span> 站长</h2>
+      <p>ningqi，Scratch 社区开发者，GitHub 年度 546 次贡献。主要作品包括 AstraEditor 镜像站、MiniChat 聊天室、ToingOS 等。本站所有代码开源于 GitHub。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">②</span> Site Owner</h2>
+      <p>ningqi, a Scratch community developer with 546 annual GitHub contributions. Main works include AstraEditor mirror, MiniChat, ToingOS, and more. All site code is open-sourced on GitHub.</p>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">③</span> 联系方式</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://github.com/ningqi24" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></div>
+          <div class="info"><div class="label">GitHub</div><div class="value">@ningqi24</div></div>
+        </a>
+        <a class="contact-card" href="https://space.bilibili.com/" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M3 2.5l2.5 2.5h5L13 2.5l1 1-2 2v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7l-2-2 1-1zM6 8v3h1V8H6zm3 0v3h1V8H9z"/></svg></div>
+          <div class="info"><div class="label">Bilibili</div><div class="value">ningqi</div></div>
+        </a>
+        <a class="contact-card" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><circle cx="8" cy="8" r="7"/></svg></div>
+          <div class="info"><div class="label">QQ 群</div><div class="value">点击加入</div></div>
+        </a>
+      </div>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">③</span> Contact</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://github.com/ningqi24" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></div>
+          <div class="info"><div class="label">GitHub</div><div class="value">@ningqi24</div></div>
+        </a>
+        <a class="contact-card" href="https://space.bilibili.com/" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path d="M3 2.5l2.5 2.5h5L13 2.5l1 1-2 2v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7l-2-2 1-1zM6 8v3h1V8H6zm3 0v3h1V8H9z"/></svg></div>
+          <div class="info"><div class="label">Bilibili</div><div class="value">ningqi</div></div>
+        </a>
+        <a class="contact-card" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">
+          <div class="ico"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><circle cx="8" cy="8" r="7"/></svg></div>
+          <div class="info"><div class="label">QQ Group</div><div class="value">Join</div></div>
+        </a>
+      </div>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">④</span> 反馈与贡献</h2>
+      <p>发现死链、报毒、内容违规？想推荐新资源？欢迎通过以下渠道反馈：</p>
+      <ul>
+        <li><a class="inline" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer">GitHub Issues</a> — 最推荐，可附截图</li>
+        <li><a class="inline" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">QQ 群</a> — 即时沟通</li>
+      </ul>
+      <p>收录的资源需满足：① 站长亲测可访问；② 有明确来源；③ 与 AstraEditor / Scratch / 前端工具相关。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">④</span> Feedback & Contributions</h2>
+      <p>Found a dead link, malware, or illegal content? Want to recommend a new resource?</p>
+      <ul>
+        <li><a class="inline" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer">GitHub Issues</a> — recommended, supports screenshots</li>
+        <li><a class="inline" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">QQ Group</a> — instant messaging</li>
+      </ul>
+      <p>Resources must meet: ① personally verified by the owner; ② clear provenance; ③ relevant to AstraEditor / Scratch / frontend tools.</p>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">⑤</span> 相关页面</h2>
+      <ul>
+        <li><a class="inline" href="/disclaimer/">免责声明</a> — 外链责任与版权说明</li>
+        <li><a class="inline" href="/go/">外链中转页</a> — 跳转确认机制说明</li>
+        <li><a class="inline" href="https://github.com/ningqi24/astras.cc" target="_blank" rel="noopener noreferrer">本站源码</a> — GitHub 开源</li>
+      </ul>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">⑤</span> Related Pages</h2>
+      <ul>
+        <li><a class="inline" href="/disclaimer/">Disclaimer</a> — external link liability & copyright</li>
+        <li><a class="inline" href="/go/">Redirect Interstitial</a> — jump confirmation mechanism</li>
+        <li><a class="inline" href="https://github.com/ningqi24/astras.cc" target="_blank" rel="noopener noreferrer">Source Code</a> — open-source on GitHub</li>
+      </ul>
+    </section>
+
+    <div class="updated" data-lang="zh">© 2026 Astras.CC · 由 ningqi 个人维护 · <a class="inline" href="/disclaimer/">免责声明</a></div>
+    <div class="updated" data-lang="en">© 2026 Astras.CC · Maintained by ningqi · <a class="inline" href="/disclaimer/">Disclaimer</a></div>
+  </div>
+
+  <script>
+    let lang = navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en';
+    function applyLang() {
+      document.documentElement.lang = lang;
+      document.querySelector('.lang-toggle').textContent = lang === 'zh' ? 'EN' : '中文';
+    }
+    function toggleLang() {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      applyLang();
+    }
+    applyLang();
+  </script>
+</body>
+</html>
