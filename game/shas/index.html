@@ -114,15 +114,15 @@ canvas{display:block;position:absolute;inset:0;}
 /* ============ GAME OVER ============ */
 #gameover-screen{display:none;position:fixed;inset:0;z-index:200;background:rgba(27,28,43,0.9);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
 #gameover-screen.active{display:flex;}
-.go-shark{font-size:50px;margin-bottom:6px;animation:sharkBounce 0.6s ease-in-out infinite alternate;}
-@keyframes sharkBounce{0%{transform:translateY(0);}100%{transform:translateY(-15px);}}
-.go-title{font-size:28px;font-weight:900;letter-spacing:4px;margin-bottom:10px;text-shadow:3px 3px 0 #000;}
+.go-shark{font-size:36px;margin-bottom:4px;animation:sharkBounce 0.6s ease-in-out infinite alternate;}
+@keyframes sharkBounce{0%{transform:translateY(0);}100%{transform:translateY(-10px);}}
+.go-title{font-size:22px;font-weight:900;letter-spacing:3px;margin-bottom:8px;text-shadow:2px 2px 0 #000;}
 .go-title.win{color:#fca311;}
 .go-title.lose{color:#e63946;}
-.go-stats{font-size:13px;font-weight:700;margin-bottom:16px;text-align:center;line-height:2;color:#f8f9fa;}
+.go-stats{font-size:11px;font-weight:700;margin-bottom:12px;text-align:center;line-height:1.8;color:#f8f9fa;}
 .go-stats b{color:#fca311;font-weight:900;}
-.go-buttons{display:flex;gap:18px;}
-.go-btn{border:5px solid #000;padding:10px 24px;font-family:inherit;font-size:15px;cursor:pointer;border-radius:24px;font-weight:900;letter-spacing:2px;transition:transform 0.08s ease;min-width:100px;}
+.go-buttons{display:flex;gap:12px;}
+.go-btn{border:4px solid #000;padding:8px 18px;font-family:inherit;font-size:13px;cursor:pointer;border-radius:20px;font-weight:900;letter-spacing:1px;transition:transform 0.08s ease;min-width:80px;}
 .go-btn:active{transform:scale(0.94);}
 .go-btn.restart{background:#fca311;color:#000;}
 .go-btn.home{background:#4cc9f0;color:#000;}
@@ -573,7 +573,7 @@ function fireWeapon(w){
         dx: Math.cos(ang) * 600,
         dy: Math.sin(ang) * 600,
         dmg: dmg,
-        life: 2.5,
+        life: 2.5, maxLife: 2.5,
         size: 30,
         color: '#e8e8e8',
         type: 'crescent',
@@ -586,7 +586,7 @@ function fireWeapon(w){
         dx: -Math.cos(ang) * 400,
         dy: -Math.sin(ang) * 400,
         dmg: dmg * 0.6,
-        life: 1.5,
+        life: 1.5, maxLife: 1.5,
         size: 22,
         color: '#a8d8ea',
         type: 'crescent',
@@ -777,7 +777,7 @@ function damagePlayer(dmg){
   player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
   // Vibration with cooldown (prevent 60fps spam; iOS Safari doesn't support Vibration API)
   const now=Date.now();
-  if(navigator.vibrate && now-(window._lastVibrate||0)>200){window._lastVibrate=now;navigator.vibrate(30);}
+  if(navigator.vibrate && window._vibratePrimed && now-(window._lastVibrate||0)>250){window._lastVibrate=now;navigator.vibrate([20,40,20]);}
 
   // Floating damage number
   const dmgEl=document.createElement('div');dmgEl.className='dmg-float';
@@ -1129,7 +1129,7 @@ function render(){
       ctx.translate(p.x - camera.x, p.y - camera.y);
       const rot = Math.atan2(p.dy, p.dx);
       ctx.rotate(rot);
-      const lifeFade = Math.min(p.life / 1.0, 1); 
+      const lifeFade = p.maxLife ? Math.max(0, p.life / p.maxLife) : Math.min(p.life / 1.0, 1);
       const h = p.size * 1.2;
 
       ctx.fillStyle = `rgba(200, 240, 255, ${0.5 * lifeFade})`;
@@ -1221,6 +1221,8 @@ function startGame(){
   monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];
   timer=0;waveNum=1;bossDefeated=0;bossActive=null;
   gameOver=false;victory=false;paused=false;gameState='playing';
+  // Prime vibration API (requires user gesture; startGame only runs from button clicks)
+  if(navigator.vibrate){navigator.vibrate(10);window._vibratePrimed=true;}
   document.getElementById('gameover-screen').classList.remove('active');
   document.getElementById('levelup-modal').classList.remove('active');
   document.getElementById('pause-panel').classList.remove('active');
