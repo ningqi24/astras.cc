@@ -114,15 +114,15 @@ canvas{display:block;position:absolute;inset:0;}
 /* ============ GAME OVER ============ */
 #gameover-screen{display:none;position:fixed;inset:0;z-index:200;background:rgba(27,28,43,0.9);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);}
 #gameover-screen.active{display:flex;}
-.go-shark{font-size:80px;margin-bottom:10px;animation:sharkBounce 0.6s ease-in-out infinite alternate;}
+.go-shark{font-size:50px;margin-bottom:6px;animation:sharkBounce 0.6s ease-in-out infinite alternate;}
 @keyframes sharkBounce{0%{transform:translateY(0);}100%{transform:translateY(-15px);}}
-.go-title{font-size:42px;font-weight:900;letter-spacing:6px;margin-bottom:16px;text-shadow:4px 4px 0 #000;}
+.go-title{font-size:28px;font-weight:900;letter-spacing:4px;margin-bottom:10px;text-shadow:3px 3px 0 #000;}
 .go-title.win{color:#fca311;}
 .go-title.lose{color:#e63946;}
-.go-stats{font-size:16px;font-weight:700;margin-bottom:24px;text-align:center;line-height:2.2;color:#f8f9fa;}
+.go-stats{font-size:13px;font-weight:700;margin-bottom:16px;text-align:center;line-height:2;color:#f8f9fa;}
 .go-stats b{color:#fca311;font-weight:900;}
 .go-buttons{display:flex;gap:18px;}
-.go-btn{border:7px solid #000;padding:14px 32px;font-family:inherit;font-size:18px;cursor:pointer;border-radius:28px;font-weight:900;letter-spacing:3px;transition:transform 0.08s ease;min-width:120px;}
+.go-btn{border:5px solid #000;padding:10px 24px;font-family:inherit;font-size:15px;cursor:pointer;border-radius:24px;font-weight:900;letter-spacing:2px;transition:transform 0.08s ease;min-width:100px;}
 .go-btn:active{transform:scale(0.94);}
 .go-btn.restart{background:#fca311;color:#000;}
 .go-btn.home{background:#4cc9f0;color:#000;}
@@ -579,6 +579,19 @@ function fireWeapon(w){
         type: 'crescent',
         penetrate: true
       });
+      // reverse crescent
+      projectiles.push({
+        x: player.x - Math.cos(ang) * 40,
+        y: player.y - Math.sin(ang) * 40,
+        dx: -Math.cos(ang) * 400,
+        dy: -Math.sin(ang) * 400,
+        dmg: dmg * 0.6,
+        life: 1.5,
+        size: 22,
+        color: '#a8d8ea',
+        type: 'crescent',
+        penetrate: true
+      });
       break;
     }
     case 'kunai':{
@@ -762,7 +775,9 @@ function damagePlayer(dmg){
   if(player.invuln>0)return;
   dmg*=(1-player.dmgReduction);const actual=Math.ceil(dmg*10)/10;
   player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
-  if(navigator.vibrate)navigator.vibrate(50);
+  // Vibration with cooldown (prevent 60fps spam; iOS Safari doesn't support Vibration API)
+  const now=Date.now();
+  if(navigator.vibrate && now-(window._lastVibrate||0)>200){window._lastVibrate=now;navigator.vibrate(30);}
 
   // Floating damage number
   const dmgEl=document.createElement('div');dmgEl.className='dmg-float';
