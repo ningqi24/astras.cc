@@ -337,6 +337,256 @@
       "verified_date": "2026-07-31",
       "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
       "note_en": "Author's early Scratch work, scattered like a draft, on mysxl."
+    },
+    {
+      "name": "猫娘计划 Project N.E.K.O.",
+      "name_en": "Project N.E.K.O.",
+      "subtitle": "project-neko.cn",
+      "url": "https://project-neko.cn/",
+      "author": "Project N.E.K.O. 团队",
+      "author_url": "",
+      "tags": [
+        "个人作品",
+        "二次元",
+        "创意工具"
+      ],
+      "description": "面向二次元用户的虚拟角色互动平台，猫娘主题。",
+      "description_en": "A virtual character interactive platform for anime-style users with cat-girl theme.",
+      "verified_date": "2026-07-31",
+      "note": "二次元虚拟角色互动平台，视觉精美，体验独特，有新意。",
+      "note_en": "Anime-style virtual character platform. Polished visuals, unique experience."
+    },
+    {
+      "name": "Corona Studio 日冕工作室",
+      "name_en": "Corona Studio",
+      "subtitle": "corona.studio",
+      "url": "https://corona.studio/",
+      "author": "Corona Studio 团队",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "开发团队",
+        "MC团队"
+      ],
+      "description": "以 Minecraft 为核心的开发团队，日冕工作室官方站。",
+      "description_en": "Minecraft-focused development team, Corona Studio official site.",
+      "verified_date": "2026-07-31",
+      "note": "Minecraft 核心开发团队官方站，有完整项目介绍，关注 MC 生态必看。",
+      "note_en": "Minecraft-focused dev team homepage. Complete project listings for MC ecosystem watchers."
+    },
+    {
+      "name": "Ghost Downloader 资源发现器",
+      "name_en": "Ghost Downloader",
+      "subtitle": "gd.xychr.com",
+      "url": "https://gd.xychr.com/",
+      "author": "晓游 nicepkg",
+      "author_url": "",
+      "tags": [
+        "工具",
+        "资源下载",
+        "开发工具"
+      ],
+      "description": "浏览器优先的资源发现与桌面传输枢纽，资源检索工具。",
+      "description_en": "Browser-first resource discovery and desktop handoff hub.",
+      "verified_date": "2026-07-31",
+      "note": "浏览器内资源发现 + 桌面传输，免客户端，找资源效率高。",
+      "note_en": "Browser-based resource discover + desktop handoff. No client needed."
+    },
+    {
+      "name": "DeskMakeover 桌面美化工作室",
+      "name_en": "DeskMakeover",
+      "subtitle": "dm.xiaominglab.com",
+      "url": "https://dm.xiaominglab.com/",
+      "author": "nicepkg 小明实验室",
+      "author_url": "",
+      "tags": [
+        "工具",
+        "编辑器",
+        "创意工具"
+      ],
+      "description": "Windows 桌面美化工作室，提供桌面主题定制工具。",
+      "description_en": "Windows desktop makeover studio & customization tool.",
+      "verified_date": "2026-07-31",
+      "note": "Windows 桌面美化一站式，主题定制友好，适合美化党。",
+      "note_en": "One-stop Windows desktop customization. Theme-friendly, for aesthetic lovers."
+    },
+    {
+      "name": "莫老师的附件表",
+      "name_en": "莫老师s Attachments",
+      "subtitle": "在下莫老师.com",
+      "url": "https://xn--fhqq21c322bzo0d.com/",
+      "author": "在下莫老师",
+      "author_url": "",
+      "tags": [
+        "个人作品",
+        "资源下载"
+      ],
+      "description": "莫老师的个人资源分享站，中文资源汇总。",
+      "description_en": "莫老师s personal Chinese resource sharing hub.",
+      "verified_date": "2026-07-31",
+      "note": "中文个人资源分享集合，稀有中文资源多，适合找小众资源。",
+      "note_en": "Chinese personal resource hub. Lots of rare Chinese-language content."
+    },
+    {
+      "name": "Cylorine Studio",
+      "name_en": "Cylorine Studio",
+      "subtitle": "cylorine.studio",
+      "url": "https://cylorine.studio/",
+      "author": "Cylorine Studio 团队",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "开发团队",
+        "MC团队"
+      ],
+      "description": "专注 Minecraft 相关内容开发与探索的组织，Cylorine 官方站。",
+      "description_en": "Minecraft content dev & exploration organization, Cylorine official site.",
+      "verified_date": "2026-07-31",
+      "note": "Minecraft 内容开发组织官方站，资源质量高，生态向全。",
+      "note_en": "Minecraft content org homepage. High-quality resources, full ecosystem coverage."
+    },
+    {
+      "name": "ChunkBase MC 应用与教程",
+      "name_en": "Chunk Base",
+      "subtitle": "chunkbase.com",
+      "url": "https://www.chunkbase.com/",
+      "author": "ChunkBase 团队",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "工具",
+        "MC工具"
+      ],
+      "description": "Minecraft 种子查图、模组、应用与教程集合站，MC 玩家必备。",
+      "description_en": "Minecraft seed map apps, mods & tutorials. Essential for MC players.",
+      "verified_date": "2026-07-31",
+      "note": "MC 玩家必收藏：种子查图/村庄定位/生物群系/模组教程一站式。",
+      "note_en": "Must-bookmark: seed viewer, village finder, biomes & mod tutorials in one."
+    },
+    {
+      "name": "Minecraft Search 物品搜索站",
+      "name_en": "Minecraft Search",
+      "subtitle": "minecraftsearch.com",
+      "url": "https://minecraftsearch.com/",
+      "author": "Minecraft Search 团队",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "工具",
+        "MC工具"
+      ],
+      "description": "Minecraft 物品/生物/方块 ID 与合成表搜索站，快速查配方。",
+      "description_en": "Minecraft items, mobs, blocks & recipes search engine.",
+      "verified_date": "2026-07-31",
+      "note": "MC 物品 / 生物 / 方块一站式搜索，配方查得快，新手救星。",
+      "note_en": "One-stop MC items/mobs/blocks search. Recipe lookup for beginners."
+    },
+    {
+      "name": "Axolotl Launcher 蝾螈启动器",
+      "name_en": "Axolotl Launcher",
+      "subtitle": "axlmc.org",
+      "url": "https://axlmc.org/",
+      "author": "Garbage Human Studio",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "工具",
+        "MC启动器"
+      ],
+      "description": "基于 Modrinth 生态的免费开源 Minecraft 启动器，支持模组整合。",
+      "description_en": "Free & open-source Minecraft launcher built on Modrinth ecosystem.",
+      "verified_date": "2026-07-31",
+      "note": "Modrinth 生态 MC 启动器，开源免费，国内可用速度不错。",
+      "note_en": "Modrinth-ecosystem MC launcher. Open-source, free, CN-reachable."
+    },
+    {
+      "name": "WormWaker 博客与产品站",
+      "name_en": "WormWaker",
+      "subtitle": "wormwake.com",
+      "url": "https://www.wormwake.com/",
+      "author": "WormWaker",
+      "author_url": "",
+      "tags": [
+        "个人作品",
+        "博客"
+      ],
+      "description": "WormWaker 的个人博客与产品展示站，分享独立开发作品。",
+      "description_en": "WormWakers personal blog & indie product showcase.",
+      "verified_date": "2026-07-31",
+      "note": "独立开发者个人博客+产品展，项目思路清晰，有参考价值。",
+      "note_en": "Indie dev blog + product showcase. Clear projects, great reference."
+    },
+    {
+      "name": "OCEAN MC 指令生成器",
+      "name_en": "OCEAN MC Command Generator",
+      "subtitle": "mc.ecylt.top",
+      "url": "https://mc.ecylt.top/",
+      "author": "OCEAN / ecylt",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "工具",
+        "MC指令"
+      ],
+      "description": "Minecraft 指令图形化生成工具，复杂命令拼接可视化。",
+      "description_en": "Minecraft visual command generator for complex command building.",
+      "verified_date": "2026-07-31",
+      "note": "MC 指令可视化拼接，命令方块党福音，不会忘参数。",
+      "note_en": "Visual MC command builder. Perfect for command-block users, no params missed."
+    },
+    {
+      "name": "Packery MC 数据包编辑器",
+      "name_en": "Packery",
+      "subtitle": "pinit.eth.limo",
+      "url": "https://vhokzhg4.pinit.eth.limo/",
+      "author": "bu_xu_yao",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "编辑器",
+        "MC数据包"
+      ],
+      "description": "浏览器内 Minecraft 数据包编辑器，图形化编辑 data pack。",
+      "description_en": "In-browser Minecraft data pack visual editor.",
+      "verified_date": "2026-07-31",
+      "note": "浏览器内 MC 数据包可视化编辑器，免装软件，做 datapack 省时间。",
+      "note_en": "In-browser visual MC datapack editor. No install, saves time making packs."
+    },
+    {
+      "name": "KitMC 数据包制作工具",
+      "name_en": "KitMC",
+      "subtitle": "kitemc.com",
+      "url": "https://www.kitemc.com/",
+      "author": "KitMC Team",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "工具",
+        "MC数据包"
+      ],
+      "description": "Minecraft 数据包可视化制作工具，拖拽式编辑，低门槛造数据包。",
+      "description_en": "Visual Minecraft datapack maker with drag-and-drop, low-barrier.",
+      "verified_date": "2026-07-31",
+      "note": "拖拽式 MC 数据包制作，零代码入门，想做自定义玩法首选。",
+      "note_en": "Drag-and-drop MC datapack maker. Zero-code entry for custom gameplay."
+    },
+    {
+      "name": "MCPlugin 插件开发框架",
+      "name_en": "MCPlugin Framework",
+      "subtitle": "mcplugin.netlify.app",
+      "url": "https://mcplugin.netlify.app/",
+      "author": "MCPlugin Team",
+      "author_url": "",
+      "tags": [
+        "Minecraft",
+        "开发工具",
+        "MC插件"
+      ],
+      "description": "Minecraft 插件开发框架与文档站，Paper/Spigot 插件快速上手。",
+      "description_en": "Minecraft plugin dev framework & docs for Paper/Spigot rapid onboarding.",
+      "verified_date": "2026-07-31",
+      "note": "Paper/Spigot 插件开发框架+文档，开服写插件的脚手架好帮手。",
+      "note_en": "Paper/Spigot plugin framework + docs. Scaffold for server plugin devs."
     }
   ]
 }
