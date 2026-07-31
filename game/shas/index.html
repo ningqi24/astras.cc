@@ -564,8 +564,18 @@ function fireWeapon(w){
 
   switch(w.id){
     case 'katana':{
-      const dir = player.lastDir;
-      const ang = Math.atan2(dir.y, dir.x);
+      // Auto-aim: target nearest monster
+      let ang;
+      if(monsters.length>0){
+        let nearest=null,bestDist=Infinity;
+        for(const m of monsters){
+          const d2=(m.x-player.x)**2+(m.y-player.y)**2;
+          if(d2<bestDist){bestDist=d2;nearest=m;}
+        }
+        ang=Math.atan2(nearest.y-player.y,nearest.x-player.x);
+      }else{
+        ang=Math.atan2(player.lastDir.y,player.lastDir.x);
+      }
       
       projectiles.push({
         x: player.x + Math.cos(ang) * 40,
