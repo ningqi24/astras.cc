@@ -3854,6 +3854,7 @@
       'mc-tool': { zh: 'MC 工具', en: 'MC Tools' },
       'tool': { zh: '通用工具', en: 'General Tools' },
       'creative': { zh: '创意项目', en: 'Creative' },
+      'game': { zh: '小游戏', en: 'Games' },
       'personal': { zh: '个人主页', en: 'Personal' }
     };
 
@@ -3868,7 +3869,7 @@
       grouped[cat].push({ button, index });
     });
 
-    const order = ['astraeditor', 'colid', 'scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'personal'];
+    const order = ['astraeditor', 'colid', 'scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
 
     order.forEach(catKey => {
       if (!grouped[catKey]) return;
@@ -4798,9 +4799,12 @@
         <li><a href="/go/?u=https%3A%2F%2Fproject-neko.cn%2F">猫娘计划 Project N.E.K.O.</a> - 二次元虚拟角色互动平台，视觉精美，体验独特，有新意。</li>
         <li><a href="/go/?u=https%3A%2F%2Fxn--fhqq21c322bzo0d.com%2F">莫老师的附件表</a> - 中文个人资源分享集合，稀有中文资源多，适合找小众资源。</li>
       </ul>
-      <h2>游戏与个人主页</h2>
+      <h2>小游戏</h2>
       <ul>
         <li><a href="/game/shas/">鲨鲨幸存者</a> - 小游戏，强制横屏，适合打发时间。</li>
+      </ul>
+      <h2>个人主页</h2>
+      <ul>
         <li><a href="/go/?u=https%3A%2F%2Fcyberneko.cn%2F">Cyberexplorer's World</a> - 个人博客，.cn 域名安全可靠，诸多作品，B站可查。</li>
         <li><a href="/go/?u=https%3A%2F%2Fgithub.com%2Fningqi24">ningqi's github homepage</a> - 作者本尊，年度546次贡献，astras.cc/minichat 等均开源于此。</li>
         <li><a href="/go/?u=https%3A%2F%2Fwww.wormwake.com%2F">WormWaker 博客与产品站</a> - 独立开发者个人博客+产品展，项目思路清晰，有参考价值。</li>
