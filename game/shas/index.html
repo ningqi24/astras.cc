@@ -1023,32 +1023,54 @@ function render(){
     ctx.save();
     switch(e.type){
       case 'slash':{
-        // SVG-style deep crescent (cubic bezier, concave front edge)
-        const sweepLen=e.range*Math.min(e.life/0.15,1);
-        const len=Math.sqrt(e.dx*e.dx+e.dy*e.dy)||1;
-        const pnx=-e.dy/len,pny=e.dx/len; // perpendicular "up"
-        const f=Math.min(e.life/0.15,1);
-        const hh=sweepLen*0.5; // half-height along perpendicular
-        // 3-layer crescents: blue trail, white trail, main white
-        const layers=[
-          {bm:0.80,fm:0.50,fill:`rgba(200,240,255,${0.5*f})`,stroke:`rgba(0,0,0,${0.5*f})`,lw:4},
-          {bm:0.90,fm:0.50,fill:`rgba(255,255,255,${0.9*f})`,stroke:`rgba(0,0,0,${0.8*f})`,lw:5},
-          {bm:1.00,fm:0.57,fill:`rgba(255,255,255,${f})`,stroke:`rgba(0,0,0,${f})`,lw:7},
-        ];
-        for(const l of layers){
-          const bBack=hh*l.bm,bFront=hh*l.fm;
-          const tX=ex+pnx*hh,tY=ey+pny*hh; // top
-          const bX=ex-pnx*hh,bY=ey-pny*hh; // bottom
-          ctx.fillStyle=l.fill;ctx.strokeStyle=l.stroke;ctx.lineWidth=l.lw;
-          ctx.beginPath();
-          ctx.moveTo(tX,tY);
-          // back edge: convex, bulges away from attack
-          ctx.bezierCurveTo(tX-e.dx*bBack,tY-e.dy*bBack,bX-e.dx*bBack,bY-e.dy*bBack,bX,bY);
-          // front edge: concave, cuts toward attack
-          ctx.bezierCurveTo(bX-e.dx*bFront,bY-e.dy*bFront,tX-e.dx*bFront,tY-e.dy*bFront,tX,tY);
-          ctx.fill();ctx.stroke();
-        }
-        }break;
+        const sLen = e.range * Math.min(e.life / 0.15, 1);
+        ctx.save();
+        // 计算法线方向，使月牙朝向攻击方向
+        const len = Math.sqrt(e.dx*e.dx + e.dy*e.dy) || 1;
+        const pnx = -e.dy / len, pny = e.dx / len; 
+        const h = sLen * 0.6; // 剑气高度系数
+
+        // 三个点：头部、尾部（根据法线平移）
+        const cx = ex + e.dx * sLen * 0.3; // 月牙质心向前偏移
+        const cy = ey + e.dy * sLen * 0.3;
+        
+        ctx.translate(cx, cy);
+        const rot = Math.atan2(e.dy, e.dx);
+        ctx.rotate(rot); 
+
+        // 1. 残影 1（半透明蓝白）
+        ctx.fillStyle = `rgba(200, 240, 255, ${0.5 * Math.min(e.life/0.15,1)})`;
+        ctx.strokeStyle = `rgba(0,0,0,${0.5 * Math.min(e.life/0.15,1)})`;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(0, -h * 0.8);
+        ctx.bezierCurveTo(-h*0.8, -h*0.8, -h*0.8, h*0.8, 0, h*0.8);
+        ctx.bezierCurveTo(-h*0.4, h*0.8, -h*0.4, -h*0.8, 0, -h*0.8);
+        ctx.fill(); ctx.stroke();
+
+        // 2. 残影 2（亮白主拖尾）
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * Math.min(e.life/0.15,1)})`;
+        ctx.strokeStyle = `rgba(0,0,0,${0.8 * Math.min(e.life/0.15,1)})`;
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(0, -h);
+        ctx.bezierCurveTo(-h, -h, -h, h, 0, h);
+        ctx.bezierCurveTo(-h*0.5, h, -h*0.5, -h, 0, -h);
+        ctx.fill(); ctx.stroke();
+
+        // 3. 主月牙（纯白实心 + 极粗黑边、右侧深度内凹）
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(e.life/0.15,1)})`;
+        ctx.strokeStyle = `rgba(0,0,0,${Math.min(e.life/0.15,1)})`;
+        ctx.lineWidth = 7;
+        ctx.beginPath();
+        ctx.moveTo(0, -h * 1.15);
+        ctx.bezierCurveTo(-h*1.15, -h*1.15, -h*1.15, h*1.15, 0, h*1.15);
+        ctx.bezierCurveTo(-h*0.65, h*1.15, -h*0.65, -h*1.15, 0, -h*1.15);
+        ctx.fill(); ctx.stroke();
+
+        ctx.restore();
+        break;
+      }
       case 'thrust':
         ctx.save();ctx.globalAlpha=e.life/0.2;
         ctx.strokeStyle=e.color;ctx.lineWidth=6-(e.life*20);
