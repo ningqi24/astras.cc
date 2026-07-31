@@ -24,6 +24,24 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Astras.CC · 个人精选工具导航站">
   <meta name="twitter:description" content="20+ 亲测可用工具集合 · 每条附实测时间与点评 · 不机器采集 · 每季度复核。">
+
+  <!-- Schema.org: WebSite (站点级，静态) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Astras.CC",
+    "alternateName": "个人精选工具导航站",
+    "url": "https://astras.cc/",
+    "description": "20+ 亲测可用工具集合 · 每条附实测时间与点评 · 不机器采集 · 每季度复核",
+    "inLanguage": ["zh-CN", "en"],
+    "publisher": {
+      "@type": "Person",
+      "name": "ningqi",
+      "url": "https://github.com/ningqi24"
+    }
+  }
+  </script>
   <style>
     :root {
       --sf-img-1: url("images/logo.svg");
@@ -3484,10 +3502,38 @@
       if (!response.ok) throw new Error('Failed to load site.json');
       const data = await response.json();
       siteButtons = data.buttons || [];
+      injectItemListSchema(siteButtons);
       renderSiteButtons();
     } catch (error) {
       console.error('Error loading site buttons:', error);
     }
+  }
+
+  function injectItemListSchema(buttons) {
+    try {
+      const existing = document.getElementById('schema-itemlist');
+      if (existing) existing.remove();
+      const itemList = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Astras.CC 精选工具列表",
+        "description": "20+ 个亲测可用的编辑器、聊天服务、前端组件库、字体服务、小游戏与个人作品",
+        "numberOfItems": buttons.length,
+        "itemListElement": buttons.map((b, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "name": b.name,
+          "url": b.url,
+          "description": b.description,
+          "author": { "@type": "Person", "name": b.author, "url": b.author_url }
+        }))
+      };
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'schema-itemlist';
+      script.textContent = JSON.stringify(itemList);
+      document.head.appendChild(script);
+    } catch (e) {}
   }
 
   function getAllTags() {
