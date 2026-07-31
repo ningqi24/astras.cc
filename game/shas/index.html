@@ -567,17 +567,17 @@ function fireWeapon(w){
       const dir = player.lastDir;
       const ang = Math.atan2(dir.y, dir.x);
       
-      // 【已修复】不再生成14个扇面，而是只生成1道月牙剑气向前横扫
-      effects.push({
-        x: player.x + Math.cos(ang) * 30, // 从角色身前发出
-        y: player.y + Math.sin(ang) * 30,
-        dx: Math.cos(ang),
-        dy: Math.sin(ang),
-        life: 0.35,         // 持续时间，决定飞多远
-        range: range * 1.5, // 长度/范围变大
+      projectiles.push({
+        x: player.x + Math.cos(ang) * 40,
+        y: player.y + Math.sin(ang) * 40,
+        dx: Math.cos(ang) * 600,
+        dy: Math.sin(ang) * 600,
         dmg: dmg,
+        life: 2.5,
+        size: 30,
         color: '#e8e8e8',
-        type: 'slash'
+        type: 'crescent',
+        penetrate: true
       });
       break;
     }
@@ -762,6 +762,7 @@ function damagePlayer(dmg){
   if(player.invuln>0)return;
   dmg*=(1-player.dmgReduction);const actual=Math.ceil(dmg*10)/10;
   player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
+  if(navigator.vibrate)navigator.vibrate(50);
 
   // Floating damage number
   const dmgEl=document.createElement('div');dmgEl.className='dmg-float';
@@ -1108,10 +1109,48 @@ function render(){
 
   // Projectiles
   projectiles.forEach(p=>{
-    ctx.fillStyle=p.color;ctx.strokeStyle='#000';ctx.lineWidth=2;
-    ctx.beginPath();
-    if(p.spin){ctx.save();ctx.translate(p.x-camera.x,p.y-camera.y);ctx.rotate(Date.now()*0.015);ctx.fillRect(-p.size,-p.size/2,p.size*2,p.size);ctx.strokeRect(-p.size,-p.size/2,p.size*2,p.size);ctx.restore();}
-    else{ctx.arc(p.x-camera.x,p.y-camera.y,p.size,0,Math.PI*2);ctx.fill();ctx.stroke();}
+    if (p.type === 'crescent') {
+      ctx.save();
+      ctx.translate(p.x - camera.x, p.y - camera.y);
+      const rot = Math.atan2(p.dy, p.dx);
+      ctx.rotate(rot);
+      const lifeFade = Math.min(p.life / 1.0, 1); 
+      const h = p.size * 1.2;
+
+      ctx.fillStyle = `rgba(200, 240, 255, ${0.5 * lifeFade})`;
+      ctx.strokeStyle = `rgba(0,0,0,${0.5 * lifeFade})`;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(0, -h * 0.8);
+      ctx.bezierCurveTo(-h*0.8, -h*0.8, -h*0.8, h*0.8, 0, h*0.8);
+      ctx.bezierCurveTo(-h*0.4, h*0.8, -h*0.4, -h*0.8, 0, -h*0.8);
+      ctx.fill(); ctx.stroke();
+
+      ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * lifeFade})`;
+      ctx.strokeStyle = `rgba(0,0,0,${0.8 * lifeFade})`;
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(0, -h);
+      ctx.bezierCurveTo(-h, -h, -h, h, 0, h);
+      ctx.bezierCurveTo(-h*0.5, h, -h*0.5, -h, 0, -h);
+      ctx.fill(); ctx.stroke();
+
+      ctx.fillStyle = `rgba(255, 255, 255, ${lifeFade})`;
+      ctx.strokeStyle = `rgba(0,0,0, ${lifeFade})`;
+      ctx.lineWidth = 7;
+      ctx.beginPath();
+      ctx.moveTo(0, -h * 1.15);
+      ctx.bezierCurveTo(-h*1.15, -h*1.15, -h*1.15, h*1.15, 0, h*1.15);
+      ctx.bezierCurveTo(-h*0.65, h*1.15, -h*0.65, -h*1.15, 0, -h*1.15);
+      ctx.fill(); ctx.stroke();
+
+      ctx.restore();
+    } else {
+      ctx.fillStyle=p.color;ctx.strokeStyle='#000';ctx.lineWidth=2;
+      ctx.beginPath();
+      if(p.spin){ctx.save();ctx.translate(p.x-camera.x,p.y-camera.y);ctx.rotate(Date.now()*0.015);ctx.fillRect(-p.size,-p.size/2,p.size*2,p.size);ctx.strokeRect(-p.size,-p.size/2,p.size*2,p.size);ctx.restore();}
+      else{ctx.arc(p.x-camera.x,p.y-camera.y,p.size,0,Math.PI*2);ctx.fill();ctx.stroke();}
+    }
   });
 
   // Monsters
