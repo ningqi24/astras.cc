@@ -580,12 +580,12 @@ function fireWeapon(w){
       projectiles.push({
         x: player.x + Math.cos(ang) * 40,
         y: player.y + Math.sin(ang) * 40,
-        dx: Math.cos(ang) * 350,
-        dy: Math.sin(ang) * 350,
-        dmg: dmg,
-        life: 0.7, maxLife: 0.7,
-        size: 30,
-        color: '#e8e8e8',
+        dx: Math.cos(ang) * 250,
+        dy: Math.sin(ang) * 250,
+        dmg: dmg * 0.6,
+        life: 0.4, maxLife: 0.4,
+        size: 22,
+        color: '#a8d8ea',
         type: 'crescent',
         penetrate: true
       });
@@ -593,12 +593,12 @@ function fireWeapon(w){
       projectiles.push({
         x: player.x - Math.cos(ang) * 40,
         y: player.y - Math.sin(ang) * 40,
-        dx: -Math.cos(ang) * 250,
-        dy: -Math.sin(ang) * 250,
-        dmg: dmg * 0.6,
-        life: 0.4, maxLife: 0.4,
-        size: 22,
-        color: '#a8d8ea',
+        dx: -Math.cos(ang) * 350,
+        dy: -Math.sin(ang) * 350,
+        dmg: dmg,
+        life: 0.7, maxLife: 0.7,
+        size: 30,
+        color: '#e8e8e8',
         type: 'crescent',
         penetrate: true
       });
