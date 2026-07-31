@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>免责声明 · Disclaimer · Astras.CC</title>
+  <meta name="description" content="astras.cc 免责声明：本站为个人聚合导航站，不对外链内容负责。">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style>
+    :root {
+      --bg-color: #111;
+      --bg-secondary: #222;
+      --text-primary: #eee;
+      --text-secondary: #888;
+      --accent-color: #66ccff;
+      --border-color: rgba(255,255,255,0.08);
+      --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #f8f8f8;
+        --bg-secondary: #f0f0f0;
+        --text-primary: #333;
+        --text-secondary: #666;
+        --border-color: rgba(0,0,0,0.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-weight: 500;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 32px;
+      padding: 6px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .back-link:hover {
+      color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .lang-toggle {
+      float: right;
+      margin-top: -56px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
+    .lang-toggle:hover { border-color: var(--accent-color); color: var(--accent-color); }
+    section {
+      margin-bottom: 36px;
+      padding: 24px;
+      background-color: rgba(34,34,34,0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+    }
+    @media (prefers-color-scheme: light) {
+      section { background-color: rgba(255,255,255,0.6); }
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 12px;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2 .icon { font-size: 1.2rem; }
+    p { margin: 0 0 12px; font-size: 0.92rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { margin: 8px 0 12px; padding-left: 22px; }
+    li { margin-bottom: 6px; font-size: 0.92rem; }
+    a.inline {
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent-color);
+    }
+    a.inline:hover { opacity: 0.8; }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--accent-color);
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+    }
+    .cta-btn.primary {
+      background-color: var(--accent-color);
+      color: #111;
+    }
+    .cta-btn.primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .cta-btn.ghost {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+    .cta-btn.ghost:hover { background-color: rgba(102,204,255,0.1); }
+    .updated {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    [data-lang] { display: none; }
+    html[lang="zh"] [data-lang="zh"] { display: block; }
+    html[lang="en"] [data-lang="en"] { display: block; }
+    @media (max-width: 600px) {
+      .wrap { padding: 40px 16px 60px; }
+      h1 { font-size: 1.5rem; }
+      .lang-toggle { margin-top: -48px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/" class="back-link" rel="noopener">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13L5 8l5-5"/></svg>
+      <span data-lang="zh">返回首页</span>
+      <span data-lang="en">Back to Home</span>
+    </a>
+    <h1 data-lang="zh">免责声明</h1>
+    <h1 data-lang="en">Disclaimer</h1>
+    <p class="subtitle" data-lang="zh">最后更新：2026-07 · 本声明适用于 astras.cc 全站及所有子页面</p>
+    <p class="subtitle" data-lang="en">Last updated: 2026-07 · Applies to astras.cc and all subpages</p>
+    <button class="lang-toggle" onclick="toggleLang()">EN</button>
+
+    <section data-lang="zh">
+      <h2><span class="icon">①</span> 本站性质</h2>
+      <p>astras.cc 是由个人维护的聚合导航站，<strong>非官方机构</strong>，与 AstraEditor 项目组、Scratch Foundation 及任何被聚合项目方均无隶属、授权或代理关系。本站仅提供第三方资源链接的索引服务，不托管、不存储、不控制外链指向的任何内容。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">①</span> Site Nature</h2>
+      <p>astras.cc is a personal-maintained aggregation navigation site, <strong>not an official entity</strong>. It has no affiliation, authorization, or agency relationship with the AstraEditor team, Scratch Foundation, or any aggregated project. This site only indexes third-party resource links and does not host, store, or control any content at those links.</p>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">②</span> 外链责任与版权</h2>
+      <p>本站聚合的所有外链资源，其著作权、商标权及其他权益均归原作者所有。本站标注的作者信息与原项目地址仅作溯源用途，不主张任何衍生权利。若被聚合项目为开源协议衍生品（如 GPL、CC-BY 等），相关协议义务由原项目方承担，本站不参与分发与修改。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">②</span> External Link Liability & Copyright</h2>
+      <p>All copyrights, trademarks, and other rights of aggregated external resources belong to their original authors. Author and source annotations on this site are for attribution only and assert no derivative rights. If an aggregated project is a derivative under an open-source license (GPL, CC-BY, etc.), the license obligations are borne by the original project; this site does not distribute or modify them.</p>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">⚠️</span> 外链风险提示</h2>
+      <p>点击外链将离开本站。本站<strong>不对外链站点的安全性、隐私保护措施、内容合法性作任何担保</strong>。建议用户：</p>
+      <ul>
+        <li>核对目标域名是否为该项目官方域名，警惕高仿域名（如 <code>.cc.cd</code>、<code>.top</code> 等多级后缀）；</li>
+        <li>不在外链站点输入本站账号、密码或支付信息；</li>
+        <li>如遇浏览器报毒、钓鱼页面或可疑脚本，立即关闭页面并向本站反馈。</li>
+      </ul>
+      <p>所有外链跳转均经 <a class="inline" href="/go/">/go/ 中转页</a> 进行风险提示，用户需主动确认后方可继续。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">⚠️</span> External Link Risk Notice</h2>
+      <p>Clicking an external link will leave this site. This site <strong>makes no guarantee regarding the security, privacy practices, or legality of external sites</strong>. Users are advised to:</p>
+      <ul>
+        <li>Verify the target domain is the project's official domain; beware of lookalike domains (e.g. <code>.cc.cd</code>, multi-level suffixes);</li>
+        <li>Never enter this site's credentials or payment info on external sites;</li>
+        <li>If a browser flags malware, phishing, or suspicious scripts, close the page immediately and report it.</li>
+      </ul>
+      <p>All external link jumps go through the <a class="inline" href="/go/">/go/ interstitial page</a> for a risk prompt; users must confirm before proceeding.</p>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">🐛</span> 死链 / 报毒反馈</h2>
+      <p>如发现外链失效、报毒、内容违规或域名被劫持，请通过以下渠道反馈，确认后将及时更新状态或移除链接：</p>
+      <div class="cta-row">
+        <a class="cta-btn primary" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer">GitHub Issues 反馈</a>
+        <a class="cta-btn ghost" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">QQ 群反馈</a>
+      </div>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">🐛</span> Dead Link / Malware Report</h2>
+      <p>If you find a dead link, malware flag, illegal content, or domain hijack, please report via the channels below. We will update the status or remove the link promptly after confirmation:</p>
+      <div class="cta-row">
+        <a class="cta-btn primary" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer">Report via GitHub Issues</a>
+        <a class="cta-btn ghost" href="https://qm.qq.com/q/ynYzV85oHY" target="_blank" rel="noopener noreferrer">Report via QQ Group</a>
+      </div>
+    </section>
+
+    <section data-lang="zh">
+      <h2><span class="icon">⚖️</span> 版权投诉</h2>
+      <p>如认为本站对你的作品聚合构成侵权，请通过 GitHub Issues 提交<strong>权属证明材料</strong>（作品原文链接、署名证据、身份/机构证明）。确认有效后，将于 48 小时内移除对应链接。</p>
+    </section>
+    <section data-lang="en">
+      <h2><span class="icon">⚖️</span> Copyright Takedown</h2>
+      <p>If you believe aggregation of your work infringes your rights, submit <strong>proof of ownership</strong> via GitHub Issues (original work URL, attribution evidence, identity/organization proof). Verified links will be removed within 48 hours.</p>
+    </section>
+
+    <div class="updated" data-lang="zh">© 2026 Astras.CC · 本站为个人聚合导航，不对外链内容负责</div>
+    <div class="updated" data-lang="en">© 2026 Astras.CC · Personal aggregation hub, not responsible for external content</div>
+  </div>
+
+  <script>
+    let lang = navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en';
+    function applyLang() {
+      document.documentElement.lang = lang;
+      document.querySelector('.lang-toggle').textContent = lang === 'zh' ? 'EN' : '中文';
+    }
+    function toggleLang() {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      applyLang();
+    }
+    applyLang();
+  </script>
+</body>
+</html>

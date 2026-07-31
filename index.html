@@ -3067,6 +3067,8 @@
         <span class="introend">
           本项目与 AstraEditor 项目组 无关
         </span>
+        <br>
+        <a class="end-disclaimer" href="/disclaimer/" rel="noopener" style="font-size:small;color:var(--accent-color);text-decoration:none;border-bottom:1px dashed var(--accent-color);">免责声明</a>
       </div>
       <div>
         <a id="qq-button" class="tabButton" href="https://qm.qq.com/q/ynYzV85oHY"><img src="images/qq.png" width="20" height="20" alt="QQ"></a><br>
@@ -3342,11 +3344,12 @@
       authorBtn.className = 'h-card-author';
       authorBtn.href = button.author_url || '#';
       authorBtn.target = '_blank';
-      authorBtn.rel = 'noopener noreferrer';
+      authorBtn.rel = 'nofollow noopener noreferrer';
       authorBtn.title = currentLang === 'zh' ? '作者: ' + button.author : 'Author: ' + button.author;
       authorBtn.innerHTML = '<svg viewBox="0 0 16 16" width="11" height="11" style="vertical-align:-1px;margin-right:3px;flex-shrink:0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14.5c0-2.5 2.5-4.5 5.5-4.5s5.5 2 5.5 4.5"/></svg>' + button.author;
       authorBtn.onclick = (e) => {
         e.stopPropagation();
+        e.preventDefault();
         animateToPage(button.author_url);
       };
       titleWrap.appendChild(authorBtn);
@@ -4002,6 +4005,7 @@
       '2026 Bilibili@ningqi 参与制作': '2026 Bilibili@ningqi 参与制作',
       '夜间': '日间',
       '日间': '夜间',
+      '免责声明': '免责声明',
       'EN': 'EN'
     },
     en: {
@@ -4018,6 +4022,7 @@
       '2026 Bilibili@ningqi 参与制作': '2026 Made by Bilibili@ningqi',
       '夜间': 'Day Mode',
       '日间': 'Night Mode',
+      '免责声明': 'Disclaimer',
       'EN': '中文'
     }
   };
@@ -4048,6 +4053,9 @@
     });
     document.querySelectorAll('.end-copyright').forEach(el => {
       el.textContent = translations[currentLang]['2026 Bilibili@ningqi 参与制作'];
+    });
+    document.querySelectorAll('.end-disclaimer').forEach(el => {
+      el.textContent = translations[currentLang]['免责声明'];
     });
     renderSiteButtons();
   }
@@ -4137,11 +4145,23 @@
     }
   });
 
+  function isInternalUrl(url) {
+    if (typeof url !== 'string') return false;
+    if (url.startsWith('/') || url.startsWith('#')) return true;
+    try {
+      const u = new URL(url);
+      return u.hostname === 'astras.cc' || u.hostname.endsWith('.astras.cc');
+    } catch (e) {
+      return false;
+    }
+  }
+
   function animateToPage(url) {
     const loadingContainer = document.querySelector(".loading");
     if (loadingContainer) loadingContainer.classList.remove("loading_out");
+    const target = isInternalUrl(url) ? url : ('/go/?u=' + encodeURIComponent(url));
     setTimeout(() => {
-      window.location.href = url;
+      window.location.href = target;
     }, 1000);
   }
 

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>跳转确认 · Redirect Notice · Astras.CC</title>
+  <meta name="description" content="您即将离开 astras.cc，前往第三方站点。">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <style>
+    :root {
+      --bg-color: #111;
+      --bg-secondary: #222;
+      --text-primary: #eee;
+      --text-secondary: #888;
+      --accent-color: #66ccff;
+      --warn-color: #ffb86b;
+      --danger-color: #f87171;
+      --border-color: rgba(255,255,255,0.08);
+      --font-family: "Mi Sans", "Segoe UI", "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #f8f8f8;
+        --bg-secondary: #f0f0f0;
+        --text-primary: #333;
+        --text-secondary: #666;
+        --border-color: rgba(0,0,0,0.08);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-text-size-adjust: 100%;
+    }
+    .card {
+      width: 100%;
+      max-width: 540px;
+      background-color: rgba(34,34,34,0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 36px 32px;
+      backdrop-filter: blur(10px);
+    }
+    @media (prefers-color-scheme: light) {
+      .card { background-color: rgba(255,255,255,0.7); }
+    }
+    .top-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255,184,107,0.15);
+      border: 1px solid var(--warn-color);
+      color: var(--warn-color);
+    }
+    .icon-circle.danger {
+      background-color: rgba(248,113,113,0.15);
+      border-color: var(--danger-color);
+      color: var(--danger-color);
+    }
+    .top-text h1 {
+      margin: 0 0 4px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .top-text .sub {
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+    }
+    .domain-box {
+      background-color: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 20px 0;
+      word-break: break-all;
+    }
+    @media (prefers-color-scheme: light) {
+      .domain-box { background-color: rgba(0,0,0,0.03); }
+    }
+    .domain-label {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .domain-value {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.95rem;
+      color: var(--accent-color);
+      word-break: break-all;
+    }
+    .warn-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-primary);
+      opacity: 0.9;
+      margin: 16px 0;
+    }
+    .warn-text strong { color: var(--warn-color); }
+    .warn-list {
+      margin: 12px 0 20px;
+      padding-left: 20px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .warn-list li { margin-bottom: 6px; }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+    .btn-continue {
+      background-color: var(--accent-color);
+      color: #111;
+      border-color: var(--accent-color);
+    }
+    .btn-continue:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(102,204,255,0.3); }
+    .btn-back {
+      background-color: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border-color);
+    }
+    .btn-back:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+    .btn-report {
+      background-color: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border-color);
+      font-size: 0.78rem;
+      padding: 8px 14px;
+      min-width: auto;
+      flex: 0 0 auto;
+    }
+    .btn-report:hover { color: var(--danger-color); border-color: var(--danger-color); }
+    .footer-note {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .footer-note a { color: var(--accent-color); text-decoration: none; }
+    .footer-note a:hover { opacity: 0.8; }
+    .loading-dots::after {
+      content: '';
+      animation: dots 1.4s infinite;
+    }
+    @keyframes dots {
+      0%, 20% { content: ''; }
+      40% { content: '.'; }
+      60% { content: '..'; }
+      80%, 100% { content: '...'; }
+    }
+    [data-lang] { display: none; }
+    html[lang="zh"] [data-lang="zh"] { display: block; }
+    html[lang="en"] [data-lang="en"] { display: block; }
+    @media (max-width: 500px) {
+      .card { padding: 28px 20px; }
+      .top-text h1 { font-size: 1.1rem; }
+      .btn { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="state-loading">
+      <div class="top-row">
+        <div class="icon-circle">
+          <svg viewBox="0 0 16 16" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/></svg>
+        </div>
+        <div class="top-text">
+          <h1><span data-lang="zh">正在校验链接</span><span data-lang="en">Verifying link</span><span class="loading-dots"></span></h1>
+          <div class="sub">astras.cc</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="state-ok" style="display:none;">
+      <div class="top-row">
+        <div class="icon-circle">
+          <svg viewBox="0 0 16 16" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.5l6 2.5v4c0 3.7-2.5 6.4-6 7.5-3.5-1.1-6-3.8-6-7.5V4z"/><path d="M5.5 8l2 2 3-3.5"/></svg>
+        </div>
+        <div class="top-text">
+          <h1 data-lang="zh">即将离开 astras.cc</h1>
+          <h1 data-lang="en">Leaving astras.cc</h1>
+          <div class="sub" data-lang="zh">第三方站点跳转确认</div>
+          <div class="sub" data-lang="en">Third-party redirect confirmation</div>
+        </div>
+      </div>
+
+      <div class="domain-box">
+        <div class="domain-label" data-lang="zh">目标地址</div>
+        <div class="domain-label" data-lang="en">Destination</div>
+        <div class="domain-value" id="target-url"></div>
+      </div>
+
+      <p class="warn-text" data-lang="zh">本站为个人聚合导航，<strong>不对外链站点的安全性、隐私保护与内容合法性作任何担保</strong>。继续访问即代表你已知晓风险。</p>
+      <p class="warn-text" data-lang="en">This site is a personal aggregation hub and <strong>makes no guarantee about the security, privacy, or legality of external sites</strong>. Proceeding means you accept the risk.</p>
+
+      <ul class="warn-list" data-lang="zh">
+        <li>请核对域名是否为该项目官方域名；</li>
+        <li>不要在目标站点输入本站账号或支付信息；</li>
+        <li>如遇报毒或钓鱼，立即关闭并反馈。</li>
+      </ul>
+      <ul class="warn-list" data-lang="en">
+        <li>Verify the domain is the project's official one;</li>
+        <li>Never enter this site's credentials or payment info;</li>
+        <li>If malware/phishing appears, close and report immediately.</li>
+      </ul>
+
+      <div class="btn-row">
+        <a class="btn btn-back" href="/" rel="noopener">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13L5 8l5-5"/></svg>
+          <span data-lang="zh">返回首页</span>
+          <span data-lang="en">Back to Home</span>
+        </a>
+        <a class="btn btn-continue" id="continue-btn" href="#" target="_blank" rel="nofollow noopener noreferrer">
+          <span data-lang="zh">继续访问</span>
+          <span data-lang="en">Continue</span>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L7 9"/><path d="M12 9v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4"/></svg>
+        </a>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-report" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer">
+          <span data-lang="zh">举报死链 / 报毒</span>
+          <span data-lang="en">Report dead link / malware</span>
+        </a>
+      </div>
+    </div>
+
+    <div id="state-blocked" style="display:none;">
+      <div class="top-row">
+        <div class="icon-circle danger">
+          <svg viewBox="0 0 16 16" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v6M8 13v.5"/><circle cx="8" cy="8" r="7"/></svg>
+        </div>
+        <div class="top-text">
+          <h1 data-lang="zh">拒绝跳转</h1>
+          <h1 data-lang="en">Redirect Blocked</h1>
+          <div class="sub" data-lang="zh">链接不在本站白名单内</div>
+          <div class="sub" data-lang="en">Link not in this site's allowlist</div>
+        </div>
+      </div>
+
+      <p class="warn-text" data-lang="zh">该链接未通过本站白名单校验，可能为<strong>伪造或钓鱼链接</strong>。为安全起见，本站中转页拒绝跳转到未登记的外部地址。</p>
+      <p class="warn-text" data-lang="en">This link failed the allowlist check and may be a <strong>forged or phishing link</strong>. For safety, this interstitial refuses to jump to unregistered external URLs.</p>
+
+      <div class="domain-box">
+        <div class="domain-label" data-lang="zh">被拦截的地址</div>
+        <div class="domain-label" data-lang="en">Blocked URL</div>
+        <div class="domain-value" id="blocked-url"></div>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-back" href="/" rel="noopener">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13L5 8l5-5"/></svg>
+          <span data-lang="zh">返回首页</span>
+          <span data-lang="en">Back to Home</span>
+        </a>
+        <a class="btn btn-report" href="https://github.com/ningqi24/astras.cc/issues/new" target="_blank" rel="noopener noreferrer" style="flex:1; min-width:130px;">
+          <span data-lang="zh">反馈此问题</span>
+          <span data-lang="en">Report this issue</span>
+        </a>
+      </div>
+    </div>
+
+    <div id="state-error" style="display:none;">
+      <div class="top-row">
+        <div class="icon-circle danger">
+          <svg viewBox="0 0 16 16" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v6M8 13v.5"/><circle cx="8" cy="8" r="7"/></svg>
+        </div>
+        <div class="top-text">
+          <h1 data-lang="zh">参数缺失</h1>
+          <h1 data-lang="en">Missing Parameter</h1>
+          <div class="sub" data-lang="zh">未提供跳转目标</div>
+          <div class="sub" data-lang="en">No destination provided</div>
+        </div>
+      </div>
+      <p class="warn-text" data-lang="zh">此页面用于 astras.cc 外链中转跳转，请通过首页卡片点击进入。</p>
+      <p class="warn-text" data-lang="en">This page handles external link redirection for astras.cc. Please enter via a card on the homepage.</p>
+      <div class="btn-row">
+        <a class="btn btn-back" href="/" rel="noopener" style="flex:1;">
+          <span data-lang="zh">返回首页</span>
+          <span data-lang="en">Back to Home</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span data-lang="zh">本站不对外链内容负责 · <a href="/disclaimer/">完整免责声明</a></span>
+      <span data-lang="en">Not responsible for external content · <a href="/disclaimer/">Full disclaimer</a></span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      let lang = navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en';
+      document.documentElement.lang = lang;
+
+      function show(id) {
+        ['state-loading', 'state-ok', 'state-blocked', 'state-error'].forEach(s => {
+          document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
+        });
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const rawU = params.get('u');
+
+      if (!rawU) {
+        show('state-error');
+        return;
+      }
+
+      let targetUrl;
+      try {
+        targetUrl = decodeURIComponent(rawU);
+      } catch (e) {
+        targetUrl = rawU;
+      }
+
+      fetch('/site.json', { cache: 'no-cache' })
+        .then(r => {
+          if (!r.ok) throw new Error('site.json fetch failed');
+          return r.json();
+        })
+        .then(data => {
+          const whitelist = (data.buttons || []).map(b => b.url);
+          const allowed = whitelist.some(u => u === targetUrl);
+          if (allowed) {
+            document.getElementById('target-url').textContent = targetUrl;
+            const btn = document.getElementById('continue-btn');
+            btn.href = targetUrl;
+            show('state-ok');
+          } else {
+            document.getElementById('blocked-url').textContent = targetUrl;
+            show('state-blocked');
+          }
+        })
+        .catch(() => {
+          document.getElementById('blocked-url').textContent = targetUrl;
+          show('state-blocked');
+        });
+    })();
+  </script>
+</body>
+</html>
