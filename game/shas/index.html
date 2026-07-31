@@ -259,7 +259,6 @@ const BOSS_COUNT=3;
 const icons={
   katana:`<svg viewBox="0 0 48 48"><rect x="22" y="2" width="4" height="28" rx="2" fill="#e8e8e8" stroke="#000" stroke-width="2"/><rect x="20" y="28" width="8" height="4" rx="2" fill="#b0b0b0" stroke="#000" stroke-width="2"/><circle cx="24" cy="42" r="3" fill="#888" stroke="#000" stroke-width="2"/><rect x="7" y="3" width="5" height="18" rx="2" fill="#ccc" stroke="#000" stroke-width="2"/></svg>`,
   kunai:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,12 24,8 29,12" fill="#d0d0d0" stroke="#000" stroke-width="2"/><rect x="22" y="12" width="4" height="18" rx="1" fill="#aaa" stroke="#000" stroke-width="2"/><rect x="10" y="26" width="28" height="10" rx="4" fill="#777" stroke="#000" stroke-width="2"/></svg>`,
-  staff:`<svg viewBox="0 0 48 48"><rect x="21" y="6" width="6" height="34" rx="3" fill="#ee5555" stroke="#000" stroke-width="2"/><rect x="10" y="4" width="28" height="7" rx="3" fill="#ff7777" stroke="#000" stroke-width="2"/><rect x="14" y="2" width="20" height="4" rx="2" fill="#ffaaaa" stroke="#000" stroke-width="2"/></svg>`,
   revolver:`<svg viewBox="0 0 48 48"><rect x="26" y="12" width="16" height="12" rx="4" fill="#999" stroke="#000" stroke-width="3"/><rect x="8" y="15" width="18" height="6" rx="2" fill="#bbb" stroke="#000" stroke-width="2"/><circle cx="42" cy="18" r="6" fill="#777" stroke="#000" stroke-width="3"/><circle cx="42" cy="18" r="3" fill="#555"/></svg>`,
   thunder:`<svg viewBox="0 0 48 48"><polygon points="25,2 18,22 26,18 20,44 32,24 23,28" fill="#00dddd" stroke="#000" stroke-width="2"/><rect x="6" y="40" width="36" height="5" rx="2" fill="#00aaaa" stroke="#000" stroke-width="2"/></svg>`,
   lightning:`<svg viewBox="0 0 48 48"><polygon points="25,2 13,24 23,20 15,44 36,22 24,26" fill="#ffdd00" stroke="#000" stroke-width="2"/></svg>`,
@@ -337,7 +336,6 @@ function loadSprites(){
 const weaponDefs={
   katana:{name:'武士刀',icon:'katana',desc:'横扫剑气斩击',color:'#e8e8e8',cd:0.8,type:'melee',superName:'燎原百斩',superDesc:'全屏剑气洪流'},
   kunai:{name:'苦无',icon:'kunai',desc:'朝最近敌人发射',color:'#ccc',cd:0.6,type:'projectile',superName:'相位苦无',superDesc:'穿透所有敌人'},
-  staff:{name:'金箍棒',icon:'staff',desc:'扇形范围攻击',color:'#f77',cd:1.0,type:'melee',superName:'定海神针',superDesc:'超大扇形范围'},
   revolver:{name:'六发左轮',icon:'revolver',desc:'6发连续射击',color:'#bb0',cd:0.5,type:'projectile',superName:'午时已到',superDesc:'12发连射'},
   thunderSpear:{name:'雷霆枪',icon:'thunder',desc:'穿透弹+雷电',color:'#0dd',cd:0.9,type:'hybrid',superName:'雷霆风暴',superDesc:'持续雷暴区'},
   lightning:{name:'雷电',icon:'lightning',desc:'召唤雷电',color:'#fd0',cd:2.0,type:'aoe',superName:'雷霆万钧',superDesc:'全屏雷电'},
@@ -653,7 +651,7 @@ function fireWeapon(w){
     }
     case 'timeField':{
       const sz=isSuper?200:120;
-      effects.push({x:player.x,y:player.y,life:5*(1+player.durationBonus),range:sz,dmg:dmg*0.5,color:'#0dd',type:'timeField'});
+      effects.push({x:player.x,y:player.y,life:Infinity,range:sz,dmg:dmg*0.5,color:'#0dd',type:'timeField',followPlayer:true});
       break;
     }
     case 'bomb':{
@@ -682,7 +680,7 @@ function fireWeapon(w){
       let nn=null,nd=Infinity;monsters.forEach(m=>{const d=dist(player,m);if(d<nd&&d<range){nn=m;nd=d;}});
       if(nn||isSuper){const count=isSuper?4:1;
       for(let i=0;i<count;i++){const a=nn?angle(player,nn):rand(0,Math.PI*2);
-        projectiles.push({x:player.x,y:player.y,dx:Math.cos(a)*350,dy:Math.sin(a)*350,dmg:dmg*1.5,life:1.5,color:'#b97',size:7,penetrate:false,spin:true});}}
+        projectiles.push({x:player.x,y:player.y,dx:Math.cos(a)*350,dy:Math.sin(a)*350,dmg:dmg*1.5,life:1.5,color:'#b97',size:14,penetrate:false,spin:true,shape:'hammer'});}}
       break;
     }
     case 'brick':{
@@ -690,7 +688,7 @@ function fireWeapon(w){
       const target=nn||{x:player.x+rand(-200,200),y:player.y+rand(-200,200)};
       const count=isSuper?3:1;
       for(let i=0;i<count;i++){const a=angle(player,target)+rand(-0.2,0.2);
-        projectiles.push({x:player.x,y:player.y-15,dx:Math.cos(a)*400,dy:Math.sin(a)*400,dmg,life:1.2,color:'#d55',size:6,penetrate:false,crit:isSuper&&Math.random()<0.4});}
+        projectiles.push({x:player.x,y:player.y-15,dx:Math.cos(a)*400,dy:Math.sin(a)*400,dmg,life:1.2,color:'#d55',size:10,penetrate:false,crit:isSuper&&Math.random()<0.4,shape:'brick'});}
       break;
     }
     case 'fireWheel':{
@@ -895,6 +893,8 @@ function update(dt){
       if(!p.penetrate){p.life=0;if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});}break;}
     }}
   }
+  // Follow-player effects
+  for(let e of effects){if(e.followPlayer){e.x=player.x;e.y=player.y;}}
   for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison')continue;
     for(let m of monsters){if(dist(e,m)<m.size+e.range*0.7){m.hp-=e.dmg*dt*5;m.hitFlash=0.05;}}
   }
@@ -1169,6 +1169,22 @@ function render(){
       ctx.bezierCurveTo(h*0.65, h*1.15, h*0.65, -h*1.15, 0, -h*1.15);
       ctx.fill(); ctx.stroke();
 
+      ctx.restore();
+    } else if (p.shape === 'hammer') {
+      ctx.save();ctx.translate(p.x-camera.x,p.y-camera.y);ctx.rotate(Date.now()*0.015);
+      const s=p.size;ctx.fillStyle='#888';ctx.strokeStyle='#000';ctx.lineWidth=3;
+      ctx.beginPath();ctx.roundRect(-s,-s*0.3,s*2.5,s*0.6,3);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#665';ctx.beginPath();ctx.roundRect(-s*0.9,s*0.1,s*0.6,s*1.5,2);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#555';ctx.beginPath();ctx.roundRect(-s*0.65,s*1.3,s*0.3,s*1.2,2);ctx.fill();ctx.stroke();
+      ctx.restore();
+    } else if (p.shape === 'brick') {
+      ctx.save();ctx.translate(p.x-camera.x,p.y-camera.y);
+      const s=p.size;ctx.fillStyle='#c44';ctx.strokeStyle='#000';ctx.lineWidth=4;
+      ctx.beginPath();ctx.roundRect(-s*1.4,-s*0.5,s*2.8,s*1.0,3);ctx.fill();ctx.stroke();
+      ctx.strokeStyle='#000';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(-s*0.5,-s*0.5);ctx.lineTo(-s*0.5,s*0.5);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(s*0.5,-s*0.5);ctx.lineTo(s*0.5,s*0.5);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(-s*1.4,0);ctx.lineTo(s*1.4,0);ctx.stroke();
       ctx.restore();
     } else {
       ctx.fillStyle=p.color;ctx.strokeStyle='#000';ctx.lineWidth=2;
