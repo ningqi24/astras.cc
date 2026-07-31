@@ -64,7 +64,7 @@
       --radius-sm: 10px;
       --shadow-hover: 0 8px 30px rgba(102, 204, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.3);
       --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.2);
-      --glass-bg: rgba(34, 34, 34, 0.45);
+      --glass-bg: rgba(255, 255, 255, 0.04);
       --scrollbar-thumb: #666;
       --scrollbar-thumb-hover: #777;
       --scrollbar-thumb-active: #555;
@@ -348,15 +348,21 @@
       align-items: center;
       gap: 10px;
       padding: 11px 14px;
-      background-color: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-soft);
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-pill);
       color: var(--text-secondary);
       transition: all 0.25s ease;
     }
-    .daylight-mode .search-wrap,
+    .daylight-mode .search-wrap {
+      background-color: rgba(255, 255, 255, 0.7);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
     @media (prefers-color-scheme: light) {
-      .search-wrap { background-color: rgba(255, 255, 255, 0.6); border-color: rgba(0, 0, 0, 0.06); }
+      .search-wrap {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-color: rgba(0, 0, 0, 0.08);
+      }
     }
     .search-wrap:focus-within {
       border-color: var(--accent-color);
