@@ -51,11 +51,10 @@ canvas{display:block;position:absolute;inset:0;}
 #wave-announce.show{display:block;animation:waveIn 0.4s ease-out;}
 @keyframes waveIn{0%{transform:translateX(-50%) scale(0.5);opacity:0;}100%{transform:translateX(-50%) scale(1);opacity:1;}}
 
-/* Minimap - bottom right */
-#minimap{position:absolute;top:16px;left:16px;width:90px;border:5px solid #000;border-radius:16px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
-#minimap canvas{display:block;width:100%;height:60px;}
-#minimap #xp-outer{margin-top:3px;width:100%;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
-#minimap #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
+/* XP Bar */
+#xp-bar{position:absolute;top:16px;left:16px;width:120px;z-index:10;pointer-events:none;}
+#xp-outer{width:100%;height:10px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
+#xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
 
 /* ============ WEAPON SLOTS - BOTTOM ============ */
 #weapon-slots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;pointer-events:none;}
@@ -189,11 +188,8 @@ canvas{display:block;position:absolute;inset:0;}
     <div id="wave-sub" style="font-size:13px;margin-top:4px;"></div>
   </div>
 
-  <!-- Minimap -->
-  <div id="minimap">
-    <canvas id="minimap-canvas" width="80" height="60"></canvas>
-    <div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div>
-  </div>
+  <!-- XP Bar -->
+  <div id="xp-bar"><div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div></div>
 
   <!-- Weapon Slots -->
   <div id="weapon-slots"></div>
@@ -824,23 +820,6 @@ document.getElementById('go-home').addEventListener('click',restartGame);
 
 function formatTime(t){const m=Math.floor(t/60),s=Math.floor(t%60);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
 
-// ============ MINIMAP ============
-const minimapCanvas=document.getElementById('minimap-canvas');
-const minimapCtx=minimapCanvas.getContext('2d');
-function drawMinimap(){
-  minimapCtx.clearRect(0,0,80,60);
-  const sx=MAP_W/80,sy=MAP_H/60;
-  minimapCtx.fillStyle='rgba(43,46,74,0.7)';minimapCtx.fillRect(0,0,80,60);
-  // Monsters
-  minimapCtx.fillStyle='#e63946';
-  monsters.forEach(m=>{minimapCtx.fillRect(m.x/sx-1,m.y/sy-1,2,2);});
-  // Player
-  minimapCtx.fillStyle='#4cc9f0';
-  minimapCtx.fillRect(player.x/sx-2,player.y/sy-2,4,4);
-  // Border
-  minimapCtx.strokeStyle='#000';minimapCtx.lineWidth=1;minimapCtx.strokeRect(0,0,80,60);
-}
-
 // ============ GAME LOOP ============
 function update(dt){
   if(gameState!=='playing')return;if(paused)return;if(gameOver)return;
@@ -916,7 +895,7 @@ function update(dt){
   if(hasSpearHead){orbitalAngle+=dt*5;for(let e of effects){if(e.type==='spearHead'){e.x=player.x+Math.cos(orbitalAngle+e.angleOffset)*e.orbitRadius;e.y=player.y+Math.sin(orbitalAngle+e.angleOffset)*e.orbitRadius;}}}
   for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison'||e.type==='teleport')continue;
     for(let m of monsters){if(m.invuln)continue;if(dist(e,m)<m.size+e.range*0.7){const dd=e.dmg*dt*5;m.hp-=dd;m.hitFlash=0.05;const rd=Math.round(dd);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.6,vy:-25,color:'#f90'});}}
-    if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size||20+e.range*0.7)damagePlayer(e.dmg*dt*3);
+    if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size+20+e.range*0.7)damagePlayer(e.dmg*dt*3);
   }
   for(let e of effects){
     if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;const rd=Math.round(dd);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.5,vy:-20,color:'#0ff'});}}}
@@ -1339,9 +1318,6 @@ function render(){
   ctx.fillStyle='#ff4444';
   ctx.fillRect(px-hpBarW/2+1,hpBarY-hpBarH/2+1,(hpBarW-2)*(player.hp/player.maxHp),hpBarH-2);
   ctx.globalAlpha=1;
-
-  // Minimap
-  drawMinimap();
 }
 
 // ============ AUDIO ============
