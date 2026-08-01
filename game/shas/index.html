@@ -35,10 +35,7 @@ canvas{display:block;position:absolute;inset:0;}
 .progress-boss-marker{position:absolute;top:-3px;width:2.5px;height:12px;background:#e63946;z-index:2;}
 .progress-boss-label{position:absolute;top:8px;font-size:9px;font-weight:900;color:#e63946;transform:translateX(-50%);text-shadow:1px 1px 0 #000;white-space:nowrap;}
 
-#hud{position:absolute;top:22px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:space-between;align-items:flex-start;}
-
-/* Left cluster */
-#hud-left{display:flex;flex-direction:column;gap:0;min-width:80px;}
+#hud{position:absolute;top:22px;left:10px;right:10px;pointer-events:none;z-index:10;display:flex;justify-content:flex-end;align-items:flex-start;}
 
 .hud-panel{background:#f8f9fa;border:6px solid #000;border-radius:24px;padding:4px 10px;display:inline-flex;align-items:center;gap:6px;}
 
@@ -170,8 +167,6 @@ canvas{display:block;position:absolute;inset:0;}
 
   <!-- HUD Top Bar -->
   <div id="hud">
-    <div id="hud-left" class="hud-panel">
-    </div>
     <div id="hud-right">
       <div class="hud-panel">
         <span class="info-text" id="hud-timer">00:00</span>
