@@ -84,6 +84,11 @@ canvas{display:block;position:absolute;inset:0;}
 #joystick-base{width:130px;height:130px;border-radius:50%;border:5px solid rgba(0,0,0,0.3);background:rgba(255,255,255,0.08);position:relative;}
 #joystick-thumb{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,0.15);border:4px solid rgba(0,0,0,0.25);position:absolute;top:38px;left:38px;transition:transform 0.04s;}
 
+/* Slide Button */
+#slide-btn{position:absolute;bottom:10px;right:10px;width:72px;height:72px;z-index:50;border-radius:50%;border:5px solid rgba(0,0,0,0.3);background:rgba(76,201,240,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;transition:background 0.15s;font-size:26px;font-weight:900;color:#4cc9f0;text-shadow:2px 2px 0 #000;font-family:'Noto Sans SC','PingFang SC',sans-serif;padding:0;line-height:1;}
+#slide-btn:active{background:rgba(76,201,240,0.4);}
+#slide-btn.on-cd{background:rgba(100,100,100,0.2);color:#555;}
+
 /* ============ LEVEL UP MODAL ============ */
 #levelup-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(27,28,43,0.85);justify-content:center;align-items:center;flex-direction:column;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
 #levelup-modal.active{display:flex;}
@@ -219,6 +224,9 @@ canvas{display:block;position:absolute;inset:0;}
       <div id="joystick-thumb"></div>
     </div>
   </div>
+
+  <!-- Slide Button -->
+  <button id="slide-btn">滑</button>
 
   <!-- HP Warning Border -->
   <div id="hp-warning"></div>
@@ -414,6 +422,7 @@ let player={
   invuln:0,kills:0,
   lastDir:{x:0,y:-1},
   animT:0,
+  slideCD:0,slideMaxCD:3,sliding:false,slideDur:0,
   hitFlash:0
 };
 let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[],dmgFloats=[];
@@ -445,9 +454,13 @@ window.addEventListener('keydown',e=>{
     else document.getElementById('pause-panel').classList.remove('active');
   }
   if(e.key===' '&&gameState==='levelup'&&levelUpChoices.length>0)selectUpgrade(0);
+  if(e.key.toLowerCase()==='shift')doSlide();
   e.preventDefault();
 });
 window.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
+
+document.getElementById('slide-btn').addEventListener('touchstart',e=>{e.preventDefault();doSlide();});
+document.getElementById('slide-btn').addEventListener('mousedown',e=>{e.preventDefault();doSlide();});
 
 document.getElementById('pause-resume').addEventListener('click',()=>{
   paused=false;document.getElementById('pause-panel').classList.remove('active');
@@ -867,8 +880,19 @@ function update(dt){
 
   if(mx!==0||my!==0){const len=Math.hypot(mx,my);mx/=len;my/=len;player.lastDir={x:mx,y:my};player.animT+=dt;}
   const spd=player.speed*(1+player.speedBonus);
-  player.x+=mx*spd*dt;player.y+=my*spd*dt;
-  player.x=clamp(player.x,20,MAP_W-20);player.y=clamp(player.y,20,MAP_H-20);
+  if(player.slideCD>0){player.slideCD-=dt;updateSlideUI();}
+  if(player.sliding){
+    player.slideDur-=dt;
+    player.invuln=0.1;
+    const slideSpd=spd*3;
+    player.x+=player.lastDir.x*slideSpd*dt;
+    player.y+=player.lastDir.y*slideSpd*dt;
+    player.x=clamp(player.x,20,MAP_W-20);player.y=clamp(player.y,20,MAP_H-20);
+    if(player.slideDur<=0){player.sliding=false;updateSlideUI();}
+  }else{
+    player.x+=mx*spd*dt;player.y+=my*spd*dt;
+    player.x=clamp(player.x,20,MAP_W-20);player.y=clamp(player.y,20,MAP_H-20);
+  }
 
   if(player.invuln>0)player.invuln-=dt;
   if(player.hitFlash>0)player.hitFlash-=dt;
@@ -1370,6 +1394,8 @@ function startGame(){
   player.regen=0;player.maxHpBonus=0;player.invuln=0;player.kills=0;
   shakeAmount=0;
   player.lastDir={x:0,y:-1};
+  player.slideCD=0;player.sliding=false;player.slideDur=0;
+  updateSlideUI();
   monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];dmgFloats=[];
   timer=0;waveNum=1;bossDefeated=0;bossActive=null;atkTimer=0;orbitalAngle=0;
   gameOver=false;victory=false;paused=false;gameState='playing';
@@ -1390,6 +1416,24 @@ function startGame(){
   updateHUD();spawnWave();
 }
 function restartGame(){startGame();}
+
+function doSlide(){
+  if(player.sliding||player.slideCD>0||gameState!=='playing'||paused||gameOver)return;
+  player.sliding=true;
+  player.slideDur=0.2;
+  player.slideCD=player.slideMaxCD;
+  updateSlideUI();
+}
+function updateSlideUI(){
+  const btn=document.getElementById('slide-btn');
+  if(player.slideCD>0){
+    btn.classList.add('on-cd');
+    btn.textContent=Math.ceil(player.slideCD);
+  }else{
+    btn.classList.remove('on-cd');
+    btn.textContent='滑';
+  }
+}
 
 // Loading simulation → Lobby
 (function(){
