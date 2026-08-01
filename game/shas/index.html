@@ -780,7 +780,6 @@ function applyPassive(id,lm){
 }
 
 function levelUp(){
-  playSound('levelUp');
   player.level++;player.xp-=player.xpToNext;
   player.xpToNext=Math.floor(player.xpToNext*1.18+5);
   player.hp=Math.min(player.hp+20,player.maxHp);
