@@ -52,8 +52,8 @@ canvas{display:block;position:absolute;inset:0;}
 @keyframes waveIn{0%{transform:translateX(-50%) scale(0.5);opacity:0;}100%{transform:translateX(-50%) scale(1);opacity:1;}}
 
 /* Minimap - bottom right */
-#minimap{position:absolute;top:16px;left:16px;width:80px;border:5px solid #000;border-radius:16px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
-#minimap canvas{display:block;width:80px;height:60px;}
+#minimap{position:absolute;top:16px;left:16px;width:90px;border:5px solid #000;border-radius:16px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
+#minimap canvas{display:block;width:100%;height:60px;}
 #minimap #xp-outer{margin-top:3px;width:100%;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
 #minimap #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
 
@@ -340,7 +340,7 @@ function loadSprites(){
 const weaponDefs={
   katana:{name:'武士刀',icon:'katana',desc:'横扫剑气斩击',color:'#e8e8e8',cd:0.8,type:'melee',superName:'燎原百斩',superDesc:'全屏剑气洪流'},
   kunai:{name:'苦无',icon:'kunai',desc:'朝最近敌人发射',color:'#ccc',cd:0.6,type:'projectile',superName:'相位苦无',superDesc:'穿透所有敌人'},
-  revolver:{name:'六发左轮',icon:'revolver',desc:'6发连续射击',color:'#bb0',cd:0.5,type:'projectile',superName:'午时已到',superDesc:'12发连射'},
+  revolver:{name:'六发左轮',icon:'revolver',desc:'6发连续射击',color:'#bb0',cd:0.8,type:'projectile',dmgMul:0.6,superName:'午时已到',superDesc:'12发连射'},
   thunderSpear:{name:'雷霆枪',icon:'thunder',desc:'穿透弹+雷电',color:'#0dd',cd:0.9,type:'hybrid',superName:'雷霆风暴',superDesc:'持续雷暴区'},
   lightning:{name:'雷电',icon:'lightning',desc:'召唤雷电',color:'#fd0',cd:2.0,type:'aoe',superName:'雷霆万钧',superDesc:'全屏雷电'},
   timeField:{name:'时间领域',icon:'timeField',desc:'伤害领域',color:'#0dd',cd:12,type:'field',superName:'领域展开',superDesc:'超大伤害领域'},
@@ -562,7 +562,7 @@ function fireWeapon(w){
   playSound('fire');
   const def=weaponDefs[w.id];
   const range=getWpnRange(w.id);
-  const dmg=getWpnDmg(w.id,w.level);
+  const dmg=getWpnDmg(w.id,w.level)*(def.dmgMul||1);
   const isSuper=w.level>=6;
 
   switch(w.id){
@@ -792,6 +792,7 @@ function damagePlayer(dmg){
   if(player.invuln>0)return;
   playSound('playerHit');
   dmg*=(1-player.dmgReduction);const actual=Math.ceil(dmg*10)/10;
+  if(actual<=0)return;
   player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
   // Vibration with cooldown (prevent 60fps spam; iOS Safari doesn't support Vibration API)
   const now=Date.now();
