@@ -3302,7 +3302,7 @@
       <div class="hero-wrap">
         <h1 class="hero-title">Astras<span class="dot">.</span>CC</h1>
         <p class="hero-slogan" data-i18n-hero-slogan>
-          精选 <span class="hl">36</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>
+          精选 <span class="hl" id="tool-count">…</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>
         </p>
       </div>
       <div class="horizontal-content" id="horizontal-content"></div>
@@ -3510,6 +3510,7 @@
       siteButtons = data.buttons || [];
       injectItemListSchema(siteButtons);
       renderSiteButtons();
+      applyLang();
     } catch (error) {
       console.error('Error loading site buttons:', error);
     }
@@ -4339,7 +4340,7 @@
       'ningqi-github': 'ningqi-github',
       'SimpleChatMini': 'SimpleChatMini',
       'Astras.CC': 'Astras.CC',
-      'hero-slogan': '精选 <span class="hl">36</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>',
+      'hero-slogan': '精选 <span class="hl">{count}</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>',
       'footer-brand': 'Astras.CC',
       'footer-intro': '个人维护的精选工具导航站，不机器采集，每季度复核。',
       'footer-nav-title': '站点',
@@ -4361,7 +4362,7 @@
       'ningqi-github': 'ningqi-github',
       'SimpleChatMini': 'SimpleChatMini',
       'Astras.CC': 'Astras.CC',
-      'hero-slogan': 'Curated <span class="hl">36</span> personally verified tools · verified dates & notes · <span class="hl">no scraping</span> · <span class="hl">re-checked quarterly</span>',
+      'hero-slogan': 'Curated <span class="hl">{count}</span> personally verified tools · verified dates & notes · <span class="hl">no scraping</span> · <span class="hl">re-checked quarterly</span>',
       'footer-brand': 'Astras.CC',
       'footer-intro': 'A personally curated tools hub. No scraping. Re-checked quarterly.',
       'footer-nav-title': 'Site',
@@ -4390,7 +4391,7 @@
     });
     const heroSlogan = document.querySelector('[data-i18n-hero-slogan]');
     if (heroSlogan && translations[currentLang]['hero-slogan']) {
-      heroSlogan.innerHTML = translations[currentLang]['hero-slogan'];
+      heroSlogan.innerHTML = translations[currentLang]['hero-slogan'].replace('{count}', siteButtons.length);
     }
     document.querySelectorAll('#theme-toggle-btn a.tabButton').forEach(el => {
       el.textContent = currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间'];
@@ -4749,6 +4750,7 @@
   <noscript>
     <div style="max-width:800px;margin:40px auto;padding:0 20px;font-family:sans-serif;color:#eee;background:#111;min-height:100vh">
       <h1>Astras.CC · 个人精选工具导航站</h1>
+      <!-- NOSCRIPT-AUTO-START -->
       <p>astras.cc 是个人精选工具导航站，收录 36 个亲测可用资源，涵盖 AstraEditor、COLID、Scratch 作品、Minecraft 工具与团队、前端组件库、字体 CDN、小游戏与个人作品。每条附实测时间与主观点评，不靠机器采集，每季度复核。</p>
       <p>本站需要 JavaScript 运行以获得完整体验（卡片视图、筛选、搜索、收藏等）。以下是收录资源的完整列表：</p>
       <h2>AstraEditor 编辑器</h2>
@@ -4809,7 +4811,7 @@
       </ul>
       <h2>小游戏</h2>
       <ul>
-        <li><a href="/game/shas/">鲨鲨幸存者</a> - 小游戏，强制横屏，适合打发时间。</li>
+        <li><a href="/game/shas/">鲨鲨幸存者</a> - 适合横屏，打发时间利器。</li>
       </ul>
       <h2>个人主页</h2>
       <ul>
@@ -4822,6 +4824,7 @@
         <a href="/about/">关于本站</a> ·
         <a href="https://github.com/ningqi24/astras.cc/issues/new" rel="nofollow noopener noreferrer">反馈失效/报毒/违规</a>
       </p>
+      <!-- NOSCRIPT-AUTO-END -->
     </div>
   </noscript>
 </body>
