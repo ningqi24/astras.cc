@@ -370,17 +370,17 @@ const passiveDefs={
 };
 
 const monsterTypes={
-  slime:{name:'史莱姆',hp:20,dmg:8,speed:1.2,size:12,color:'#55dd55',xp:5},
-  skull:{name:'骷髅兵',hp:35,dmg:15,speed:1.0,size:14,color:'#e8e8e8',xp:10},
-  bat:{name:'蝙蝠',hp:15,dmg:5,speed:2.0,size:10,color:'#cc66cc',xp:8},
-  golem:{name:'石魔',hp:80,dmg:25,speed:0.5,size:18,color:'#cc8833',xp:25},
-  ghost:{name:'幽灵',hp:25,dmg:12,speed:1.4,size:14,color:'#8899ee',xp:15}
+  slime:{name:'史莱姆',hp:20,dmg:8,speed:1.2,size:12,color:'#55dd55',xp:5,behavior:'basic'},
+  skull:{name:'骷髅兵',hp:35,dmg:15,speed:1.0,size:14,color:'#e8e8e8',xp:10,behavior:'charger'},
+  bat:{name:'蝙蝠',hp:15,dmg:5,speed:2.0,size:10,color:'#cc66cc',xp:8,behavior:'swarmer'},
+  golem:{name:'石魔',hp:80,dmg:25,speed:0.5,size:18,color:'#cc8833',xp:25,behavior:'slammer'},
+  ghost:{name:'幽灵',hp:25,dmg:12,speed:1.4,size:14,color:'#8899ee',xp:15,behavior:'phaser'}
 };
 
 const bossTypes={
-  demonKing:{name:'魔王',hp:600,dmg:30,speed:0.6,size:30,color:'#ff3333',xp:200},
-  shadowLord:{name:'暗影领主',hp:800,dmg:35,speed:0.5,size:32,color:'#660088',xp:250},
-  mecha:{name:'机械巨兽',hp:1000,dmg:40,speed:0.4,size:36,color:'#888888',xp:300}
+  demonKing:{name:'魔王',hp:600,dmg:30,speed:0.6,size:30,color:'#ff3333',xp:200,behavior:'ranged'},
+  shadowLord:{name:'暗影领主',hp:800,dmg:35,speed:0.5,size:32,color:'#660088',xp:250,behavior:'teleporter'},
+  mecha:{name:'机械巨兽',hp:1000,dmg:40,speed:0.4,size:36,color:'#888888',xp:300,behavior:'artillery'}
 };
 
 // ============ GAME STATE ============
@@ -405,7 +405,7 @@ let player={
   lastDir:{x:0,y:-1},
   hitFlash:0
 };
-let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[];
+let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[],dmgFloats=[];
 let timer=0,waveNum=1,bossDefeated=0,bossActive=null,bossAnnounceTimer=0;
 let gameOver=false,victory=false,paused=false;
 let levelUpChoices=[];
@@ -526,7 +526,7 @@ function randomEdgePos(){
 function spawnMonster(type){
   const pos=randomEdgePos();
   const t=monsterTypes[type];
-  monsters.push({x:pos.x,y:pos.y,hp:t.hp,maxHp:t.hp,dmg:t.dmg,speed:t.speed*(1+waveNum*0.05),size:t.size,color:t.color,xpValue:t.xp,type:type,hitFlash:0});
+  monsters.push({x:pos.x,y:pos.y,hp:t.hp,maxHp:t.hp,dmg:t.dmg,speed:t.speed*(1+waveNum*0.05),size:t.size,color:t.color,xpValue:t.xp,type:type,behavior:t.behavior,behaviorCD:rand(1,3),hitFlash:0});
 }
 function spawnWave(){
   const count=6+waveNum*3;
@@ -539,7 +539,7 @@ function spawnBoss(num){
   const k=bk[Math.min(num-1,bk.length-1)];
   const b=bossTypes[k];
   const pos=randomEdgePos();
-  const boss={x:pos.x,y:pos.y,hp:b.hp*(1+(num-1)*0.3),maxHp:b.hp*(1+(num-1)*0.3),dmg:b.dmg,speed:b.speed,size:b.size,color:b.color,xpValue:b.xp,type:k,isBoss:true,hitFlash:0,name:b.name};
+  const boss={x:pos.x,y:pos.y,hp:b.hp*(1+(num-1)*0.3),maxHp:b.hp*(1+(num-1)*0.3),dmg:b.dmg,speed:b.speed,size:b.size,color:b.color,xpValue:b.xp,type:k,isBoss:true,behavior:b.behavior,behaviorCD:1.5,hitFlash:0,name:b.name};
   monsters.push(boss);bossActive=boss;
   document.getElementById('ba-text').textContent=b.name;
   document.getElementById('ba-sub').textContent='第 '+num+' 只 BOSS';
@@ -561,6 +561,7 @@ function getWpnRange(id){let r=weaponDefs[id].type==='melee'?80:400;return r*(1+
 function getWpnDmg(id,level){let d=10+level*5;d*=(1+player.atkBonus);if(level>=6)d*=1.5;return d;}
 
 function fireWeapon(w){
+  playSound('fire');
   const def=weaponDefs[w.id];
   const range=getWpnRange(w.id);
   const dmg=getWpnDmg(w.id,w.level);
@@ -779,6 +780,7 @@ function applyPassive(id,lm){
 }
 
 function levelUp(){
+  playSound('levelUp');
   player.level++;player.xp-=player.xpToNext;
   player.xpToNext=Math.floor(player.xpToNext*1.18+5);
   player.hp=Math.min(player.hp+20,player.maxHp);
@@ -789,6 +791,7 @@ function levelUp(){
 
 function damagePlayer(dmg){
   if(player.invuln>0)return;
+  playSound('playerHit');
   dmg*=(1-player.dmgReduction);const actual=Math.ceil(dmg*10)/10;
   player.hp-=actual;player.invuln=0.3;player.hitFlash=0.1;shakeAmount=Math.max(shakeAmount,Math.min(actual*0.6,8));
   // Vibration with cooldown (prevent 60fps spam; iOS Safari doesn't support Vibration API)
@@ -886,7 +889,7 @@ function update(dt){
   // Projectiles
   projectiles=projectiles.filter(p=>{
     p.x+=p.dx*dt;p.y+=p.dy*dt;p.life-=dt;
-    if(p.life<=0){if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});}return false;}
+    if(p.life<=0){if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});playSound('explosion');}return false;}
     if(p.bounce&&p.bounce>0){let b=false;if(p.x<10||p.x>MAP_W-10){p.dx*=-1;b=true;}if(p.y<10||p.y>MAP_H-10){p.dy*=-1;b=true;}if(b)p.bounce--;}
     if(p.x<-100||p.x>MAP_W+100||p.y<-100||p.y>MAP_H+100)return false;return true;
   });
@@ -896,19 +899,21 @@ function update(dt){
 
   // Collision
   for(let p of projectiles){if(p.life<=0)continue;
-    for(let i=monsters.length-1;i>=0;i--){const m=monsters[i];const hitR=m.size+Math.max(p.size*0.6,5);if(dist(p,m)<hitR){
-      let dmg=p.dmg;if(p.crit)dmg*=2;m.hp-=dmg;m.hitFlash=0.1;
-      if(!p.penetrate){p.life=0;if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});}break;}
+    if(p.isEnemy){if(dist(p,player)<12+p.size*0.6){damagePlayer(p.dmg);p.life=0;}continue;}
+    for(let i=monsters.length-1;i>=0;i--){const m=monsters[i];if(m.invuln)continue;const hitR=m.size+Math.max(p.size*0.6,5);if(dist(p,m)<hitR){
+      let dmg=p.dmg;if(p.crit)dmg*=2;m.hp-=dmg;m.hitFlash=0.1;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dmg),life:0.8,vy:-40,color:p.crit?'#ff0':'#fff'});playSound('hit');
+      if(!p.penetrate){p.life=0;if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});playSound('explosion');}break;}
     }}
   }
   // Follow-player effects
   for(let e of effects){if(e.followPlayer){e.x=player.x;e.y=player.y;}}
-  for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison')continue;
-    for(let m of monsters){if(dist(e,m)<m.size+e.range*0.7){m.hp-=e.dmg*dt*5;m.hitFlash=0.05;}}
+  for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison'||e.type==='teleport')continue;
+    for(let m of monsters){if(m.invuln)continue;if(dist(e,m)<m.size+e.range*0.7){const dd=e.dmg*dt*5;m.hp-=dd;m.hitFlash=0.05;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.6,vy:-25,color:'#f90'});}}
+    if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size||20+e.range*0.7)damagePlayer(e.dmg*dt*3);
   }
   for(let e of effects){
     if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range)m.speed*=0.5;}}
-    if(e.type==='poison'){for(let m of monsters){if(dist(e,m)<e.range){m.hp-=e.dmg*dt;m.hitFlash=0.02;}}}
+    if(e.type==='poison'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.5,vy:-20,color:'#0f0'});}}}
   }
 
   // Kill monsters
@@ -917,13 +922,71 @@ function update(dt){
       const xc=m.isBoss?15:randInt(1,3);
       for(let j=0;j<xc;j++)xpOrbs.push({x:m.x+rand(-20,20),y:m.y+rand(-20,20),value:m.isBoss?m.xpValue/xc:5});
       if(m.isBoss){bossActive=null;bossDefeated++;chests.push({x:m.x,y:m.y,bossChest:true});}
-      player.kills++;player.xp+=m.xpValue*(1+player.xpBonus);
+      player.kills++;player.xp+=m.xpValue*(1+player.xpBonus);playSound('kill');
       monsters.splice(i,1);
     }
   }
 
-  // Monster AI
-  monsters.forEach(m=>{const a=angle(m,player);let spd=m.speed;for(let e of effects){if(e.type==='timeField'&&dist(e,m)<e.range)spd*=0.5;}m.x+=Math.cos(a)*spd*dt*60;m.y+=Math.sin(a)*spd*dt*60;});
+  // Monster AI with behaviors
+  dmgFloats=dmgFloats.filter(f=>{f.y+=f.vy*dt;f.life-=dt;return f.life>0;});
+  monsters.forEach(m=>{
+    if(m.behaviorCD===undefined)m.behaviorCD=rand(1,3);
+    m.behaviorCD-=dt;
+    let spd=m.speed;for(let e of effects){if(e.type==='timeField'&&dist(e,m)<e.range)spd*=0.5;}
+    const a=angle(m,player);
+    if(!m.isBoss){
+      switch(m.behavior){
+        case 'charger':
+          if(m.behaviorCD<=0){m.charging=true;m.chargeSpeed=spd*2.5;m.behaviorCD=2.5;m.chargeTime=0.4;}
+          if(m.charging){m.chargeTime-=dt;spd=m.chargeSpeed;if(m.chargeTime<=0)m.charging=false;}
+          break;
+        case 'swarmer':{
+          const d=dist(m,player);if(d>150){spd*=1.3;}else if(d<60){spd*=0.6;}
+          const orbitA=a+1.57;m.x+=Math.cos(orbitA)*spd*dt*60;m.y+=Math.sin(orbitA)*spd*dt*60;
+          return;
+        }
+        case 'slammer':
+          if(m.behaviorCD<=0&&dist(m,player)<120){
+            m.slamming=true;m.behaviorCD=4;m.slamTimer=0.6;
+            effects.push({x:m.x,y:m.y,life:0.4,range:80,dmg:m.dmg*1.5,color:'#f80',type:'slamAoE'});
+          }
+          break;
+        case 'phaser':
+          if(m.behaviorCD<=0){m.phasing=true;m.phaseTimer=1.5;m.behaviorCD=4;}
+          if(m.phasing){m.phaseTimer-=dt;spd*=2;m.invuln=true;if(m.phaseTimer<=0){m.phasing=false;m.invuln=false;}}
+          break;
+        default:break;
+      }
+    } else {
+      switch(m.behavior){
+        case 'ranged':
+          if(m.behaviorCD<=0&&dist(m,player)<350){
+            const ba=angle(m,player);projectiles.push({x:m.x,y:m.y,dx:Math.cos(ba)*200,dy:Math.sin(ba)*200,size:8,dmg:m.dmg*0.7,life:2,color:'#f33',isEnemy:true});
+            if(waveNum>=5){const b2=ba+0.4,b3=ba-0.4;projectiles.push({x:m.x,y:m.y,dx:Math.cos(b2)*180,dy:Math.sin(b2)*180,size:8,dmg:m.dmg*0.7,life:2,color:'#f33',isEnemy:true});projectiles.push({x:m.x,y:m.y,dx:Math.cos(b3)*180,dy:Math.sin(b3)*180,size:8,dmg:m.dmg*0.7,life:2,color:'#f33',isEnemy:true});}
+            m.behaviorCD=1.8;playSound('bossAtk');
+          }
+          break;
+        case 'teleporter':
+          if(m.behaviorCD<=0){
+            const tx=player.x+rand(-100,100),ty=player.y+rand(-100,100);
+            effects.push({x:m.x,y:m.y,life:0.4,range:60,dmg:0,color:'#909',type:'teleport'});
+            m.x=clamp(tx,20,MAP_W-20);m.y=clamp(ty,20,MAP_H-20);
+            effects.push({x:m.x,y:m.y,life:0.4,range:60,dmg:0,color:'#909',type:'teleport'});
+            effects.push({x:m.x,y:m.y,life:0.5,range:120,dmg:m.dmg*1.2,color:'#70f',type:'darkPulse'});
+            m.behaviorCD=3+rand(0,2);
+            playSound('teleport');
+          }
+          break;
+        case 'artillery':
+          if(m.behaviorCD<=0){
+            for(let j=0;j<5;j++){const ba=angle(m,player)+rand(-0.4,0.4);projectiles.push({x:m.x+rand(-20,20),y:m.y+rand(-20,20),dx:Math.cos(ba)*250,dy:Math.sin(ba)*250,size:5,dmg:m.dmg*0.5,life:3,color:'#aaa',isEnemy:true});}
+            m.behaviorCD=3;playSound('bossAtk');
+          }
+          break;
+      }
+    }
+    if(!m.charging||m.behavior==='swarmer'){m.x+=Math.cos(a)*spd*dt*60;m.y+=Math.sin(a)*spd*dt*60;}
+  });
 
   // Damage player
   monsters.forEach(m=>{if(dist(m,player)<m.size+12)damagePlayer(m.dmg*dt*60);});
@@ -1013,10 +1076,12 @@ function drawMonster(m){
   ctx.save();ctx.translate(m.x-camera.x,m.y-camera.y);
   const scale=m.isBoss?0.5:0.22;
   const w=500*scale,h=500*scale;
+  if(m.phasing)ctx.globalAlpha=0.3;
   if(m.hitFlash>0&&Math.floor(m.hitFlash*30)%2===0)ctx.globalAlpha=0.5;
   ctx.imageSmoothingEnabled=false;
   ctx.drawImage(monsterImg,-w/2,-h/2,w,h);
   ctx.imageSmoothingEnabled=true;
+  if(m.charging){ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,w*0.6,0,Math.PI*2);ctx.stroke();}
   ctx.globalAlpha=1;
 
   // HP bar above monster
@@ -1133,6 +1198,18 @@ function render(){
       case 'poison':
         ctx.fillStyle='rgba(68,170,68,0.2)';ctx.beginPath();ctx.arc(ex,ey,e.range,0,Math.PI*2);ctx.fill();
         ctx.strokeStyle='#4a4';ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(ex,ey,e.range,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);break;
+      case 'slamAoE':{
+        const sr=e.range*(e.life/0.4);ctx.fillStyle='rgba(255,136,0,0.3)';ctx.beginPath();ctx.arc(ex,ey,sr,0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle='#f80';ctx.lineWidth=4;ctx.globalAlpha=e.life/0.4;ctx.beginPath();ctx.arc(ex,ey,sr,0,Math.PI*2);ctx.stroke();
+        break;}
+      case 'darkPulse':{
+        const dr=e.range*(e.life/0.5);ctx.fillStyle='rgba(112,0,255,0.25)';ctx.beginPath();ctx.arc(ex,ey,dr,0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle='#70f';ctx.lineWidth=5;ctx.setLineDash([10,5]);ctx.globalAlpha=e.life/0.5;ctx.beginPath();ctx.arc(ex,ey,dr,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+        break;}
+      case 'teleport':{
+        ctx.fillStyle='rgba(153,0,153,0.5)';ctx.beginPath();ctx.arc(ex,ey,e.range*(1-e.life/0.4),0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle='#909';ctx.lineWidth=3;ctx.beginPath();ctx.arc(ex,ey,e.range*(e.life/0.4),0,Math.PI*2);ctx.stroke();
+        break;}
       case 'explosion':
         const a=e.life/0.3;ctx.fillStyle=`rgba(252,163,17,${a*0.4})`;ctx.beginPath();ctx.arc(ex,ey,e.range*(1-a),0,Math.PI*2);ctx.fill();
         ctx.strokeStyle=`rgba(252,163,17,${a})`;ctx.lineWidth=3;ctx.beginPath();ctx.arc(ex,ey,e.range*(1-a*0.5),0,Math.PI*2);ctx.stroke();break;
@@ -1209,6 +1286,15 @@ function render(){
   particles.forEach(p=>{ctx.fillStyle=p.color;ctx.globalAlpha=p.life/0.5;ctx.beginPath();ctx.arc(p.x-camera.x+rand(-2,2),p.y-camera.y+rand(-2,2),p.size*p.life*2,0,Math.PI*2);ctx.fill();});
   ctx.globalAlpha=1;
 
+  // Damage floats
+  dmgFloats.forEach(f=>{
+    ctx.save();ctx.globalAlpha=Math.min(1,f.life/0.3);
+    ctx.fillStyle=f.color;ctx.font='bold 16px "Noto Sans SC","PingFang SC",sans-serif';ctx.textAlign='center';
+    ctx.strokeStyle='#000';ctx.lineWidth=3;
+    ctx.strokeText(f.text,f.x-camera.x,f.y-camera.y);ctx.fillText(f.text,f.x-camera.x,f.y-camera.y);
+    ctx.restore();
+  });
+
   // ===== PLAYER =====
   const px=player.x-camera.x,py=player.y-camera.y;
   if(player.invuln>0&&Math.floor(player.invuln*20)%2===0)ctx.globalAlpha=0.4;
@@ -1232,6 +1318,23 @@ function render(){
   drawMinimap();
 }
 
+// ============ AUDIO ============
+let audioCtx=null;
+function getAudioCtx(){if(!audioCtx){audioCtx=new(window.AudioContext||window.webkitAudioContext)();}return audioCtx;}
+function playSound(type){
+  try{const ctx=getAudioCtx();const now=ctx.currentTime;const g=ctx.createGain();g.connect(ctx.destination);
+  switch(type){
+    case 'hit':{const o=ctx.createOscillator();o.type='square';o.frequency.setValueAtTime(220,now);o.frequency.exponentialRampToValueAtTime(80,now+0.08);o.connect(g);g.gain.setValueAtTime(0.08,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.1);o.start(now);o.stop(now+0.1);break;}
+    case 'playerHit':{const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(150,now);o.frequency.exponentialRampToValueAtTime(40,now+0.15);o.connect(g);g.gain.setValueAtTime(0.12,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.15);o.start(now);o.stop(now+0.15);break;}
+    case 'fire':{const o=ctx.createOscillator();o.type='triangle';o.frequency.setValueAtTime(600,now);o.frequency.exponentialRampToValueAtTime(200,now+0.06);o.connect(g);g.gain.setValueAtTime(0.06,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.06);o.start(now);o.stop(now+0.06);break;}
+    case 'kill':{const o=ctx.createOscillator();o.type='sine';o.frequency.setValueAtTime(300,now);o.frequency.exponentialRampToValueAtTime(600,now+0.1);o.connect(g);g.gain.setValueAtTime(0.1,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.12);o.start(now);o.stop(now+0.12);break;}
+    case 'bossAtk':{const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(100,now);o.frequency.linearRampToValueAtTime(50,now+0.3);o.connect(g);g.gain.setValueAtTime(0.15,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.35);o.start(now);o.stop(now+0.35);break;}
+    case 'teleport':{const o=ctx.createOscillator();o.type='sine';o.frequency.setValueAtTime(800,now);o.frequency.exponentialRampToValueAtTime(200,now+0.2);o.connect(g);g.gain.setValueAtTime(0.1,now);g.gain.setValueAtTime(0.05,now+0.1);g.gain.exponentialRampToValueAtTime(0.001,now+0.25);o.start(now);o.stop(now+0.25);break;}
+    case 'levelUp':{for(let i=0;i<3;i++){const o=ctx.createOscillator();o.type='sine';o.frequency.setValueAtTime(400+i*150,now+i*0.08);o.connect(g);const g2=ctx.createGain();o.connect(g2);g2.connect(g);g2.gain.setValueAtTime(0.08,now+i*0.08);g2.gain.exponentialRampToValueAtTime(0.001,now+i*0.08+0.15);o.start(now+i*0.08);o.stop(now+i*0.08+0.15);}break;}
+    case 'explosion':{const o=ctx.createOscillator();o.type='square';o.frequency.setValueAtTime(80,now);o.frequency.exponentialRampToValueAtTime(20,now+0.2);o.connect(g);g.gain.setValueAtTime(0.12,now);g.gain.exponentialRampToValueAtTime(0.001,now+0.25);const n=ctx.createOscillator();n.type='triangle';n.frequency.setValueAtTime(50,now);n.frequency.exponentialRampToValueAtTime(10,now+0.25);n.connect(g);g.gain.value=0.1;n.start(now);n.stop(now+0.25);o.start(now);o.stop(now+0.25);break;}
+  }}catch(e){}
+}
+
 // ============ MAIN LOOP ============
 function gameLoop(ts){
   if(!lastTime)lastTime=ts;
@@ -1252,7 +1355,7 @@ function startGame(){
   player.regen=0;player.maxHpBonus=0;player.invuln=0;player.kills=0;
   shakeAmount=0;
   player.lastDir={x:0,y:-1};
-  monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];
+  monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];dmgFloats=[];
   timer=0;waveNum=1;bossDefeated=0;bossActive=null;
   gameOver=false;victory=false;paused=false;gameState='playing';
   // Prime vibration API (requires user gesture; startGame only runs from button clicks)
