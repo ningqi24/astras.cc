@@ -52,6 +52,9 @@ canvas{display:block;position:absolute;inset:0;}
 #xp-bar{position:absolute;top:23px;left:16px;width:120px;z-index:10;pointer-events:none;}
 #xp-outer{width:100%;height:10px;background:#444;border-radius:20px;overflow:hidden;}
 #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
+#hp-bar{position:absolute;top:38px;left:16px;width:120px;z-index:10;pointer-events:none;}
+#hp-outer{width:100%;height:10px;background:#444;border-radius:20px;overflow:hidden;}
+#hp-inner{height:100%;background:#e63946;transition:width 0.2s ease;border-radius:20px;}
 
 /* ============ WEAPON SLOTS - BOTTOM ============ */
 #weapon-slots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;pointer-events:none;}
@@ -186,6 +189,7 @@ canvas{display:block;position:absolute;inset:0;}
 
   <!-- XP Bar -->
   <div id="xp-bar"><div id="xp-outer"><div id="xp-inner" style="width:0%"></div></div></div>
+  <div id="hp-bar"><div id="hp-outer"><div id="hp-inner" style="width:100%"></div></div></div>
 
   <!-- Weapon Slots -->
   <div id="weapon-slots"></div>
@@ -996,6 +1000,7 @@ function updateHUD(){
   document.getElementById('hud-timer').textContent=formatTime(timer);
   document.getElementById('hud-energy').textContent=Math.floor(timer*2+player.kills*3);
   document.getElementById('xp-inner').style.width=(player.xp/player.xpToNext*100)+'%';
+  document.getElementById('hp-inner').style.width=(player.hp/player.maxHp*100)+'%';
   document.getElementById('progress-fill').style.width=(timer/TOTAL_TIME*100)+'%';
 
   updateWeaponSlots();
@@ -1307,12 +1312,6 @@ function render(){
     ctx.drawImage(playerImg,-pw/2,-ph/2,pw,ph);
     ctx.restore();
   }
-  // HP bar under player
-  const hpBarW=80,hpBarH=5,hpBarY=py+60;
-  ctx.fillStyle='#000';
-  ctx.fillRect(px-hpBarW/2,hpBarY-hpBarH/2,hpBarW,hpBarH);
-  ctx.fillStyle='#ff4444';
-  ctx.fillRect(px-hpBarW/2+1,hpBarY-hpBarH/2+1,(hpBarW-2)*(player.hp/player.maxHp),hpBarH-2);
   ctx.globalAlpha=1;
 }
 
