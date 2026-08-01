@@ -15,13 +15,21 @@ html,body{width:100%;height:100%;overflow:hidden;background:#1b1c2b;font-family:
 canvas{display:block;position:absolute;inset:0;}
 
 /* ============ LANDSCAPE WARNING ============ */
-#landscape-warning{display:none;position:fixed;inset:0;background:#1b1c2b;z-index:9999;flex-direction:column;justify-content:center;align-items:center;color:#fca311;font-size:22px;text-align:center;font-family:'Noto Sans SC','PingFang SC',sans-serif;font-weight:900;}
-#landscape-warning .lw-icon{margin-bottom:18px;animation:spin-soft 2.5s ease-in-out infinite;}
-#landscape-warning .lw-icon svg{width:52px;height:52px;}
-@keyframes spin-soft{0%{transform:rotate(0deg);}50%{transform:rotate(90deg);}100%{transform:rotate(0deg);}}
-#landscape-warning .lw-sub{color:#4cc9f0;font-size:15px;margin-top:8px;font-weight:700;}
-@media(orientation:portrait){#landscape-warning{display:flex;}}
-@media(orientation:landscape){#landscape-warning{display:none;}}
+/* Loading Screen */
+#loading-screen{display:flex;position:fixed;inset:0;background:#1b1c2b;z-index:9999;flex-direction:column;justify-content:center;align-items:center;}
+#loading-logo{color:#fca311;font-size:48px;font-weight:900;letter-spacing:6px;text-shadow:3px 3px 0 #000;margin-bottom:30px;font-family:'Noto Sans SC','PingFang SC',sans-serif;}
+#loading-bar-wrap{width:60%;max-width:400px;height:14px;background:#3a3d5c;border:3px solid #000;border-radius:12px;overflow:hidden;}
+#loading-bar-fill{height:100%;background:#fca311;width:0%;transition:width 0.3s ease;border-radius:12px;}
+#loading-ver{color:#6c757d;font-size:12px;margin-top:12px;font-weight:700;}
+
+/* Lobby Screen */
+#lobby-screen{display:none;position:fixed;inset:0;background:#1b1c2b;z-index:9998;flex-direction:column;justify-content:center;align-items:center;}
+#lobby-screen.active{display:flex;}
+#lobby-title{color:#fca311;font-size:36px;font-weight:900;letter-spacing:4px;margin-bottom:8px;text-shadow:3px 3px 0 #000;font-family:'Noto Sans SC','PingFang SC',sans-serif;}
+#lobby-sub{color:#4cc9f0;font-size:14px;font-weight:700;margin-bottom:30px;}
+#lobby-start-btn{border:5px solid #000;padding:12px 40px;font-size:18px;font-weight:900;cursor:pointer;border-radius:24px;background:#fca311;color:#000;letter-spacing:2px;transition:transform 0.06s;font-family:'Noto Sans SC','PingFang SC',sans-serif;}
+#lobby-start-btn:active{transform:scale(0.94);}
+#lobby-ver{color:#6c757d;font-size:11px;margin-top:40px;font-weight:700;}
 
 /* ============ SHARED BLOB ART TOKENS ============ */
 /* 6-10px black outline on all UI, no gradients, big rounded corners 20-30px */
@@ -151,12 +159,19 @@ canvas{display:block;position:absolute;inset:0;}
 </head>
 <body>
 
-<div id="landscape-warning">
-  <div class="lw-icon">
-    <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="36" height="28" rx="6" stroke="#4cc9f0" stroke-width="3"/><path d="M26 10V8a4 4 0 0 0-8 0v2" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/><path d="M24 20v8M24 32v1" stroke="#fca311" stroke-width="3.5" stroke-linecap="round"/></svg>
+<div id="loading-screen">
+  <div id="loading-logo">鲨鲨幸存者</div>
+  <div id="loading-bar-wrap">
+    <div id="loading-bar-fill" style="width:0%"></div>
   </div>
-  <div>请横屏使用</div>
-  <div class="lw-sub">旋转设备获得最佳体验</div>
+  <div id="loading-ver">v3.0</div>
+</div>
+
+<div id="lobby-screen">
+  <div id="lobby-title">鲨鲨幸存者</div>
+  <div id="lobby-sub">— 在太空杀中存活下去 —</div>
+  <button id="lobby-start-btn">开始游戏</button>
+  <div id="lobby-ver">v3.0</div>
 </div>
 
 <div id="game-container">
@@ -818,7 +833,7 @@ function endGame(won){
   document.getElementById('hp-warning').classList.remove('active');
 }
 document.getElementById('go-restart').addEventListener('click',restartGame);
-document.getElementById('go-home').addEventListener('click',restartGame);
+document.getElementById('go-home').addEventListener('click',()=>{document.getElementById('gameover-screen').classList.remove('active');document.getElementById('lobby-screen').classList.add('active');});
 
 function formatTime(t){const m=Math.floor(t/60),s=Math.floor(t%60);return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
 
@@ -1362,6 +1377,7 @@ function startGame(){
   if(navigator.vibrate){navigator.vibrate(10);window._vibratePrimed=true;}
   document.getElementById('gameover-screen').classList.remove('active');
   document.getElementById('levelup-modal').classList.remove('active');
+  document.getElementById('lobby-screen').classList.remove('active');
   document.getElementById('pause-panel').classList.remove('active');
   document.getElementById('hp-warning').classList.remove('active');
   // Init boss markers on progress bar
@@ -1375,8 +1391,24 @@ function startGame(){
 }
 function restartGame(){startGame();}
 
-// Start
-startGame();
+// Loading simulation → Lobby
+(function(){
+  const fill=document.getElementById('loading-bar-fill');
+  let p=0;
+  const t=setInterval(()=>{
+    p+=Math.random()*25+10;
+    if(p>=100){p=100;clearInterval(t);
+      setTimeout(()=>{
+        document.getElementById('loading-screen').style.display='none';
+        document.getElementById('lobby-screen').classList.add('active');
+      },300);
+    }
+    fill.style.width=p+'%';
+  },200);
+})();
+
+document.getElementById('lobby-start-btn').addEventListener('click',()=>{startGame();});
+
 requestAnimationFrame(gameLoop);
 </script>
 </body>
