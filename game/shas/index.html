@@ -254,7 +254,7 @@ canvas{display:block;position:absolute;inset:0;}
 
 <script>
 // ============ GAME CONSTANTS ============
-const MAP_W=1000,MAP_H=300;
+const MAP_W=1500,MAP_H=500;
 const TILE=40;
 const TOTAL_TIME=480;
 const WAVE_INTERVAL=35;
@@ -714,7 +714,7 @@ function getAvailableUpgrades(){
   const choices=[];
   const awids=player.weapons.map(w=>w.id);
   const pids=player.passiveItems.map(p=>p.id);
-  player.weapons.forEach(w=>{choices.push({type:'weapon_upgrade',weaponId:w.id,weapon:w});});
+  player.weapons.forEach(w=>{if(w.level<6)choices.push({type:'weapon_upgrade',weaponId:w.id,weapon:w});});
   if(player.weapons.length<6){const avail=Object.keys(weaponDefs).filter(id=>!awids.includes(id));if(avail.length>0)choices.push({type:'new_weapon',weaponId:avail[randInt(0,avail.length-1)]});}
   if(player.passiveItems.length<6){const avail=Object.keys(passiveDefs).filter(id=>!pids.includes(id));if(avail.length>0)choices.push({type:'new_passive',passiveId:avail[randInt(0,avail.length-1)]});}
   player.passiveItems.forEach(p=>{if(p.level<5)choices.push({type:'passive_upgrade',passiveId:p.id,passive:p});});
@@ -896,7 +896,7 @@ function update(dt){
   projectiles=projectiles.filter(p=>{
     p.x+=p.dx*dt;p.y+=p.dy*dt;p.life-=dt;
     if(p.life<=0){if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});playSound('explosion');}return false;}
-    if(p.bounce&&p.bounce>0){let b=false;if(p.x<10||p.x>MAP_W-10){p.dx*=-1;b=true;}if(p.y<10||p.y>MAP_H-10){p.dy*=-1;b=true;}if(b)p.bounce--;}
+    if(p.bounce&&p.bounce>0){let b=false;const m=10;const cl=Math.max(m,camera.x+m),cr=Math.min(MAP_W-m,camera.x+canvas.width-m);const ct=Math.max(m,camera.y+m),cb=Math.min(MAP_H-m,camera.y+canvas.height-m);if(p.x<cl&&p.dx<0){p.x=cl;p.dx*=-1;b=true;}if(p.x>cr&&p.dx>0){p.x=cr;p.dx*=-1;b=true;}if(p.y<ct&&p.dy<0){p.y=ct;p.dy*=-1;b=true;}if(p.y>cb&&p.dy>0){p.y=cb;p.dy*=-1;b=true;}if(b)p.bounce--;}
     if(p.x<-100||p.x>MAP_W+100||p.y<-100||p.y>MAP_H+100)return false;return true;
   });
 
