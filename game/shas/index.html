@@ -86,6 +86,7 @@ canvas{display:block;position:absolute;inset:0;}
 
 .choice-card{width:130px;background:#31344e;border:6px solid #000;border-radius:22px;padding:10px 8px;cursor:pointer;transition:all 0.12s ease;text-align:center;position:relative;}
 .choice-card:hover,.choice-card:active{border-color:#4cc9f0;box-shadow:0 0 18px rgba(76,201,240,0.7);transform:scale(1.08);}
+.choice-card.chosen{border-color:#4cc9f0;box-shadow:0 0 18px rgba(76,201,240,0.7);}
 .choice-card.selected{border-color:#fca311;background:#4a3d1a;}
 .choice-icon{width:36px;height:36px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;}
 .choice-icon svg{width:32px;height:32px;}
@@ -100,7 +101,7 @@ canvas{display:block;position:absolute;inset:0;}
 .choice-lvl{color:#4cc9f0;font-size:10px;font-weight:900;}
 
 /* Selected state overlay */
-.choice-card .check-mark{display:none;position:absolute;inset:0;border-radius:20px;background:rgba(76,201,240,0.2);border:6px solid #4cc9f0;justify-content:center;align-items:center;font-size:28px;color:#4cc9f0;font-weight:900;}
+.choice-card .check-mark{display:none;position:absolute;inset:0;border-radius:20px;background:rgba(76,201,240,0.2);justify-content:center;align-items:center;font-size:28px;color:#4cc9f0;font-weight:900;}
 .choice-card.chosen .check-mark{display:flex;}
 
 /* ============ BOSS ANNOUNCE ============ */
