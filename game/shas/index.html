@@ -53,7 +53,7 @@ canvas{display:block;position:absolute;inset:0;}
 
 /* Minimap - bottom right */
 #minimap{position:absolute;top:16px;left:16px;width:80px;border:5px solid #000;border-radius:16px;overflow:hidden;pointer-events:none;z-index:10;background:rgba(43,46,74,0.6);}
-#minimap canvas{display:block;width:100%;}
+#minimap canvas{display:block;width:80px;height:60px;}
 #minimap #xp-outer{margin-top:3px;width:100%;height:8px;background:#e0e0e0;border:2.5px solid #000;border-radius:20px;overflow:hidden;}
 #minimap #xp-inner{height:100%;background:#fca311;transition:width 0.2s ease;border-radius:20px;}
 
@@ -905,7 +905,7 @@ function update(dt){
   for(let p of projectiles){if(p.life<=0)continue;
     if(p.isEnemy){if(dist(p,player)<12+p.size*0.6){damagePlayer(p.dmg);p.life=0;}continue;}
     for(let i=monsters.length-1;i>=0;i--){const m=monsters[i];if(m.invuln)continue;const hitR=m.size+Math.max(p.size*0.6,5);if(dist(p,m)<hitR){
-      let dmg=p.dmg;if(p.crit)dmg*=2;m.hp-=dmg;m.hitFlash=0.1;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dmg),life:0.8,vy:-40,color:p.crit?'#ff0':'#fff'});playSound('hit');
+      let dmg=p.dmg;if(p.crit)dmg*=2;m.hp-=dmg;m.hitFlash=0.1;const rd=Math.round(dmg);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.8,vy:-40,color:p.crit?'#ff0':'#fff'});playSound('hit');
       if(!p.penetrate){p.life=0;if(p.explode){effects.push({x:p.x,y:p.y,life:0.3,range:p.explode,dmg:p.dmg*0.8,color:'#f90',type:'explosion'});playSound('explosion');}break;}
     }}
   }
@@ -914,12 +914,12 @@ function update(dt){
   for(let e of effects){if(e.followPlayer){e.x=player.x;e.y=player.y;if(e.type==='spearHead')hasSpearHead=true;}}
   if(hasSpearHead){orbitalAngle+=dt*5;for(let e of effects){if(e.type==='spearHead'){e.x=player.x+Math.cos(orbitalAngle+e.angleOffset)*e.orbitRadius;e.y=player.y+Math.sin(orbitalAngle+e.angleOffset)*e.orbitRadius;}}}
   for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison'||e.type==='teleport')continue;
-    for(let m of monsters){if(m.invuln)continue;if(dist(e,m)<m.size+e.range*0.7){const dd=e.dmg*dt*5;m.hp-=dd;m.hitFlash=0.05;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.6,vy:-25,color:'#f90'});}}
+    for(let m of monsters){if(m.invuln)continue;if(dist(e,m)<m.size+e.range*0.7){const dd=e.dmg*dt*5;m.hp-=dd;m.hitFlash=0.05;const rd=Math.round(dd);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.6,vy:-25,color:'#f90'});}}
     if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size||20+e.range*0.7)damagePlayer(e.dmg*dt*3);
   }
   for(let e of effects){
-    if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.5,vy:-20,color:'#0ff'});}}}
-    if(e.type==='poison'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.5,vy:-20,color:'#0f0'});}}}
+    if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;const rd=Math.round(dd);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.5,vy:-20,color:'#0ff'});}}}
+    if(e.type==='poison'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;const rd=Math.round(dd);if(rd>0)dmgFloats.push({x:m.x,y:m.y,text:rd,life:0.5,vy:-20,color:'#0f0'});}}}
   }
 
   // Kill monsters
