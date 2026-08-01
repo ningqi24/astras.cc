@@ -254,7 +254,7 @@ canvas{display:block;position:absolute;inset:0;}
 
 <script>
 // ============ GAME CONSTANTS ============
-const MAP_W=1600,MAP_H=1200;
+const MAP_W=1800,MAP_H=1000;
 const TILE=40;
 const TOTAL_TIME=480;
 const WAVE_INTERVAL=35;
@@ -406,7 +406,7 @@ let player={
   hitFlash:0
 };
 let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[],dmgFloats=[];
-let timer=0,waveNum=1,bossDefeated=0,bossActive=null,bossAnnounceTimer=0;
+let timer=0,waveNum=1,bossDefeated=0,bossActive=null,bossAnnounceTimer=0,atkTimer=0;
 let gameOver=false,victory=false,paused=false;
 let levelUpChoices=[];
 let keys={};
@@ -882,8 +882,13 @@ function update(dt){
   const hpWarn=document.getElementById('hp-warning');
   if(player.hp/player.maxHp<0.2)hpWarn.classList.add('active');else hpWarn.classList.remove('active');
 
-  // Weapon CDs
-  player.weapons.forEach(w=>{if(w.cd===undefined)w.cd=0;w.cd-=dt;while(w.cd<=0){fireWeapon(w);w.cd+=getWpnCd(w.id);}});
+  // Weapon CDs with attack stagger
+  atkTimer-=dt;
+  if(atkTimer<=0){
+    player.weapons.some(w=>{if(w.cd===undefined)w.cd=0;w.cd-=dt;if(w.cd<=0){fireWeapon(w);w.cd=getWpnCd(w.id);atkTimer=0.08;return true;}return false;});
+  }else{
+    player.weapons.forEach(w=>{if(w.cd===undefined)w.cd=0;w.cd-=dt;});
+  }
 
   // Projectiles
   projectiles=projectiles.filter(p=>{
@@ -922,6 +927,7 @@ function update(dt){
       for(let j=0;j<xc;j++)xpOrbs.push({x:m.x+rand(-20,20),y:m.y+rand(-20,20),value:m.isBoss?m.xpValue/xc:5});
       if(m.isBoss){bossActive=null;bossDefeated++;chests.push({x:m.x,y:m.y,bossChest:true});}
       player.kills++;player.xp+=m.xpValue*(1+player.xpBonus);playSound('kill');
+      const pc=m.isBoss?20:6;for(let j=0;j<pc;j++){const a=rand(0,Math.PI*2),s=rand(40,120);particles.push({x:m.x,y:m.y,color:m.color,size:rand(2,5),life:0.3+rand(0,0.3),vx:Math.cos(a)*s,vy:Math.sin(a)*s});}
       monsters.splice(i,1);
     }
   }
@@ -1282,7 +1288,7 @@ function render(){
   monsters.forEach(m=>drawMonster(m));
 
   // Particles
-  particles.forEach(p=>{ctx.fillStyle=p.color;ctx.globalAlpha=p.life/0.5;ctx.beginPath();ctx.arc(p.x-camera.x+rand(-2,2),p.y-camera.y+rand(-2,2),p.size*p.life*2,0,Math.PI*2);ctx.fill();});
+  particles.forEach(p=>{ctx.fillStyle=p.color;ctx.globalAlpha=p.life/0.5;ctx.beginPath();if(p.vx!==undefined){ctx.arc(p.x+p.vx*(1-p.life*2)-camera.x,p.y+p.vy*(1-p.life*2)-camera.y,p.size*p.life*2,0,Math.PI*2);}else{ctx.arc(p.x-camera.x,p.y-camera.y,p.size*p.life*2,0,Math.PI*2);}ctx.fill();});
   ctx.globalAlpha=1;
 
   // Damage floats
@@ -1355,7 +1361,7 @@ function startGame(){
   shakeAmount=0;
   player.lastDir={x:0,y:-1};
   monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];dmgFloats=[];
-  timer=0;waveNum=1;bossDefeated=0;bossActive=null;
+  timer=0;waveNum=1;bossDefeated=0;bossActive=null;atkTimer=0;
   gameOver=false;victory=false;paused=false;gameState='playing';
   // Prime vibration API (requires user gesture; startGame only runs from button clicks)
   if(navigator.vibrate){navigator.vibrate(10);window._vibratePrimed=true;}
