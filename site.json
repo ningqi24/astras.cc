@@ -594,6 +594,41 @@
       "note": "Paper/Spigot 插件开发框架+文档，开服写插件的脚手架好帮手。",
       "note_en": "Paper/Spigot plugin framework + docs. Scaffold for server plugin devs.",
       "category": "mc-tool"
+    },
+    {
+      "name": "KJ 操作系统 标签页",
+      "name_en": "KJ OS Tab Page",
+      "subtitle": "kj.sgguo.com",
+      "url": "https://kj.sgguo.com/",
+      "author": "KJ 团队",
+      "author_url": "",
+      "tags": [
+        "工具"
+      ],
+      "description": "KJ 操作系统 浏览器标签页，欢迎配置新标签页工具。",
+      "description_en": "KJ OS browser tab page & welcome-config dashboard.",
+      "verified_date": "2026-08-01",
+      "note": "浏览器新标签页工具，欢迎配置，界面干净，适合开屏即用。",
+      "note_en": "Browser new-tab dashboard. Clean UI, ready to use out of the box.",
+      "category": "tool"
+    },
+    {
+      "name": "Portal MC 启动器",
+      "name_en": "Portal Launcher",
+      "subtitle": "portal.tiouo.cc",
+      "url": "https://portal.tiouo.cc/",
+      "author": "Portal contributors",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "工具"
+      ],
+      "description": "Portal - 简洁、现代的开源跨平台 Minecraft 启动器与实例管理器。",
+      "description_en": "Portal - a clean, modern, open-source cross-platform Minecraft launcher & instance manager.",
+      "verified_date": "2026-08-01",
+      "note": "开源跨平台 MC 启动器，现代简洁 UI，多实例管理，Modrinth 生态友好。",
+      "note_en": "Open-source cross-platform MC launcher. Clean modern UI, multi-instance & Modrinth-friendly.",
+      "category": "mc-tool"
     }
   ]
 }
