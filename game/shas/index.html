@@ -272,7 +272,7 @@ const icons={
   bomb:`<svg viewBox="0 0 48 48"><circle cx="24" cy="26" r="16" fill="#555" stroke="#000" stroke-width="3"/><circle cx="24" cy="26" r="10" fill="#666"/><rect x="22" y="4" width="4" height="8" rx="1" fill="#888" stroke="#000" stroke-width="2"/><circle cx="24" cy="4" r="5" fill="#ff9900" stroke="#000" stroke-width="2"/></svg>`,
   poison:`<svg viewBox="0 0 48 48"><rect x="12" y="22" width="24" height="22" rx="5" fill="#44aa44" stroke="#000" stroke-width="2"/><rect x="8" y="12" width="32" height="14" rx="4" fill="#33aa33" stroke="#000" stroke-width="2"/></svg>`,
   volleyball:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" fill="#ff8800" stroke="#000" stroke-width="3"/><path d="M11,14 Q24,8 37,14" fill="none" stroke="#fff" stroke-width="2"/><path d="M11,34 Q24,40 37,34" fill="none" stroke="#fff" stroke-width="2"/></svg>`,
-  spear:`<svg viewBox="0 0 48 48"><polygon points="24,2 19,20 24,32 29,20" fill="#dd9900" stroke="#000" stroke-width="2"/></svg>`,
+  spear:`<svg viewBox="0 0 48 48"><rect x="22" y="16" width="4" height="30" rx="2" fill="#8B4513" stroke="#5a2d0c" stroke-width="1.5"/><rect x="20" y="14" width="8" height="6" rx="2" fill="#cc0000"/><rect x="22" y="13" width="4" height="5" rx="1" fill="#dd2222"/><polygon points="24,0 17,14 24,6 31,14" fill="#ffd700" stroke="#b8860b" stroke-width="2"/><polygon points="24,2 19,10 24,6 29,10" fill="#ffec80"/><polygon points="24,48 22,42 26,42" fill="#999" stroke="#777" stroke-width="1"/></svg>`,
   hammer:`<svg viewBox="0 0 48 48"><rect x="12" y="6" width="24" height="18" rx="5" fill="#aaa" stroke="#000" stroke-width="2"/></svg>`,
   brick:`<svg viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="22" rx="4" fill="#dd5555" stroke="#000" stroke-width="2"/></svg>`,
   fireWheel:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15" fill="none" stroke="#ff8800" stroke-width="4"/><circle cx="24" cy="24" r="6" fill="#ff4400" stroke="#000" stroke-width="3"/></svg>`,
@@ -349,7 +349,7 @@ const weaponDefs={
   bomb:{name:'鬼脸炸弹',icon:'bomb',desc:'命中爆炸',color:'#f90',cd:3.0,type:'projectile',superName:'炸弹专家',superDesc:'连锁爆炸'},
   poison:{name:'毒气桶',icon:'poison',desc:'毒气范围',color:'#4a4',cd:4.0,type:'field',superName:'毒气风暴',superDesc:'毒雾扩散'},
   volleyball:{name:'夏日排球',icon:'volleyball',desc:'反弹排球',color:'#f80',cd:2.5,type:'projectile',superName:'排球风暴',superDesc:'多球反弹'},
-  spear:{name:'霸王枪',icon:'spear',desc:'近身打击',color:'#d90',cd:0.7,type:'melee',superName:'霸王枪阵',superDesc:'周身枪阵'},
+  spear:{name:'霸王枪',icon:'spear',desc:'环绕枪头',color:'#d90',cd:2,type:'orbital',superName:'霸王枪阵',superDesc:'双倍枪头'},
   hammer:{name:'大锤',icon:'hammer',desc:'投掷大锤',color:'#b97',cd:1.5,type:'projectile',superName:'巨锤风暴',superDesc:'旋转巨锤'},
   brick:{name:'武德砖',icon:'brick',desc:'砖块投掷',color:'#d55',cd:1.0,type:'projectile',superName:'武德之顿',superDesc:'砖块暴击'},
   fireWheel:{name:'风火轮',icon:'fireWheel',desc:'反弹风火轮',color:'#f40',cd:1.8,type:'projectile',superName:'风火燎原',superDesc:'多风火轮'}
@@ -406,7 +406,7 @@ let player={
   hitFlash:0
 };
 let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[],dmgFloats=[];
-let timer=0,waveNum=1,bossDefeated=0,bossActive=null,bossAnnounceTimer=0,atkTimer=0;
+let timer=0,waveNum=1,bossDefeated=0,bossActive=null,bossAnnounceTimer=0,atkTimer=0,orbitalAngle=0;
 let gameOver=false,victory=false,paused=false;
 let levelUpChoices=[];
 let keys={};
@@ -678,9 +678,11 @@ function fireWeapon(w){
       break;
     }
     case 'spear':{
-      const dir=player.lastDir;const count=isSuper?6:1;
-      for(let i=0;i<count;i++){const a=Math.atan2(dir.y,dir.x)+(i-(count-1)/2)*0.4;
-        effects.push({x:player.x+Math.cos(a)*30,y:player.y+Math.sin(a)*30,dx:Math.cos(a),dy:Math.sin(a),life:0.15,range:100,dmg,color:'#d90',type:'thrust'});}
+      effects=effects.filter(e=>e.type!=='spearHead');
+      const count=isSuper?w.level*2:w.level;
+      for(let i=0;i<count;i++){
+        effects.push({type:'spearHead',followPlayer:true,angleOffset:i/count*Math.PI*2,orbitRadius:isSuper?80:60,range:isSuper?40:32,dmg:dmg*0.35,life:cd+0.5,color:'#d90',idx:i,total:count});
+      }
       break;
     }
     case 'hammer':{
@@ -910,7 +912,9 @@ function update(dt){
     }}
   }
   // Follow-player effects
-  for(let e of effects){if(e.followPlayer){e.x=player.x;e.y=player.y;}}
+  let hasSpearHead=false;
+  for(let e of effects){if(e.followPlayer){e.x=player.x;e.y=player.y;if(e.type==='spearHead')hasSpearHead=true;}}
+  if(hasSpearHead){orbitalAngle+=dt*5;for(let e of effects){if(e.type==='spearHead'){e.x=player.x+Math.cos(orbitalAngle+e.angleOffset)*e.orbitRadius;e.y=player.y+Math.sin(orbitalAngle+e.angleOffset)*e.orbitRadius;}}}
   for(let e of effects){if(e.life<=0||e.type==='timeField'||e.type==='poison'||e.type==='teleport')continue;
     for(let m of monsters){if(m.invuln)continue;if(dist(e,m)<m.size+e.range*0.7){const dd=e.dmg*dt*5;m.hp-=dd;m.hitFlash=0.05;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.6,vy:-25,color:'#f90'});}}
     if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size||20+e.range*0.7)damagePlayer(e.dmg*dt*3);
@@ -1203,6 +1207,24 @@ function render(){
       case 'poison':
         ctx.fillStyle='rgba(68,170,68,0.2)';ctx.beginPath();ctx.arc(ex,ey,e.range,0,Math.PI*2);ctx.fill();
         ctx.strokeStyle='#4a4';ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(ex,ey,e.range,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);break;
+      case 'spearHead':{
+        const a=orbitalAngle+e.angleOffset;
+        ctx.save();ctx.translate(ex,ey);ctx.rotate(a-Math.PI/2);
+        // glow
+        ctx.fillStyle='rgba(255,200,50,0.15)';ctx.beginPath();ctx.arc(0,0,e.range,0,Math.PI*2);ctx.fill();
+        // trail ring
+        ctx.strokeStyle='rgba(255,180,0,0.3)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(0,0,e.orbitRadius||60,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+        // spear head - golden blade
+        ctx.fillStyle='#ffd700';ctx.strokeStyle='#b8860b';ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(-7,-6);ctx.lineTo(0,-12);ctx.lineTo(7,-6);ctx.closePath();ctx.fill();ctx.stroke();
+        ctx.fillStyle='#ffec80';ctx.beginPath();ctx.moveTo(0,-18);ctx.lineTo(-4,-8);ctx.lineTo(0,-12);ctx.lineTo(4,-8);ctx.closePath();ctx.fill();
+        // shaft
+        ctx.fillStyle='#8B4513';ctx.strokeStyle='#5a2d0c';ctx.lineWidth=1;
+        ctx.fillRect(-2,-6,4,16);ctx.strokeRect(-2,-6,4,16);
+        // red tassel
+        ctx.fillStyle='#cc0000';ctx.beginPath();ctx.arc(0,2,4,0,Math.PI*2);ctx.fill();
+        ctx.restore();break;
+      }
       case 'slamAoE':{
         const sr=e.range*(e.life/0.4);ctx.fillStyle='rgba(255,136,0,0.3)';ctx.beginPath();ctx.arc(ex,ey,sr,0,Math.PI*2);ctx.fill();
         ctx.strokeStyle='#f80';ctx.lineWidth=4;ctx.globalAlpha=e.life/0.4;ctx.beginPath();ctx.arc(ex,ey,sr,0,Math.PI*2);ctx.stroke();
@@ -1361,7 +1383,7 @@ function startGame(){
   shakeAmount=0;
   player.lastDir={x:0,y:-1};
   monsters=[];projectiles=[];effects=[];xpOrbs=[];chests=[];particles=[];dmgFloats=[];
-  timer=0;waveNum=1;bossDefeated=0;bossActive=null;atkTimer=0;
+  timer=0;waveNum=1;bossDefeated=0;bossActive=null;atkTimer=0;orbitalAngle=0;
   gameOver=false;victory=false;paused=false;gameState='playing';
   // Prime vibration API (requires user gesture; startGame only runs from button clicks)
   if(navigator.vibrate){navigator.vibrate(10);window._vibratePrimed=true;}
