@@ -345,7 +345,7 @@ const weaponDefs={
   revolver:{name:'六发左轮',icon:'revolver',desc:'6发连续射击',color:'#bb0',cd:0.5,type:'projectile',superName:'午时已到',superDesc:'12发连射'},
   thunderSpear:{name:'雷霆枪',icon:'thunder',desc:'穿透弹+雷电',color:'#0dd',cd:0.9,type:'hybrid',superName:'雷霆风暴',superDesc:'持续雷暴区'},
   lightning:{name:'雷电',icon:'lightning',desc:'召唤雷电',color:'#fd0',cd:2.0,type:'aoe',superName:'雷霆万钧',superDesc:'全屏雷电'},
-  timeField:{name:'时间领域',icon:'timeField',desc:'减速敌人',color:'#0dd',cd:12,type:'field',superName:'领域展开',superDesc:'超大领域'},
+  timeField:{name:'时间领域',icon:'timeField',desc:'伤害领域',color:'#0dd',cd:12,type:'field',superName:'领域展开',superDesc:'超大伤害领域'},
   bomb:{name:'鬼脸炸弹',icon:'bomb',desc:'命中爆炸',color:'#f90',cd:3.0,type:'projectile',superName:'炸弹专家',superDesc:'连锁爆炸'},
   poison:{name:'毒气桶',icon:'poison',desc:'毒气范围',color:'#4a4',cd:4.0,type:'field',superName:'毒气风暴',superDesc:'毒雾扩散'},
   volleyball:{name:'夏日排球',icon:'volleyball',desc:'反弹排球',color:'#f80',cd:2.5,type:'projectile',superName:'排球风暴',superDesc:'多球反弹'},
@@ -657,8 +657,8 @@ function fireWeapon(w){
       break;
     }
     case 'timeField':{
-      const sz=isSuper?200:120;
-      effects.push({x:player.x,y:player.y,life:Infinity,range:sz,dmg:dmg*0.5,color:'#0dd',type:'timeField',followPlayer:true});
+      const sz=isSuper?200:50+(w.level-1)*18;
+      effects.push({x:player.x,y:player.y,life:Infinity,range:sz,dmg:dmg*0.8,color:'#0dd',type:'timeField',followPlayer:true});
       break;
     }
     case 'bomb':{
@@ -681,7 +681,7 @@ function fireWeapon(w){
       effects=effects.filter(e=>e.type!=='spearHead');
       const count=isSuper?w.level*2:w.level;
       for(let i=0;i<count;i++){
-        effects.push({type:'spearHead',followPlayer:true,angleOffset:i/count*Math.PI*2,orbitRadius:isSuper?80:60,range:isSuper?40:32,dmg:dmg*0.35,life:cd+0.5,color:'#d90',idx:i,total:count});
+        effects.push({type:'spearHead',followPlayer:true,angleOffset:i/count*Math.PI*2,orbitRadius:isSuper?80:60,range:isSuper?40:32,dmg:dmg*0.35,life:def.cd+0.5,color:'#d90',idx:i,total:count});
       }
       break;
     }
@@ -920,7 +920,7 @@ function update(dt){
     if((e.type==='slamAoE'||e.type==='darkPulse')&&dist(e,player)<player.size||20+e.range*0.7)damagePlayer(e.dmg*dt*3);
   }
   for(let e of effects){
-    if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range)m.speed*=0.5;}}
+    if(e.type==='timeField'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.5,vy:-20,color:'#0ff'});}}}
     if(e.type==='poison'){for(let m of monsters){if(dist(e,m)<e.range){const dd=e.dmg*dt;m.hp-=dd;m.hitFlash=0.02;dmgFloats.push({x:m.x,y:m.y,text:Math.round(dd),life:0.5,vy:-20,color:'#0f0'});}}}
   }
 
@@ -941,7 +941,7 @@ function update(dt){
   monsters.forEach(m=>{
     if(m.behaviorCD===undefined)m.behaviorCD=rand(1,3);
     m.behaviorCD-=dt;
-    let spd=m.speed;for(let e of effects){if(e.type==='timeField'&&dist(e,m)<e.range)spd*=0.5;}
+    let spd=m.speed;
     const a=angle(m,player);
     if(!m.isBoss){
       switch(m.behavior){
