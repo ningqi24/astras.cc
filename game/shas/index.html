@@ -398,6 +398,7 @@ let player={
   regen:0,maxHpBonus:0,
   invuln:0,kills:0,
   lastDir:{x:0,y:-1},
+  animT:0,
   hitFlash:0
 };
 let monsters=[],projectiles=[],effects=[],xpOrbs=[],chests=[],particles=[],dmgFloats=[];
@@ -849,7 +850,7 @@ function update(dt){
   if(keys['a']||keys['arrowleft'])mx-=1;if(keys['d']||keys['arrowright'])mx+=1;
   if(joystickActive){mx=joystickDX;my=joystickDY;}
 
-  if(mx!==0||my!==0){const len=Math.hypot(mx,my);mx/=len;my/=len;player.lastDir={x:mx,y:my};}
+  if(mx!==0||my!==0){const len=Math.hypot(mx,my);mx/=len;my/=len;player.lastDir={x:mx,y:my};player.animT+=dt;}
   const spd=player.speed*(1+player.speedBonus);
   player.x+=mx*spd*dt;player.y+=my*spd*dt;
   player.x=clamp(player.x,20,MAP_W-20);player.y=clamp(player.y,20,MAP_H-20);
@@ -1309,7 +1310,8 @@ function render(){
   if(playerImg){
     const pScale=0.22;
     const pw=500*pScale,ph=500*pScale;
-    ctx.save();ctx.translate(px,py);
+    const bob=Math.sin(player.animT*12)*4;
+    ctx.save();ctx.translate(px,py+bob);
     ctx.drawImage(playerImg,-pw/2,-ph/2,pw,ph);
     ctx.restore();
   }
