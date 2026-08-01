@@ -284,18 +284,18 @@
     {
       "name": "鲨鲨幸存者",
       "name_en": "Shark Survivor",
-      "subtitle": "astras.cc/waterworks",
+      "subtitle": "astras.cc/game/shas",
       "url": "https://astras.cc/game/shas/",
       "author": "ningqi",
       "author_url": "https://github.com/ningqi24",
       "tags": [
         "游戏"
       ],
-      "description": "俯视角割草生存游戏。操控角色自动攻击，收集经验升级，搭配武士刀、风火轮等 10+ 武器与多种被动道具，在怪物潮中活过 5 分钟。超武进化后火力全开。适配手机触屏+虚拟摇杆，打开即玩。",
-      "description_en": "Top-down survivor-like bullet hell. Auto-attack, collect XP, level up, and combine 10+ weapons with passives to survive 5 minutes of monster waves. Super weapon evolution unleashes ultimate power. Mobile touch + virtual joystick support.",
-      "verified_date": "2026-07-31",
-      "note": "小游戏，强制横屏，适合打发时间。",
-      "note_en": "Mini game, forced landscape, good for killing time.",
+      "description": "俯视角割草生存游戏。操控角色自动攻击，收集经验升级，从武士刀、左轮、风火轮等 10+ 武器与被动道具中自由搭配。历经 5 波 BOSS 战，超武进化后火力全开，撑过 8 分钟即胜利。适配手机触屏+虚拟摇杆，加载即玩。",
+      "description_en": "Top-down survivor-like bullet hell. Auto-attack, collect XP, level up, and combine 10+ weapons (katana, revolver, fire wheel, etc.) with passive items. Survive 5 BOSS waves over 8 minutes — super weapon evolution unleashes ultimate power. Mobile touch + virtual joystick support, play instantly.",
+      "verified_date": "2026-08-01",
+      "note": "适合横屏，打发时间利器。",
+      "note_en": "Best in landscape, great for killing time.",
       "category": "game"
     },
     {
