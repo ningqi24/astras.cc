@@ -629,6 +629,41 @@
       "note": "开源跨平台 MC 启动器，现代简洁 UI，多实例管理，Modrinth 生态友好。",
       "note_en": "Open-source cross-platform MC launcher. Clean modern UI, multi-instance & Modrinth-friendly.",
       "category": "mc-tool"
+    },
+    {
+      "name": "bxya B站AI学习机器人",
+      "name_en": "bxya bilibili AI Learning Bot",
+      "subtitle": "bxya.app",
+      "url": "https://bxya.app/",
+      "author": "xiaoyaya191",
+      "author_url": "",
+      "tags": [
+        "工具"
+      ],
+      "description": "全自动 B 站 AI 学习机器人，自动化学习工具。",
+      "description_en": "Fully automated bilibili AI learning bot.",
+      "verified_date": "2026-08-02",
+      "note": "开源全自动 B 站 AI 学习机器人，作者 xiaoyaya191，自动化挂机学习，效率拉满。",
+      "note_en": "Open-source automated bilibili AI learning bot by xiaoyaya191. Auto study, full efficiency.",
+      "category": "tool"
+    },
+    {
+      "name": "LUMEN MC 创作平台",
+      "name_en": "LUMEN MC Creator Platform",
+      "subtitle": "lumenplatform.net",
+      "url": "https://lumenplatform.net/",
+      "author": "LUMEN 团队",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "工具"
+      ],
+      "description": "LUMEN - 为 Minecraft 创作者打造的辅助创作平台。",
+      "description_en": "LUMEN - an assistant platform for Minecraft creators.",
+      "verified_date": "2026-08-02",
+      "note": "Minecraft 创作者辅助平台，一站式辅助创作，做 MC 内容必备。",
+      "note_en": "Minecraft creator assistant platform. All-in-one toolbox for MC content makers.",
+      "category": "mc-tool"
     }
   ]
 }
