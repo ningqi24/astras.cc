@@ -664,6 +664,25 @@
       "note": "Minecraft 创作者辅助平台，一站式辅助创作，做 MC 内容必备。",
       "note_en": "Minecraft creator assistant platform. All-in-one toolbox for MC content makers.",
       "category": "mc-tool"
+    },
+    {
+      "name": "Coomi Agent for Android",
+      "name_en": "Coomi Agent for Android",
+      "subtitle": "coomi.septemc.com",
+      "url": "https://coomi.septemc.com/",
+      "author": "septemc",
+      "author_url": "https://septemc.com/",
+      "tags": [
+        "AI",
+        "Android",
+        "工具"
+      ],
+      "description": "Coomi 是一款面向 Android 平台的 AI Agent 工具，类似 Claude Code / Codex，提供智能体对话与自动化能力。",
+      "description_en": "Coomi is an AI agent tool for Android, similar to Claude Code / Codex, providing intelligent agent conversations and automation capabilities.",
+      "verified_date": "2026-08-02",
+      "note": "AI Agent 工具，类似 Claude Code/Codex，septemc 维护，Android 端可用。",
+      "note_en": "AI agent tool, similar to Claude Code/Codex, maintained by septemc, available on Android.",
+      "category": "tool"
     }
   ]
 }
