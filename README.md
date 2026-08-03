@@ -81,6 +81,27 @@ astras.cc/
 
 ---
 
+## 添加新站点流程
+
+> 零手动改 HTML，三步走：
+
+```bash
+# 1. 编辑 site.json，按上方格式新增条目
+vim site.json
+
+# 2. 运行 sync 脚本，自动更新 index.html（meta 数字 / noscript 列表）
+node scripts/sync.js
+
+# 3. 推送
+git add site.json index.html
+git commit -m "site: add xxx"
+git push
+```
+
+注释：`scripts/sync.js` 会读取 `site.json` 自动更新 `index.html` 中的资源总数和 noscript 兜底 HTML，**禁止手改 index.html 中的数字**。
+
+---
+
 ## 外链中转机制
 
 所有非 `astras.cc` 域名的外链均不直接跳转，而是先到 `/go/?u=<url>` 中转页：
