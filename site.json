@@ -721,6 +721,25 @@
       "note": "109 篇技术博客，Cloudflare/AI 实战经验丰富，保姆级教程，值得订阅。",
       "note_en": "109 tech articles, rich in Cloudflare/AI practices, step-by-step tutorials. Worth subscribing.",
       "category": "personal"
+    },
+    {
+      "name": "Neumorphism.io - 软UI阴影生成器",
+      "name_en": "Neumorphism.io - Soft UI Shadow Generator",
+      "subtitle": "neumorphism.io",
+      "url": "https://neumorphism.io/",
+      "author": "Adam Giebl",
+      "author_url": "https://github.com/adamgiebl/neumorphism",
+      "tags": [
+        "前端",
+        "CSS",
+        "设计"
+      ],
+      "description": "在线生成新拟物风格（Neumorphism / Soft UI）CSS 阴影代码，支持实时预览、调节凸起/凹陷/模糊/距离参数，一键复制 CSS。",
+      "description_en": "Online CSS box-shadow generator for neumorphic / soft UI designs. Real-time preview, tweak elevation/inset/blur/distance, one-click copy CSS.",
+      "verified_date": "2026-08-03",
+      "note": "前端设计师必备，新拟物风格阴影一键出码，GitHub 开源。",
+      "note_en": "Must-have for frontend designers, one-click neumorphic shadow code, open-source on GitHub.",
+      "category": "tool"
     }
   ]
 }
