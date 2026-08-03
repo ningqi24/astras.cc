@@ -683,6 +683,25 @@
       "note": "AI Agent 工具，类似 Claude Code/Codex，septemc 维护，Android 端可用。",
       "note_en": "AI agent tool, similar to Claude Code/Codex, maintained by septemc, available on Android.",
       "category": "tool"
+    },
+    {
+      "name": "resourcery - MC 资源包工具箱",
+      "name_en": "resourcery - MC Resource Pack Toolbox",
+      "subtitle": "resourcery.skycrystal.fun",
+      "url": "https://resourcery.skycrystal.fun/",
+      "author": "bu_xu_yao",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "编辑器",
+        "工具"
+      ],
+      "description": "面向 Minecraft 资源包制作的在线工具箱，支持材质绘画、声音编辑、模型编辑、方块状态、语言文件、粒子效果、画作、界面贴图等，内置 AI 助手辅助创作，可导出完整资源包。",
+      "description_en": "An online toolbox for Minecraft resource pack creation, supporting texture painting, sound editing, model editing, block states, language files, particles, paintings, UI textures, and more. Built-in AI assistant. Exportable resource packs.",
+      "verified_date": "2026-08-03",
+      "note": "MC 资源包一站式在线编辑器，v1.0 支持 MC 26.2+，bu_xu_yao 作品。",
+      "note_en": "One-stop online MC resource pack editor, v1.0 for MC 26.2+, by bu_xu_yao.",
+      "category": "mc-tool"
     }
   ]
 }
