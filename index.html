@@ -283,6 +283,41 @@
       margin-bottom: 10px;
       margin-top: 8px;
       padding-left: 4px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .category-header:hover {
+      color: var(--text-primary);
+    }
+    .category-header .cat-toggle-arrow {
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .category-header.collapsed .cat-toggle-arrow {
+      transform: rotate(-90deg);
+    }
+    .category-header .cat-count {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      margin-left: 2px;
+    }
+    .card-group {
+      transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
+      overflow: hidden;
+    }
+    .card-group.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
     /* ========== Hero ========== */
@@ -3907,20 +3942,74 @@
 
     const order = ['astraeditor', 'colid', 'scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
 
+    // Determine which categories should start collapsed
+    const hasActiveFilter = !!currentSearch || !!activeTag;
+    const collapsedState = getCollapsedCategories();
+
+    // If no active filter, ensure first 3 visible categories are expanded
+    if (!hasActiveFilter) {
+      let visibleCount = 0;
+      order.forEach(catKey => {
+        if (grouped[catKey]) visibleCount++;
+      });
+      if (visibleCount > 3) {
+        let i = 0;
+        order.forEach(catKey => {
+          if (grouped[catKey]) {
+            if (i >= 3 && collapsedState[catKey] === undefined) {
+              collapsedState[catKey] = true;
+            }
+            i++;
+          }
+        });
+      }
+    }
+
     order.forEach(catKey => {
       if (!grouped[catKey]) return;
 
+      const catName = currentLang === 'zh' ? categories[catKey].zh : categories[catKey].en;
+      const count = grouped[catKey].length;
+      const isCollapsed = collapsedState[catKey] === true;
+
+      // Category header with toggle
       const header = document.createElement('div');
-      header.className = 'category-header';
-      header.textContent = currentLang === 'zh' ? categories[catKey].zh : categories[catKey].en;
+      header.className = 'category-header' + (isCollapsed ? ' collapsed' : '');
+      header.innerHTML = '<span class="cat-toggle-arrow"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span>' + catName + '<span class="cat-count">(' + count + ')</span>';
       container.appendChild(header);
 
+      // Card group
       const groupWrap = document.createElement('div');
-      groupWrap.className = 'card-group';
+      groupWrap.className = 'card-group' + (isCollapsed ? ' collapsed' : '');
+      if (!isCollapsed) {
+        // Calculate max-height for smooth animation
+        const estimatedRows = Math.ceil(count / 3);
+        groupWrap.style.maxHeight = (estimatedRows * 120 + 20) + 'px';
+      }
 
       grouped[catKey].forEach(({ button, index }) => {
         groupWrap.appendChild(createSiteCard(button, index));
       });
+
+      // Toggle handler
+      header.onclick = function() {
+        const collapsed = groupWrap.classList.toggle('collapsed');
+        header.classList.toggle('collapsed', collapsed);
+        if (collapsed) {
+          groupWrap.style.maxHeight = '0px';
+        } else {
+          const actualHeight = groupWrap.scrollHeight;
+          groupWrap.style.maxHeight = actualHeight + 'px';
+          // Clean up max-height after transition to allow future reflows
+          setTimeout(() => {
+            if (!groupWrap.classList.contains('collapsed')) {
+              groupWrap.style.maxHeight = 'none';
+            }
+          }, 400);
+        }
+        collapsedState[catKey] = collapsed;
+        saveCollapsedCategories(collapsedState);
+      };
 
       container.appendChild(groupWrap);
     });
@@ -4746,6 +4835,16 @@
   function clearHistory() {
     setHistory([]);
     renderSiteButtons();
+  }
+
+  function getCollapsedCategories() {
+    try {
+      return JSON.parse(localStorage.getItem('collapsedCategories') || '{}');
+    } catch(e) { return {}; }
+  }
+
+  function saveCollapsedCategories(state) {
+    localStorage.setItem('collapsedCategories', JSON.stringify(state));
   }
 
   const originalAnimateToPage = animateToPage;
