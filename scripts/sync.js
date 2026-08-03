@@ -7,6 +7,7 @@
  * 自动完成：
  *   1. 更新 meta description / OG / Twitter / Schema WebSite 中的资源总数
  *   2. 重新生成 noscript 兜底列表（按 category 分组）
+ *   3. 同步 README.md 中的资源数量
  *
  * 添加新网站后只需：改 site.json → node scripts/sync.js → git push
  */
@@ -106,10 +107,30 @@ if (!noscriptRegex.test(html)) {
 }
 html = html.replace(noscriptRegex, `$1\n${noscriptContent}      $2`);
 
-// ── 写回 ──────────────────────────────────────────────────
+// ── 写回 index.html ──────────────────────────────────────
 fs.writeFileSync(INDEX_HTML, html, "utf8");
 
-console.log(`✅ 同步完成：${count} 条资源`);
+// ── 3. 同步 README.md 中的资源数量 ────────────────────────
+const README_MD = path.join(ROOT, "README.md");
+if (fs.existsSync(README_MD)) {
+  let readme = fs.readFileSync(README_MD, "utf8");
+  readme = readme.replace(
+    /(\d+)\+ 亲测可用资源/,
+    `${count}+ 亲测可用资源`
+  );
+  readme = readme.replace(
+    /等 (\d+)\+ 条资源/,
+    `等 ${count}+ 条资源`
+  );
+  readme = readme.replace(
+    /资源数据（(\d+)\+ 条，含/,
+    `资源数据（${count}+ 条，含`
+  );
+  fs.writeFileSync(README_MD, readme, "utf8");
+  console.log(`   - README.md 资源数量已更新`);
+}
+
+console.log(`\n✅ 同步完成：${count} 条资源`);
 console.log(`   - meta/OG/Twitter/Schema 数字已更新`);
 console.log(`   - noscript 兜底列表已重新生成`);
 
