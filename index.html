@@ -308,9 +308,35 @@
       line-height: 1.7;
     }
     .hero-slogan .hl { color: var(--accent-color); font-weight: 600; }
+    .hero-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border: 1px solid var(--accent-color);
+      border-radius: var(--radius-pill);
+      color: var(--accent-color);
+      background: var(--accent-05);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .hero-submit:hover {
+      background: var(--accent-10);
+      box-shadow: 0 0 18px var(--accent-08);
+      transform: translateY(-1px);
+    }
+    .hero-submit .plus {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1;
+    }
     @media (max-width: 600px) {
       .hero-wrap { padding: 28px 16px 14px; }
       .hero-slogan { font-size: 0.85rem; margin-bottom: 20px; }
+      .hero-submit { padding: 8px 18px; font-size: 0.82rem; }
     }
 
     .filter-bar {
@@ -3304,6 +3330,9 @@
         <p class="hero-slogan" data-i18n-hero-slogan>
           精选 <span class="hl" id="tool-count">…</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>
         </p>
+        <a class="hero-submit" href="https://github.com/ningqi24/astras.cc/issues/new?title=%E6%8F%90%E4%BA%A4%E7%BD%91%E7%AB%99%EF%BC%9A&labels=site-submission" target="_blank" rel="noopener noreferrer nofollow">
+          <span class="plus">+</span><span data-i18n="submit-site">提交网站</span>
+        </a>
       </div>
       <div class="horizontal-content" id="horizontal-content"></div>
     </div>
@@ -4350,7 +4379,8 @@
       '日间': '夜间',
       '免责声明': '免责声明',
       '关于本站': '关于本站',
-      'EN': 'EN'
+      'EN': 'EN',
+      'submit-site': '提交网站'
     },
     en: {
       '官网(.cc)': 'Official (.cc)',
@@ -4374,7 +4404,8 @@
       '日间': 'Night Mode',
       '免责声明': 'Disclaimer',
       '关于本站': 'About',
-      'EN': '中文'
+      'EN': '中文',
+      'submit-site': 'Submit Site'
     }
   };
 
