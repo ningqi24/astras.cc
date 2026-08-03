@@ -544,8 +544,8 @@
     {
       "name": "Packery MC 数据包编辑器",
       "name_en": "Packery",
-      "subtitle": "pinit.eth.limo",
-      "url": "https://vhokzhg4.pinit.eth.limo/",
+      "subtitle": "packery.skycrystal.fun",
+      "url": "https://packery.skycrystal.fun/",
       "author": "bu_xu_yao",
       "author_url": "",
       "tags": [
@@ -702,6 +702,25 @@
       "note": "MC 资源包一站式在线编辑器，v1.0 支持 MC 26.2+，bu_xu_yao 作品。",
       "note_en": "One-stop online MC resource pack editor, v1.0 for MC 26.2+, by bu_xu_yao.",
       "category": "mc-tool"
+    },
+    {
+      "name": "Web3村长 - 技术博客",
+      "name_en": "Web3 Cunzhang - Tech Blog",
+      "subtitle": "cunzhangblog.com",
+      "url": "https://www.cunzhangblog.com/",
+      "author": "Web3村长 / Rin",
+      "author_url": "https://www.cunzhangblog.com/",
+      "tags": [
+        "博客",
+        "AI",
+        "工具"
+      ],
+      "description": "Web3村长（Rin）的技术博客，专注 AI 工具评测、Cloudflare 实战、开源项目部署、互联网效率工具、技术出海与变现。已积累 109 篇教程，以保姆级实战著称。",
+      "description_en": "Tech blog by Web3 Cunzhang (Rin), covering AI tool reviews, Cloudflare practices, open-source deployments, productivity tools, and tech globalization. 109 articles with hands-on tutorials.",
+      "verified_date": "2026-08-03",
+      "note": "109 篇技术博客，Cloudflare/AI 实战经验丰富，保姆级教程，值得订阅。",
+      "note_en": "109 tech articles, rich in Cloudflare/AI practices, step-by-step tutorials. Worth subscribing.",
+      "category": "personal"
     }
   ]
 }
