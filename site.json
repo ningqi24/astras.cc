@@ -757,6 +757,25 @@
       "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。PMPK 版本。",
       "note_en": "Personal, open-source, great for highway signs, CN-friendly. PMPK edition.",
       "category": "tool"
+    },
+    {
+      "name": "创客次元 MakerVerse - 创作者社区",
+      "name_en": "MakerVerse - Creator Community",
+      "subtitle": "forum.ctspace.xyz",
+      "url": "https://forum.ctspace.xyz/",
+      "author": "创客次元 / MakerVerse",
+      "author_url": "",
+      "tags": [
+        "社区",
+        "论坛",
+        "创作"
+      ],
+      "description": "面向创作者与开发者的中文社区平台，支持帖子讨论、作品展示、频道/标签分类浏览，提供开放 API 与扩展机制。",
+      "description_en": "A Chinese community for creators and developers. Supports discussions, project showcases, channel/tag browsing, with open API and extensions.",
+      "verified_date": "2026-08-03",
+      "note": "创作者社区，氛围友好，有开放 API 和扩展能力，适合技术创作交流。",
+      "note_en": "Creator community with friendly atmosphere, open API and extensions, great for tech creation discussions.",
+      "category": "chat"
     }
   ]
 }
