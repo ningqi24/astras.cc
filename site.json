@@ -740,6 +740,23 @@
       "note": "前端设计师必备，新拟物风格阴影一键出码，GitHub 开源。",
       "note_en": "Must-have for frontend designers, one-click neumorphic shadow code, open-source on GitHub.",
       "category": "tool"
+    },
+    {
+      "name": "PMPK 高速编号牌生成器 - NanGua-QWQ",
+      "name_en": "PMPK Highway Sign Generator - NanGua-QWQ",
+      "subtitle": "pmpk.astras.cc",
+      "url": "https://pmpk.astras.cc/",
+      "author": "NanGua-QWQ",
+      "author_url": "https://github.com/NanGua-QWQ",
+      "tags": [
+        "工具"
+      ],
+      "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
+      "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
+      "verified_date": "2026-08-03",
+      "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。PMPK 版本。",
+      "note_en": "Personal, open-source, great for highway signs, CN-friendly. PMPK edition.",
+      "category": "tool"
     }
   ]
 }
