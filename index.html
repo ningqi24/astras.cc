@@ -3981,15 +3981,21 @@
       // Card group
       const groupWrap = document.createElement('div');
       groupWrap.className = 'card-group' + (isCollapsed ? ' collapsed' : '');
-      if (!isCollapsed) {
-        // Calculate max-height for smooth animation
-        const estimatedRows = Math.ceil(count / 3);
-        groupWrap.style.maxHeight = (estimatedRows * 120 + 20) + 'px';
-      }
 
       grouped[catKey].forEach(({ button, index }) => {
         groupWrap.appendChild(createSiteCard(button, index));
       });
+
+      // Set real max-height after cards are rendered
+      if (!isCollapsed) {
+        groupWrap.style.maxHeight = groupWrap.scrollHeight + 'px';
+        // Clean up max-height after layout settles, so container can grow naturally
+        setTimeout(() => {
+          if (!groupWrap.classList.contains('collapsed')) {
+            groupWrap.style.maxHeight = 'none';
+          }
+        }, 400);
+      }
 
       // Toggle handler
       header.onclick = function() {
