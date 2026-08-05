@@ -776,6 +776,25 @@
       "note": "创作者社区，氛围友好，有开放 API 和扩展能力，适合技术创作交流。",
       "note_en": "Creator community with friendly atmosphere, open API and extensions, great for tech creation discussions.",
       "category": "chat"
+    },
+    {
+      "name": "抓鱼鸭 - 摸鱼起始页",
+      "name_en": "ZhuaYuYa - Slacking Startpage",
+      "subtitle": "zhuayuya.com",
+      "url": "https://zhuayuya.com/",
+      "author": "Pony",
+      "author_url": "https://space.bilibili.com/",
+      "tags": [
+        "摸鱼",
+        "起始页",
+        "聚合"
+      ],
+      "description": "由 B站UP主 Pony 开发的摸鱼起始页，聚合实用工具与趣味功能（弹幕聊天、伪装更新、偷看小说等），iTab 风格，让摸鱼更快乐。",
+      "description_en": "A slacking startpage by Bilibili creator Pony, aggregating fun tools like bullet-chat, fake system updates, hidden novel reader, and more. iTab-style, makes slacking joyful.",
+      "verified_date": "2026-08-03",
+      "note": "摸鱼神器，弹幕聊天人气高，B站 UP主 Pony 维护，上班必备。",
+      "note_en": "Ultimate slacking tool, lively bullet-chat, maintained by Pony, office essential.",
+      "category": "tool"
     }
   ]
 }
