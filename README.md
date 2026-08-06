@@ -41,7 +41,7 @@ astras.cc/
 ├── about/                  # 关于本站（站长介绍 + 联系 + 反馈入口）
 │   └── index.html
 │
-├── SignGenerator/          # 高速编号牌生成器子站
+├── signgenerator/          # 高速编号牌生成器
 ├── sendemail/              # 域名邮件发送工具子站
 ├── game/shas/              # 鲨鲨幸存者小游戏
 └── images/                 # 图片资源
