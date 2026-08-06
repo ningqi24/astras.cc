@@ -795,6 +795,25 @@
       "note": "摸鱼神器，弹幕聊天人气高，B站 UP主 Pony 维护，上班必备。",
       "note_en": "Ultimate slacking tool, lively bullet-chat, maintained by Pony, office essential.",
       "category": "tool"
+    },
+    {
+      "name": "OWLCRAFT - MC 网页版",
+      "name_en": "OWLCRAFT - MC Web Edition",
+      "subtitle": "owlcraft.raymondjxu.net",
+      "url": "https://owlcraft.raymondjxu.net/",
+      "author": "awesomestowl / raymondjxu",
+      "author_url": "https://www.youtube.com/watch?v=i5luLslTLZk",
+      "tags": [
+        "MC",
+        "游戏",
+        "浏览器"
+      ],
+      "description": "Minecraft v26.2 网页版，awesomestowl 原作，raymondjxu 移植，无需安装直接在浏览器里玩。",
+      "description_en": "Minecraft v26.2 web edition by awesomestowl, ported by raymondjxu. Play directly in browser.",
+      "verified_date": "2026-08-07",
+      "note": "awesomestowl 原作，raymondjxu 移植网页版，浏览器即玩 MC。",
+      "note_en": "Original by awesomestowl, web port by raymondjxu. Play MC in browser.",
+      "category": "mc-tool"
     }
   ]
 }
