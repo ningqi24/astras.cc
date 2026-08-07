@@ -814,6 +814,25 @@
       "note": "awesomestowl 原作，raymondjxu 移植网页版，浏览器即玩 MC。",
       "note_en": "Original by awesomestowl, web port by raymondjxu. Play MC in browser.",
       "category": "mc-tool"
+    },
+    {
+      "name": "NexBot - QQ 机器人托管",
+      "name_en": "NexBot - QQ Bot Hosting",
+      "subtitle": "nexbot.muzisen.asia",
+      "url": "https://nexbot.muzisen.asia/",
+      "author": "NexBot",
+      "author_url": "",
+      "tags": [
+        "QQ机器人",
+        "托管",
+        "云服务"
+      ],
+      "description": "QQ 机器人一键上云平台，NapCat + AstrBot，60 秒开通独立实例，免自建服务器。",
+      "description_en": "QQ bot one-click cloud hosting. NapCat + AstrBot, deploy in 60s, no server needed.",
+      "verified_date": "2026-08-07",
+      "note": "NapCat + AstrBot 组合，扫码即上，面板直达，QQ 机器人托管首选。",
+      "note_en": "NapCat + AstrBot combo, scan to deploy, panel access, top QQ bot host.",
+      "category": "tool"
     }
   ]
 }
