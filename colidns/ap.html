@@ -142,7 +142,7 @@
             margin: 2em 0;
         }
 
-        /* 脚注 / 签名 */
+        /* 脚注 */
         .protocol-footer {
             margin-top: 32px;
             padding-top: 22px;
@@ -157,6 +157,18 @@
         .protocol-footer .signature {
             color: rgba(255, 255, 255, 0.65);
             font-weight: 500;
+        }
+
+        /* 加载提示 */
+        .loading-tip {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            padding: 10px 0;
+            display: none;
+        }
+        .loading-tip.show {
+            display: block;
         }
 
         /* 小屏适配 */
@@ -211,9 +223,9 @@
 </head>
 <body>
 
-    <div class="protocol-card">
+    <div class="protocol-card" id="protocolCard">
 
-        <!-- 头部 -->
+        <!-- 头部（固定，不随网络更新） -->
         <div class="protocol-header">
             <h1>📄 NS 使用协议</h1>
             <div class="protocol-meta">
@@ -222,9 +234,35 @@
             </div>
         </div>
 
-        <!-- 正文 -->
-        <div class="protocol-body">
+        <!-- 正文容器 – 会被动态替换 -->
+        <div class="protocol-body" id="protocolBody">
+            <!-- 内置备用内容将在 JavaScript 中注入，此处留空 -->
+        </div>
 
+        <!-- 脚注（固定） -->
+        <div class="protocol-footer">
+            <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
+            <span>NS 社区 · 愿您使用愉快</span>
+        </div>
+
+        <!-- 加载提示（仅用于调试，可隐藏） -->
+        <div class="loading-tip" id="loadingTip">正在从 GitHub 加载最新协议…</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. 配置：设置您存放协议正文（HTML 片段）的 GitHub raw 地址
+        //    如果该地址无法访问，将自动使用下方内置的备用内容。
+        // ============================================================
+        const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/protocol-body.html';
+        // 请将您的协议正文 HTML 上传到该地址，或者修改为实际可用的 URL。
+        // 若不需要网络加载，可将其设为空字符串，则直接使用内置内容。
+
+        // ============================================================
+        // 2. 内置备用协议正文（完整 HTML 片段，与之前版本一致）
+        //    当网络请求失败或 URL 无效时使用。
+        // ============================================================
+        const FALLBACK_HTML = `
             <p style="font-size:16px; color:#c8d6f0; font-weight:400; margin-top:0;">
                 感谢您选择使用 <strong style="color:#eaeef5;">NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
                 使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。
@@ -233,7 +271,6 @@
 
             <hr class="divider" />
 
-            <!-- 一、版权与归属 -->
             <h2>一、版权与归属</h2>
 
             <h3>1. 原创版权</h3>
@@ -260,7 +297,6 @@
 
             <hr class="divider" />
 
-            <!-- 二、使用许可与限制 -->
             <h2>二、使用许可与限制</h2>
 
             <h3>1. 允许的行为</h3>
@@ -293,7 +329,6 @@
 
             <hr class="divider" />
 
-            <!-- 三、免责声明 -->
             <h2>三、免责声明</h2>
 
             <h3>1. 功能与现实性</h3>
@@ -314,7 +349,6 @@
 
             <hr class="divider" />
 
-            <!-- 四、其他条款 -->
             <h2>四、其他条款</h2>
 
             <h3>1. 协议变更</h3>
@@ -340,16 +374,50 @@
             <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:14px; margin: 0.5em 0 0.2em 0;">
                 ⚡ 请您在使用前再次确认已阅读并理解上述所有条款。
             </p>
+        `;
 
-        </div>
+        // ============================================================
+        // 3. 核心逻辑：尝试从 GitHub 加载，失败则使用内置备用
+        // ============================================================
+        (function loadProtocol() {
+            const bodyEl = document.getElementById('protocolBody');
+            const tipEl = document.getElementById('loadingTip');
 
-        <!-- 脚注 -->
-        <div class="protocol-footer">
-            <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
-            <span>NS 社区 · 愿您使用愉快</span>
-        </div>
+            // 如果未配置 URL 或 URL 为空，直接使用内置
+            if (!PROTOCOL_URL || PROTOCOL_URL.trim() === '') {
+                bodyEl.innerHTML = FALLBACK_HTML;
+                return;
+            }
 
-    </div>
+            // 显示加载提示
+            tipEl.classList.add('show');
+            tipEl.textContent = '正在从 GitHub 加载最新协议…';
+
+            fetch(PROTOCOL_URL, {
+                method: 'GET',
+                headers: { 'Accept': 'text/html' },
+                cache: 'no-cache'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                // 成功获取，替换正文内容
+                bodyEl.innerHTML = html;
+                tipEl.classList.remove('show');
+                console.log('✅ 协议已从 GitHub 加载');
+            })
+            .catch(err => {
+                // 网络错误或文件不存在，使用内置备用
+                bodyEl.innerHTML = FALLBACK_HTML;
+                tipEl.classList.remove('show');
+                console.warn('⚠️ 无法从 GitHub 加载协议，使用内置备用内容。', err);
+            });
+        })();
+    </script>
 
 </body>
 </html>
