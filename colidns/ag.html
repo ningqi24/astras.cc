@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NS 使用协议</title>
     <style>
-        /* 全局重置：背景完全透明，无任何颜色 */
+        /* 全局重置：背景完全透明，无任何颜色块或特效 */
         * {
             margin: 0;
             padding: 0;
@@ -15,24 +15,23 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            background: transparent !important;  /* 完全透明，无任何颜色 */
+            background: transparent !important;  /* 完全透明 */
             font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-            color: #ffffff; /* 文字白色 */
+            color: #000000; /* 纯黑色文字 */
             line-height: 1.7;
         }
 
-        /* 内容容器：铺满全屏，背景透明，仅文字 */
+        /* 内容容器：铺满全屏，背景透明 */
         .protocol-container {
             width: 100%;
             min-height: 100vh;
             padding: 40px 24px;
-            background: transparent !important; /* 无任何背景色 */
+            background: transparent !important;
             display: flex;
             flex-direction: column;
-            /* 无阴影、无边框、无圆角 */
         }
 
-        /* 头部：透明背景，仅文字 */
+        /* 头部：透明，纯黑文字，无emoji */
         .protocol-header {
             display: flex;
             justify-content: space-between;
@@ -40,7 +39,7 @@
             flex-wrap: wrap;
             gap: 8px 20px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 细线保留，方便阅读 */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15); /* 浅灰分割线 */
             margin-bottom: 20px;
             background: transparent;
         }
@@ -48,33 +47,29 @@
         .protocol-header h1 {
             font-size: 26px;
             font-weight: 700;
-            color: #ffffff;
+            color: #000000;
             letter-spacing: 0.5px;
             margin: 0;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7); /* 仅文字阴影，提高对比度 */
         }
 
         .protocol-meta {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+            color: #000000;
             text-align: right;
             white-space: nowrap;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .protocol-meta .version {
             font-weight: 600;
-            color: #ffffff;
         }
 
-        /* 正文：透明背景，亮色文字 */
+        /* 正文：纯黑文字，透明背景 */
         .protocol-body {
             flex: 1;
             font-size: 15px;
-            color: #f0f4ff;
+            color: #000000;
             overflow-y: auto;
             padding-right: 4px;
             background: transparent;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); /* 统一文字阴影 */
         }
 
         .protocol-body p {
@@ -84,17 +79,15 @@
         .protocol-body h2 {
             font-size: 18px;
             font-weight: 600;
-            color: #ffffff;
+            color: #000000;
             margin: 1.6em 0 0.5em 0;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
         }
 
         .protocol-body h3 {
             font-size: 16px;
             font-weight: 600;
-            color: #e0e8ff;
+            color: #000000;
             margin: 1em 0 0.3em 0;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
         .protocol-body ul,
@@ -106,64 +99,59 @@
             margin: 0.25em 0;
         }
 
-        /* 代码块：保留左边框以区分，背景透明 */
+        /* 代码块：左边框区分，文字黑色，背景透明 */
         .protocol-body .code-block {
             background: transparent;
             padding: 10px 16px;
             font-family: "SF Mono", "Fira Code", monospace;
             font-size: 13px;
-            color: #d6e0ff;
-            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            color: #000000;
+            border-left: 3px solid rgba(0, 0, 0, 0.3);
             margin: 0.6em 0 1em 0;
             overflow-x: auto;
             white-space: pre-wrap;
             word-break: break-word;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
         .protocol-body .divider {
             border: none;
             height: 1px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.15);
             margin: 1.8em 0;
         }
 
         .protocol-body a {
-            color: #8ab4f8;
-            text-decoration: none;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
-        }
-        .protocol-body a:hover {
+            color: #000000;
             text-decoration: underline;
         }
+        .protocol-body a:hover {
+            text-decoration: none;
+        }
 
-        /* 脚注：透明背景 */
+        /* 脚注：透明背景，纯黑 */
         .protocol-footer {
             margin-top: 24px;
             padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            color: #000000;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 6px 16px;
             background: transparent;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .protocol-footer .signature {
-            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
         }
 
         /* 加载提示（极简） */
         .loading-tip {
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
+            color: #000000;
             font-size: 14px;
             padding: 4px 0;
             display: none;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .loading-tip.show {
             display: block;
@@ -193,7 +181,7 @@
             }
         }
 
-        /* 滚动条透明简洁 */
+        /* 滚动条简洁，透明背景 */
         ::-webkit-scrollbar {
             width: 4px;
             height: 4px;
@@ -202,19 +190,19 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 0;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
 <body>
     <div class="protocol-container">
-        <!-- 头部 -->
+        <!-- 头部（无emoji） -->
         <div class="protocol-header">
-            <h1>📄 NS 使用协议</h1>
+            <h1>NS 使用协议</h1>
             <div class="protocol-meta">
                 <span class="version">v1.0</span>
                 <span>生效：2026.08.07</span>
@@ -244,11 +232,11 @@
         const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/protocol-body.html';
 
         // ============================================================
-        // 内置备用协议正文（完整 HTML 片段，文字样式已适配透明背景）
+        // 内置备用协议正文（无任何emoji，纯黑色文字）
         // ============================================================
         const FALLBACK_HTML = `
             <p style="font-size:16px; font-weight:400; margin-top:0;">
-                感谢您选择使用 <strong style="color:#ffffff;">NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
+                感谢您选择使用 <strong>NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
                 使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。
                 在使用前，请您仔细阅读并同意本协议的全部条款。
             </p>
@@ -347,16 +335,16 @@
 
             <h3>3. 联系方式</h3>
             <div class="code-block">
-                COLID 官网：https://colid.mysxl.cn<br />
-                官方 QQ 群：996349521<br />
-                Bilibili 空间：https://space.bilibili.com/1825564224<br />
+                COLID 官网：https://colid.mysxl.cn
+                官方 QQ 群：996349521
+                Bilibili 空间：https://space.bilibili.com/1825564224
                 GitHub 仓库：https://github.com/ningqi24/COLID-CE-NS/
             </div>
 
             <hr class="divider" />
 
-            <p style="text-align:center; color:rgba(255,255,255,0.7); font-size:14px; margin: 0.5em 0 0.2em 0;">
-                ⚡ 请您在使用前再次确认已阅读并理解上述所有条款。
+            <p style="text-align:center; font-size:14px; margin: 0.5em 0 0.2em 0; color:#000000;">
+                请您在使用前再次确认已阅读并理解上述所有条款。
             </p>
         `;
 
@@ -367,7 +355,6 @@
             const bodyEl = document.getElementById('protocolBody');
             const tipEl = document.getElementById('loadingTip');
 
-            // 如果未配置 URL，直接使用内置
             if (!PROTOCOL_URL || PROTOCOL_URL.trim() === '') {
                 bodyEl.innerHTML = FALLBACK_HTML;
                 return;
@@ -382,18 +369,17 @@
                 cache: 'no-cache'
             })
             .then(response => {
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();
             })
             .then(html => {
+                // 可在此过滤emoji，但假设远程内容也不含emoji
                 bodyEl.innerHTML = html;
                 tipEl.classList.remove('show');
-                console.log('✅ 协议已从 GitHub 加载');
             })
-            .catch(err => {
+            .catch(() => {
                 bodyEl.innerHTML = FALLBACK_HTML;
                 tipEl.classList.remove('show');
-                console.warn('⚠️ 使用内置备用协议', err);
             });
         })();
     </script>
