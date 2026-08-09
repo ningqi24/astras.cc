@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NS投稿协议</title>
+    <style>
+        /* 全局重置：完全透明背景，纯黑文字，无任何特效 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background: transparent !important;
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            color: #000000;
+            line-height: 1.7;
+        }
+
+        .protocol-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 24px;
+            background: transparent !important;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 头部：纯黑，无emoji */
+        .protocol-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            background: transparent;
+        }
+
+        .protocol-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .protocol-meta {
+            font-size: 14px;
+            color: #000000;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .protocol-meta .version {
+            font-weight: 600;
+        }
+
+        /* 正文 */
+        .protocol-body {
+            flex: 1;
+            font-size: 15px;
+            color: #000000;
+            overflow-y: auto;
+            padding-right: 4px;
+            background: transparent;
+        }
+
+        .protocol-body p {
+            margin: 0.8em 0;
+        }
+
+        .protocol-body h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin: 1.6em 0 0.5em 0;
+        }
+
+        .protocol-body h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            margin: 1em 0 0.3em 0;
+        }
+
+        .protocol-body ul,
+        .protocol-body ol {
+            padding-left: 1.6em;
+            margin: 0.4em 0 0.8em 0;
+        }
+        .protocol-body li {
+            margin: 0.25em 0;
+        }
+
+        .protocol-body .code-block {
+            background: transparent;
+            padding: 10px 16px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 13px;
+            color: #000000;
+            border-left: 3px solid rgba(0, 0, 0, 0.3);
+            margin: 0.6em 0 1em 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .protocol-body .divider {
+            border: none;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.15);
+            margin: 1.8em 0;
+        }
+
+        .protocol-body a {
+            color: #000000;
+            text-decoration: underline;
+        }
+        .protocol-body a:hover {
+            text-decoration: none;
+        }
+
+        .protocol-footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            color: #000000;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            background: transparent;
+        }
+        .protocol-footer .signature {
+            font-weight: 500;
+        }
+
+        .loading-tip {
+            text-align: center;
+            color: #000000;
+            font-size: 14px;
+            padding: 4px 0;
+            display: none;
+        }
+        .loading-tip.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .protocol-container {
+                padding: 24px 16px;
+            }
+            .protocol-header h1 {
+                font-size: 22px;
+            }
+            .protocol-meta {
+                white-space: normal;
+                text-align: left;
+            }
+            .protocol-body {
+                font-size: 14px;
+            }
+            .protocol-body h2 {
+                font-size: 17px;
+            }
+            .protocol-footer {
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="protocol-container">
+        <div class="protocol-header">
+            <h1>NS投稿协议</h1>
+        </div>
+
+        <div class="protocol-body" id="protocolBody">
+            <!-- 动态注入 -->
+        </div>
+
+        <div class="protocol-footer">
+            <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
+            <span>提交即视为同意</span>
+        </div>
+
+        <div class="loading-tip" id="loadingTip">正在加载最新投稿协议…</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 配置：优先从 GitHub 仓库获取协议内容
+        // ============================================================
+        const PROTOCOL_URL = 'https://github.com/ningqi24/COLID-CE-NS/blob/main/cse/README.md?raw=true';
+
+        // ============================================================
+        // 内置备用协议正文（当网络获取失败时使用）
+        // ============================================================
+        const FALLBACK_HTML = `
+            <p>
+                您通过以下 Issues 渠道提交的任何内容（包括但不限于代码、素材、建议、反馈等），均视为自愿向 <strong>NS</strong> 项目投稿。<br />
+                投稿内容应为本项目相关的 <strong>app.sprite3</strong>（即 <strong>.cse</strong> 文件）或其他可复用资源。
+            </p>
+            <p><strong>投稿渠道：</strong> <a href="https://github.com/ningqi24/COLID-CE-NS/issues" target="_blank">https://github.com/ningqi24/COLID-CE-NS/issues</a></p>
+
+            <hr class="divider" />
+
+            <h2>版权与署名</h2>
+            <ul>
+                <li>您投稿的内容，其版权归您本人所有，但您需确保该内容不侵犯任何第三方权益。</li>
+                <li>您同意授予本项目作者 <strong>ningqi</strong> 及 <strong>COLID Studio</strong> 非独占、永久、全球范围内、免版税的使用权，包括但不限于修改、合并、发布、分发该内容。</li>
+                <li>投稿被采纳后，我们将在项目内或相关文档中标注您的贡献者身份（除非您要求匿名）。</li>
+            </ul>
+
+            <h2>合规要求</h2>
+            <ul>
+                <li>投稿内容不得包含色情、暴力、血腥、政治敏感或其他违反中华人民共和国法律法规的元素。</li>
+                <li>投稿内容不得恶意利用或放大 COLID OS / NS 的已知 Bug。</li>
+                <li>投稿内容须尊重 <strong>COLID OS</strong> 原创版权，不得删除或篡改原始署名信息。</li>
+            </ul>
+
+            <h2>处理方式</h2>
+            <ul>
+                <li>项目维护者有权决定是否采纳、合并或拒绝您的投稿，无需另行解释。</li>
+                <li>未被采纳的投稿，您可自行处置；已采纳的投稿将纳入项目版本，不再另行通知。</li>
+                <li>若投稿存在争议，以 <strong>COLID Studio</strong> 生态部（高小圈）的最终裁定为准。</li>
+            </ul>
+
+            <h2>免责</h2>
+            <ul>
+                <li>投稿内容如引发任何法律纠纷，由投稿人自行承担全部责任。</li>
+                <li>项目作者不对投稿内容的完整性、安全性或兼容性作任何担保。</li>
+            </ul>
+
+            <hr class="divider" />
+
+            <p style="text-align:center; font-size:14px; margin: 0.5em 0 0.2em 0;">
+                提交投稿即表示您已阅读并同意本协议。
+            </p>
+        `;
+
+        // ============================================================
+        // 加载逻辑：优先从 GitHub 获取，失败则使用备用
+        // ============================================================
+        (function loadProtocol() {
+            const bodyEl = document.getElementById('protocolBody');
+            const tipEl = document.getElementById('loadingTip');
+
+            // 显示加载提示
+            tipEl.classList.add('show');
+            tipEl.textContent = '正在从 GitHub 加载最新投稿协议…';
+
+            fetch(PROTOCOL_URL, {
+                method: 'GET',
+                headers: { 'Accept': 'text/plain' },
+                cache: 'no-cache'
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(rawText => {
+                // 将 Markdown 风格的纯文本转换为 HTML
+                let html = rawText
+                    // 标题（# 开头）
+                    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+                    // 加粗（**文本**）
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    // 链接（[文本](url)）
+                    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>')
+                    // 有序列表（数字. 开头）
+                    .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>')
+                    // 无序列表（- 开头）
+                    .replace(/^-\s+(.+)$/gm, '<li>$1</li>')
+                    // 段落（连续两行换行分隔）
+                    .replace(/\n\n/g, '</p><p>')
+                    // 换行
+                    .replace(/\n/g, '<br />');
+
+                // 包装成完整段落
+                html = '<p>' + html + '</p>';
+
+                // 修复列表：将连续的 <li> 包装到 <ul> 中
+                html = html.replace(/(<li>.*?<\/li>)+/g, function(match) {
+                    return '<ul>' + match + '</ul>';
+                });
+
+                // 清理多余的 <p><ul> 和 </ul></p>
+                html = html.replace(/<p><ul>/g, '<ul>');
+                html = html.replace(/<\/ul><\/p>/g, '</ul>');
+                html = html.replace(/<p><\/p>/g, '');
+
+                bodyEl.innerHTML = html;
+                tipEl.classList.remove('show');
+                console.log('✅ 投稿协议已从 GitHub 加载');
+            })
+            .catch(err => {
+                // 获取失败，使用内置备用
+                bodyEl.innerHTML = FALLBACK_HTML;
+                tipEl.classList.remove('show');
+                console.warn('⚠️ 无法从 GitHub 加载，使用内置备用协议', err);
+            });
+        })();
+    </script>
+</body>
+</html>
