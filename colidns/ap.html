@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NS 使用协议</title>
+    <style>
+        /* 全局透明背景 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+            /* 完全透明背景 */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 20px;
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* 半透明卡片 —— 保持“背景透明”的同时让文字可读 */
+        .protocol-card {
+            max-width: 820px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(18, 22, 30, 0.88);
+            /* 深色半透明，可见后方内容 */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 44px 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+            color: #eaeef5;
+            line-height: 1.7;
+            transition: all 0.2s ease;
+        }
+
+        /* 标题区 */
+        .protocol-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-bottom: 28px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .protocol-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #a8c0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .protocol-meta {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .protocol-meta span {
+            display: block;
+        }
+        .protocol-meta .version {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 正文样式 */
+        .protocol-body {
+            font-size: 15px;
+            color: #d6dee9;
+        }
+
+        .protocol-body p {
+            margin: 1em 0;
+        }
+
+        .protocol-body h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f0f4ff;
+            margin: 1.8em 0 0.6em 0;
+            padding-top: 0.2em;
+            letter-spacing: 0.3px;
+        }
+        .protocol-body h2:first-of-type {
+            margin-top: 0.2em;
+        }
+
+        .protocol-body h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #d0dbf0;
+            margin: 1.2em 0 0.4em 0;
+        }
+
+        .protocol-body ul,
+        .protocol-body ol {
+            padding-left: 1.6em;
+            margin: 0.5em 0 1em 0;
+        }
+        .protocol-body li {
+            margin: 0.35em 0;
+        }
+
+        .protocol-body .highlight {
+            color: #9bbaff;
+            font-weight: 500;
+        }
+
+        .protocol-body .code-block {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 13px;
+            color: #c8d6f0;
+            border-left: 3px solid #5b7fc7;
+            margin: 0.6em 0 1.2em 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .protocol-body .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            margin: 2em 0;
+        }
+
+        /* 脚注 / 签名 */
+        .protocol-footer {
+            margin-top: 32px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+        .protocol-footer .signature {
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 500;
+        }
+
+        /* 小屏适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 12px;
+            }
+            .protocol-card {
+                padding: 28px 20px;
+                border-radius: 20px;
+            }
+            .protocol-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .protocol-header h1 {
+                font-size: 22px;
+            }
+            .protocol-meta {
+                text-align: left;
+                white-space: normal;
+            }
+            .protocol-body {
+                font-size: 14px;
+            }
+            .protocol-body h2 {
+                font-size: 17px;
+            }
+            .protocol-footer {
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        /* 滚动条美观 */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="protocol-card">
+
+        <!-- 头部 -->
+        <div class="protocol-header">
+            <h1>📄 NS 使用协议</h1>
+            <div class="protocol-meta">
+                <span class="version">v1.0</span>
+                <span>生效：2026.08.07</span>
+            </div>
+        </div>
+
+        <!-- 正文 -->
+        <div class="protocol-body">
+
+            <p style="font-size:16px; color:#c8d6f0; font-weight:400; margin-top:0;">
+                感谢您选择使用 <strong style="color:#eaeef5;">NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
+                使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。
+                在使用前，请您仔细阅读并同意本协议的全部条款。
+            </p>
+
+            <hr class="divider" />
+
+            <!-- 一、版权与归属 -->
+            <h2>一、版权与归属</h2>
+
+            <h3>1. 原创版权</h3>
+            <ul>
+                <li>本作品所引用的 <strong>COLID OS</strong> 原创设计、视觉元素、核心逻辑等，其知识产权归 <strong>COLID Studio</strong> 及其创始人 <strong>孤行的3044</strong> 所有。</li>
+                <li>本作品作为二次创作产物，其 <strong>新增原创代码、界面调整、功能重置</strong> 等部分，版权归 <strong>NS 作者 ningqi</strong> 所有，但不得损害原始版权方的合法权益。</li>
+            </ul>
+
+            <h3>2. 开源协议</h3>
+            <ul>
+                <li>本作品遵循 <strong>CC-BY-4.0 开源协议</strong> 发布。您可以在遵守本协议及 CC-BY-4.0 的前提下，自由使用、修改、分发本作品，但必须 <strong>保留原作者署名</strong>，并注明原始出处。</li>
+            </ul>
+
+            <h3>3. 标注要求</h3>
+            <ul>
+                <li>您在任何场合（包括但不限于发布、宣传、分发修改版本）使用本作品时，<strong>必须明确标注</strong>：</li>
+                <ul>
+                    <li>原始作者：<strong>孤行的3044（COLID Studio）</strong></li>
+                    <li>二次作者：<strong>ningqi</strong></li>
+                    <li>项目仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank" style="color:#8ab4f8; text-decoration:none;">https://github.com/ningqi24/COLID-CE-NS/</a></li>
+                </ul>
+                <li>根据 COLID Studio 最终决议，本作品 <strong>无需</strong> 在“关于”界面添加“COS”字样，但仍须显著注明 <strong>“基于 COLID OS 原创”</strong> 或 <strong>“Original by 孤行的3044”</strong>。</li>
+            </ul>
+
+            <hr class="divider" />
+
+            <!-- 二、使用许可与限制 -->
+            <h2>二、使用许可与限制</h2>
+
+            <h3>1. 允许的行为</h3>
+            <ul>
+                <li><strong>个人或非商业性使用：</strong> 您可以自由下载、运行、体验本作品，用于学习、展示或个人娱乐。</li>
+                <li><strong>二次创作：</strong> 您可以基于本作品进行进一步修改或重置，但修改后的作品必须 <strong>继续遵循 CC-BY-4.0 协议</strong>，并保留所有原始署名。</li>
+                <li><strong>开源分发：</strong> 您可以在注明原作者和本协议的前提下，将本作品或其修改版本重新分发。</li>
+            </ul>
+
+            <h3>2. 禁止的行为</h3>
+            <ul>
+                <li><strong>商业用途：</strong> 未经 COLID Studio 及 NS 作者书面授权，禁止将本作品或其任何部分用于商业盈利目的（包括但不限于销售、收费下载、植入广告等）。</li>
+                <li><strong>违法及不良用途：</strong> 禁止利用本作品传播色情、暴力、血腥、恐怖内容，禁止用于制作政治敏感或攻击性内容，禁止任何违反中华人民共和国法律法规的行为。</li>
+                <li><strong>恶意破坏与甩锅：</strong> 禁止利用本作品已知或未知的 Bug 进行不当操作，禁止在用户反馈时将问题归咎于 COLID Studio 或原版系统。</li>
+                <li><strong>过度宣传与误导：</strong> 禁止以本作品名义冒充官方、过度宣传自身或进行拉人测试等扰乱社区秩序的行为。</li>
+                <li><strong>删除或隐藏署名：</strong> 任何分发或修改版本中，不得删除、遮盖或篡改原作者及二次作者的署名信息。</li>
+            </ul>
+
+            <h3>3. 合规与生态协同</h3>
+            <ul>
+                <li>本作品属于 <strong>COLID 第三方生态</strong>，需遵守 COLID Studio 制定的《第三方生态发展标准》及《COLID STUDIO 室规》。</li>
+                <li>若您基于本作品开发衍生版本，须接受 <strong>COLID Studio 生态部（部长 高小圈）</strong> 的监督管理，并在必要时配合调整。</li>
+                <li>若违反上述规定，COLID Studio 有权将您的作品排除出 COLID 生态，包括但不限于：</li>
+                <ul>
+                    <li>拒绝上架 COLID App Store；</li>
+                    <li>在安全补丁更新后将其识别为“盗版”或威胁；</li>
+                    <li>取消其与官方系统的互通权限。</li>
+                </ul>
+            </ul>
+
+            <hr class="divider" />
+
+            <!-- 三、免责声明 -->
+            <h2>三、免责声明</h2>
+
+            <h3>1. 功能与现实性</h3>
+            <ul>
+                <li>本作品使用 <strong>TurboWarp 图形化编程</strong> 制作，<strong>并非真正的操作系统或 UI 框架</strong>，仅提供视觉界面模拟体验，不具备实际系统功能。</li>
+                <li>作者不保证本作品与所有硬件、浏览器或原版 COLID OS 的完全兼容，可能存在已知或未知的兼容性问题。</li>
+            </ul>
+
+            <h3>2. 使用风险</h3>
+            <ul>
+                <li>您使用本作品所产生的一切后果（包括但不限于数据丢失、设备故障、法律纠纷等）由您自行承担，作者及 COLID Studio 不承担任何责任。</li>
+            </ul>
+
+            <h3>3. Bug 与反馈</h3>
+            <ul>
+                <li>如发现 Bug 或有问题，请优先在 <strong>COLID Studio 官方 QQ 群（996349521）</strong> 或 GitHub 仓库提交反馈，我们会尽力协助解决，但不承诺修复时限。</li>
+            </ul>
+
+            <hr class="divider" />
+
+            <!-- 四、其他条款 -->
+            <h2>四、其他条款</h2>
+
+            <h3>1. 协议变更</h3>
+            <ul>
+                <li>本协议可能根据 COLID Studio 的生态政策或原作者意愿进行修订，修订后将在官方渠道公布，恕不另行逐一通知。您继续使用本作品即视为接受修订后的协议。</li>
+            </ul>
+
+            <h3>2. 适用法律</h3>
+            <ul>
+                <li>本协议的订立、执行和解释均适用中华人民共和国法律。如发生争议，双方应友好协商解决；协商不成的，可提交至作者所在地有管辖权的人民法院诉讼解决。</li>
+            </ul>
+
+            <h3>3. 联系方式</h3>
+            <div class="code-block">
+                COLID 官网：https://colid.mysxl.cn<br />
+                官方 QQ 群：996349521<br />
+                Bilibili 空间：https://space.bilibili.com/1825564224<br />
+                GitHub 仓库：https://github.com/ningqi24/COLID-CE-NS/
+            </div>
+
+            <hr class="divider" />
+
+            <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:14px; margin: 0.5em 0 0.2em 0;">
+                ⚡ 请您在使用前再次确认已阅读并理解上述所有条款。
+            </p>
+
+        </div>
+
+        <!-- 脚注 -->
+        <div class="protocol-footer">
+            <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
+            <span>NS 社区 · 愿您使用愉快</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
