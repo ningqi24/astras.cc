@@ -5,167 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NS 使用协议</title>
     <style>
-        /* 全局透明背景 */
+        /* 全局重置：背景完全透明，无任何颜色 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            background: transparent;
-            /* 完全透明背景 */
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 30px 20px;
-            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-        }
-
-        /* 半透明卡片 —— 保持“背景透明”的同时让文字可读 */
-        .protocol-card {
-            max-width: 820px;
+        html, body {
             width: 100%;
-            margin: 0 auto;
-            background: rgba(18, 22, 30, 0.88);
-            /* 深色半透明，可见后方内容 */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 44px 48px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-            color: #eaeef5;
+            min-height: 100vh;
+            background: transparent !important;  /* 完全透明，无任何颜色 */
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            color: #ffffff; /* 文字白色 */
             line-height: 1.7;
-            transition: all 0.2s ease;
         }
 
-        /* 标题区 */
+        /* 内容容器：铺满全屏，背景透明，仅文字 */
+        .protocol-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 24px;
+            background: transparent !important; /* 无任何背景色 */
+            display: flex;
+            flex-direction: column;
+            /* 无阴影、无边框、无圆角 */
+        }
+
+        /* 头部：透明背景，仅文字 */
         .protocol-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: baseline;
             flex-wrap: wrap;
-            gap: 10px 20px;
-            margin-bottom: 28px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 8px 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 细线保留，方便阅读 */
+            margin-bottom: 20px;
+            background: transparent;
         }
 
         .protocol-header h1 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
+            color: #ffffff;
             letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #a8c0ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin: 0;
-            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7); /* 仅文字阴影，提高对比度 */
         }
 
         .protocol-meta {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
             text-align: right;
             white-space: nowrap;
-        }
-        .protocol-meta span {
-            display: block;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .protocol-meta .version {
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
+            color: #ffffff;
         }
 
-        /* 正文样式 */
+        /* 正文：透明背景，亮色文字 */
         .protocol-body {
+            flex: 1;
             font-size: 15px;
-            color: #d6dee9;
+            color: #f0f4ff;
+            overflow-y: auto;
+            padding-right: 4px;
+            background: transparent;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); /* 统一文字阴影 */
         }
 
         .protocol-body p {
-            margin: 1em 0;
+            margin: 0.8em 0;
         }
 
         .protocol-body h2 {
             font-size: 18px;
             font-weight: 600;
-            color: #f0f4ff;
-            margin: 1.8em 0 0.6em 0;
-            padding-top: 0.2em;
-            letter-spacing: 0.3px;
-        }
-        .protocol-body h2:first-of-type {
-            margin-top: 0.2em;
+            color: #ffffff;
+            margin: 1.6em 0 0.5em 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
         }
 
         .protocol-body h3 {
             font-size: 16px;
             font-weight: 600;
-            color: #d0dbf0;
-            margin: 1.2em 0 0.4em 0;
+            color: #e0e8ff;
+            margin: 1em 0 0.3em 0;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
         .protocol-body ul,
         .protocol-body ol {
             padding-left: 1.6em;
-            margin: 0.5em 0 1em 0;
+            margin: 0.4em 0 0.8em 0;
         }
         .protocol-body li {
-            margin: 0.35em 0;
+            margin: 0.25em 0;
         }
 
-        .protocol-body .highlight {
-            color: #9bbaff;
-            font-weight: 500;
-        }
-
+        /* 代码块：保留左边框以区分，背景透明 */
         .protocol-body .code-block {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 8px;
+            background: transparent;
             padding: 10px 16px;
             font-family: "SF Mono", "Fira Code", monospace;
             font-size: 13px;
-            color: #c8d6f0;
-            border-left: 3px solid #5b7fc7;
-            margin: 0.6em 0 1.2em 0;
+            color: #d6e0ff;
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            margin: 0.6em 0 1em 0;
             overflow-x: auto;
             white-space: pre-wrap;
             word-break: break-word;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
         .protocol-body .divider {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-            margin: 2em 0;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 1.8em 0;
         }
 
-        /* 脚注 */
+        .protocol-body a {
+            color: #8ab4f8;
+            text-decoration: none;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+        }
+        .protocol-body a:hover {
+            text-decoration: underline;
+        }
+
+        /* 脚注：透明背景 */
         .protocol-footer {
-            margin-top: 32px;
-            padding-top: 22px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255, 255, 255, 0.6);
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px 16px;
+            gap: 6px 16px;
+            background: transparent;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .protocol-footer .signature {
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
         }
 
-        /* 加载提示 */
+        /* 加载提示（极简） */
         .loading-tip {
             text-align: center;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
-            padding: 10px 0;
+            padding: 4px 0;
             display: none;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .loading-tip.show {
             display: block;
@@ -173,24 +171,15 @@
 
         /* 小屏适配 */
         @media (max-width: 600px) {
-            body {
-                padding: 16px 12px;
-            }
-            .protocol-card {
-                padding: 28px 20px;
-                border-radius: 20px;
-            }
-            .protocol-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
+            .protocol-container {
+                padding: 24px 16px;
             }
             .protocol-header h1 {
                 font-size: 22px;
             }
             .protocol-meta {
-                text-align: left;
                 white-space: normal;
+                text-align: left;
             }
             .protocol-body {
                 font-size: 14px;
@@ -204,28 +193,26 @@
             }
         }
 
-        /* 滚动条美观 */
+        /* 滚动条透明简洁 */
         ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 0;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.4);
         }
     </style>
 </head>
 <body>
-
-    <div class="protocol-card" id="protocolCard">
-
-        <!-- 头部（固定，不随网络更新） -->
+    <div class="protocol-container">
+        <!-- 头部 -->
         <div class="protocol-header">
             <h1>📄 NS 使用协议</h1>
             <div class="protocol-meta">
@@ -234,37 +221,34 @@
             </div>
         </div>
 
-        <!-- 正文容器 – 会被动态替换 -->
+        <!-- 正文容器（动态填充） -->
         <div class="protocol-body" id="protocolBody">
-            <!-- 内置备用内容将在 JavaScript 中注入，此处留空 -->
+            <!-- 内容由 JavaScript 注入 -->
         </div>
 
-        <!-- 脚注（固定） -->
+        <!-- 脚注 -->
         <div class="protocol-footer">
             <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
             <span>NS 社区 · 愿您使用愉快</span>
         </div>
 
-        <!-- 加载提示（仅用于调试，可隐藏） -->
-        <div class="loading-tip" id="loadingTip">正在从 GitHub 加载最新协议…</div>
+        <!-- 加载提示 -->
+        <div class="loading-tip" id="loadingTip">正在加载最新协议…</div>
     </div>
 
     <script>
         // ============================================================
-        // 1. 配置：设置您存放协议正文（HTML 片段）的 GitHub raw 地址
-        //    如果该地址无法访问，将自动使用下方内置的备用内容。
+        // 配置：GitHub Raw 地址（存放协议正文 HTML 片段）
+        // 如果获取失败，自动使用内置备用内容
         // ============================================================
         const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/protocol-body.html';
-        // 请将您的协议正文 HTML 上传到该地址，或者修改为实际可用的 URL。
-        // 若不需要网络加载，可将其设为空字符串，则直接使用内置内容。
 
         // ============================================================
-        // 2. 内置备用协议正文（完整 HTML 片段，与之前版本一致）
-        //    当网络请求失败或 URL 无效时使用。
+        // 内置备用协议正文（完整 HTML 片段，文字样式已适配透明背景）
         // ============================================================
         const FALLBACK_HTML = `
-            <p style="font-size:16px; color:#c8d6f0; font-weight:400; margin-top:0;">
-                感谢您选择使用 <strong style="color:#eaeef5;">NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
+            <p style="font-size:16px; font-weight:400; margin-top:0;">
+                感谢您选择使用 <strong style="color:#ffffff;">NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
                 使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。
                 在使用前，请您仔细阅读并同意本协议的全部条款。
             </p>
@@ -290,7 +274,7 @@
                 <ul>
                     <li>原始作者：<strong>孤行的3044（COLID Studio）</strong></li>
                     <li>二次作者：<strong>ningqi</strong></li>
-                    <li>项目仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank" style="color:#8ab4f8; text-decoration:none;">https://github.com/ningqi24/COLID-CE-NS/</a></li>
+                    <li>项目仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank">https://github.com/ningqi24/COLID-CE-NS/</a></li>
                 </ul>
                 <li>根据 COLID Studio 最终决议，本作品 <strong>无需</strong> 在“关于”界面添加“COS”字样，但仍须显著注明 <strong>“基于 COLID OS 原创”</strong> 或 <strong>“Original by 孤行的3044”</strong>。</li>
             </ul>
@@ -371,27 +355,26 @@
 
             <hr class="divider" />
 
-            <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:14px; margin: 0.5em 0 0.2em 0;">
+            <p style="text-align:center; color:rgba(255,255,255,0.7); font-size:14px; margin: 0.5em 0 0.2em 0;">
                 ⚡ 请您在使用前再次确认已阅读并理解上述所有条款。
             </p>
         `;
 
         // ============================================================
-        // 3. 核心逻辑：尝试从 GitHub 加载，失败则使用内置备用
+        // 加载逻辑
         // ============================================================
         (function loadProtocol() {
             const bodyEl = document.getElementById('protocolBody');
             const tipEl = document.getElementById('loadingTip');
 
-            // 如果未配置 URL 或 URL 为空，直接使用内置
+            // 如果未配置 URL，直接使用内置
             if (!PROTOCOL_URL || PROTOCOL_URL.trim() === '') {
                 bodyEl.innerHTML = FALLBACK_HTML;
                 return;
             }
 
-            // 显示加载提示
             tipEl.classList.add('show');
-            tipEl.textContent = '正在从 GitHub 加载最新协议…';
+            tipEl.textContent = '正在加载最新协议…';
 
             fetch(PROTOCOL_URL, {
                 method: 'GET',
@@ -399,25 +382,20 @@
                 cache: 'no-cache'
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 return response.text();
             })
             .then(html => {
-                // 成功获取，替换正文内容
                 bodyEl.innerHTML = html;
                 tipEl.classList.remove('show');
                 console.log('✅ 协议已从 GitHub 加载');
             })
             .catch(err => {
-                // 网络错误或文件不存在，使用内置备用
                 bodyEl.innerHTML = FALLBACK_HTML;
                 tipEl.classList.remove('show');
-                console.warn('⚠️ 无法从 GitHub 加载协议，使用内置备用内容。', err);
+                console.warn('⚠️ 使用内置备用协议', err);
             });
         })();
     </script>
-
 </body>
 </html>
