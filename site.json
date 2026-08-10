@@ -833,6 +833,26 @@
       "note": "NapCat + AstrBot 组合，扫码即上，面板直达，QQ 机器人托管首选。",
       "note_en": "NapCat + AstrBot combo, scan to deploy, panel access, top QQ bot host.",
       "category": "tool"
+    },
+    {
+      "name": "Celia Music NextGen - 桌面音乐播放器",
+      "name_en": "Celia Music NextGen - Desktop Music Player",
+      "subtitle": "celiamusic.site",
+      "url": "https://celiamusic.site/",
+      "author": "seliaYYDS",
+      "author_url": "https://github.com/seliaYYDS/CeliaMusic-NextGen",
+      "tags": [
+        "音乐",
+        "播放器",
+        "开源",
+        "桌面"
+      ],
+      "description": "基于 Tauri + Rust 的开源桌面播放器，支持本地音乐、网易云和酷狗在线音源，沉浸歌词与灵动岛。",
+      "description_en": "Open-source desktop music player built on Tauri + Rust. Supports local files, NetEase Cloud & Kugou, immersive lyrics & Dynamic Island.",
+      "verified_date": "2026-08-07",
+      "note": "Tauri + Rust 构建，网易云+酷狗双音源，桌面歌词灵动岛，颜值在线。",
+      "note_en": "Tauri + Rust, dual sources NetEase+Kugou, desktop lyrics & Dynamic Island.",
+      "category": "tool"
     }
   ]
 }
