@@ -1,12 +1,12 @@
 # astras.cc
 
-> 个人精选工具导航站 · 47+ 亲测可用资源 · 不机器采集 · 每季度复核
+> 个人精选工具导航站 · 48+ 亲测可用资源 · 不机器采集 · 每季度复核
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-astras.cc-66ccff.svg)](https://astras.cc/)
 [![Status](https://img.shields.io/badge/status-live-brightgreen.svg)](https://astras.cc/)
 
-`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI）、前端工具、聊天服务、字体 CDN、小游戏与个人作品等 47+ 条资源。每条均附"亲测时间徽章 + 主观点评"，每季度复核，不靠机器采集。
+`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI）、前端工具、聊天服务、字体 CDN、小游戏与个人作品等 48+ 条资源。每条均附"亲测时间徽章 + 主观点评"，每季度复核，不靠机器采集。
 
 ---
 
@@ -28,7 +28,7 @@
 ```
 astras.cc/
 ├── index.html              # 导航首页（Hero + 筛选栏 + 卡片列表 + Footer）
-├── site.json               # 资源数据（47+ 条，含 verified_date / note / note_en）
+├── site.json               # 资源数据（48+ 条，含 verified_date / note / note_en）
 ├── sitemap.xml             # 站点地图
 ├── CNAME                   # 自定义域名 astras.cc
 ├── favicon.ico
