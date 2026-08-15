@@ -853,6 +853,26 @@
       "note": "Tauri + Rust 构建，网易云+酷狗双音源，桌面歌词灵动岛，颜值在线。",
       "note_en": "Tauri + Rust, dual sources NetEase+Kugou, desktop lyrics & Dynamic Island.",
       "category": "tool"
+    },
+    {
+      "name": "一加全能工具箱",
+      "name_en": "OnePlus All-in-one Toolbox",
+      "subtitle": "optool.daxiaamu.com",
+      "url": "https://optool.daxiaamu.com",
+      "author": "大侠阿木",
+      "author_url": "https://daxiaamu.com/",
+      "tags": [
+        "一加",
+        "ROOT",
+        "刷机",
+        "工具"
+      ],
+      "description": "一加手机 PC 端刷机 / ROOT / 解 BL 锁一体化工具，支持 Magisk、KernelSU、APatch、SukiSU-Ultra。",
+      "description_en": "OnePlus PC toolbox for flashing / ROOT / BL unlock. Supports Magisk, KernelSU, APatch, SukiSU-Ultra.",
+      "verified_date": "2026-08-07",
+      "note": "大侠阿木出品，一加刷机 ROOT 一站式，多网盘下载，刷机党必备。",
+      "note_en": "By daxiaamu, one-stop OnePlus flashing & ROOT, multi-mirror downloads.",
+      "category": "tool"
     }
   ]
 }
