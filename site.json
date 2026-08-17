@@ -892,6 +892,24 @@
       "note": "AlephPro 全新计算范式，二次元 AI 互动 + 算力经营玩法，完整体验需登录。",
       "note_en": "AlephPro next-gen computing. Anime AI interaction + compute management gameplay. Full experience requires login.",
       "category": "creative"
+    },
+    {
+      "name": "Shaihai Studio - 晒海工作室",
+      "name_en": "Shaihai Studio",
+      "subtitle": "shaihai.cn",
+      "url": "https://shaihai.cn",
+      "author": "Shaihai Studio",
+      "author_url": "https://space.bilibili.com/3690976753223882",
+      "tags": [
+        "个人作品",
+        "科普"
+      ],
+      "description": "Shaihai Studio（晒海工作室）的个人主页，坚持做高质量科普/实验性视频。页面含趣味彩蛋：背景颜色随时间变化、点击大标题跳转B站主页，并提供 BUG 反馈表单。",
+      "description_en": "Personal homepage of Shaihai Studio, dedicated to high-quality science popularization and experimental videos. Fun easter eggs: background color shifts over time, clicking the big title jumps to the Bilibili profile, plus a bug feedback form.",
+      "verified_date": "2026-08-18",
+      "note": "B站科普UP主个人站，浙ICP备案，有 BUG 反馈通道，彩蛋有意思。",
+      "note_en": "Bilibili science UP's personal site, ICP filed, has bug feedback, fun easter eggs.",
+      "category": "personal"
     }
   ]
 }
