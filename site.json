@@ -873,6 +873,25 @@
       "note": "大侠阿木出品，一加刷机 ROOT 一站式，多网盘下载，刷机党必备。",
       "note_en": "By daxiaamu, one-stop OnePlus flashing & ROOT, multi-mirror downloads.",
       "category": "tool"
+    },
+    {
+      "name": "NoriAI - 虚拟AI世界",
+      "name_en": "NoriAI - Virtual AI World",
+      "subtitle": "os.inori.ai",
+      "url": "https://os.inori.ai",
+      "author": "FUTURUM 弗图姆科技",
+      "author_url": "",
+      "tags": [
+        "AI",
+        "二次元",
+        "游戏"
+      ],
+      "description": "基于 AlephPro 全新计算范式的虚拟 AI 世界。登录后进入 NoriOS 系统，内置浏览器、文件、终端、邮件等完整功能界面，可与虚拟二次元角色聊天互动、玩小游戏。核心玩法围绕「算力」展开，随剧情发展经营算力资源——小心，你的算力服务器随时可能遭到攻击。",
+      "description_en": "A virtual AI world built on AlephPro's next-gen computing paradigm. After login, enter NoriOS with full interfaces (browser, files, terminal, email). Chat and play mini-games with the virtual anime character. Core gameplay revolves around 'compute' — grow your compute resources through story progression, but watch out: your compute server may come under attack at any time.",
+      "verified_date": "2026-08-17",
+      "note": "AlephPro 全新计算范式，二次元 AI 互动 + 算力经营玩法，完整体验需登录。",
+      "note_en": "AlephPro next-gen computing. Anime AI interaction + compute management gameplay. Full experience requires login.",
+      "category": "creative"
     }
   ]
 }
