@@ -910,6 +910,25 @@
       "note": "B站科普UP主个人站，浙ICP备案，有 BUG 反馈通道，彩蛋有意思。",
       "note_en": "Bilibili science UP's personal site, ICP filed, has bug feedback, fun easter eggs.",
       "category": "personal"
+    },
+    {
+      "name": "PixelForum 像素聚落",
+      "name_en": "PixelForum",
+      "subtitle": "www.pixelforum.cn",
+      "url": "https://www.pixelforum.cn",
+      "author": "PixelForum 像素聚落",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "社区",
+        "论坛"
+      ],
+      "description": "Minecraft 中文社区论坛（Discuz 搭建）。提供 JE 纹理光影 / Mods / 整合包 / 地图与 MCBE 资源下载，支持签到、任务、关注、充值等完整社区功能，会员榜与发帖榜活跃。",
+      "description_en": "A Chinese Minecraft community forum (powered by Discuz). Offers JE texture/shader/modpack/map and MCBE resource downloads, with sign-in, tasks, follow and credit systems, plus active member & post leaderboards.",
+      "verified_date": "2026-08-18",
+      "note": "MC 中文社区论坛，Discuz 搭建，资源板块全，京ICP备案正规，有QQ/微信客服。",
+      "note_en": "CN MC community forum on Discuz. Full resource boards, ICP filed, QQ/WeChat support.",
+      "category": "chat"
     }
   ]
 }
