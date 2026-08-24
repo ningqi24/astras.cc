@@ -3322,6 +3322,23 @@
       margin-top: 5px;
       line-height: 1.5;
     }
+    .submit-form .sf-translate-btn {
+      margin-left: 8px;
+      padding: 0 9px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent, #5b8cff);
+      background: transparent;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      cursor: pointer;
+      line-height: 1.7;
+      vertical-align: 1px;
+    }
+    .submit-form .sf-translate-btn:hover {
+      background: rgba(91, 140, 255, 0.14);
+      text-decoration: none;
+    }
     .submit-modal-slogan {
       font-size: 0.85rem;
       color: var(--text2, #8b94a3);
@@ -3440,22 +3457,27 @@
             <textarea id="sf-desc" name="description" placeholder="用一两句话说明这个网站是做什么的、好在哪"></textarea>
           </div>
           <div>
-            <label for="sf-name-en">英文名（可选）</label>
-            <input type="text" id="sf-name-en" name="name_en" autocomplete="off">
+            <label for="sf-name-en">英文名 <span class="req">*</span>
+              <button type="button" class="sf-translate-btn" onclick="openTranslate('sf-name-en','sf-name')" title="打开翻译网站帮助填写"><span data-i18n="submit-modal-translate">翻译</span>&nbsp;↗</button>
+            </label>
+            <input type="text" id="sf-name-en" name="name_en" placeholder="English site name" autocomplete="off">
           </div>
           <div>
             <label for="sf-cat">分类</label>
-            <select id="sf-cat" name="category">
+            <select id="sf-cat" name="category" onchange="toggleCustomCat()">
               <option value="">（默认：通用工具 tool）</option>
             </select>
+            <input type="text" id="sf-cat-custom" name="category_custom" placeholder="自定义分类 key（小写字母/数字/短横线，如 my-cat）" style="display:none;margin-top:6px" autocomplete="off">
           </div>
           <div class="field-full">
             <label for="sf-tags">标签（可选，逗号分隔）</label>
             <input type="text" id="sf-tags" name="tags" placeholder="如：编辑器, 开源, 免费" autocomplete="off">
           </div>
           <div class="field-full">
-            <label for="sf-desc-en">英文简介（可选）</label>
-            <textarea id="sf-desc-en" name="description_en" placeholder="如有英文版简介可在此填写"></textarea>
+            <label for="sf-desc-en">英文简介 <span class="req">*</span>
+              <button type="button" class="sf-translate-btn" onclick="openTranslate('sf-desc-en','sf-desc')" title="打开翻译网站帮助填写"><span data-i18n="submit-modal-translate">翻译</span>&nbsp;↗</button>
+            </label>
+            <textarea id="sf-desc-en" name="description_en" placeholder="Short English description of the site"></textarea>
           </div>
         </form>
       </div>
@@ -4304,7 +4326,13 @@
         opt.textContent = zh + ' (' + key + ')';
         sel.appendChild(opt);
       });
+      const customOpt = document.createElement('option');
+      customOpt.value = '__custom__';
+      customOpt.textContent = '自定义…';
+      sel.appendChild(customOpt);
     }
+    const customInput = document.getElementById('sf-cat-custom');
+    if (customInput) customInput.style.display = 'none';
     const errBox = document.getElementById('submit-modal-err');
     if (errBox) errBox.classList.remove('show');
     modal.style.display = 'flex';
@@ -4318,6 +4346,21 @@
     if (!modal) return;
     modal.classList.remove('show');
     setTimeout(() => { modal.style.display = 'none'; }, 220);
+  }
+
+  function toggleCustomCat() {
+    const sel = document.getElementById('sf-cat');
+    const customInput = document.getElementById('sf-cat-custom');
+    if (!sel || !customInput) return;
+    customInput.style.display = sel.value === '__custom__' ? 'block' : 'none';
+  }
+
+  function openTranslate(targetId, srcId) {
+    const src = (document.getElementById(srcId) || { value: '' }).value.trim();
+    const text = src ? encodeURIComponent(src) : '';
+    const url = 'https://translate.google.com/?sl=zh-CN&tl=en&op=translate'
+      + (text ? '&text=' + text : '');
+    window.open(url, '_blank', 'noopener');
   }
 
   function submitSiteIssue() {
@@ -4337,6 +4380,19 @@
     }
     if (!author) errs.push('作者');
     if (!description) errs.push('简介');
+    const nameEn = val('sf-name-en').trim();
+    const descEn = val('sf-desc-en').trim();
+    if (!nameEn) errs.push('英文名');
+    if (!descEn) errs.push('英文简介');
+    let cat = val('sf-cat').trim() || 'tool';
+    const customCat = val('sf-cat-custom').trim();
+    if (customCat) {
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(customCat)) errs.push('自定义分类 key 需为小写字母/数字/短横线');
+      else cat = customCat;
+    } else if (cat === '__custom__') {
+      errs.push('自定义分类 key');
+      cat = 'tool';
+    }
     if (errs.length) {
       errBox.textContent = '请补充以下信息：' + errs.join('、');
       errBox.classList.add('show');
@@ -4344,10 +4400,7 @@
     }
     errBox.classList.remove('show');
 
-    const nameEn = val('sf-name-en').trim();
     const authorUrl = val('sf-author-url').trim();
-    const cat = val('sf-cat').trim() || 'tool';
-    const descEn = val('sf-desc-en').trim();
     const tags = val('sf-tags').split(/[,，、]+/).map(t => t.trim()).filter(Boolean);
 
     // 按 site.json 标准字段组装（不含站长填写的 note / verified_date）
@@ -4700,7 +4753,8 @@
       'submit-site': '提交网站',
       'submit-modal-title': '提交网站',
       'submit-modal-cancel': '取消',
-      'submit-modal-submit': '生成并打开 Issue'
+      'submit-modal-submit': '生成并打开 Issue',
+      'submit-modal-translate': '翻译'
     },
     en: {
       '官网(.cc)': 'Official (.cc)',
@@ -4728,7 +4782,8 @@
       'submit-site': 'Submit Site',
       'submit-modal-title': 'Submit a Site',
       'submit-modal-cancel': 'Cancel',
-      'submit-modal-submit': 'Generate & Open Issue'
+      'submit-modal-submit': 'Generate & Open Issue',
+      'submit-modal-translate': 'Translate'
     }
   };
 
