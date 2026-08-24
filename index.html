@@ -3270,6 +3270,75 @@
       border-bottom-style: solid;
       border-right-style: solid;
     }
+
+    /* ── 提交网站 弹窗表单 ────────────────────────── */
+    .submit-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      padding: 4px 2px 2px;
+    }
+    .submit-form .field-full { grid-column: 1 / -1; }
+    .submit-form label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text2, #8b94a3);
+      margin-bottom: 5px;
+      letter-spacing: 0.02em;
+    }
+    .submit-form label .req { color: #e5484d; margin-left: 2px; }
+    .submit-form input,
+    .submit-form select,
+    .submit-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 9px 11px;
+      font-size: 0.9rem;
+      color: var(--text1, #e8edf4);
+      background: rgba(120, 130, 150, 0.12);
+      border: 1px solid rgba(130, 140, 160, 0.28);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .daylight-mode .submit-form input,
+    .daylight-mode .submit-form select,
+    .daylight-mode .submit-form textarea {
+      color: #24292f;
+      background: rgba(20, 30, 50, 0.05);
+      border-color: rgba(30, 40, 60, 0.25);
+    }
+    .submit-form input:focus,
+    .submit-form select:focus,
+    .submit-form textarea:focus {
+      border-color: var(--accent, #5b8cff);
+      box-shadow: 0 0 0 3px rgba(91, 140, 255, 0.18);
+    }
+    .submit-form textarea { resize: vertical; min-height: 64px; }
+    .submit-form .hint {
+      font-size: 0.78rem;
+      color: var(--text3, #6b7482);
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+    .submit-modal-slogan {
+      font-size: 0.85rem;
+      color: var(--text2, #8b94a3);
+      margin: -4px 0 12px;
+      line-height: 1.6;
+    }
+    .submit-modal-err {
+      display: none;
+      margin: 0 2px 12px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      color: #e5484d;
+      background: rgba(229, 72, 77, 0.1);
+      border: 1px solid rgba(229, 72, 77, 0.35);
+      border-radius: 8px;
+    }
+    .submit-modal-err.show { display: block; }
   </style>
 </head>
 
@@ -3321,7 +3390,7 @@
         <p class="hero-slogan" data-i18n-hero-slogan>
           精选 <span class="hl" id="tool-count">…</span> 个亲测可用工具 · 每条附实测时间与主观点评 · <span class="hl">不机器采集</span> · <span class="hl">每季度复核</span>
         </p>
-        <a class="hero-submit" href="https://github.com/ningqi24/astras.cc/issues/new?title=%E6%8F%90%E4%BA%A4%E7%BD%91%E7%AB%99%EF%BC%9A&labels=site-submission" target="_blank" rel="noopener noreferrer nofollow">
+        <a class="hero-submit" href="javascript:void(0);" id="submit-site-btn" onclick="openSubmitModal()" role="button" aria-haspopup="dialog">
           <span class="plus">+</span><span data-i18n="submit-site">提交网站</span>
         </a>
       </div>
@@ -3333,6 +3402,72 @@
   <button id="back-to-top-btn" class="back-to-top" title="回到顶部">
     <svg viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14V3"/><path d="M3 8l5-5 5 5"/></svg>
   </button>
+
+  <!-- 提交网站 弹窗 -->
+  <div class="detail-modal-overlay" id="submit-modal" role="dialog" aria-modal="true" style="display:none">
+    <div class="detail-modal" style="max-width:620px">
+      <button class="detail-modal-close" onclick="closeSubmitModal()" title="关闭">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+      </button>
+      <div class="detail-modal-header">
+        <h3 class="detail-modal-title" data-i18n="submit-modal-title">提交网站</h3>
+        <p class="submit-modal-slogan" id="submit-modal-slogan"></p>
+      </div>
+      <div class="detail-modal-body">
+        <div class="submit-modal-err" id="submit-modal-err"></div>
+        <form class="submit-form" id="submit-form" onsubmit="return false;">
+          <div class="field-full" style="display:none">
+            <!-- 隐藏域用于占位，避免 form 首元素为 select 时影响布局 -->
+          </div>
+          <div>
+            <label for="sf-name">站点名称 <span class="req">*</span></label>
+            <input type="text" id="sf-name" name="name" autocomplete="off">
+          </div>
+          <div>
+            <label for="sf-url">网址 URL <span class="req">*</span></label>
+            <input type="url" id="sf-url" name="url" placeholder="https://example.com" autocomplete="off">
+          </div>
+          <div>
+            <label for="sf-author">作者 / 开发者 <span class="req">*</span></label>
+            <input type="text" id="sf-author" name="author" autocomplete="off">
+          </div>
+          <div>
+            <label for="sf-author-url">作者主页</label>
+            <input type="url" id="sf-author-url" name="author_url" placeholder="可填 GitHub / 博客 等" autocomplete="off">
+          </div>
+          <div class="field-full">
+            <label for="sf-desc">简介 <span class="req">*</span></label>
+            <textarea id="sf-desc" name="description" placeholder="用一两句话说明这个网站是做什么的、好在哪"></textarea>
+          </div>
+          <div>
+            <label for="sf-name-en">英文名（可选）</label>
+            <input type="text" id="sf-name-en" name="name_en" autocomplete="off">
+          </div>
+          <div>
+            <label for="sf-cat">分类</label>
+            <select id="sf-cat" name="category">
+              <option value="">（默认：通用工具 tool）</option>
+            </select>
+          </div>
+          <div class="field-full">
+            <label for="sf-tags">标签（可选，逗号分隔）</label>
+            <input type="text" id="sf-tags" name="tags" placeholder="如：编辑器, 开源, 免费" autocomplete="off">
+          </div>
+          <div class="field-full">
+            <label for="sf-desc-en">英文简介（可选）</label>
+            <textarea id="sf-desc-en" name="description_en" placeholder="如有英文版简介可在此填写"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="detail-modal-footer">
+        <button class="detail-modal-btn detail-modal-btn-close" onclick="closeSubmitModal()" data-i18n="submit-modal-cancel">取消</button>
+        <button class="detail-modal-btn detail-modal-btn-visit" onclick="submitSiteIssue()">
+          <span data-i18n="submit-modal-submit">生成并打开 Issue</span>
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h5v5"/><path d="M14 2L7 9"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="end">
     <div class="end-content">
@@ -4137,6 +4272,131 @@
     }
   }
 
+  // ── 提交网站 弹窗表单 ──────────────────────────────
+  const submitCategoryOptions = [
+    ['astraeditor', 'AstraEditor 系列'],
+    ['colid', 'COLID 系列'],
+    ['scratch', 'Scratch 作品'],
+    ['chat', '聊天社交'],
+    ['mc-team', 'MC 开发团队'],
+    ['mc-tool', 'MC 工具'],
+    ['tool', '通用工具'],
+    ['creative', '创意项目'],
+    ['game', '小游戏'],
+    ['personal', '个人主页'],
+    ['scratch-editor', 'Scratch 编辑器']
+  ];
+
+  function openSubmitModal() {
+    const modal = document.getElementById('submit-modal');
+    if (!modal) return;
+    const slogan = document.getElementById('submit-modal-slogan');
+    if (slogan) {
+      slogan.innerHTML = currentLang === 'zh'
+        ? '填写以下信息后，将按 <b>site.json</b> 的标准字段自动生成 Issue 提交给站长审核收录。带 <span style="color:#e5484d">*</span> 为必填，其余可留空。'
+        : 'Fill in the fields below and we will generate an Issue in the standard <b>site.json</b> format for review. Fields marked <span style="color:#e5484d">*</span> are required.';
+    }
+    const sel = document.getElementById('sf-cat');
+    if (sel && sel.options.length <= 1) {
+      submitCategoryOptions.forEach(([key, zh]) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = zh + ' (' + key + ')';
+        sel.appendChild(opt);
+      });
+    }
+    const errBox = document.getElementById('submit-modal-err');
+    if (errBox) errBox.classList.remove('show');
+    modal.style.display = 'flex';
+    requestAnimationFrame(() => modal.classList.add('show'));
+    const nameInput = document.getElementById('sf-name');
+    if (nameInput) setTimeout(() => nameInput.focus(), 120);
+  }
+
+  function closeSubmitModal() {
+    const modal = document.getElementById('submit-modal');
+    if (!modal) return;
+    modal.classList.remove('show');
+    setTimeout(() => { modal.style.display = 'none'; }, 220);
+  }
+
+  function submitSiteIssue() {
+    const errBox = document.getElementById('submit-modal-err');
+    const val = (id) => (document.getElementById(id) || { value: '' }).value || '';
+    const name = val('sf-name').trim();
+    const url = val('sf-url').trim();
+    const author = val('sf-author').trim();
+    const description = val('sf-desc').trim();
+
+    const errs = [];
+    if (!name) errs.push('站点名称');
+    if (!url) errs.push('网址');
+    else {
+      try { new URL(url); }
+      catch (e) { errs.push('网址格式不正确（需以 http:// 或 https:// 开头）'); }
+    }
+    if (!author) errs.push('作者');
+    if (!description) errs.push('简介');
+    if (errs.length) {
+      errBox.textContent = '请补充以下信息：' + errs.join('、');
+      errBox.classList.add('show');
+      return;
+    }
+    errBox.classList.remove('show');
+
+    const nameEn = val('sf-name-en').trim();
+    const authorUrl = val('sf-author-url').trim();
+    const cat = val('sf-cat').trim() || 'tool';
+    const descEn = val('sf-desc-en').trim();
+    const tags = val('sf-tags').split(/[,，、]+/).map(t => t.trim()).filter(Boolean);
+
+    // 按 site.json 标准字段组装（不含站长填写的 note / verified_date）
+    const json = { name, url, author, description };
+    if (nameEn) json.name_en = nameEn;
+    if (authorUrl) json.author_url = authorUrl;
+    if (descEn) json.description_en = descEn;
+    if (tags.length) json.tags = tags;
+    if (cat) json.category = cat;
+
+    const rows = [
+      `| site.json 字段 | 值 |`,
+      `| --- | --- |`,
+      `| name（站点名称） | ${name} |`,
+      `| url（网址） | ${url} |`,
+      `| author（作者） | ${author} |`
+    ];
+    if (authorUrl) rows.push(`| author_url（作者主页） | ${authorUrl} |`);
+    rows.push(`| description（简介） | ${description} |`);
+    if (nameEn) rows.push(`| name_en（英文名） | ${nameEn} |`);
+    if (descEn) rows.push(`| description_en（英文简介） | ${descEn} |`);
+    if (cat) rows.push(`| category（分类） | ${cat} |`);
+    if (tags.length) rows.push(`| tags（标签） | ${tags.join(', ')} |`);
+
+    const body = [
+      '### 申请收录网站',
+      '',
+      '> 已按 `site.json` 标准字段填写，审核通过后请将下方 JSON 加入 `site.json`，并用 `sync.js` 同步。',
+      '',
+      '```json',
+      JSON.stringify(json, null, 2),
+      '```',
+      '',
+      '---',
+      '',
+      '**字段核对：**',
+      '',
+      rows.join('\n'),
+      '',
+      '以上信息属实，欢迎联系我补充细节。'
+    ].join('\n');
+
+    const issueUrl = 'https://github.com/ningqi24/astras.cc/issues/new'
+      + '?title=' + encodeURIComponent('提交网站：' + name)
+      + '&labels=site-submission'
+      + '&body=' + encodeURIComponent(body);
+    window.open(issueUrl, '_blank', 'noopener');
+  }
+
   let currentPlatform = '';
 
   function toggleDownloadCard(key) {
@@ -4437,7 +4697,10 @@
       '免责声明': '免责声明',
       '关于本站': '关于本站',
       'EN': 'EN',
-      'submit-site': '提交网站'
+      'submit-site': '提交网站',
+      'submit-modal-title': '提交网站',
+      'submit-modal-cancel': '取消',
+      'submit-modal-submit': '生成并打开 Issue'
     },
     en: {
       '官网(.cc)': 'Official (.cc)',
@@ -4462,7 +4725,10 @@
       '免责声明': 'Disclaimer',
       '关于本站': 'About',
       'EN': '中文',
-      'submit-site': 'Submit Site'
+      'submit-site': 'Submit Site',
+      'submit-modal-title': 'Submit a Site',
+      'submit-modal-cancel': 'Cancel',
+      'submit-modal-submit': 'Generate & Open Issue'
     }
   };
 
