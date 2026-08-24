@@ -3924,7 +3924,8 @@
     order.forEach(catKey => {
       if (!grouped[catKey]) return;
 
-      const catName = currentLang === 'zh' ? categories[catKey].zh : categories[catKey].en;
+      const catDef = categories[catKey] || { zh: catKey, en: catKey };
+      const catName = currentLang === 'zh' ? catDef.zh : catDef.en;
       const count = grouped[catKey].length;
       const isCollapsed = collapsedState[catKey] === true;
 
@@ -4895,6 +4896,10 @@
         <li><a href="/go/?u=https%3A%2F%2Fwww.wormwake.com%2F">WormWaker 博客与产品站</a> - 独立开发者个人博客+产品展，项目思路清晰，有参考价值。</li>
         <li><a href="/go/?u=https%3A%2F%2Fwww.cunzhangblog.com%2F">Web3村长 - 技术博客</a> - 109 篇技术博客，Cloudflare/AI 实战经验丰富，保姆级教程，值得订阅。</li>
         <li><a href="/go/?u=https%3A%2F%2Fshaihai.cn">Shaihai Studio - 晒海工作室</a> - B站科普UP主个人站，浙ICP备案，有 BUG 反馈通道，彩蛋有意思。</li>
+      </ul>
+      <h2>Scratch 编辑器</h2>
+      <ul>
+        <li><a href="/go/?u=https%3A%2F%2Fremixwarp.pages.dev%2F">RemixWarp（重构跃迁）少儿图形化编辑器</a> - 项目方自嘲「移植bug又添新bug」，官网需 JS 且多域名存在访问错误。用户反馈稳定性不足、易崩溃、资源占用高。优势在于融合多家编辑器功能</li>
       </ul>
       <p style="margin-top:30px;font-size:0.85em;color:#888">
         <a href="/disclaimer/">免责声明</a> ·
