@@ -920,7 +920,7 @@
       "author_url": "https://remixwarp.pages.dev/",
       "tags": [
         "Scratch",
-        "编辑器", 
+        "编辑器"
       ],
       "description": "基于 Scratch 的图形化编辑器，汇集 TurboWarp、MistWarp、O2Engine、AstraEditor、Builp 等多家编辑器特性，支持极速编译、插件生态、实时预览与多格式导出。",
       "description_en": "Scratch-based graphical editor that integrates features from TurboWarp, MistWarp, O2Engine, AstraEditor, Builp, etc. Supports fast compilation, plugin ecosystem, live preview, and multi-format export.",
