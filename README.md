@@ -154,7 +154,7 @@ GitHub Pages + CNAME = `astras.cc`，纯静态无构建。直接 `git push` 到 
 
 ## 贡献
 
-- 提交新资源建议：[GitHub Issues](https://github.com/ningqi24/astras.cc/issues/new)
+- 提交新资源建议：点击站内「提交网站」按钮，按 `site.json` 标准字段填写后自动生成 Issue；亦可直接 [GitHub Issues](https://github.com/ningqi24/astras.cc/issues/new)
 - 报死链 / 报毒 / 报违规：[GitHub Issues](https://github.com/ningqi24/astras.cc/issues/new)
 - 收录标准：① 站长亲测可访问 ② 有明确来源 ③ 与 AstraEditor / Scratch / 前端工具相关
 
