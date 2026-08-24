@@ -4358,8 +4358,9 @@
   function openTranslate(targetId, srcId) {
     const src = (document.getElementById(srcId) || { value: '' }).value.trim();
     const text = src ? encodeURIComponent(src) : '';
-    const url = 'https://translate.google.com/?sl=zh-CN&tl=en&op=translate'
-      + (text ? '&text=' + text : '');
+    // 国内可访问：使用百度翻译（zh -> en），内容自动带过去
+    const url = 'https://fanyi.baidu.com/#zh/en'
+      + (text ? '/' + text : '');
     window.open(url, '_blank', 'noopener');
   }
 
