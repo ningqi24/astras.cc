@@ -928,7 +928,7 @@
       "note": "项目方自嘲「移植bug又添新bug」，官网需 JS 且多域名存在访问错误。用户反馈稳定性不足、易崩溃、资源占用高。优势在于融合多家编辑器功能，但当前代码成熟度较低，建议谨慎评估后使用。",
       "note_en": "The team jokes about 'porting bugs and adding new ones'. Website requires JS and shows errors on multiple domains. Users report poor stability, crashes, and high resource usage. Its strength lies in merging features from various editors, but current code maturity is low; evaluate carefully before use.",
       "category": "scratch-editor"
-    }
+    },
     {
       "name": "PixelForum 像素聚落",
       "name_en": "PixelForum",
