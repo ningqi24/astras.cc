@@ -3882,7 +3882,8 @@
       'tool': { zh: '通用工具', en: 'General Tools' },
       'creative': { zh: '创意项目', en: 'Creative' },
       'game': { zh: '小游戏', en: 'Games' },
-      'personal': { zh: '个人主页', en: 'Personal' }
+      'personal': { zh: '个人主页', en: 'Personal' },
+      'scratch-editor': { zh: 'Scratch 编辑器', en: 'Scratch Editors' }
     };
 
     function getCategory(button) {
@@ -3897,6 +3898,10 @@
     });
 
     const order = ['astraeditor', 'colid', 'scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
+    // 自动纳入 site.json 中出现的所有新分类（追加到末尾，保持首次出现顺序）
+    Object.keys(grouped).forEach(catKey => {
+      if (catKey && !order.includes(catKey)) order.push(catKey);
+    });
 
     // Determine which categories should start collapsed
     const hasActiveFilter = !!currentSearch || !!activeTag;
