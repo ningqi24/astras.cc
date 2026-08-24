@@ -912,6 +912,24 @@
       "category": "personal"
     },
     {
+      "name": "RemixWarp（重构跃迁）少儿图形化编辑器",
+      "name_en": "RemixWarp",
+      "subtitle": "remixwarp.pages.dev",
+      "url": "https://remixwarp.pages.dev/",
+      "author": "RemixWarp Team",
+      "author_url": "https://remixwarp.pages.dev/",
+      "tags": [
+        "Scratch",
+        "编辑器", 
+      ],
+      "description": "基于 Scratch 的图形化编辑器，汇集 TurboWarp、MistWarp、O2Engine、AstraEditor、Builp 等多家编辑器特性，支持极速编译、插件生态、实时预览与多格式导出。",
+      "description_en": "Scratch-based graphical editor that integrates features from TurboWarp, MistWarp, O2Engine, AstraEditor, Builp, etc. Supports fast compilation, plugin ecosystem, live preview, and multi-format export.",
+      "verified_date": "2026-08-24",
+      "note": "项目方自嘲「移植bug又添新bug」，官网需 JS 且多域名存在访问错误。用户反馈稳定性不足、易崩溃、资源占用高。优势在于融合多家编辑器功能，但当前代码成熟度较低，建议谨慎评估后使用。",
+      "note_en": "The team jokes about 'porting bugs and adding new ones'. Website requires JS and shows errors on multiple domains. Users report poor stability, crashes, and high resource usage. Its strength lies in merging features from various editors, but current code maturity is low; evaluate carefully before use.",
+      "category": "scratch-editor"
+    }
+    {
       "name": "PixelForum 像素聚落",
       "name_en": "PixelForum",
       "subtitle": "www.pixelforum.cn",
