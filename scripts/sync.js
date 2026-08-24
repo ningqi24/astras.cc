@@ -34,7 +34,8 @@ const CATEGORY_CONFIG = [
   { key: "tool", zh: "通用工具与开发资源" },
   { key: "creative", zh: "创意项目" },
   { key: "game", zh: "小游戏" },
-  { key: "personal", zh: "个人主页" }
+  { key: "personal", zh: "个人主页" },
+  { key: "scratch-editor", zh: "Scratch 编辑器" }
 ];
 
 let html = fs.readFileSync(INDEX_HTML, "utf8");
@@ -79,7 +80,14 @@ let noscriptContent = "";
 noscriptContent += `      <p>astras.cc 是个人精选工具导航站，收录 ${count} 个亲测可用资源，涵盖 AstraEditor、COLID、Scratch 作品、Minecraft 工具与团队、前端组件库、字体 CDN、小游戏与个人作品。每条附实测时间与主观点评，不靠机器采集，每季度复核。</p>\n`;
 noscriptContent += `      <p>本站需要 JavaScript 运行以获得完整体验（卡片视图、筛选、搜索、收藏等）。以下是收录资源的完整列表：</p>\n`;
 
-for (const { key, zh } of CATEGORY_CONFIG) {
+// 分类顺序：配置分类在前，site.json 中出现的新分类自动追加到末尾
+const orderedCats = [
+  ...CATEGORY_CONFIG.filter(c => grouped[c.key]).map(c => ({ key: c.key, zh: c.zh })),
+  ...Object.keys(grouped)
+    .filter(k => !CATEGORY_CONFIG.some(c => c.key === k))
+    .map(k => ({ key: k, zh: k }))
+];
+for (const { key, zh } of orderedCats) {
   const items = grouped[key];
   if (!items || items.length === 0) continue;
   noscriptContent += `      <h2>${zh}</h2>\n      <ul>\n`;
@@ -134,9 +142,14 @@ console.log(`\n✅ 同步完成：${count} 条资源`);
 console.log(`   - meta/OG/Twitter/Schema 数字已更新`);
 console.log(`   - noscript 兜底列表已重新生成`);
 
-// 输出分类统计
+// 输出分类统计（含未配置的新分类，自动识别）
 console.log(`\n分类统计：`);
 for (const { key, zh } of CATEGORY_CONFIG) {
   const n = (grouped[key] || []).length;
   if (n > 0) console.log(`   ${zh.padEnd(20)} ${n}`);
 }
+Object.keys(grouped)
+  .filter(k => !CATEGORY_CONFIG.some(c => c.key === k))
+  .forEach(k => {
+    console.log(`   ${k.padEnd(20)} ${grouped[k].length}  (自动识别新分类)`);
+  });
