@@ -947,6 +947,25 @@
       "note": "MC 中文社区论坛，Discuz 搭建，资源板块全，京ICP备案正规，有QQ/微信客服。",
       "note_en": "CN MC community forum on Discuz. Full resource boards, ICP filed, QQ/WeChat support.",
       "category": "chat"
+    },
+    {
+      "name": "ModMinds 模组开发平台",
+      "name_en": "ModMinds Mod Development Platform",
+      "subtitle": "ether-studio.top",
+      "url": "https://ether-studio.top/",
+      "author": "Ether Studio",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "模组开发",
+        "AI"
+      ],
+      "description": "Minecraft 模组一站式开发平台：桌面开发工具内置 Agent 接入，授权后即可调用 AI 模型服务；按量计费、余额硬管控，余额不足自动冻结、充值秒级恢复，支持兑换码秒到账。",
+      "description_en": "A one-stop platform for Minecraft mod development. Desktop dev tools come with built-in Agent integration granting AI model services on authorization; pay-as-you-go billing with hard balance control, auto-freeze when credit runs out and instant restore after top-up, redeem-code recharge.",
+      "verified_date": "2026-08-25",
+      "note": "亲测可访问（已抓取验证）。模组开发者向的 AI 接入平台，兑换码在闲鱼自助购买。",
+      "note_en": "Verified accessible. Mod-dev oriented AI integration platform; redeem codes self-purchased on Xianyu.",
+      "category": "mc-tool"
     }
   ]
 }
