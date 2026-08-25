@@ -3435,15 +3435,15 @@
       </div>
       <div class="color-picker-wrap" id="color-picker-wrap">
         <button type="button" class="color-picker-toggle" id="color-picker-toggle" onclick="toggleColorPicker()" title="主题色">
-          <svg viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 2v4M8 10v4M2 8h4M10 8h4"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <svg viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2a7 7 0 1 0 7 7c0-1.6-1.3-2.9-2.9-2.9h-2.3A1.8 1.8 0 0 1 9 4.3V2z"/><circle cx="4.6" cy="7.2" r="0.9" fill="currentColor" stroke="none"/><circle cx="6.1" cy="12.1" r="0.9" fill="currentColor" stroke="none"/><circle cx="11.7" cy="12.5" r="0.9" fill="currentColor" stroke="none"/></svg>
         </button>
         <div class="color-picker-panel" id="color-picker-panel">
           <div class="color-picker-label" id="color-picker-label">主题色</div>
           <div class="color-picker" id="color-picker"></div>
         </div>
       </div>
-      <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()">
-        <a href="javascript:void(0)" class="tabButton">夜间</a>
+      <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()" style="display:inline-flex;align-items:center;justify-content:center;gap:4px" aria-label="切换日间/夜间模式">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M13.5 8.5A5.5 5.5 0 1 1 7.5 2.5a4.5 4.5 0 0 0 6 6z"/></svg><a href="javascript:void(0)" class="tabButton">夜间</a>
       </button>
       <button type="button" class="tabButton" id="lang-toggle-btn" onclick="toggleLang()">
         <a href="javascript:void(0)" class="tabButton">EN</a>
@@ -4887,7 +4887,9 @@
   function applyTheme() {
     const btn = document.getElementById('theme-toggle-btn');
     if (btn) {
-      btn.innerHTML = `<a href="javascript:void(0)" class="tabButton">${currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间']}</a>`;
+      const sunIcon = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M12.95 3.05l-1.42 1.42M4.47 11.53l-1.42 1.42"/></svg>';
+      const moonIcon = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M13.5 8.5A5.5 5.5 0 1 1 7.5 2.5a4.5 4.5 0 0 0 6 6z"/></svg>';
+      btn.innerHTML = `${currentTheme === 'dark' ? sunIcon : moonIcon}<a href="javascript:void(0)" class="tabButton">${currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间']}</a>`;
     }
     if (currentTheme === 'light') {
       document.documentElement.classList.add('daylight-mode');
