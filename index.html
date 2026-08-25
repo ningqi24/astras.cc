@@ -3442,8 +3442,8 @@
           <div class="color-picker" id="color-picker"></div>
         </div>
       </div>
-      <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()" style="display:inline-flex;align-items:center;justify-content:center;gap:4px" aria-label="切换日间/夜间模式">
-        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M13.5 8.5A5.5 5.5 0 1 1 7.5 2.5a4.5 4.5 0 0 0 6 6z"/></svg><a href="javascript:void(0)" class="tabButton">夜间</a>
+      <button type="button" class="tabButton" id="theme-toggle-btn" onclick="toggleTheme()" style="display:inline-flex;align-items:center;justify-content:center;min-width:36px;padding:0 6px" aria-label="切换日间/夜间模式" title="切换日间/夜间">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M13.5 8.5A5.5 5.5 0 1 1 7.5 2.5a4.5 4.5 0 0 0 6 6z"/></svg>
       </button>
       <button type="button" class="tabButton" id="lang-toggle-btn" onclick="toggleLang()">
         <a href="javascript:void(0)" class="tabButton">EN</a>
@@ -4853,9 +4853,6 @@
     if (heroSlogan && translations[currentLang]['hero-slogan']) {
       heroSlogan.innerHTML = translations[currentLang]['hero-slogan'].replace('{count}', siteButtons.length);
     }
-    document.querySelectorAll('#theme-toggle-btn a.tabButton').forEach(el => {
-      el.textContent = currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间'];
-    });
     const colorLabel = document.getElementById('color-picker-label');
     if (colorLabel) {
       colorLabel.textContent = currentLang === 'zh' ? '主题色' : 'Theme Color';
@@ -4889,7 +4886,7 @@
     if (btn) {
       const sunIcon = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M12.95 3.05l-1.42 1.42M4.47 11.53l-1.42 1.42"/></svg>';
       const moonIcon = '<svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M13.5 8.5A5.5 5.5 0 1 1 7.5 2.5a4.5 4.5 0 0 0 6 6z"/></svg>';
-      btn.innerHTML = `${currentTheme === 'dark' ? sunIcon : moonIcon}<a href="javascript:void(0)" class="tabButton">${currentTheme === 'dark' ? translations[currentLang]['夜间'] : translations[currentLang]['日间']}</a>`;
+      btn.innerHTML = currentTheme === 'dark' ? sunIcon : moonIcon;
     }
     if (currentTheme === 'light') {
       document.documentElement.classList.add('daylight-mode');
