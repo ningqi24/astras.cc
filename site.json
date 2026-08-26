@@ -966,6 +966,25 @@
       "note": "亲测可访问（已抓取验证）。模组开发者向的 AI 接入平台，兑换码在闲鱼自助购买。",
       "note_en": "Verified accessible. Mod-dev oriented AI integration platform; redeem codes self-purchased on Xianyu.",
       "category": "mc-tool"
+    },
+    {
+      "name": "AutoMods",
+      "name_en": "AutoMods",
+      "subtitle": "automods.cn",
+      "url": "https://automods.cn/",
+      "author": "AutoMods",
+      "author_url": "",
+      "tags": [
+        "MC",
+        "模组制作",
+        "AI"
+      ],
+      "description": "用对话做 Minecraft 模组：一句话说清想法，AI 自动生成并实时展示每一步（读写文件、改动、编译是否通过），产物 jar/源码/贴图/模型随时可下载；支持连续对话与透明过程，兼容 Fabric/Forge/NeoForge。",
+      "description_en": "Make Minecraft mods by chatting: describe the idea in one sentence and AI generates it live, showing every step (files read/written, changes, build status); artifacts like jar/source/textures/models are downloadable anytime; supports ongoing dialogue and transparency, compatible with Fabric/Forge/NeoForge.",
+      "verified_date": "2026-08-25",
+      "note": "亲测可访问（浏览器验证）。AI 对话式模组制作平台，微信扫码注册送 1000 积分，公测中。",
+      "note_en": "Verified accessible via browser. AI dialogue-based mod creation platform; WeChat scan signup gives 1000 credits, in open beta.",
+      "category": "mc-tool"
     }
   ]
 }
