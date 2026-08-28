@@ -985,6 +985,25 @@
       "note": "亲测可访问（浏览器验证）。AI 对话式模组制作平台，微信扫码注册送 1000 积分，公测中。",
       "note_en": "Verified accessible via browser. AI dialogue-based mod creation platform; WeChat scan signup gives 1000 credits, in open beta.",
       "category": "mc-tool"
+    },
+    {
+      "name": "Celestial Launcher",
+      "name_en": "Celestial Launcher",
+      "subtitle": "celestial.wemsur.top",
+      "url": "https://celestial.wemsur.top/",
+      "author": "Wemsur",
+      "author_url": "https://github.com/Wemsur/Celestial-Launcher",
+      "tags": [
+        "MC",
+        "启动器",
+        "开源"
+      ],
+      "description": "免费开源的 Minecraft 游戏启动器，基于 Modrinth App 分叉。多版本库互不打扰、直接兼容现有 .minecraft（从 PCL/HMCL/官方启动器零成本迁移）、自定义主题色与背景、离线登录、完整汉化、无广告、自动更新。",
+      "description_en": "A free & open-source Minecraft launcher forked from the Modrinth App. Multiple instance libraries that don't interfere, direct compatibility with existing .minecraft (zero-cost migration from PCL/HMCL/official launcher), custom accent color & background, offline login, full Chinese localization, ad-free, auto-update.",
+      "verified_date": "2026-08-25",
+      "note": "亲测可访问（浏览器验证）。开源启动器，Linux/RPM/DEB 等各平台安装包齐全。",
+      "note_en": "Verified accessible via browser. Open-source launcher with Linux/RPM/DEB packages.",
+      "category": "mc-tool"
     }
   ]
 }
