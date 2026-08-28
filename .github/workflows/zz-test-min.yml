@@ -1,9 +1,0 @@
-name: MinTest
-"on":
-  issue_comment:
-    types: [created]
-jobs:
-  hi:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo hello
