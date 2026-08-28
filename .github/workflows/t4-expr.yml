@@ -1,0 +1,9 @@
+name: T4expr
+"on":
+  issue_comment:
+    types: [created]
+jobs:
+  j:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.event.issue.number }}"
