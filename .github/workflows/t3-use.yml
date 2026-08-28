@@ -1,0 +1,12 @@
+name: T3use
+"on":
+  issue_comment:
+    types: [created]
+jobs:
+  j:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
