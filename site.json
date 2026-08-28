@@ -1093,6 +1093,26 @@
       "category": "mc-tool",
       "github": "https://github.com/Wemsur/Celestial-Launcher",
       "group": "mc"
+    },
+    {
+      "name": "nsos",
+      "name_en": "nsos",
+      "subtitle": "nsos.astras.cc",
+      "url": "https://nsos.astras.cc",
+      "author": "ningqi24",
+      "author_url": "https://github.com/ningqi24",
+      "tags": [
+        "HTML",
+        "操作系统"
+      ],
+      "description": "一个运行在浏览器里的迷你移动操作系统（Web-based OS）。分层渲染、状态机驱动，含 Android 风格开机引导（Fastboot/Recovery）、桌面 Launcher、真锁屏、状态栏、终端与设置应用；内置统一命令引擎（shell），支持真实设备信息、虚拟文件系统、分区挂载、bootloader 解锁刷写等终端玩法。",
+      "description_en": "A web-based mini mobile OS running in the browser. Layered rendering driven by state machine: Android-style boot (Fastboot/Recovery), desktop Launcher, real lock screen, status bar, terminal & settings apps; built-in unified shell command engine with real device info, virtual filesystem, partition mounting, bootloader unlock/flash.",
+      "verified_date": "2026-08-29",
+      "note": "亲测：页面模拟完整 Android 开机流程（开机动画→锁屏→桌面），双击状态栏回锁屏；桌面终端命令真实可用（devinfo/df/mount/wipe/reboot/fastboot 等），Fastboot/Recovery 工程模式可进入，极客趣味十足。",
+      "note_en": "Tested: simulates full Android boot flow (boot animation → lock screen → desktop). Desktop terminal commands really work (devinfo/df/mount/wipe/reboot/fastboot etc.). Fastboot/Recovery modes accessible. Geeky fun.",
+      "category": "creative",
+      "github": "https://github.com/ningqi24/nsos",
+      "group": "creative"
     }
   ]
 }
