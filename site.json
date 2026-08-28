@@ -16,7 +16,8 @@
       "verified_date": "2026-07-31",
       "note": "Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。",
       "note_en": "Scratch-derivative editor, CN-maintained, open-source on GitHub. Trustworthy.",
-      "category": "scratch-editor"
+      "category": "scratch-editor",
+      "github": "https://github.com/AstraEditor/AstraEditor"
     },
     {
       "name": "AstraEditor 非官方定制官网(.cc)",
@@ -34,7 +35,8 @@
       "verified_date": "2026-07-31",
       "note": "AstraEditor 官网镜像，个人维护，fork 自官方仓库。",
       "note_en": "Mirror of AstraEditor official, personal fork for UX tweaks.",
-      "category": "scratch-editor"
+      "category": "scratch-editor",
+      "github": "https://github.com/ningqi24/editors.astras.cc"
     },
     {
       "name": "COLID NS UI - scratch",
@@ -52,7 +54,8 @@
       "verified_date": "2026-07-31",
       "note": "Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。",
       "note_en": "Scratch-based OS mock, open-source (CC-BY-4.0), study only.",
-      "category": "scratch"
+      "category": "scratch",
+      "github": "https://github.com/ningqi24/COLID-CE-NS"
     },
     {
       "name": "COLID Studio",
@@ -141,7 +144,8 @@
       "verified_date": "2026-07-31",
       "note": "需注册且满13岁，有隐私政策，运营规模小，GitHub 开源。",
       "note_en": "Reg required (13+), has privacy policy, small-scale, open-source.",
-      "category": "chat"
+      "category": "chat",
+      "github": "https://github.com/ningqi24/minichat.astras"
     },
     {
       "name": "SimpleChatMini - scratch",
@@ -159,7 +163,8 @@
       "verified_date": "2026-07-31",
       "note": "个人维护的 Scratch 打包项目，仅供学习。",
       "note_en": "Personal Scratch bundled project, study only.",
-      "category": "scratch"
+      "category": "scratch",
+      "github": "https://github.com/ningqi24/simplechatmini.astras"
     },
     {
       "name": "AstraEditor 下载站(.cc)",
@@ -177,7 +182,8 @@
       "verified_date": "2026-07-31",
       "note": "第三方代下，ghproxy 加速，速度尚可，GitHub 开源。",
       "note_en": "Third-party download mirror, ghproxy accelerated, open-source.",
-      "category": "scratch-editor"
+      "category": "scratch-editor",
+      "github": "https://github.com/ningqi24/download.astras"
     },
     {
       "name": "Search 极简页",
@@ -194,7 +200,8 @@
       "verified_date": "2026-07-31",
       "note": "Via 聚合搜索，含谷歌必应百度360等，无后端，GitHub 开源。",
       "note_en": "Via aggregated search (Google/Bing/Baidu/360), no backend, open-source.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/ningqi24/search.astras"
     },
     {
       "name": "深海字体 CDN",
@@ -245,7 +252,8 @@
       "verified_date": "2026-07-31",
       "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。",
       "note_en": "Personal, open-source, best tool for highway signs, CN-friendly.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/NanGua-QWQ/SignGenerator"
     },
     {
       "name": "Lucide 图标中文网",
@@ -262,7 +270,8 @@
       "verified_date": "2026-07-31",
       "note": "知名开源图标库国内汉化站，好评但 UI 不多。",
       "note_en": "Popular icon library, CN localized, praised but sparse UI.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/lucide-icons/lucide"
     },
     {
       "name": "React Bits 组件库",
@@ -279,7 +288,8 @@
       "verified_date": "2026-07-31",
       "note": "高质量 React 动效组件库，GitHub 44.6k 星，开源免费。",
       "note_en": "High-quality React animation library, 44.6k stars, free & open-source.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/DavidHDev/react-bits"
     },
     {
       "name": "鲨鲨幸存者",
@@ -382,7 +392,8 @@
       "verified_date": "2026-07-31",
       "note": "Minecraft 核心开发团队官方站，有完整项目介绍，关注 MC 生态必看。",
       "note_en": "Minecraft-focused dev team homepage. Complete project listings for MC ecosystem watchers.",
-      "category": "mc-team"
+      "category": "mc-team",
+      "github": "https://github.com/Corona-Studio"
     },
     {
       "name": "Ghost Downloader 资源发现器",
@@ -416,7 +427,8 @@
       "verified_date": "2026-07-31",
       "note": "Windows 桌面美化一站式，主题定制友好，适合美化党。",
       "note_en": "One-stop Windows desktop customization. Theme-friendly, for aesthetic lovers.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/nicepkg/deskmakeover"
     },
     {
       "name": "莫老师的附件表",
@@ -504,7 +516,8 @@
       "verified_date": "2026-07-31",
       "note": "Modrinth 生态 MC 启动器，开源免费，国内可用速度不错。",
       "note_en": "Modrinth-ecosystem MC launcher. Open-source, free, CN-reachable.",
-      "category": "mc-tool"
+      "category": "mc-tool",
+      "github": "https://github.com/Mystic-Stars/Axolotl"
     },
     {
       "name": "WormWaker 博客与产品站",
@@ -628,7 +641,8 @@
       "verified_date": "2026-08-01",
       "note": "开源跨平台 MC 启动器，现代简洁 UI，多实例管理，Modrinth 生态友好。",
       "note_en": "Open-source cross-platform MC launcher. Clean modern UI, multi-instance & Modrinth-friendly.",
-      "category": "mc-tool"
+      "category": "mc-tool",
+      "github": "https://github.com/tiouoo/Portal"
     },
     {
       "name": "bxya B站AI学习机器人",
@@ -645,7 +659,8 @@
       "verified_date": "2026-08-02",
       "note": "开源全自动 B 站 AI 学习机器人，作者 xiaoyaya191，自动化挂机学习，效率拉满。",
       "note_en": "Open-source automated bilibili AI learning bot by xiaoyaya191. Auto study, full efficiency.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/xiaoyaya191/bilibili_learning_bot"
     },
     {
       "name": "LUMEN MC 创作平台",
@@ -682,7 +697,8 @@
       "verified_date": "2026-08-02",
       "note": "AI Agent 工具，类似 Claude Code/Codex，septemc 维护，Android 端可用。",
       "note_en": "AI agent tool, similar to Claude Code/Codex, maintained by septemc, available on Android.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/Septemc/Coomi"
     },
     {
       "name": "resourcery - MC 资源包工具箱",
@@ -739,7 +755,8 @@
       "verified_date": "2026-08-03",
       "note": "前端设计师必备，新拟物风格阴影一键出码，GitHub 开源。",
       "note_en": "Must-have for frontend designers, one-click neumorphic shadow code, open-source on GitHub.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/adamgiebl/neumorphism"
     },
     {
       "name": "PMPK 高速编号牌生成器 - NanGua-QWQ",
@@ -852,7 +869,8 @@
       "verified_date": "2026-08-07",
       "note": "Tauri + Rust 构建，网易云+酷狗双音源，桌面歌词灵动岛，颜值在线。",
       "note_en": "Tauri + Rust, dual sources NetEase+Kugou, desktop lyrics & Dynamic Island.",
-      "category": "tool"
+      "category": "tool",
+      "github": "https://github.com/seliaYYDS/CeliaMusic-NextGen"
     },
     {
       "name": "一加全能工具箱",
@@ -1003,7 +1021,8 @@
       "verified_date": "2026-08-25",
       "note": "亲测可访问（浏览器验证）。开源启动器，Linux/RPM/DEB 等各平台安装包齐全。",
       "note_en": "Verified accessible via browser. Open-source launcher with Linux/RPM/DEB packages.",
-      "category": "mc-tool"
+      "category": "mc-tool",
+      "github": "https://github.com/Wemsur/Celestial-Launcher"
     }
   ]
 }
