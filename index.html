@@ -285,6 +285,48 @@
       opacity: 0.7;
       margin-left: 2px;
     }
+    .group-header {
+      font-size: 0.86rem;
+      margin-top: 18px;
+    }
+    .sub-cat-header {
+      width: 100%;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      opacity: 0.88;
+      margin: 14px 0 8px;
+      padding-left: 4px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .sub-cat-header:hover {
+      color: var(--text-primary);
+    }
+    .sub-cat-header .cat-toggle-arrow {
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .sub-cat-header.collapsed .cat-toggle-arrow {
+      transform: rotate(-90deg);
+    }
+    .sub-cat-header .cat-count {
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      margin-left: 2px;
+    }
+    .card-group .card-group {
+      margin-bottom: 6px;
+    }
     .card-group {
       transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.35s ease;
       overflow: hidden;
@@ -2410,6 +2452,16 @@
         margin-bottom: 8px;
       }
 
+      .group-header {
+        font-size: 0.76rem;
+      }
+
+      .sub-cat-header {
+        font-size: 0.66rem;
+        letter-spacing: 0.5px;
+        margin: 10px 0 6px;
+      }
+
       .card-group {
         margin-bottom: 18px;
       }
@@ -4123,96 +4175,177 @@
       return button.category || 'tool';
     }
 
-    const grouped = {};
+    // 大分类配置（group -> 中级分类）。cats 为空表示单分类组（组内不渲染中级标题）
+    const GROUP_CONFIG = [
+      { key: 'scratch', zh: 'Scratch', en: 'Scratch', cats: ['scratch-editor', 'scratch'] },
+      { key: 'mc', zh: 'Minecraft', en: 'Minecraft', cats: ['mc-team', 'mc-tool'] },
+      { key: 'tool', zh: '通用工具', en: 'General Tools', cats: ['tool'] },
+      { key: 'chat', zh: '聊天社交', en: 'Chat & Social', cats: ['chat'] },
+      { key: 'creative', zh: '创意项目', en: 'Creative', cats: ['creative'] },
+      { key: 'game', zh: '小游戏', en: 'Games', cats: ['game'] },
+      { key: 'personal', zh: '个人主页', en: 'Personal', cats: ['personal'] }
+    ];
+
+    // 由 category 推断大分类；未配置/自定义分类直接用自身作为大分类
+    function getGroup(button) {
+      if (button.group) return button.group;
+      const cat = getCategory(button);
+      const g = GROUP_CONFIG.find(gr => gr.cats.includes(cat));
+      return g ? g.key : cat;
+    }
+
+    const groupedByCat = {};
     filtered.forEach(({ button, index }) => {
       const cat = getCategory(button);
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push({ button, index });
+      if (!groupedByCat[cat]) groupedByCat[cat] = [];
+      groupedByCat[cat].push({ button, index });
     });
 
-    const order = ['scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
-    // 自动纳入 site.json 中出现的所有新分类（追加到末尾，保持首次出现顺序）
-    Object.keys(grouped).forEach(catKey => {
-      if (catKey && !order.includes(catKey)) order.push(catKey);
+    // 大分类顺序：已知 group 在前，自动纳入的自定义分类组追加到末尾
+    const groupOrder = [];
+    GROUP_CONFIG.forEach(gr => {
+      if (gr.cats.some(c => groupedByCat[c])) groupOrder.push(gr.key);
+    });
+    Object.keys(groupedByCat).forEach(cat => {
+      if (!GROUP_CONFIG.some(gr => gr.cats.includes(cat)) && !groupOrder.includes(cat)) {
+        groupOrder.push(cat);
+      }
     });
 
-    // Determine which categories should start collapsed
+    // Determine which groups should start collapsed
     const hasActiveFilter = !!currentSearch || !!activeTag;
     const collapsedState = getCollapsedCategories();
 
-    // If no active filter, ensure first 3 visible categories are expanded
+    // If no active filter, ensure first 3 visible groups are expanded
     if (!hasActiveFilter) {
-      let visibleCount = 0;
-      order.forEach(catKey => {
-        if (grouped[catKey]) visibleCount++;
-      });
-      if (visibleCount > 3) {
+      if (groupOrder.length > 3) {
         let i = 0;
-        order.forEach(catKey => {
-          if (grouped[catKey]) {
-            if (i >= 3 && collapsedState[catKey] === undefined) {
-              collapsedState[catKey] = true;
-            }
-            i++;
+        groupOrder.forEach(gKey => {
+          const gState = 'g:' + gKey;
+          if (i >= 3 && collapsedState[gState] === undefined) {
+            collapsedState[gState] = true;
           }
+          i++;
         });
       }
     }
 
-    order.forEach(catKey => {
-      if (!grouped[catKey]) return;
+    const arrowSvg = '<span class="cat-toggle-arrow"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span>';
 
-      const catDef = categories[catKey] || { zh: catKey, en: catKey };
-      const catName = currentLang === 'zh' ? catDef.zh : catDef.en;
-      const count = grouped[catKey].length;
-      const isCollapsed = collapsedState[catKey] === true;
+    groupOrder.forEach(gKey => {
+      const grpDef = GROUP_CONFIG.find(g => g.key === gKey);
+      // 该大分类内的中级分类
+      let catKeys;
+      if (grpDef) {
+        catKeys = grpDef.cats.filter(c => groupedByCat[c]);
+      } else {
+        catKeys = [gKey]; // 自定义分类自身成组
+      }
+      if (catKeys.length === 0) return;
 
-      // Category header with toggle
-      const header = document.createElement('div');
-      header.className = 'category-header' + (isCollapsed ? ' collapsed' : '');
-      header.innerHTML = '<span class="cat-toggle-arrow"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg></span>' + catName + '<span class="cat-count">(' + count + ')</span>';
-      container.appendChild(header);
+      const grpName = currentLang === 'zh'
+        ? (grpDef ? grpDef.zh : gKey)
+        : (grpDef ? grpDef.en : gKey);
+      let grpCount = 0;
+      catKeys.forEach(c => { grpCount += groupedByCat[c].length; });
+      const multiSub = grpDef && grpDef.cats.length > 1;
+      const grpCollapsed = collapsedState['g:' + gKey] === true;
 
-      // Card group
-      const groupWrap = document.createElement('div');
-      groupWrap.className = 'card-group' + (isCollapsed ? ' collapsed' : '');
+      // 大分类 header（可折叠）
+      const gHeader = document.createElement('div');
+      gHeader.className = 'category-header group-header' + (grpCollapsed ? ' collapsed' : '');
+      gHeader.innerHTML = arrowSvg + grpName + '<span class="cat-count">(' + grpCount + ')</span>';
+      container.appendChild(gHeader);
 
-      grouped[catKey].forEach(({ button, index }) => {
-        groupWrap.appendChild(createSiteCard(button, index));
+      // 大分类容器
+      const gWrap = document.createElement('div');
+      gWrap.className = 'card-group' + (grpCollapsed ? ' collapsed' : '');
+
+      catKeys.forEach(catKey => {
+        const items = groupedByCat[catKey];
+        const catDef = categories[catKey] || { zh: catKey, en: catKey };
+        const catName = currentLang === 'zh' ? catDef.zh : catDef.en;
+        const isSubCollapsed = collapsedState[catKey] === true;
+
+        if (multiSub) {
+          // 中级分类 header（可折叠）
+          const sHeader = document.createElement('div');
+          sHeader.className = 'sub-cat-header' + (isSubCollapsed ? ' collapsed' : '');
+          sHeader.innerHTML = arrowSvg + catName + '<span class="cat-count">(' + items.length + ')</span>';
+          gWrap.appendChild(sHeader);
+
+          const subWrap = document.createElement('div');
+          subWrap.className = 'card-group' + (isSubCollapsed ? ' collapsed' : '');
+          items.forEach(({ button, index }) => {
+            subWrap.appendChild(createSiteCard(button, index));
+          });
+          gWrap.appendChild(subWrap);
+
+          if (!isSubCollapsed) {
+            subWrap.style.maxHeight = subWrap.scrollHeight + 'px';
+            setTimeout(() => {
+              if (!subWrap.classList.contains('collapsed')) {
+                subWrap.style.maxHeight = 'none';
+              }
+            }, 400);
+          }
+
+          sHeader.onclick = function() {
+            const collapsed = subWrap.classList.toggle('collapsed');
+            sHeader.classList.toggle('collapsed', collapsed);
+            if (collapsed) {
+              subWrap.style.maxHeight = '0px';
+            } else {
+              subWrap.style.maxHeight = subWrap.scrollHeight + 'px';
+              setTimeout(() => {
+                if (!subWrap.classList.contains('collapsed')) {
+                  subWrap.style.maxHeight = 'none';
+                }
+              }, 400);
+            }
+            collapsedState[catKey] = collapsed;
+            saveCollapsedCategories(collapsedState);
+          };
+        } else {
+          // 单分类组：卡片直接放入大分类容器
+          const subWrap = document.createElement('div');
+          subWrap.className = 'card-group';
+          items.forEach(({ button, index }) => {
+            subWrap.appendChild(createSiteCard(button, index));
+          });
+          gWrap.appendChild(subWrap);
+        }
       });
 
-      // Set real max-height after cards are rendered
-      if (!isCollapsed) {
-        groupWrap.style.maxHeight = groupWrap.scrollHeight + 'px';
-        // Clean up max-height after layout settles, so container can grow naturally
+      container.appendChild(gWrap);
+
+      // 大分类展开动画
+      if (!grpCollapsed) {
+        gWrap.style.maxHeight = gWrap.scrollHeight + 'px';
         setTimeout(() => {
-          if (!groupWrap.classList.contains('collapsed')) {
-            groupWrap.style.maxHeight = 'none';
+          if (!gWrap.classList.contains('collapsed')) {
+            gWrap.style.maxHeight = 'none';
           }
         }, 400);
       }
 
-      // Toggle handler
-      header.onclick = function() {
-        const collapsed = groupWrap.classList.toggle('collapsed');
-        header.classList.toggle('collapsed', collapsed);
+      // 大分类 toggle
+      gHeader.onclick = function() {
+        const collapsed = gWrap.classList.toggle('collapsed');
+        gHeader.classList.toggle('collapsed', collapsed);
         if (collapsed) {
-          groupWrap.style.maxHeight = '0px';
+          gWrap.style.maxHeight = '0px';
         } else {
-          const actualHeight = groupWrap.scrollHeight;
-          groupWrap.style.maxHeight = actualHeight + 'px';
-          // Clean up max-height after transition to allow future reflows
+          gWrap.style.maxHeight = gWrap.scrollHeight + 'px';
           setTimeout(() => {
-            if (!groupWrap.classList.contains('collapsed')) {
-              groupWrap.style.maxHeight = 'none';
+            if (!gWrap.classList.contains('collapsed')) {
+              gWrap.style.maxHeight = 'none';
             }
           }, 400);
         }
-        collapsedState[catKey] = collapsed;
+        collapsedState['g:' + gKey] = collapsed;
         saveCollapsedCategories(collapsedState);
       };
-
-      container.appendChild(groupWrap);
     });
 
     pointer.bind_targets_events();
@@ -4376,16 +4509,10 @@
   }
 
   // ── 提交网站 弹窗表单 ──────────────────────────────
-  const submitCategoryOptions = [
-    ['scratch', 'Scratch 作品'],
-    ['chat', '聊天社交'],
-    ['mc-team', 'MC 开发团队'],
-    ['mc-tool', 'MC 工具'],
-    ['tool', '通用工具'],
-    ['creative', '创意项目'],
-    ['game', '小游戏'],
-    ['personal', '个人主页'],
-    ['scratch-editor', 'Scratch 编辑器']
+  const submitCategoryGroups = [
+    { label: 'Scratch', options: [['scratch-editor', 'Scratch 编辑器'], ['scratch', 'Scratch 作品']] },
+    { label: 'Minecraft', options: [['mc-team', 'MC 开发团队'], ['mc-tool', 'MC 工具']] },
+    { label: '其他', options: [['tool', '通用工具'], ['chat', '聊天社交'], ['creative', '创意项目'], ['game', '小游戏'], ['personal', '个人主页']] }
   ];
 
   function openSubmitModal() {
@@ -4399,11 +4526,16 @@
     }
     const sel = document.getElementById('sf-cat');
     if (sel && sel.options.length <= 1) {
-      submitCategoryOptions.forEach(([key, zh]) => {
-        const opt = document.createElement('option');
-        opt.value = key;
-        opt.textContent = zh + ' (' + key + ')';
-        sel.appendChild(opt);
+      submitCategoryGroups.forEach(group => {
+        const og = document.createElement('optgroup');
+        og.label = group.label;
+        group.options.forEach(([key, zh]) => {
+          const opt = document.createElement('option');
+          opt.value = key;
+          opt.textContent = zh + ' (' + key + ')';
+          og.appendChild(opt);
+        });
+        sel.appendChild(og);
       });
       const customOpt = document.createElement('option');
       customOpt.value = '__custom__';
