@@ -3,7 +3,7 @@ name: Import Site from Issue
 # 站长在提交网站的 Issue 里评论 /confirm（或 /ok）后，自动把 Issue 中的 JSON 合并进 site.json 并部署。
 # 仅仓库拥有者/协作者的评论生效，其他人评论会被拒绝。
 
-on:
+"on":
   issue_comment:
     types: [created]
 
