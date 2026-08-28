@@ -3576,12 +3576,20 @@
             <input type="url" id="sf-url" name="url" placeholder="https://example.com" autocomplete="off">
           </div>
           <div>
+            <label for="sf-subtitle">副标题（可选）</label>
+            <input type="text" id="sf-subtitle" name="subtitle" placeholder="如域名短名 editors.astras.cc" autocomplete="off">
+          </div>
+          <div>
             <label for="sf-author">作者 / 开发者 <span class="req">*</span></label>
             <input type="text" id="sf-author" name="author" autocomplete="off">
           </div>
           <div>
             <label for="sf-author-url">作者主页</label>
             <input type="url" id="sf-author-url" name="author_url" placeholder="可填 GitHub / 博客 等" autocomplete="off">
+          </div>
+          <div>
+            <label for="sf-github">GitHub 仓库（可选）</label>
+            <input type="url" id="sf-github" name="github" placeholder="https://github.com/作者/仓库" autocomplete="off">
           </div>
           <div class="field-full">
             <label for="sf-desc">简介 <span class="req">*</span></label>
@@ -3609,6 +3617,10 @@
               <button type="button" class="sf-translate-btn" onclick="openTranslate('sf-desc-en','sf-desc')" title="打开翻译网站帮助填写"><span data-i18n="submit-modal-translate">翻译</span>&nbsp;↗</button>
             </label>
             <textarea id="sf-desc-en" name="description_en" placeholder="Short English description of the site"></textarea>
+          </div>
+          <div class="field-full">
+            <label for="sf-note">实测点评（可选，站长会展示）</label>
+            <textarea id="sf-note" name="note" placeholder="如：加载速度快、功能全、UI 精致、开源可自部署……" maxlength="300"></textarea>
           </div>
         </form>
       </div>
@@ -4606,6 +4618,12 @@
       errs.push('自定义分类 key');
       cat = 'tool';
     }
+    const authorUrl = val('sf-author-url').trim();
+    const subtitle = val('sf-subtitle').trim();
+    const github = val('sf-github').trim();
+    const note = val('sf-note').trim();
+    if (github && !/^https?:\/\/github\.com\//i.test(github)) errs.push('GitHub 仓库链接需为 github.com 地址');
+    if (subtitle.length > 80) errs.push('副标题过长（最多 80 字）');
     if (errs.length) {
       errBox.textContent = '请补充以下信息：' + errs.join('、');
       errBox.classList.add('show');
@@ -4613,15 +4631,17 @@
     }
     errBox.classList.remove('show');
 
-    const authorUrl = val('sf-author-url').trim();
     const tags = val('sf-tags').split(/[,，、]+/).map(t => t.trim()).filter(Boolean);
 
-    // 按 site.json 标准字段组装（不含站长填写的 note / verified_date）
+    // 按 site.json 标准字段组装（note / verified_date / group 由站长与 Actions 入库时补充）
     const json = { name, url, author, description };
     if (nameEn) json.name_en = nameEn;
+    if (subtitle) json.subtitle = subtitle;
     if (authorUrl) json.author_url = authorUrl;
     if (descEn) json.description_en = descEn;
     if (tags.length) json.tags = tags;
+    if (note) json.note = note;
+    if (github) json.github = github;
     if (cat) json.category = cat;
 
     const rows = [
@@ -4631,12 +4651,15 @@
       `| url（网址） | ${url} |`,
       `| author（作者） | ${author} |`
     ];
+    if (subtitle) rows.push(`| subtitle（副标题） | ${subtitle} |`);
     if (authorUrl) rows.push(`| author_url（作者主页） | ${authorUrl} |`);
+    if (github) rows.push(`| github（仓库） | ${github} |`);
     rows.push(`| description（简介） | ${description} |`);
     if (nameEn) rows.push(`| name_en（英文名） | ${nameEn} |`);
     if (descEn) rows.push(`| description_en（英文简介） | ${descEn} |`);
     if (cat) rows.push(`| category（分类） | ${cat} |`);
     if (tags.length) rows.push(`| tags（标签） | ${tags.join(', ')} |`);
+    if (note) rows.push(`| note（实测点评） | ${note} |`);
 
     const body = [
       '### 申请收录网站',
