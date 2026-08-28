@@ -16,7 +16,7 @@
       "verified_date": "2026-07-31",
       "note": "Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。",
       "note_en": "Scratch-derivative editor, CN-maintained, open-source on GitHub. Trustworthy.",
-      "category": "astraeditor"
+      "category": "scratch-editor"
     },
     {
       "name": "AstraEditor 非官方定制官网(.cc)",
@@ -34,7 +34,7 @@
       "verified_date": "2026-07-31",
       "note": "AstraEditor 官网镜像，个人维护，fork 自官方仓库。",
       "note_en": "Mirror of AstraEditor official, personal fork for UX tweaks.",
-      "category": "astraeditor"
+      "category": "scratch-editor"
     },
     {
       "name": "COLID NS UI - scratch",
@@ -52,7 +52,7 @@
       "verified_date": "2026-07-31",
       "note": "Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。",
       "note_en": "Scratch-based OS mock, open-source (CC-BY-4.0), study only.",
-      "category": "colid"
+      "category": "scratch"
     },
     {
       "name": "COLID Studio",
@@ -70,7 +70,7 @@
       "verified_date": "2026-07-31",
       "note": "Scratch 仿 OS，开源协议未知，B站有信誉背书，mysxl 免费建站。",
       "note_en": "Scratch OS project, license unknown, Bilibili-backed, on mysxl.",
-      "category": "colid"
+      "category": "scratch"
     },
     {
       "name": "COLID-EG APP Store",
@@ -88,7 +88,7 @@
       "verified_date": "2026-07-31",
       "note": "COLID 社区应用商店下载站，Scratch 制，仅供学习，mysxl 免费建站。",
       "note_en": "COLID app store downloads, Scratch-made, study only, on mysxl.",
-      "category": "colid"
+      "category": "scratch"
     },
     {
       "name": "COLID-EG 官网",
@@ -106,7 +106,7 @@
       "verified_date": "2026-07-31",
       "note": "COLID 社区应用商店主页，Scratch 制，仅供学习，mysxl 免费建站。",
       "note_en": "COLID app store homepage, Scratch-made, study only, on mysxl.",
-      "category": "colid"
+      "category": "scratch"
     },
     {
       "name": "ToingOS/NQOS UI - scratch",
@@ -159,7 +159,7 @@
       "verified_date": "2026-07-31",
       "note": "个人维护的 Scratch 打包项目，仅供学习。",
       "note_en": "Personal Scratch bundled project, study only.",
-      "category": "chat"
+      "category": "scratch"
     },
     {
       "name": "AstraEditor 下载站(.cc)",
@@ -177,7 +177,7 @@
       "verified_date": "2026-07-31",
       "note": "第三方代下，ghproxy 加速，速度尚可，GitHub 开源。",
       "note_en": "Third-party download mirror, ghproxy accelerated, open-source.",
-      "category": "astraeditor"
+      "category": "scratch-editor"
     },
     {
       "name": "Search 极简页",

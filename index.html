@@ -4080,8 +4080,6 @@
     }
 
     const categories = {
-      'astraeditor': { zh: 'AstraEditor 系列', en: 'AstraEditor' },
-      'colid': { zh: 'COLID 系列', en: 'COLID' },
       'scratch': { zh: 'Scratch 作品', en: 'Scratch Works' },
       'chat': { zh: '聊天社交', en: 'Chat & Social' },
       'mc-team': { zh: 'MC 开发团队', en: 'MC Dev Teams' },
@@ -4104,7 +4102,7 @@
       grouped[cat].push({ button, index });
     });
 
-    const order = ['astraeditor', 'colid', 'scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
+    const order = ['scratch', 'chat', 'mc-team', 'mc-tool', 'tool', 'creative', 'game', 'personal'];
     // 自动纳入 site.json 中出现的所有新分类（追加到末尾，保持首次出现顺序）
     Object.keys(grouped).forEach(catKey => {
       if (catKey && !order.includes(catKey)) order.push(catKey);
@@ -4346,8 +4344,6 @@
 
   // ── 提交网站 弹窗表单 ──────────────────────────────
   const submitCategoryOptions = [
-    ['astraeditor', 'AstraEditor 系列'],
-    ['colid', 'COLID 系列'],
     ['scratch', 'Scratch 作品'],
     ['chat', '聊天社交'],
     ['mc-team', 'MC 开发团队'],
@@ -5189,30 +5185,21 @@
     <div style="max-width:800px;margin:40px auto;padding:0 20px;font-family:sans-serif;color:#eee;background:#111;min-height:100vh">
       <h1>Astras.CC · 个人精选工具导航站</h1>
       <!-- NOSCRIPT-AUTO-START -->
-      <p>astras.cc 是个人精选工具导航站，收录 56 个亲测可用资源，涵盖 AstraEditor、COLID、Scratch 作品、Minecraft 工具与团队、前端组件库、字体 CDN、小游戏与个人作品。每条附实测时间与主观点评，不靠机器采集，每季度复核。</p>
+      <p>astras.cc 是个人精选工具导航站，收录 56 个亲测可用资源，涵盖 Scratch 编辑器与作品、Minecraft 工具与团队、前端组件库、字体 CDN、小游戏与个人作品。每条附实测时间与主观点评，不靠机器采集，每季度复核。</p>
       <p>本站需要 JavaScript 运行以获得完整体验（卡片视图、筛选、搜索、收藏等）。以下是收录资源的完整列表：</p>
-      <h2>AstraEditor 编辑器</h2>
-      <ul>
-        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.top%2F">AstraEditor 官网(.top)</a> - Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。</li>
-        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.cc%2F">AstraEditor 非官方定制官网(.cc)</a> - AstraEditor 官网镜像，个人维护，fork 自官方仓库。</li>
-        <li><a href="/go/?u=https%3A%2F%2Fdownload.astras.cc%2F">AstraEditor 下载站(.cc)</a> - 第三方代下，ghproxy 加速，速度尚可，GitHub 开源。</li>
-      </ul>
-      <h2>COLID 系列</h2>
+      <h2>Scratch 作品</h2>
       <ul>
         <li><a href="/go/?u=https%3A%2F%2Fcolidns.mysxl.cn%2F">COLID NS UI - scratch</a> - Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。</li>
         <li><a href="/go/?u=https%3A%2F%2Fcolid.mysxl.cn%2F">COLID Studio</a> - Scratch 仿 OS，开源协议未知，B站有信誉背书，mysxl 免费建站。</li>
         <li><a href="/go/?u=https%3A%2F%2Fcolid-eg-appstore.mysxl.cn%2F">COLID-EG APP Store</a> - COLID 社区应用商店下载站，Scratch 制，仅供学习，mysxl 免费建站。</li>
         <li><a href="/go/?u=https%3A%2F%2Fcolid-eg.mysxl.cn%2F">COLID-EG 官网</a> - COLID 社区应用商店主页，Scratch 制，仅供学习，mysxl 免费建站。</li>
-      </ul>
-      <h2>Scratch 作品</h2>
-      <ul>
         <li><a href="/go/?u=https%3A%2F%2Fningqi24.mysxl.cn%2F">ToingOS/NQOS UI - scratch</a> - 作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。</li>
+        <li><a href="/go/?u=https%3A%2F%2Fsimplechatmini.astras.cc%2F">SimpleChatMini - scratch</a> - 个人维护的 Scratch 打包项目，仅供学习。</li>
         <li><a href="/go/?u=https%3A%2F%2Fnqxz.mysxl.cn%2F">ningqi开发社</a> - 作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。</li>
       </ul>
       <h2>聊天与社交</h2>
       <ul>
         <li><a href="/go/?u=https%3A%2F%2Fminichat.astras.cc">Minichat聊天 - Astras.cc</a> - 需注册且满13岁，有隐私政策，运营规模小，GitHub 开源。</li>
-        <li><a href="/go/?u=https%3A%2F%2Fsimplechatmini.astras.cc%2F">SimpleChatMini - scratch</a> - 个人维护的 Scratch 打包项目，仅供学习。</li>
         <li><a href="/go/?u=https%3A%2F%2Fforum.ctspace.xyz%2F">创客次元 MakerVerse - 创作者社区</a> - 创作者社区，氛围友好，有开放 API 和扩展能力，适合技术创作交流。</li>
         <li><a href="/go/?u=https%3A%2F%2Fwww.pixelforum.cn">PixelForum 像素聚落</a> - MC 中文社区论坛，Discuz 搭建，资源板块全，京ICP备案正规，有QQ/微信客服。</li>
       </ul>
@@ -5278,6 +5265,9 @@
       </ul>
       <h2>Scratch 编辑器</h2>
       <ul>
+        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.top%2F">AstraEditor 官网(.top)</a> - Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。</li>
+        <li><a href="/go/?u=https%3A%2F%2Feditors.astras.cc%2F">AstraEditor 非官方定制官网(.cc)</a> - AstraEditor 官网镜像，个人维护，fork 自官方仓库。</li>
+        <li><a href="/go/?u=https%3A%2F%2Fdownload.astras.cc%2F">AstraEditor 下载站(.cc)</a> - 第三方代下，ghproxy 加速，速度尚可，GitHub 开源。</li>
         <li><a href="/go/?u=https%3A%2F%2Fremixwarp.pages.dev%2F">RemixWarp（重构跃迁）少儿图形化编辑器</a> - 项目方自嘲「移植bug又添新bug」，官网需 JS 且多域名存在访问错误。用户反馈稳定性不足、易崩溃、资源占用高。优势在于融合多家编辑器功能</li>
       </ul>
       <p style="margin-top:30px;font-size:0.85em;color:#888">
