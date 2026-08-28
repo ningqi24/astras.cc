@@ -1,0 +1,12 @@
+name: T2if
+"on":
+  issue_comment:
+    types: [created]
+jobs:
+  j:
+    if: >
+      !contains(github.event.issue.pull_request) &&
+      (contains(github.event.comment.body, '/confirm') || contains(github.event.comment.body, '/ok'))
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hi
