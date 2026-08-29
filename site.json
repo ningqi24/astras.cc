@@ -1068,6 +1068,46 @@
       "category": "creative",
       "github": "https://github.com/ningqi24/nsos",
       "group": "creative"
+    },
+    {
+      "name": "02Engine",
+      "name_en": "02Engine",
+      "subtitle": "02engine.org",
+      "url": "https://02engine.org/",
+      "author": "0.2Studio",
+      "author_url": "https://github.com/02engine",
+      "tags": [
+        "编辑器",
+        "扩展"
+      ],
+      "description": "02Engine 是 TurboWarp 的二次修改版编辑器（官网自称 mod of TurboWarp），主打极限速度与丰富扩展：移除帧率上限提升运行速度，整合 PenguinMod、TurboWarp 与社区扩展（工具/物理/3D/网络），内置扩展管理器与代码转换工具，为硬核用户打造。",
+      "description_en": "02Engine is a mod of TurboWarp focused on extreme speed and rich extensions: removes framerate cap for faster runtime, integrates PenguinMod, TurboWarp and community extensions (tools/physics/3D/network), with an expansion manager and code tools for hardcore users.",
+      "verified_date": "2026-08-29",
+      "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器，UI 较朴素但功能强大，适合极客玩家，稳定性一般。",
+      "note_en": "Verified accessible via browser. TurboWarp mod with a plain UI but very powerful features for hardcore users; stability is so-so.",
+      "category": "scratch-editor",
+      "github": "https://github.com/02engine",
+      "group": "scratch"
+    },
+    {
+      "name": "Bilup",
+      "name_en": "Bilup",
+      "subtitle": "com.bilup.org",
+      "url": "https://com.bilup.org/",
+      "author": "Bilup",
+      "author_url": "https://github.com/Bilup",
+      "tags": [
+        "编辑器",
+        "协作"
+      ],
+      "description": "Bilup 是基于 TurboWarp 的 Scratch 二次修改编辑器：保留熟悉的编辑器体验，加入 blocks-to-JS 编译器、大量插件与主题、项目打包器、调试器、Git 版本控制与实时多人协作，并附带账号体系的社区平台；免费开源，浏览器/桌面端皆可用。",
+      "description_en": "Bilup is a Scratch modification built on TurboWarp: keeps the familiar editor and adds a blocks-to-JS compiler, a large set of addons and themes, a project packager, a debugger, git version control, live collaboration, and a community platform with accounts. Free and open source, works in browser or desktop.",
+      "verified_date": "2026-08-29",
+      "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器（用户所述 mistwarp 二改，实为 TurboWarp 二改），运行稳定，实时多人协作功能强大。",
+      "note_en": "Verified accessible via browser. TurboWarp mod (reported as MistWarp mod, actually built on TurboWarp). Stable, with powerful live collaboration.",
+      "category": "scratch-editor",
+      "github": "https://github.com/Bilup",
+      "group": "scratch"
     }
   ]
 }
