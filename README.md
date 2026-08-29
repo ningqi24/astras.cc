@@ -1,12 +1,23 @@
+---
+AIGC:
+    Label: "1"
+    ContentProducer: 001191440300708461136T1XGW3
+    ProduceID: 3f46cd201310b9f16429cf9ea350a564_b8ca321ca34911f192a2525400287e28
+    ReservedCode1: 0wqSRkwY4bZ/7FigtsJhXe0qzKb3Gg8HVpugaCtH5Iqkz1zSReX1seLPqOdeGFSh7Ep1Mifm2zeAZDK4sUI3X5T7JMH3Z12GcvsduU5XubvBgCzY3QYgYoMkvZ62bQMS0Oj57+ls8ZuP34zljTsOkG+bR9o7gXCjjsBTfWp9z7VwE1ylBtmcWnsnihg=
+    ContentPropagator: 001191440300708461136T1XGW3
+    PropagateID: 3f46cd201310b9f16429cf9ea350a564_b8ca321ca34911f192a2525400287e28
+    ReservedCode2: 0wqSRkwY4bZ/7FigtsJhXe0qzKb3Gg8HVpugaCtH5Iqkz1zSReX1seLPqOdeGFSh7Ep1Mifm2zeAZDK4sUI3X5T7JMH3Z12GcvsduU5XubvBgCzY3QYgYoMkvZ62bQMS0Oj57+ls8ZuP34zljTsOkG+bR9o7gXCjjsBTfWp9z7VwE1ylBtmcWnsnihg=
+---
+
 # astras.cc
 
-> 个人精选工具导航站 · 57+ 亲测可用资源 · 人工筛选 · 每季度复核
+> 个人精选工具导航站 · 59+ 亲测可用资源 · 人工筛选 · 每季度复核
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-astras.cc-66ccff.svg)](https://astras.cc/)
 [![Status](https://img.shields.io/badge/status-live-brightgreen.svg)](https://astras.cc/)
 
-`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI / 编辑器）、Minecraft 工具与团队、前端工具、聊天服务、小游戏与个人作品等 57+ 条资源。每条均附「亲测时间徽章 + 双语主观点评 + GitHub 仓库链接」，每季度复核，不靠机器采集。
+`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI / 编辑器）、Minecraft 工具与团队、前端工具、聊天服务、小游戏与个人作品等 59+ 条资源。每条均附「亲测时间徽章 + 双语主观点评 + GitHub 仓库链接」，每季度复核，不靠机器采集。
 
 ---
 
@@ -206,3 +217,4 @@ GitHub Pages + CNAME = `astras.cc`，纯静态无构建。直接 `git push` 到 
 ## 许可证
 
 MIT © [ningqi](https://github.com/ningqi24)
+*（内容由AI生成，仅供参考）*
