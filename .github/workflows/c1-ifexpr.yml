@@ -1,0 +1,10 @@
+name: Diag
+"on":
+  issue_comment:
+    types: [created]
+jobs:
+  j:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.comment.body }}
+    steps:
+      - run: echo ok
