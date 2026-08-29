@@ -1113,22 +1113,6 @@
       "category": "creative",
       "github": "https://github.com/ningqi24/nsos",
       "group": "creative"
-    },
-    {
-      "name": "Issue导入测试站",
-      "name_en": "Issue Import Test",
-      "url": "https://issue-test.example.com",
-      "author": "ningqi",
-      "description": "用于验证 Issue 自动导入工作流的测试站点",
-      "description_en": "Test site for issue auto-import workflow",
-      "category": "tool",
-      "tags": [
-        "测试",
-        "workflow"
-      ],
-      "note": "链路验证用：提交 -> 评论确认 -> 自动入库",
-      "verified_date": "2026-08-29",
-      "group": "tool"
     }
   ]
 }
