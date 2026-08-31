@@ -11,13 +11,13 @@ AIGC:
 
 # astras.cc
 
-> 个人精选工具导航站 · 59+ 亲测可用资源 · 人工筛选 · 每季度复核
+> 个人精选工具导航站 · 60+ 亲测可用资源 · 人工筛选 · 每季度复核
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-astras.cc-66ccff.svg)](https://astras.cc/)
 [![Status](https://img.shields.io/badge/status-live-brightgreen.svg)](https://astras.cc/)
 
-`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI / 编辑器）、Minecraft 工具与团队、前端工具、聊天服务、小游戏与个人作品等 59+ 条资源。每条均附「亲测时间徽章 + 双语主观点评 + GitHub 仓库链接」，每季度复核，不靠机器采集。
+`astras.cc` 是由 [@ningqi24](https://github.com/ningqi24) 个人维护的聚合导航站。收录 AstraEditor、Scratch 衍生项目（OS / UI / 编辑器）、Minecraft 工具与团队、前端工具、聊天服务、小游戏与个人作品等 60+ 条资源。每条均附「亲测时间徽章 + 双语主观点评 + GitHub 仓库链接」，每季度复核，不靠机器采集。
 
 ---
 
