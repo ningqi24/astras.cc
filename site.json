@@ -1108,6 +1108,25 @@
       "category": "scratch-editor",
       "github": "https://github.com/Bilup",
       "group": "scratch"
+    },
+    {
+      "name": "Scratch Mods",
+      "name_en": "Scratch Mods",
+      "subtitle": "scratchmod.github.io",
+      "url": "https://scratchmod.github.io/",
+      "author": "GabsTheCuriousKid",
+      "author_url": "https://github.com/ScratchMod",
+      "tags": [
+        "导航"
+      ],
+      "description": "Scratch 模组导航目录站：集中罗列 60+ 个 Scratch 及其二次 mod 的入口（AbsoluteMod、Circle-IDE、PenguinMod、TurboWarp、MistWarp、02Engine、AstraEditor、ClipCC、Xcratch 等），是查找 Scratch 衍生编辑器的聚合索引。",
+      "description_en": "A directory of Scratch mods: aggregates links to 60+ Scratch and mod-of-mod editors (AbsoluteMod, Circle-IDE, PenguinMod, TurboWarp, MistWarp, 02Engine, AstraEditor, ClipCC, Xcratch, etc.) as an index of Scratch derivatives.",
+      "verified_date": "2026-08-29",
+      "note": "亲测可访问（浏览器验证）。开源目录站，主要维护者 GabsTheCuriousKid，收录约 66 个 Scratch 模组/编辑器。",
+      "note_en": "Verified accessible via browser. Open-source directory maintained by GabsTheCuriousKid, listing ~66 Scratch mods/editors.",
+      "category": "tool",
+      "github": "https://github.com/ScratchMod/scratchmod.github.io",
+      "group": "tool"
     }
   ]
 }
