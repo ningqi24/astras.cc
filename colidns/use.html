@@ -204,8 +204,7 @@
         <div class="protocol-header">
             <h1>NS 使用协议</h1>
             <div class="protocol-meta">
-                <span class="version">v1.0</span>
-                <span>生效：2026.08.07</span>
+                <span class="version">内容以仓库 README 为最新</span>
             </div>
         </div>
 
@@ -226,10 +225,10 @@
 
     <script>
         // ============================================================
-        // 配置：GitHub Raw 地址（存放协议正文 HTML 片段）
+        // 配置：GitHub Raw 地址（仓库根目录 README.md，Markdown 格式）
         // 如果获取失败，自动使用内置备用内容
         // ============================================================
-        const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/protocol-body.html';
+        const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/README.md';
 
         // ============================================================
         // 内置备用协议正文（无任何emoji，纯黑色文字）
@@ -365,15 +364,55 @@
 
             fetch(PROTOCOL_URL, {
                 method: 'GET',
-                headers: { 'Accept': 'text/html' },
+                headers: { 'Accept': 'text/plain' },
                 cache: 'no-cache'
             })
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();
             })
-            .then(html => {
-                // 可在此过滤emoji，但假设远程内容也不含emoji
+            .then(rawText => {
+                // 将 Markdown 风格的纯文本转换为 HTML
+                let html = rawText
+                    // 分隔线
+                    .replace(/^---+$/gm, '<hr class="divider" />')
+                    // 标题（### / ## / #）
+                    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+                    // 加粗（**文本**）
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    // 链接（[文本](url)）
+                    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>')
+                    // 有序列表（数字. 开头）
+                    .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>')
+                    // 无序列表（- 开头）
+                    .replace(/^-\s+(.+)$/gm, '<li>$1</li>')
+                    // 缩进子项（含前导空格的 - 开头）
+                    .replace(/^\s+-\s+(.+)$/gm, '<li>$1</li>')
+                    // 段落（连续两行换行分隔）
+                    .replace(/\n\n/g, '</p><p>')
+                    // 换行
+                    .replace(/\n/g, '<br />');
+
+                // 包装成完整段落
+                html = '<p>' + html + '</p>';
+
+                // 修复列表：将连续的 <li> 包装到 <ul> 中
+                html = html.replace(/(<li>.*?<\/li>)+/g, function(match) {
+                    return '<ul>' + match + '</ul>';
+                });
+
+                // 清理多余的 <p><ul> 和 </ul></p>
+                html = html.replace(/<p><ul>/g, '<ul>');
+                html = html.replace(/<\/ul><\/p>/g, '</ul>');
+                html = html.replace(/<p><\/p>/g, '');
+                html = html.replace(/<p><hr class="divider" \/><\/p>/g, '<hr class="divider" />');
+                html = html.replace(/<p><h3>/g, '<h3>');
+                html = html.replace(/<\/h3><\/p>/g, '</h3>');
+                html = html.replace(/<p><h2>/g, '<h2>');
+                html = html.replace(/<\/h2><\/p>/g, '</h2>');
+
                 bodyEl.innerHTML = html;
                 tipEl.classList.remove('show');
             })
