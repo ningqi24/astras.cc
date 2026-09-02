@@ -231,117 +231,7 @@
         // 内置备用协议正文（无任何emoji，纯黑色文字）
         // ============================================================
         const FALLBACK_HTML = `
-            <p style="font-size:16px; font-weight:400; margin-top:0;">
-                感谢您选择使用 <strong>NS</strong>。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，
-                使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。
-                在使用前，请您仔细阅读并同意本协议的全部条款。
-            </p>
-
-            <hr class="divider" />
-
-            <h2>一、版权与归属</h2>
-
-            <h3>1. 原创版权</h3>
-            <ul>
-                <li>本作品所引用的 <strong>COLID OS</strong> 原创设计、视觉元素、核心逻辑等，其知识产权归 <strong>COLID Studio</strong> 及其创始人 <strong>孤行的3044</strong> 所有。</li>
-                <li>本作品作为二次创作产物，其 <strong>新增原创代码、界面调整、功能重置</strong> 等部分，版权归 <strong>NS 作者 ningqi</strong> 所有，但不得损害原始版权方的合法权益。</li>
-            </ul>
-
-            <h3>2. 开源协议</h3>
-            <ul>
-                <li>本作品遵循 <strong>CC-BY-4.0 开源协议</strong> 发布。您可以在遵守本协议及 CC-BY-4.0 的前提下，自由使用、修改、分发本作品，但必须 <strong>保留原作者署名</strong>，并注明原始出处。</li>
-            </ul>
-
-            <h3>3. 标注要求</h3>
-            <ul>
-                <li>您在任何场合（包括但不限于发布、宣传、分发修改版本）使用本作品时，<strong>必须明确标注</strong>：</li>
-                <ul>
-                    <li>原始作者：<strong>孤行的3044（COLID Studio）</strong></li>
-                    <li>二次作者：<strong>ningqi</strong></li>
-                    <li>项目仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank">https://github.com/ningqi24/COLID-CE-NS/</a></li>
-                </ul>
-                <li>根据 COLID Studio 最终决议，本作品 <strong>无需</strong> 在“关于”界面添加“COS”字样，但仍须显著注明 <strong>“基于 COLID OS 原创”</strong> 或 <strong>“Original by 孤行的3044”</strong>。</li>
-            </ul>
-
-            <hr class="divider" />
-
-            <h2>二、使用许可与限制</h2>
-
-            <h3>1. 允许的行为</h3>
-            <ul>
-                <li><strong>个人或非商业性使用：</strong> 您可以自由下载、运行、体验本作品，用于学习、展示或个人娱乐。</li>
-                <li><strong>二次创作：</strong> 您可以基于本作品进行进一步修改或重置，但修改后的作品必须 <strong>继续遵循 CC-BY-4.0 协议</strong>，并保留所有原始署名。</li>
-                <li><strong>开源分发：</strong> 您可以在注明原作者和本协议的前提下，将本作品或其修改版本重新分发。</li>
-            </ul>
-
-            <h3>2. 禁止的行为</h3>
-            <ul>
-                <li><strong>商业用途：</strong> 未经 COLID Studio 及 NS 作者书面授权，禁止将本作品或其任何部分用于商业盈利目的（包括但不限于销售、收费下载、植入广告等）。</li>
-                <li><strong>违法及不良用途：</strong> 禁止利用本作品传播色情、暴力、血腥、恐怖内容，禁止用于制作政治敏感或攻击性内容，禁止任何违反中华人民共和国法律法规的行为。</li>
-                <li><strong>恶意破坏与甩锅：</strong> 禁止利用本作品已知或未知的 Bug 进行不当操作，禁止在用户反馈时将问题归咎于 COLID Studio 或原版系统。</li>
-                <li><strong>过度宣传与误导：</strong> 禁止以本作品名义冒充官方、过度宣传自身或进行拉人测试等扰乱社区秩序的行为。</li>
-                <li><strong>删除或隐藏署名：</strong> 任何分发或修改版本中，不得删除、遮盖或篡改原作者及二次作者的署名信息。</li>
-            </ul>
-
-            <h3>3. 合规与生态协同</h3>
-            <ul>
-                <li>本作品属于 <strong>COLID 第三方生态</strong>，需遵守 COLID Studio 制定的《第三方生态发展标准》及《COLID STUDIO 室规》。</li>
-                <li>若您基于本作品开发衍生版本，须接受 <strong>COLID Studio 生态部（部长 高小圈）</strong> 的监督管理，并在必要时配合调整。</li>
-                <li>若违反上述规定，COLID Studio 有权将您的作品排除出 COLID 生态，包括但不限于：</li>
-                <ul>
-                    <li>拒绝上架 COLID App Store；</li>
-                    <li>在安全补丁更新后将其识别为“盗版”或威胁；</li>
-                    <li>取消其与官方系统的互通权限。</li>
-                </ul>
-            </ul>
-
-            <hr class="divider" />
-
-            <h2>三、免责声明</h2>
-
-            <h3>1. 功能与现实性</h3>
-            <ul>
-                <li>本作品使用 <strong>TurboWarp 图形化编程</strong> 制作，<strong>并非真正的操作系统或 UI 框架</strong>，仅提供视觉界面模拟体验，不具备实际系统功能。</li>
-                <li>作者不保证本作品与所有硬件、浏览器或原版 COLID OS 的完全兼容，可能存在已知或未知的兼容性问题。</li>
-            </ul>
-
-            <h3>2. 使用风险</h3>
-            <ul>
-                <li>您使用本作品所产生的一切后果（包括但不限于数据丢失、设备故障、法律纠纷等）由您自行承担，作者及 COLID Studio 不承担任何责任。</li>
-            </ul>
-
-            <h3>3. Bug 与反馈</h3>
-            <ul>
-                <li>如发现 Bug 或有问题，请优先在 <strong>COLID Studio 官方 QQ 群（996349521）</strong> 或 GitHub 仓库提交反馈，我们会尽力协助解决，但不承诺修复时限。</li>
-            </ul>
-
-            <hr class="divider" />
-
-            <h2>四、其他条款</h2>
-
-            <h3>1. 协议变更</h3>
-            <ul>
-                <li>本协议可能根据 COLID Studio 的生态政策或原作者意愿进行修订，修订后将在官方渠道公布，恕不另行逐一通知。您继续使用本作品即视为接受修订后的协议。</li>
-            </ul>
-
-            <h3>2. 适用法律</h3>
-            <ul>
-                <li>本协议的订立、执行和解释均适用中华人民共和国法律。如发生争议，双方应友好协商解决；协商不成的，可提交至作者所在地有管辖权的人民法院诉讼解决。</li>
-            </ul>
-
-            <h3>3. 联系方式</h3>
-            <div class="code-block">
-                COLID 官网：https://colid.mysxl.cn
-                官方 QQ 群：996349521
-                Bilibili 空间：https://space.bilibili.com/1825564224
-                GitHub 仓库：https://github.com/ningqi24/COLID-CE-NS/
-            </div>
-
-            <hr class="divider" />
-
-            <p style="text-align:center; font-size:14px; margin: 0.5em 0 0.2em 0; color:#000000;">
-                请您在使用前再次确认已阅读并理解上述所有条款。
-            </p>
+<h2>COLID-CE-Ningqi-Snapshot（NS） 使用协议</h2><p><strong>版本：1.1</strong>  <br /><strong>生效日期：2025年8月15日</strong>  </p><p>感谢您选择使用 <strong>NS</strong>（以下简称“本作品”）。本作品是基于 <strong>COLID OS</strong> 的 UI 与部分逻辑，使用 <strong>TurboWarp</strong> 图形化编程制作的二次创作版本。在使用本作品前，请您仔细阅读并同意本协议的全部条款。若您不同意任何条款，请勿安装或使用本作品。</p><hr class="divider" /><h2>一、版权与归属</h2><ul><li><strong>原创版权</strong>  </li></ul><br /><ul><li>本作品所引用的 <strong>COLID OS</strong> 原创设计、视觉元素、核心逻辑等，其知识产权归 <strong>COLID Studio</strong> 及其创始人 <strong>孤行的3044</strong> 所有。  </li></ul><br /><ul><li>本作品作为二次创作（二创）产物，其 <strong>新增原创代码、界面调整、功能重置</strong> 等部分，版权归 <strong>NS 作者 ningqi</strong> 所有，但不得损害原始版权方的合法权益。</li></ul><ul><li><strong>开源协议</strong>  </li></ul><br /><ul><li>本作品遵循 <strong>CC-BY-4.0 开源协议</strong> 发布。您可以在遵守本协议及 CC-BY-4.0 的前提下，自由使用、修改、分发本作品，但必须 <strong>保留原作者署名</strong>，并注明原始出处。</li></ul><ul><li><strong>标注要求</strong>  </li></ul><br /><ul><li>您在任何场合（包括但不限于发布、宣传、分发修改版本）使用本作品时，<strong>必须明确标注</strong>：  </li></ul><br /><ul><li>原始作者：<strong>孤行的3044（COLID Studio）</strong>  </li></ul><br /><ul><li>二次作者：<strong>ningqi</strong>  </li></ul><br /><ul><li>项目仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank">https://github.com/ningqi24/COLID-CE-NS/</a>  </li></ul><br /><ul><li>根据 COLID Studio 最终决议，本作品 <strong>无需</strong>在“关于”界面添加“COS”字样，但仍须显著注明 <strong>“基于 COLID OS 原创”</strong> 或 <strong>“Original by 孤行的3044”</strong>。</li></ul><hr class="divider" /><h2>二、使用许可与限制</h2><ul><li><strong>允许的行为</strong>  </li></ul><br /><ul><li>个人或非商业性使用：您可以自由下载、运行、体验本作品，用于学习、展示或个人娱乐。  </li></ul><br /><ul><li>二次创作：您可以基于本作品进行进一步修改或重置，但修改后的作品必须<strong>继续遵循 CC-BY-4.0 协议</strong>，并保留所有原始署名。  </li></ul><br /><ul><li>开源分发：您可以在注明原作者和本协议的前提下，将本作品或其修改版本重新分发。</li></ul><ul><li><strong>禁止的行为</strong>  </li></ul><br /><ul><li><strong>商业用途</strong>：未经 COLID Studio 及 NS 作者书面授权，禁止将本作品或其任何部分用于商业盈利目的（包括但不限于销售、收费下载、植入广告等）。  </li></ul><br /><ul><li><strong>违法及不良用途</strong>：禁止利用本作品传播色情、暴力、血腥、恐怖内容，禁止用于制作政治敏感或攻击性内容，禁止任何违反中华人民共和国法律法规的行为。  </li></ul><br /><ul><li><strong>恶意破坏与甩锅</strong>：禁止利用本作品已知或未知的 Bug 进行不当操作，禁止在用户反馈时将问题归咎于 COLID Studio 或原版系统。  </li></ul><br /><ul><li><strong>过度宣传与误导</strong>：禁止以本作品名义冒充官方、过度宣传自身或进行拉人测试等扰乱社区秩序的行为。  </li></ul><br /><ul><li><strong>删除或隐藏署名</strong>：任何分发或修改版本中，不得删除、遮盖或篡改原作者及二次作者的署名信息。</li></ul><ul><li><strong>合规与生态协同</strong>  </li></ul><br /><ul><li>本作品属于 <strong>COLID 第三方生态</strong>，需遵守 COLID Studio 制定的《第三方生态发展标准》及《COLID STUDIO 室规》。  </li></ul><br /><ul><li>若您基于本作品开发衍生版本，须接受 <strong>COLID Studio 生态部（部长 高小圈）</strong> 的监督管理，并在必要时配合调整。  </li></ul><br /><ul><li>若违反上述规定，COLID Studio 有权将您的作品排除出 COLID 生态，包括但不限于：  </li></ul><br /><ul><li>拒绝上架 COLID App Store；  </li></ul><br /><ul><li>在安全补丁更新后将其识别为“盗版”或威胁；  </li></ul><br /><ul><li>取消其与官方系统的互通权限。</li></ul><hr class="divider" /><h2>三、免责声明</h2><ul><li><strong>功能与现实性</strong>  </li></ul><br /><ul><li>本作品使用 <strong>TurboWarp 图形化编程</strong> 制作，<strong>并非真正的操作系统或 UI 框架</strong>，仅提供视觉界面模拟体验，不具备实际系统功能。  </li></ul><br /><ul><li>作者不保证本作品与所有硬件、浏览器或原版 COLID OS 的完全兼容，可能存在已知或未知的兼容性问题。</li></ul><ul><li><strong>使用风险</strong>  </li></ul><br /><ul><li>您使用本作品所产生的一切后果（包括但不限于数据丢失、设备故障、法律纠纷等）由您自行承担，作者及 COLID Studio 不承担任何责任。</li></ul><ul><li><strong>Bug 与反馈</strong>  </li></ul><br /><ul><li>如发现 Bug 或有问题，请优先在 <strong>COLID Studio 官方 QQ 群（996349521）</strong> 或 GitHub 仓库提交反馈，我们会尽力协助解决，但不承诺修复时限。</li></ul><hr class="divider" /><h2>四、其他条款</h2><ul><li><strong>协议变更</strong>  </li></ul><br /><ul><li>本协议可能根据 COLID Studio 的生态政策或原作者意愿进行修订，修订后将在官方渠道公布，恕不另行逐一通知。您继续使用本作品即视为接受修订后的协议。</li></ul><ul><li><strong>适用法律</strong>  </li></ul><br /><ul><li>本协议的订立、执行和解释均适用中华人民共和国法律。如发生争议，双方应友好协商解决；协商不成的，可提交至作者所在地有管辖权的人民法院诉讼解决。</li></ul><ul><li><strong>联系方式</strong>  </li></ul><br /><ul><li>COLID 官网：<a href="https://colid.mysxl.cn" target="_blank">https://colid.mysxl.cn</a>  </li></ul><br /><ul><li>COLID-NS官网：<a href="https://colidns.mysxl.cn" target="_blank">https://colidns.mysxl.cn</a></li></ul><br /><ul><li>COLID-EG官网：<a href="https://colid-eg.mysxl.cn" target="_blank">https://colid-eg.mysxl.cn</a></li></ul><br /><ul><li>官方 QQ 群：996349521</li></ul><br /><ul><li>官方 QQ频道：pd41344914  </li></ul><br /><ul><li>Bilibili 空间：<a href="https://space.bilibili.com/1825564224" target="_blank">https://space.bilibili.com/1825564224</a>  </li></ul><br /><ul><li>GitHub 仓库：<a href="https://github.com/ningqi24/COLID-CE-NS/" target="_blank">https://github.com/ningqi24/COLID-CE-NS/</a></li></ul><hr class="divider" /><p><strong>请您在使用前再次确认已阅读并理解上述所有条款。</strong>  <br /><strong>NS 社区感谢您的支持，愿您使用愉快！</strong>  </p><p>—— NS 作者 ningqi & COLID Studio<br /></p>
         `;
 
         // ============================================================
@@ -356,9 +246,11 @@
                 return;
             }
 
-            tipEl.classList.add('show');
-            tipEl.textContent = '正在加载最新协议…';
+            // 秒开：先立即显示内置内容，不等待网络
+            bodyEl.innerHTML = FALLBACK_HTML;
+            tipEl.classList.remove('show');
 
+            // 后台异步拉取最新 README，成功则替换
             fetch(PROTOCOL_URL, {
                 method: 'GET',
                 headers: { 'Accept': 'text/plain' },
@@ -377,6 +269,8 @@
                     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
                     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
                     .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+                    // 行内代码（`xxx`）
+                    .replace(/`([^`]+)`/g, '<code>$1</code>')
                     // 加粗（**文本**）
                     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                     // 链接（[文本](url)）
@@ -414,7 +308,7 @@
                 tipEl.classList.remove('show');
             })
             .catch(() => {
-                bodyEl.innerHTML = FALLBACK_HTML;
+                // 网络失败则保留秒开的内置内容
                 tipEl.classList.remove('show');
             });
         })();
