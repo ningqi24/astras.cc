@@ -212,7 +212,6 @@
 
         <!-- 脚注 -->
         <div class="protocol-footer">
-            <span class="signature">—— NS 作者 ningqi &amp; COLID Studio</span>
             <span>NS 社区 · 愿您使用愉快</span>
         </div>
 
@@ -225,7 +224,7 @@
         // 配置：GitHub Raw 地址（仓库根目录 README.md，Markdown 格式）
         // 如果获取失败，自动使用内置备用内容
         // ============================================================
-        const PROTOCOL_URL = 'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/README.md';
+        const PROTOCOL_URL = 'https://ghproxy.net/https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/README.md';
 
         // ============================================================
         // 内置备用协议正文（无任何emoji，纯黑色文字）
@@ -237,31 +236,16 @@
         // ============================================================
         // 加载逻辑
         // ============================================================
-        (function loadProtocol() {
+                (function loadProtocol() {
             const bodyEl = document.getElementById('protocolBody');
             const tipEl = document.getElementById('loadingTip');
-
-            if (!PROTOCOL_URL || PROTOCOL_URL.trim() === '') {
-                bodyEl.innerHTML = FALLBACK_HTML;
-                return;
-            }
 
             // 秒开：先立即显示内置内容，不等待网络
             bodyEl.innerHTML = FALLBACK_HTML;
             tipEl.classList.remove('show');
 
-            // 后台异步拉取最新 README，成功则替换
-            fetch(PROTOCOL_URL, {
-                method: 'GET',
-                headers: { 'Accept': 'text/plain' },
-                cache: 'no-cache'
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(rawText => {
-                // 将 Markdown 风格的纯文本转换为 HTML
+            // 将 Markdown 风格的纯文本转换为 HTML
+            function renderMarkdown(rawText) {
                 let html = rawText
                     // 分隔线
                     .replace(/^---+$/gm, '<hr class="divider" />')
@@ -306,11 +290,33 @@
 
                 bodyEl.innerHTML = html;
                 tipEl.classList.remove('show');
-            })
-            .catch(() => {
-                // 网络失败则保留秒开的内置内容
-                tipEl.classList.remove('show');
-            });
+            }
+
+            // 依次尝试多个地址：代理优先，失败自动回退直连；全失败则保留内置内容
+            const urlList = [
+                PROTOCOL_URL,
+                'https://raw.githubusercontent.com/ningqi24/COLID-CE-NS/main/README.md'
+            ];
+
+            (function tryFetch(i) {
+                if (i >= urlList.length) {
+                    // 全部失败：保留秒开的内置内容
+                    tipEl.classList.remove('show');
+                    return;
+                }
+
+                fetch(urlList[i], {
+                    method: 'GET',
+                    headers: { 'Accept': 'text/plain' },
+                    cache: 'no-cache'
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.text();
+                })
+                .then(rawText => renderMarkdown(rawText))
+                .catch(() => tryFetch(i + 1));
+            })(0);
         })();
     </script>
 </body>
