@@ -220,46 +220,7 @@
         // 内置备用协议正文（当网络获取失败时使用）
         // ============================================================
         const FALLBACK_HTML = `
-            <p>
-                您通过以下 Issues 渠道提交的任何内容（包括但不限于代码、素材、建议、反馈等），均视为自愿向 <strong>NS</strong> 项目投稿。<br />
-                投稿内容应为本项目相关的 <strong>app.sprite3</strong>（即 <strong>.cse</strong> 文件）或其他可复用资源。
-            </p>
-            <p><strong>投稿渠道：</strong> <a href="https://github.com/ningqi24/COLID-CE-NS/issues" target="_blank">https://github.com/ningqi24/COLID-CE-NS/issues</a></p>
-
-            <hr class="divider" />
-
-            <h2>版权与署名</h2>
-            <ul>
-                <li>您投稿的内容，其版权归您本人所有，但您需确保该内容不侵犯任何第三方权益。</li>
-                <li>您同意授予本项目作者 <strong>ningqi</strong> 及 <strong>COLID Studio</strong> 非独占、永久、全球范围内、免版税的使用权，包括但不限于修改、合并、发布、分发该内容。</li>
-                <li>投稿被采纳后，我们将在项目内或相关文档中标注您的贡献者身份（除非您要求匿名）。</li>
-            </ul>
-
-            <h2>合规要求</h2>
-            <ul>
-                <li>投稿内容不得包含色情、暴力、血腥、政治敏感或其他违反中华人民共和国法律法规的元素。</li>
-                <li>投稿内容不得恶意利用或放大 COLID OS / NS 的已知 Bug。</li>
-                <li>投稿内容须尊重 <strong>COLID OS</strong> 原创版权，不得删除或篡改原始署名信息。</li>
-            </ul>
-
-            <h2>处理方式</h2>
-            <ul>
-                <li>项目维护者有权决定是否采纳、合并或拒绝您的投稿，无需另行解释。</li>
-                <li>未被采纳的投稿，您可自行处置；已采纳的投稿将纳入项目版本，不再另行通知。</li>
-                <li>若投稿存在争议，以 <strong>COLID Studio</strong> 生态部（高小圈）的最终裁定为准。</li>
-            </ul>
-
-            <h2>免责</h2>
-            <ul>
-                <li>投稿内容如引发任何法律纠纷，由投稿人自行承担全部责任。</li>
-                <li>项目作者不对投稿内容的完整性、安全性或兼容性作任何担保。</li>
-            </ul>
-
-            <hr class="divider" />
-
-            <p style="text-align:center; font-size:14px; margin: 0.5em 0 0.2em 0;">
-                提交投稿即表示您已阅读并同意本协议。
-            </p>
+<h2>NS 投稿协议（app.sprite3 / .cse）</h2><p><strong>投稿渠道：</strong> https://github.com/ningqi24/COLID-CE-NS/issues  <br />（仓库名保留历史，但本协议中所指作品统称 <strong>NS</strong>）</p><hr class="divider" /><ul><li><strong>投稿内容</strong>  </li></ul><br />   您提交的 <code>cse</code> 文件（即 <code>app.sprite3</code>Scratch角色文件，<code>cse应用</code>本体文件）、 <code>cse.json</code>文件（即您提交的<code>cse应用</code>的介绍文件，格式请参照此仓库<code>./cse.json</code>）及相关说明、素材，均为自愿向 <strong>NS</strong> 项目投稿。</p><ul><li><strong>版权归属</strong>  </li></ul><br /><ul><li>您保留投稿内容的原始版权，但须保证不侵犯任何第三方权益。  </li></ul><br /><ul><li>您授予项目作者 <strong>ningqi</strong> 及 <strong>COLID Studio</strong> 永久、非独占、免版税的使用权，包括修改、合并、发布。</li></ul><ul><li><strong>署名</strong>  </li></ul><br />   采纳后我们将标注您的贡献者名称（可要求匿名），但不得篡改 <strong>COLID OS</strong> 原始署名。</p><ul><li><strong>合规</strong>  </li></ul><br />   禁止包含色情、暴力、政治敏感内容；禁止利用 Bug 恶意操作；禁止甩锅官方。</p><ul><li><strong>处理</strong>  </li></ul><br />   维护者有权决定是否采纳，无需额外说明。未采纳的投稿可自行处置。</p><ul><li><strong>免责</strong>  </li></ul><br />   投稿引发的一切法律纠纷由投稿人自行承担，项目方不作任何担保。</p><hr class="divider" /><p><strong>提交即视为同意本协议。</strong>  </p><p>—— NS 作者 ningqi & COLID Studio<br /></p>
         `;
 
         // ============================================================
@@ -269,10 +230,11 @@
             const bodyEl = document.getElementById('protocolBody');
             const tipEl = document.getElementById('loadingTip');
 
-            // 显示加载提示
-            tipEl.classList.add('show');
-            tipEl.textContent = '正在从 GitHub 加载最新投稿协议…';
+            // 秒开：先立即显示内置内容，不等待网络
+            bodyEl.innerHTML = FALLBACK_HTML;
+            tipEl.classList.remove('show');
 
+            // 后台异步拉取最新 README，成功则替换
             fetch(PROTOCOL_URL, {
                 method: 'GET',
                 headers: { 'Accept': 'text/plain' },
@@ -285,8 +247,14 @@
             .then(rawText => {
                 // 将 Markdown 风格的纯文本转换为 HTML
                 let html = rawText
-                    // 标题（# 开头）
+                    // 分隔线
+                    .replace(/^---+$/gm, '<hr class="divider" />')
+                    // 标题（### / ## / #）
+                    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
                     .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+                    // 行内代码（`xxx`）
+                    .replace(/`([^`]+)`/g, '<code>$1</code>')
                     // 加粗（**文本**）
                     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                     // 链接（[文本](url)）
@@ -295,6 +263,8 @@
                     .replace(/^(\d+)\.\s+(.+)$/gm, '<li>$2</li>')
                     // 无序列表（- 开头）
                     .replace(/^-\s+(.+)$/gm, '<li>$1</li>')
+                    // 缩进子项（含前导空格的 - 开头）
+                    .replace(/^\s+-\s+(.+)$/gm, '<li>$1</li>')
                     // 段落（连续两行换行分隔）
                     .replace(/\n\n/g, '</p><p>')
                     // 换行
@@ -312,16 +282,19 @@
                 html = html.replace(/<p><ul>/g, '<ul>');
                 html = html.replace(/<\/ul><\/p>/g, '</ul>');
                 html = html.replace(/<p><\/p>/g, '');
+                html = html.replace(/<p><hr class="divider" \/><\/p>/g, '<hr class="divider" />');
+                html = html.replace(/<p><h3>/g, '<h3>');
+                html = html.replace(/<\/h3><\/p>/g, '</h3>');
+                html = html.replace(/<p><h2>/g, '<h2>');
+                html = html.replace(/<\/h2><\/p>/g, '</h2>');
 
-                bodyEl.innerHTML = html;
+                                bodyEl.innerHTML = html;
                 tipEl.classList.remove('show');
-                console.log('✅ 投稿协议已从 GitHub 加载');
             })
             .catch(err => {
-                // 获取失败，使用内置备用
-                bodyEl.innerHTML = FALLBACK_HTML;
+                // 网络失败则保留秒开的内置内容
                 tipEl.classList.remove('show');
-                console.warn('⚠️ 无法从 GitHub 加载，使用内置备用协议', err);
+                console.warn('无法从 GitHub 拉取最新协议，已显示内置版本', err);
             });
         })();
     </script>
