@@ -1,1132 +1,1130 @@
 {
-  "buttons": [
-    {
-      "name": "AstraEditor 官网(.top)",
-      "name_en": "AstraEditor Official(.top)",
-      "subtitle": "editors.astras.top",
-      "url": "https://editors.astras.top/",
-      "author": "AstraTeam",
-      "author_url": "https://github.com/AstraEditor",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "AstraEditor 的官方网站（.top 域名），同样提供增强型造型编辑器、更多插件和自定义主题，内容与 .cc 版本一致。",
-      "description_en": "The official website of AstraEditor on the .top domain, offering the same enhanced costume editor, more addons, and custom themes as the .cc version.",
-      "verified_date": "2026-07-31",
-      "note": "Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。",
-      "note_en": "Scratch-derivative editor, CN-maintained, open-source on GitHub. Trustworthy.",
-      "category": "scratch-editor",
-      "github": "https://github.com/AstraEditor/AstraEditor",
-      "group": "scratch"
-    },
-    {
-      "name": "AstraEditor 非官方定制官网(.cc)",
-      "name_en": "AstraEditor Unofficial customized official website(.cc)",
-      "subtitle": "editors.astras.cc",
-      "url": "https://editors.astras.cc/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "AstraEditor 是一款基于 Scratch 的增强型造型编辑器，提供更好的造型编辑器、更多插件和自定义主题，让编程速度「快如闪电」。这是部署在 .cc 域名上的特制版本。",
-      "description_en": "AstraEditor is an enhanced Scratch costume editor with a better paint editor, more addons, and custom themes for lightning-fast coding. This is the special version deployed on the .cc domain.",
-      "verified_date": "2026-07-31",
-      "note": "AstraEditor 官网镜像，个人维护，fork 自官方仓库。",
-      "note_en": "Mirror of AstraEditor official, personal fork for UX tweaks.",
-      "category": "scratch-editor",
-      "github": "https://github.com/ningqi24/editors.astras.cc",
-      "group": "scratch"
-    },
-    {
-      "name": "COLID NS UI - scratch",
-      "name_en": "COLID NS UI - scratch",
-      "subtitle": "colidns.mysxl.cn",
-      "url": "https://colidns.mysxl.cn/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "OS&UI"
-      ],
-      "description": "COLID CE 出品的 NS UI 界面重制项目，旨在让 COLID OS 焕然一新。采用 CC-BY-4.0 开源协议，包含 NS 2.6UI 等版本，兼容部分原版拓展应用。",
-      "description_en": "A UI redesign project by COLID CE, aiming to refresh COLID OS with a new look. Released under CC-BY-4.0 license, includes versions like NS 2.6UI, compatible with select original extensions.",
-      "verified_date": "2026-07-31",
-      "note": "Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。",
-      "note_en": "Scratch-based OS mock, open-source (CC-BY-4.0), study only.",
-      "category": "scratch",
-      "github": "https://github.com/ningqi24/COLID-CE-NS",
-      "group": "scratch"
-    },
-    {
-      "name": "COLID Studio",
-      "name_en": "COLID Studio",
-      "subtitle": "colid.mysxl.cn",
-      "url": "https://colid.mysxl.cn/",
-      "author": "COLID Studio",
-      "author_url": "https://colid.mysxl.cn/",
-      "tags": [
-        "OS&UI"
-      ],
-      "description": "COLID 创意工作室官方网站。使用 Scratch 图形化编程制作操作系统，产品包括 COLID OS（支持窗口拖动、窗口堆叠、任务栏、拓展程序）和 Arc Os 移动端系统。",
-      "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system.",
-      "verified_date": "2026-07-31",
-      "note": "Scratch 仿 OS，开源协议未知，B站有信誉背书，mysxl 免费建站。",
-      "note_en": "Scratch OS project, license unknown, Bilibili-backed, on mysxl.",
-      "category": "scratch",
-      "group": "scratch"
-    },
-    {
-      "name": "COLID-EG APP Store",
-      "name_en": "COLID-EG APP Store",
-      "subtitle": "colid-eg-appstore.mysxl.cn",
-      "url": "https://colid-eg-appstore.mysxl.cn/",
-      "author": "COLID-EG",
-      "author_url": "https://colid-eg.mysxl.cn/",
-      "tags": [
-        "下载"
-      ],
-      "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
-      "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives.",
-      "verified_date": "2026-07-31",
-      "note": "COLID 社区应用商店下载站，Scratch 制，仅供学习，mysxl 免费建站。",
-      "note_en": "COLID app store downloads, Scratch-made, study only, on mysxl.",
-      "category": "scratch",
-      "group": "scratch"
-    },
-    {
-      "name": "COLID-EG 官网",
-      "name_en": "COLID-EG Official",
-      "subtitle": "colid-eg.mysxl.cn",
-      "url": "https://colid-eg.mysxl.cn/",
-      "author": "COLID-EG",
-      "author_url": "https://colid-eg.mysxl.cn/",
-      "tags": [
-        "OS&UI"
-      ],
-      "description": "COLID-EG 是基于 Pro APP Store 项目开发的操作系统架构，应用窗口部分完全由架构负责，开发者仅需完成应用部分。提供大窗口和小窗口两种示例程序，关键代码带有注释。后期将更新开发手册和教程视频。",
-      "description_en": "COLID-EG is an OS architecture based on the Pro APP Store project. The architecture handles the application window part, allowing developers to focus on the app itself. Offers two window size examples with commented key code. Development manuals and tutorials are planned.",
-      "verified_date": "2026-07-31",
-      "note": "COLID 社区应用商店主页，Scratch 制，仅供学习，mysxl 免费建站。",
-      "note_en": "COLID app store homepage, Scratch-made, study only, on mysxl.",
-      "category": "scratch",
-      "github": "https://github.com/SWEEP-office/COLID-Eg-Achive",
-      "group": "scratch"
-    },
-    {
-      "name": "ToingOS/NQOS UI - scratch",
-      "name_en": "ToingOS/NQOS UI - scratch",
-      "subtitle": "ningqi24.mysxl.cn",
-      "url": "https://ningqi24.mysxl.cn/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "OS&UI"
-      ],
-      "description": "ToingOS 是 Ning Qi.24 用 Scratch 制作的操作系统，追寻 COLID OS 的质心之作。包含锁屏登录、桌面壁纸、音量/网络/蓝牙控制、设置面板、WLAN 面板、音乐应用、Dock 栏等功能，持续迭代更新至 1.995 版本。",
-      "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995.",
-      "verified_date": "2026-07-31",
-      "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
-      "note_en": "Author's early Scratch work, scattered like a draft, on mysxl.",
-      "category": "scratch",
-      "group": "scratch"
-    },
-    {
-      "name": "Minichat聊天 - Astras.cc",
-      "name_en": "MiniChat - Astras.cc",
-      "subtitle": "minichat.astras.cc",
-      "url": "https://minichat.astras.cc",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "社交"
-      ],
-      "description": "MiniChat 是一款轻量级在线聊天室（当前版本 4.0.0）。支持注册登录、全局聊天、自定义头像、桌面通知与提示音、@提醒、主题与语言切换等丰富功能。",
-      "description_en": "MiniChat is a lightweight online chat room (currently v4.0.0). Features include registration/login, global chat, custom avatars, desktop notifications and sounds, @mentions, theme and language switching, and more.",
-      "verified_date": "2026-07-31",
-      "note": "需注册且满13岁，有隐私政策，运营规模小，GitHub 开源。",
-      "note_en": "Reg required (13+), has privacy policy, small-scale, open-source.",
-      "category": "chat",
-      "github": "https://github.com/ningqi24/minichat.astras",
-      "group": "chat"
-    },
-    {
-      "name": "SimpleChatMini - scratch",
-      "name_en": "SimpleChatMini - scratch",
-      "subtitle": "simplechatmini.astras.cc",
-      "url": "https://simplechatmini.astras.cc/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "社交"
-      ],
-      "description": "基于 Scratch 的简易聊天 UI 组件，使用 WebGL 渲染，可在 Scratch 项目中嵌入聊天界面。",
-      "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects.",
-      "verified_date": "2026-07-31",
-      "note": "个人维护的 Scratch 打包项目，仅供学习。",
-      "note_en": "Personal Scratch bundled project, study only.",
-      "category": "scratch",
-      "github": "https://github.com/ningqi24/simplechatmini.astras",
-      "group": "scratch"
-    },
-    {
-      "name": "AstraEditor 下载站(.cc)",
-      "name_en": "AstraEditor Download (.cc)",
-      "subtitle": "download.astras.cc",
-      "url": "https://download.astras.cc/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "下载"
-      ],
-      "description": "AstraEditor 各平台客户端下载站。提供大陆地区 GitHub 代理加速下载（按省份分配 ghproxy 节点），并附带 Chrome/Edge 并行下载提速指南。",
-      "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips.",
-      "verified_date": "2026-07-31",
-      "note": "第三方代下，ghproxy 加速，速度尚可，GitHub 开源。",
-      "note_en": "Third-party download mirror, ghproxy accelerated, open-source.",
-      "category": "scratch-editor",
-      "github": "https://github.com/ningqi24/download.astras",
-      "group": "scratch"
-    },
-    {
-      "name": "Search 极简页",
-      "name_en": "Simple Search Tab",
-      "subtitle": "search.astras.cc",
-      "url": "https://search.astras.cc/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "搜索"
-      ],
-      "description": "一个极简风格的搜索引擎首页，界面干净清爽，专注于快速搜索。",
-      "description_en": "A minimalist search engine homepage with a clean interface focused on quick searching.",
-      "verified_date": "2026-07-31",
-      "note": "Via 聚合搜索，含谷歌必应百度360等，无后端，GitHub 开源。",
-      "note_en": "Via aggregated search (Google/Bing/Baidu/360), no backend, open-source.",
-      "category": "tool",
-      "github": "https://github.com/ningqi24/search.astras",
-      "group": "tool"
-    },
-    {
-      "name": "深海字体 CDN",
-      "name_en": "DeepSea Fonts CDN",
-      "subtitle": "fontscdn.deepsealab.cc.cd",
-      "url": "https://fontscdn.deepsealab.cc.cd/",
-      "author": "深海实验室",
-      "author_url": "https://fontscdn.deepsealab.cc.cd/",
-      "tags": [
-        "字体"
-      ],
-      "description": "基于中文网字计划改编的中文字体 CDN 服务，提供大量中文字体的 CSS 引用链接，可一键复制并在网页中通过 link 标签引入使用。",
-      "description_en": "A Chinese fonts CDN service adapted from the Chinese Web Fonts project. Provides CSS links for a large number of Chinese fonts that can be easily copied and embedded via link tags in web pages.",
-      "verified_date": "2026-07-31",
-      "note": ".cc.cd 后缀虽不正规，字体丰富，对国内用户友好，体验尚可。",
-      "note_en": ".cc.cd suffix looks odd, but rich fonts, CN-friendly, works fine.",
-      "category": "tool",
-      "github": "https://github.com/KonghaYao/chinese-free-web-font-storage",
-      "group": "tool"
-    },
-    {
-      "name": "用域名发送邮件 - Astras.cc",
-      "name_en": "Send email with domain name - Astras.cc",
-      "subtitle": "astras.cc/sendemail",
-      "url": "https://astras.cc/sendemail",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "邮件"
-      ],
-      "description": "使用自定义域名发送邮件的在线工具。填写收件人、主题和内容（支持 HTML 格式）即可发送邮件。",
-      "description_en": "An online tool to send emails with a custom domain. Simply fill in the recipient, subject, and content (HTML supported) to send.",
-      "verified_date": "2026-07-31",
-      "note": "支持 API/SMTP 发信，有免费测试接口，个人自用尚可，GitHub 开源。",
-      "note_en": "API/SMTP sending, free test endpoint, for personal use, open-source.",
-      "category": "tool",
-      "group": "tool"
-    },
-    {
-      "name": "高速编号牌生成器 - NanGua-QWQ",
-      "name_en": "High Speed Number Card Generator - NanGua-QWQ",
-      "subtitle": "astras.cc/SignGenerator",
-      "url": "https://astras.cc/SignGenerator/",
-      "author": "NanGua-QWQ",
-      "author_url": "https://github.com/NanGua-QWQ",
-      "tags": [
-        "生成器"
-      ],
-      "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
-      "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
-      "verified_date": "2026-07-31",
-      "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。",
-      "note_en": "Personal, open-source, best tool for highway signs, CN-friendly.",
-      "category": "tool",
-      "github": "https://github.com/NanGua-QWQ/SignGenerator",
-      "group": "tool"
-    },
-    {
-      "name": "Lucide 图标中文网",
-      "name_en": "Lucide Icons (Chinese)",
-      "subtitle": "lucide.nodejs.cn",
-      "url": "https://lucide.nodejs.cn/icons/",
-      "author": "Lucide",
-      "author_url": "https://lucide.dev/",
-      "tags": [
-        "前端"
-      ],
-      "description": "Lucide 是由社区制作的开源图标工具包，提供美观且一致的 SVG 图标。中文网支持按类别（无障碍、动物、箭头、房屋、图表、设计、设备、表情等）浏览图标，可自定义颜色、描边宽度和尺寸，方便在项目中检索使用。",
-      "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects.",
-      "verified_date": "2026-07-31",
-      "note": "知名开源图标库国内汉化站，好评但 UI 不多。",
-      "note_en": "Popular icon library, CN localized, praised but sparse UI.",
-      "category": "tool",
-      "github": "https://github.com/lucide-icons/lucide",
-      "group": "tool"
-    },
-    {
-      "name": "React Bits 组件库",
-      "name_en": "React Bits Component Library",
-      "subtitle": "reactbits.dev",
-      "url": "https://reactbits.dev/get-started/index/",
-      "author": "React Bits",
-      "author_url": "https://reactbits.dev/",
-      "tags": [
-        "前端"
-      ],
-      "description": "React Bits 是一个开源的 React 组件库，提供大量精美的动画组件、UI 组件和模板，包含 Cursor Grid、Specular Button、Option Wheel、Curved Input、Line Sidebar 等创意组件，可直接复制代码在项目中使用。",
-      "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects.",
-      "verified_date": "2026-07-31",
-      "note": "高质量 React 动效组件库，GitHub 44.6k 星，开源免费。",
-      "note_en": "High-quality React animation library, 44.6k stars, free & open-source.",
-      "category": "tool",
-      "github": "https://github.com/DavidHDev/react-bits",
-      "group": "tool"
-    },
-    {
-      "name": "鲨鲨幸存者",
-      "name_en": "Shark Survivor",
-      "subtitle": "astras.cc/game/shas",
-      "url": "https://astras.cc/game/shas/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [],
-      "description": "俯视角割草生存游戏。操控角色自动攻击，收集经验升级，从武士刀、左轮、风火轮等 10+ 武器与被动道具中自由搭配。历经 5 波 BOSS 战，超武进化后火力全开，撑过 8 分钟即胜利。适配手机触屏+虚拟摇杆，加载即玩。",
-      "description_en": "Top-down survivor-like bullet hell. Auto-attack, collect XP, level up, and combine 10+ weapons (katana, revolver, fire wheel, etc.) with passive items. Survive 5 BOSS waves over 8 minutes — super weapon evolution unleashes ultimate power. Mobile touch + virtual joystick support, play instantly.",
-      "verified_date": "2026-08-01",
-      "note": "适合横屏，打发时间利器。",
-      "note_en": "Best in landscape, great for killing time.",
-      "category": "game",
-      "github": "https://github.com/ningqi24/astras.cc/tree/main/game/shas",
-      "group": "game"
-    },
-    {
-      "name": "Cyberexplorer's World",
-      "name_en": "Cyberexplorer's World",
-      "subtitle": "cyberneko.cn",
-      "url": "https://cyberneko.cn/",
-      "author": "Cyberexplorer",
-      "author_url": "https://cyberneko.cn/",
-      "tags": [],
-      "description": "Cyberexplorer 的个人主页，展示个人项目与作品。",
-      "description_en": "Cyberexplorer's personal homepage showcasing projects and works.",
-      "verified_date": "2026-07-31",
-      "note": "个人博客，.cn 域名安全可靠，诸多作品，B站可查。",
-      "note_en": "Personal blog, .cn domain safe, many works, findable on Bilibili.",
-      "category": "personal",
-      "github": "https://github.com/LanwyWriteXU/lanwywritexu.github.io",
-      "group": "personal"
-    },
-    {
-      "name": "ningqi's github homepage",
-      "name_en": "ningqi's github homepage",
-      "subtitle": "github.com/ningqi24",
-      "url": "https://github.com/ningqi24",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [],
-      "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
-      "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories.",
-      "verified_date": "2026-07-31",
-      "note": "作者本尊，年度546次贡献，astras.cc/minichat 等均开源于此。",
-      "note_en": "The author, 546 contributions/yr, astras.cc/minichat open-sourced here.",
-      "category": "personal",
-      "group": "personal"
-    },
-    {
-      "name": "ningqi开发社",
-      "name_en": "ningqi Dev Studio",
-      "subtitle": "nqxz.mysxl.cn",
-      "url": "https://nqxz.mysxl.cn/",
-      "author": "ningqi",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "OS&UI"
-      ],
-      "description": "ningqi 的个人作品展示站，收录了 ToingOS、NQ_OS 系列等 Scratch 操作系统作品及其它项目，提供蓝奏云下载链接。",
-      "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud.",
-      "verified_date": "2026-07-31",
-      "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
-      "note_en": "Author's early Scratch work, scattered like a draft, on mysxl.",
-      "category": "scratch",
-      "group": "scratch"
-    },
-    {
-      "name": "猫娘计划 Project N.E.K.O.",
-      "name_en": "Project N.E.K.O.",
-      "subtitle": "project-neko.cn",
-      "url": "https://project-neko.cn/",
-      "author": "Project N.E.K.O. 团队",
-      "author_url": "",
-      "tags": [
-        "二次元"
-      ],
-      "description": "面向二次元用户的虚拟角色互动平台，猫娘主题。",
-      "description_en": "A virtual character interactive platform for anime-style users with cat-girl theme.",
-      "verified_date": "2026-07-31",
-      "note": "二次元虚拟角色互动平台，视觉精美，体验独特，有新意。",
-      "note_en": "Anime-style virtual character platform. Polished visuals, unique experience.",
-      "category": "creative",
-      "github": "https://github.com/Project-N-E-K-O",
-      "group": "creative"
-    },
-    {
-      "name": "Corona Studio 日冕工作室",
-      "name_en": "Corona Studio",
-      "subtitle": "corona.studio",
-      "url": "https://corona.studio/",
-      "author": "Corona Studio 团队",
-      "author_url": "",
-      "tags": [],
-      "description": "以 Minecraft 为核心的开发团队，日冕工作室官方站。",
-      "description_en": "Minecraft-focused development team, Corona Studio official site.",
-      "verified_date": "2026-07-31",
-      "note": "Minecraft 核心开发团队官方站，有完整项目介绍，关注 MC 生态必看。",
-      "note_en": "Minecraft-focused dev team homepage. Complete project listings for MC ecosystem watchers.",
-      "category": "mc-team",
-      "github": "https://github.com/Corona-Studio",
-      "group": "mc"
-    },
-    {
-      "name": "Ghost Downloader 资源发现器",
-      "name_en": "Ghost Downloader",
-      "subtitle": "gd.xychr.com",
-      "url": "https://gd.xychr.com/",
-      "author": "晓游 nicepkg",
-      "author_url": "",
-      "tags": [
-        "下载"
-      ],
-      "description": "浏览器优先的资源发现与桌面传输枢纽，资源检索工具。",
-      "description_en": "Browser-first resource discovery and desktop handoff hub.",
-      "verified_date": "2026-07-31",
-      "note": "浏览器内资源发现 + 桌面传输，免客户端，找资源效率高。",
-      "note_en": "Browser-based resource discover + desktop handoff. No client needed.",
-      "category": "tool",
-      "github": "https://github.com/XiaoYouChR/Ghost-Downloader-3",
-      "group": "tool"
-    },
-    {
-      "name": "DeskMakeover 桌面美化工作室",
-      "name_en": "DeskMakeover",
-      "subtitle": "dm.xiaominglab.com",
-      "url": "https://dm.xiaominglab.com/",
-      "author": "nicepkg 小明实验室",
-      "author_url": "",
-      "tags": [
-        "桌面"
-      ],
-      "description": "Windows 桌面美化工作室，提供桌面主题定制工具。",
-      "description_en": "Windows desktop makeover studio & customization tool.",
-      "verified_date": "2026-07-31",
-      "note": "Windows 桌面美化一站式，主题定制友好，适合美化党。",
-      "note_en": "One-stop Windows desktop customization. Theme-friendly, for aesthetic lovers.",
-      "category": "tool",
-      "github": "https://github.com/nicepkg/deskmakeover",
-      "group": "tool"
-    },
-    {
-      "name": "莫老师的附件表",
-      "name_en": "莫老师s Attachments",
-      "subtitle": "在下莫老师.com",
-      "url": "https://xn--fhqq21c322bzo0d.com/",
-      "author": "在下莫老师",
-      "author_url": "",
-      "tags": [
-        "资源"
-      ],
-      "description": "莫老师的个人资源分享站，中文资源汇总。",
-      "description_en": "莫老师s personal Chinese resource sharing hub.",
-      "verified_date": "2026-07-31",
-      "note": "中文个人资源分享集合，稀有中文资源多，适合找小众资源。",
-      "note_en": "Chinese personal resource hub. Lots of rare Chinese-language content.",
-      "category": "creative",
-      "group": "creative"
-    },
-    {
-      "name": "Cylorine Studio",
-      "name_en": "Cylorine Studio",
-      "subtitle": "cylorine.studio",
-      "url": "https://cylorine.studio/",
-      "author": "Cylorine Studio 团队",
-      "author_url": "",
-      "tags": [],
-      "description": "专注 Minecraft 相关内容开发与探索的组织，Cylorine 官方站。",
-      "description_en": "Minecraft content dev & exploration organization, Cylorine official site.",
-      "verified_date": "2026-07-31",
-      "note": "Minecraft 内容开发组织官方站，资源质量高，生态向全。",
-      "note_en": "Minecraft content org homepage. High-quality resources, full ecosystem coverage.",
-      "category": "mc-team",
-      "github": "https://github.com/CylorineStudio",
-      "group": "mc"
-    },
-    {
-      "name": "ChunkBase MC 应用与教程",
-      "name_en": "Chunk Base",
-      "subtitle": "chunkbase.com",
-      "url": "https://www.chunkbase.com/",
-      "author": "ChunkBase 团队",
-      "author_url": "",
-      "tags": [
-        "教程"
-      ],
-      "description": "Minecraft 种子查图、模组、应用与教程集合站，MC 玩家必备。",
-      "description_en": "Minecraft seed map apps, mods & tutorials. Essential for MC players.",
-      "verified_date": "2026-07-31",
-      "note": "MC 玩家必收藏：种子查图/村庄定位/生物群系/模组教程一站式。",
-      "note_en": "Must-bookmark: seed viewer, village finder, biomes & mod tutorials in one.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Minecraft Search 物品搜索站",
-      "name_en": "Minecraft Search",
-      "subtitle": "minecraftsearch.com",
-      "url": "https://minecraftsearch.com/",
-      "author": "Minecraft Search 团队",
-      "author_url": "",
-      "tags": [
-        "搜索"
-      ],
-      "description": "Minecraft 物品/生物/方块 ID 与合成表搜索站，快速查配方。",
-      "description_en": "Minecraft items, mobs, blocks & recipes search engine.",
-      "verified_date": "2026-07-31",
-      "note": "MC 物品 / 生物 / 方块一站式搜索，配方查得快，新手救星。",
-      "note_en": "One-stop MC items/mobs/blocks search. Recipe lookup for beginners.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Axolotl Launcher 蝾螈启动器",
-      "name_en": "Axolotl Launcher",
-      "subtitle": "axlmc.org",
-      "url": "https://axlmc.org/",
-      "author": "Garbage Human Studio",
-      "author_url": "",
-      "tags": [
-        "启动器"
-      ],
-      "description": "基于 Modrinth 生态的免费开源 Minecraft 启动器，支持模组整合。",
-      "description_en": "Free & open-source Minecraft launcher built on Modrinth ecosystem.",
-      "verified_date": "2026-07-31",
-      "note": "Modrinth 生态 MC 启动器，开源免费，国内可用速度不错。",
-      "note_en": "Modrinth-ecosystem MC launcher. Open-source, free, CN-reachable.",
-      "category": "mc-tool",
-      "github": "https://github.com/Mystic-Stars/Axolotl",
-      "group": "mc"
-    },
-    {
-      "name": "WormWaker 博客与产品站",
-      "name_en": "WormWaker",
-      "subtitle": "wormwake.com",
-      "url": "https://www.wormwake.com/",
-      "author": "WormWaker",
-      "author_url": "",
-      "tags": [
-        "博客"
-      ],
-      "description": "WormWaker 的个人博客与产品展示站，分享独立开发作品。",
-      "description_en": "WormWakers personal blog & indie product showcase.",
-      "verified_date": "2026-07-31",
-      "note": "独立开发者个人博客+产品展，项目思路清晰，有参考价值。",
-      "note_en": "Indie dev blog + product showcase. Clear projects, great reference.",
-      "category": "personal",
-      "group": "personal"
-    },
-    {
-      "name": "OCEAN MC 指令生成器",
-      "name_en": "OCEAN MC Command Generator",
-      "subtitle": "mc.ecylt.top",
-      "url": "https://mc.ecylt.top/",
-      "author": "OCEAN / ecylt",
-      "author_url": "",
-      "tags": [
-        "生成器"
-      ],
-      "description": "Minecraft 指令图形化生成工具，复杂命令拼接可视化。",
-      "description_en": "Minecraft visual command generator for complex command building.",
-      "verified_date": "2026-07-31",
-      "note": "MC 指令可视化拼接，命令方块党福音，不会忘参数。",
-      "note_en": "Visual MC command builder. Perfect for command-block users, no params missed.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Packery MC 数据包编辑器",
-      "name_en": "Packery",
-      "subtitle": "packery.skycrystal.fun",
-      "url": "https://packery.skycrystal.fun/",
-      "author": "bu_xu_yao",
-      "author_url": "",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "浏览器内 Minecraft 数据包编辑器，图形化编辑 data pack。",
-      "description_en": "In-browser Minecraft data pack visual editor.",
-      "verified_date": "2026-07-31",
-      "note": "浏览器内 MC 数据包可视化编辑器，免装软件，做 datapack 省时间。",
-      "note_en": "In-browser visual MC datapack editor. No install, saves time making packs.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "KitMC 数据包制作工具",
-      "name_en": "KitMC",
-      "subtitle": "kitemc.com",
-      "url": "https://www.kitemc.com/",
-      "author": "KitMC Team",
-      "author_url": "",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "Minecraft 数据包可视化制作工具，拖拽式编辑，低门槛造数据包。",
-      "description_en": "Visual Minecraft datapack maker with drag-and-drop, low-barrier.",
-      "verified_date": "2026-07-31",
-      "note": "拖拽式 MC 数据包制作，零代码入门，想做自定义玩法首选。",
-      "note_en": "Drag-and-drop MC datapack maker. Zero-code entry for custom gameplay.",
-      "category": "mc-tool",
-      "github": "https://github.com/KiteMC",
-      "group": "mc"
-    },
-    {
-      "name": "MCPlugin 插件开发框架",
-      "name_en": "MCPlugin Framework",
-      "subtitle": "mcplugin.netlify.app",
-      "url": "https://mcplugin.netlify.app/",
-      "author": "MCPlugin Team",
-      "author_url": "",
-      "tags": [
-        "开发"
-      ],
-      "description": "Minecraft 插件开发框架与文档站，Paper/Spigot 插件快速上手。",
-      "description_en": "Minecraft plugin dev framework & docs for Paper/Spigot rapid onboarding.",
-      "verified_date": "2026-07-31",
-      "note": "Paper/Spigot 插件开发框架+文档，开服写插件的脚手架好帮手。",
-      "note_en": "Paper/Spigot plugin framework + docs. Scaffold for server plugin devs.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "KJ 操作系统 标签页",
-      "name_en": "KJ OS Tab Page",
-      "subtitle": "kj.sgguo.com",
-      "url": "https://kj.sgguo.com/",
-      "author": "KJ 团队",
-      "author_url": "",
-      "tags": [
-        "操作系统"
-      ],
-      "description": "KJ 操作系统 浏览器标签页，欢迎配置新标签页工具。",
-      "description_en": "KJ OS browser tab page & welcome-config dashboard.",
-      "verified_date": "2026-08-01",
-      "note": "浏览器新标签页工具，欢迎配置，界面干净，适合开屏即用。",
-      "note_en": "Browser new-tab dashboard. Clean UI, ready to use out of the box.",
-      "category": "tool",
-      "group": "tool"
-    },
-    {
-      "name": "Portal MC 启动器",
-      "name_en": "Portal Launcher",
-      "subtitle": "portal.tiouo.cc",
-      "url": "https://portal.tiouo.cc/",
-      "author": "Portal contributors",
-      "author_url": "",
-      "tags": [
-        "启动器"
-      ],
-      "description": "Portal - 简洁、现代的开源跨平台 Minecraft 启动器与实例管理器。",
-      "description_en": "Portal - a clean, modern, open-source cross-platform Minecraft launcher & instance manager.",
-      "verified_date": "2026-08-01",
-      "note": "开源跨平台 MC 启动器，现代简洁 UI，多实例管理，Modrinth 生态友好。",
-      "note_en": "Open-source cross-platform MC launcher. Clean modern UI, multi-instance & Modrinth-friendly.",
-      "category": "mc-tool",
-      "github": "https://github.com/tiouoo/Portal",
-      "group": "mc"
-    },
-    {
-      "name": "bxya B站AI学习机器人",
-      "name_en": "bxya bilibili AI Learning Bot",
-      "subtitle": "bxya.app",
-      "url": "https://bxya.app/",
-      "author": "xiaoyaya191",
-      "author_url": "",
-      "tags": [
-        "AI"
-      ],
-      "description": "全自动 B 站 AI 学习机器人，自动化学习工具。",
-      "description_en": "Fully automated bilibili AI learning bot.",
-      "verified_date": "2026-08-02",
-      "note": "开源全自动 B 站 AI 学习机器人，作者 xiaoyaya191，自动化挂机学习，效率拉满。",
-      "note_en": "Open-source automated bilibili AI learning bot by xiaoyaya191. Auto study, full efficiency.",
-      "category": "tool",
-      "github": "https://github.com/xiaoyaya191/bilibili_learning_bot",
-      "group": "tool"
-    },
-    {
-      "name": "LUMEN MC 创作平台",
-      "name_en": "LUMEN MC Creator Platform",
-      "subtitle": "lumenplatform.net",
-      "url": "https://lumenplatform.net/",
-      "author": "LUMEN 团队",
-      "author_url": "",
-      "tags": [
-        "创作"
-      ],
-      "description": "LUMEN - 为 Minecraft 创作者打造的辅助创作平台。",
-      "description_en": "LUMEN - an assistant platform for Minecraft creators.",
-      "verified_date": "2026-08-02",
-      "note": "Minecraft 创作者辅助平台，一站式辅助创作，做 MC 内容必备。",
-      "note_en": "Minecraft creator assistant platform. All-in-one toolbox for MC content makers.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Coomi Agent for Android",
-      "name_en": "Coomi Agent for Android",
-      "subtitle": "coomi.septemc.com",
-      "url": "https://coomi.septemc.com/",
-      "author": "septemc",
-      "author_url": "https://septemc.com/",
-      "tags": [
-        "AI",
-        "Android"
-      ],
-      "description": "Coomi 是一款面向 Android 平台的 AI Agent 工具，类似 Claude Code / Codex，提供智能体对话与自动化能力。",
-      "description_en": "Coomi is an AI agent tool for Android, similar to Claude Code / Codex, providing intelligent agent conversations and automation capabilities.",
-      "verified_date": "2026-08-02",
-      "note": "AI Agent 工具，类似 Claude Code/Codex，septemc 维护，Android 端可用。",
-      "note_en": "AI agent tool, similar to Claude Code/Codex, maintained by septemc, available on Android.",
-      "category": "tool",
-      "github": "https://github.com/Septemc/Coomi",
-      "group": "tool"
-    },
-    {
-      "name": "resourcery - MC 资源包工具箱",
-      "name_en": "resourcery - MC Resource Pack Toolbox",
-      "subtitle": "resourcery.skycrystal.fun",
-      "url": "https://resourcery.skycrystal.fun/",
-      "author": "bu_xu_yao",
-      "author_url": "",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "面向 Minecraft 资源包制作的在线工具箱，支持材质绘画、声音编辑、模型编辑、方块状态、语言文件、粒子效果、画作、界面贴图等，内置 AI 助手辅助创作，可导出完整资源包。",
-      "description_en": "An online toolbox for Minecraft resource pack creation, supporting texture painting, sound editing, model editing, block states, language files, particles, paintings, UI textures, and more. Built-in AI assistant. Exportable resource packs.",
-      "verified_date": "2026-08-03",
-      "note": "MC 资源包一站式在线编辑器，v1.0 支持 MC 26.2+，bu_xu_yao 作品。",
-      "note_en": "One-stop online MC resource pack editor, v1.0 for MC 26.2+, by bu_xu_yao.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Web3村长 - 技术博客",
-      "name_en": "Web3 Cunzhang - Tech Blog",
-      "subtitle": "cunzhangblog.com",
-      "url": "https://www.cunzhangblog.com/",
-      "author": "Web3村长 / Rin",
-      "author_url": "https://www.cunzhangblog.com/",
-      "tags": [
-        "博客",
-        "AI"
-      ],
-      "description": "Web3村长（Rin）的技术博客，专注 AI 工具评测、Cloudflare 实战、开源项目部署、互联网效率工具、技术出海与变现。已积累 109 篇教程，以保姆级实战著称。",
-      "description_en": "Tech blog by Web3 Cunzhang (Rin), covering AI tool reviews, Cloudflare practices, open-source deployments, productivity tools, and tech globalization. 109 articles with hands-on tutorials.",
-      "verified_date": "2026-08-03",
-      "note": "109 篇技术博客，Cloudflare/AI 实战经验丰富，保姆级教程，值得订阅。",
-      "note_en": "109 tech articles, rich in Cloudflare/AI practices, step-by-step tutorials. Worth subscribing.",
-      "category": "personal",
-      "group": "personal"
-    },
-    {
-      "name": "Neumorphism.io - 软UI阴影生成器",
-      "name_en": "Neumorphism.io - Soft UI Shadow Generator",
-      "subtitle": "neumorphism.io",
-      "url": "https://neumorphism.io/",
-      "author": "Adam Giebl",
-      "author_url": "https://github.com/adamgiebl/neumorphism",
-      "tags": [
-        "前端",
-        "CSS",
-        "设计"
-      ],
-      "description": "在线生成新拟物风格（Neumorphism / Soft UI）CSS 阴影代码，支持实时预览、调节凸起/凹陷/模糊/距离参数，一键复制 CSS。",
-      "description_en": "Online CSS box-shadow generator for neumorphic / soft UI designs. Real-time preview, tweak elevation/inset/blur/distance, one-click copy CSS.",
-      "verified_date": "2026-08-03",
-      "note": "前端设计师必备，新拟物风格阴影一键出码，GitHub 开源。",
-      "note_en": "Must-have for frontend designers, one-click neumorphic shadow code, open-source on GitHub.",
-      "category": "tool",
-      "github": "https://github.com/adamgiebl/neumorphism",
-      "group": "tool"
-    },
-    {
-      "name": "PMPK 高速编号牌生成器 - NanGua-QWQ",
-      "name_en": "PMPK Highway Sign Generator - NanGua-QWQ",
-      "subtitle": "pmpk.astras.cc",
-      "url": "https://pmpk.astras.cc/",
-      "author": "NanGua-QWQ",
-      "author_url": "https://github.com/NanGua-QWQ",
-      "tags": [
-        "生成器"
-      ],
-      "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
-      "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
-      "verified_date": "2026-08-03",
-      "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。PMPK 版本。",
-      "note_en": "Personal, open-source, great for highway signs, CN-friendly. PMPK edition.",
-      "category": "tool",
-      "group": "tool"
-    },
-    {
-      "name": "创客次元 MakerVerse - 创作者社区",
-      "name_en": "MakerVerse - Creator Community",
-      "subtitle": "forum.ctspace.xyz",
-      "url": "https://forum.ctspace.xyz/",
-      "author": "创客次元 / MakerVerse",
-      "author_url": "",
-      "tags": [
-        "社区",
-        "论坛",
-        "创作"
-      ],
-      "description": "面向创作者与开发者的中文社区平台，支持帖子讨论、作品展示、频道/标签分类浏览，提供开放 API 与扩展机制。",
-      "description_en": "A Chinese community for creators and developers. Supports discussions, project showcases, channel/tag browsing, with open API and extensions.",
-      "verified_date": "2026-08-03",
-      "note": "创作者社区，氛围友好，有开放 API 和扩展能力，适合技术创作交流。",
-      "note_en": "Creator community with friendly atmosphere, open API and extensions, great for tech creation discussions.",
-      "category": "chat",
-      "github": "https://github.com/Adopos610/AuroraForum",
-      "group": "chat"
-    },
-    {
-      "name": "抓鱼鸭 - 摸鱼起始页",
-      "name_en": "ZhuaYuYa - Slacking Startpage",
-      "subtitle": "zhuayuya.com",
-      "url": "https://zhuayuya.com/",
-      "author": "抓鱼鸭",
-      "author_url": "https://zhuayuya.com/",
-      "tags": [
-        "摸鱼",
-        "起始页",
-        "聚合"
-      ],
-      "description": "由 B站UP主 Pony 开发的摸鱼起始页，聚合实用工具与趣味功能（弹幕聊天、伪装更新、偷看小说等），iTab 风格，让摸鱼更快乐。",
-      "description_en": "A slacking startpage by Bilibili creator Pony, aggregating fun tools like bullet-chat, fake system updates, hidden novel reader, and more. iTab-style, makes slacking joyful.",
-      "verified_date": "2026-08-03",
-      "note": "摸鱼神器，弹幕聊天人气高，B站 UP主 Pony 维护，上班必备。",
-      "note_en": "Ultimate slacking tool, lively bullet-chat, maintained by Pony, office essential.",
-      "category": "tool",
-      "github": "https://github.com/ponysb/zhuayuya",
-      "group": "tool"
-    },
-    {
-      "name": "OWLCRAFT - MC 网页版",
-      "name_en": "OWLCRAFT - MC Web Edition",
-      "subtitle": "owlcraft.raymondjxu.net",
-      "url": "https://owlcraft.raymondjxu.net/",
-      "author": "awesomestowl / raymondjxu",
-      "author_url": "https://www.youtube.com/watch?v=i5luLslTLZk",
-      "tags": [
-        "浏览器"
-      ],
-      "description": "Minecraft v26.2 网页版，awesomestowl 原作，raymondjxu 移植，无需安装直接在浏览器里玩。",
-      "description_en": "Minecraft v26.2 web edition by awesomestowl, ported by raymondjxu. Play directly in browser.",
-      "verified_date": "2026-08-07",
-      "note": "awesomestowl 原作，raymondjxu 移植网页版，浏览器即玩 MC。",
-      "note_en": "Original by awesomestowl, web port by raymondjxu. Play MC in browser.",
-      "category": "mc-tool",
-      "github": "https://github.com/owlcraftweb",
-      "group": "mc"
-    },
-    {
-      "name": "NexBot - QQ 机器人托管",
-      "name_en": "NexBot - QQ Bot Hosting",
-      "subtitle": "nexbot.muzisen.asia",
-      "url": "https://nexbot.muzisen.asia/",
-      "author": "NexBot",
-      "author_url": "",
-      "tags": [
-        "QQ机器人",
-        "托管",
-        "云服务"
-      ],
-      "description": "QQ 机器人一键上云平台，NapCat + AstrBot，60 秒开通独立实例，免自建服务器。",
-      "description_en": "QQ bot one-click cloud hosting. NapCat + AstrBot, deploy in 60s, no server needed.",
-      "verified_date": "2026-08-07",
-      "note": "NapCat + AstrBot 组合，扫码即上，面板直达，QQ 机器人托管首选。",
-      "note_en": "NapCat + AstrBot combo, scan to deploy, panel access, top QQ bot host.",
-      "category": "tool",
-      "group": "tool"
-    },
-    {
-      "name": "Celia Music NextGen - 桌面音乐播放器",
-      "name_en": "Celia Music NextGen - Desktop Music Player",
-      "subtitle": "celiamusic.site",
-      "url": "https://celiamusic.site/",
-      "author": "seliaYYDS",
-      "author_url": "https://github.com/seliaYYDS/CeliaMusic-NextGen",
-      "tags": [
-        "音乐",
-        "播放器",
-        "桌面"
-      ],
-      "description": "基于 Tauri + Rust 的开源桌面播放器，支持本地音乐、网易云和酷狗在线音源，沉浸歌词与灵动岛。",
-      "description_en": "Open-source desktop music player built on Tauri + Rust. Supports local files, NetEase Cloud & Kugou, immersive lyrics & Dynamic Island.",
-      "verified_date": "2026-08-07",
-      "note": "Tauri + Rust 构建，网易云+酷狗双音源，桌面歌词灵动岛，颜值在线。",
-      "note_en": "Tauri + Rust, dual sources NetEase+Kugou, desktop lyrics & Dynamic Island.",
-      "category": "tool",
-      "github": "https://github.com/seliaYYDS/CeliaMusic-NextGen",
-      "group": "tool"
-    },
-    {
-      "name": "一加全能工具箱",
-      "name_en": "OnePlus All-in-one Toolbox",
-      "subtitle": "optool.daxiaamu.com",
-      "url": "https://optool.daxiaamu.com",
-      "author": "大侠阿木",
-      "author_url": "https://daxiaamu.com/",
-      "tags": [
-        "一加",
-        "ROOT",
-        "刷机"
-      ],
-      "description": "一加手机 PC 端刷机 / ROOT / 解 BL 锁一体化工具，支持 Magisk、KernelSU、APatch、SukiSU-Ultra。",
-      "description_en": "OnePlus PC toolbox for flashing / ROOT / BL unlock. Supports Magisk, KernelSU, APatch, SukiSU-Ultra.",
-      "verified_date": "2026-08-07",
-      "note": "大侠阿木出品，一加刷机 ROOT 一站式，多网盘下载，刷机党必备。",
-      "note_en": "By daxiaamu, one-stop OnePlus flashing & ROOT, multi-mirror downloads.",
-      "category": "tool",
-      "github": "https://github.com/daxiaamu/oplusmutools",
-      "group": "tool"
-    },
-    {
-      "name": "NoriAI - 虚拟AI世界",
-      "name_en": "NoriAI - Virtual AI World",
-      "subtitle": "os.inori.ai",
-      "url": "https://os.inori.ai",
-      "author": "FUTURUM 弗图姆科技",
-      "author_url": "",
-      "tags": [
-        "AI",
-        "二次元"
-      ],
-      "description": "基于 AlephPro 全新计算范式的虚拟 AI 世界。登录后进入 NoriOS 系统，内置浏览器、文件、终端、邮件等完整功能界面，可与虚拟二次元角色聊天互动、玩小游戏。核心玩法围绕「算力」展开，随剧情发展经营算力资源——小心，你的算力服务器随时可能遭到攻击。",
-      "description_en": "A virtual AI world built on AlephPro's next-gen computing paradigm. After login, enter NoriOS with full interfaces (browser, files, terminal, email). Chat and play mini-games with the virtual anime character. Core gameplay revolves around 'compute' — grow your compute resources through story progression, but watch out: your compute server may come under attack at any time.",
-      "verified_date": "2026-08-17",
-      "note": "AlephPro 全新计算范式，二次元 AI 互动 + 算力经营玩法，完整体验需登录。",
-      "note_en": "AlephPro next-gen computing. Anime AI interaction + compute management gameplay. Full experience requires login.",
-      "category": "creative",
-      "group": "creative"
-    },
-    {
-      "name": "Shaihai Studio - 晒海工作室",
-      "name_en": "Shaihai Studio",
-      "subtitle": "shaihai.cn",
-      "url": "https://shaihai.cn",
-      "author": "Shaihai Studio",
-      "author_url": "https://space.bilibili.com/3690976753223882",
-      "tags": [
-        "科普"
-      ],
-      "description": "Shaihai Studio（晒海工作室）的个人主页，坚持做高质量科普/实验性视频。页面含趣味彩蛋：背景颜色随时间变化、点击大标题跳转B站主页，并提供 BUG 反馈表单。",
-      "description_en": "Personal homepage of Shaihai Studio, dedicated to high-quality science popularization and experimental videos. Fun easter eggs: background color shifts over time, clicking the big title jumps to the Bilibili profile, plus a bug feedback form.",
-      "verified_date": "2026-08-18",
-      "note": "B站科普UP主个人站，浙ICP备案，有 BUG 反馈通道，彩蛋有意思。",
-      "note_en": "Bilibili science UP's personal site, ICP filed, has bug feedback, fun easter eggs.",
-      "category": "personal",
-      "group": "personal"
-    },
-    {
-      "name": "RemixWarp（重构跃迁）少儿图形化编辑器",
-      "name_en": "RemixWarp",
-      "subtitle": "remixwarp.pages.dev",
-      "url": "https://remixwarp.pages.dev/",
-      "author": "RemixWorld重构世界工作室",
-      "author_url": "https://remixwarp.pages.dev/",
-      "tags": [
-        "编辑器"
-      ],
-      "description": "基于 Scratch 的图形化编辑器，汇集 TurboWarp、MistWarp、O2Engine、AstraEditor、Builp 等多家编辑器特性，支持极速编译、插件生态、实时预览与多格式导出。",
-      "description_en": "Scratch-based graphical editor that integrates features from TurboWarp, MistWarp, O2Engine, AstraEditor, Builp, etc. Supports fast compilation, plugin ecosystem, live preview, and multi-format export.",
-      "verified_date": "2026-08-24",
-      "note": "项目方自嘲「移植bug又添新bug」，官网需 JS 且多域名存在访问错误。用户反馈稳定性不足、易崩溃、资源占用高。优势在于融合多家编辑器功能，但当前代码成熟度较低，建议谨慎评估后使用。",
-      "note_en": "The team jokes about 'porting bugs and adding new ones'. Website requires JS and shows errors on multiple domains. Users report poor stability, crashes, and high resource usage. Its strength lies in merging features from various editors, but current code maturity is low; evaluate carefully before use.",
-      "category": "scratch-editor",
-      "github": "https://github.com/RemixWarp",
-      "group": "scratch"
-    },
-    {
-      "name": "PixelForum 像素聚落",
-      "name_en": "PixelForum",
-      "subtitle": "www.pixelforum.cn",
-      "url": "https://www.pixelforum.cn",
-      "author": "PixelForum 像素聚落",
-      "author_url": "",
-      "tags": [
-        "社区",
-        "论坛"
-      ],
-      "description": "Minecraft 中文社区论坛（Discuz 搭建）。提供 JE 纹理光影 / Mods / 整合包 / 地图与 MCBE 资源下载，支持签到、任务、关注、充值等完整社区功能，会员榜与发帖榜活跃。",
-      "description_en": "A Chinese Minecraft community forum (powered by Discuz). Offers JE texture/shader/modpack/map and MCBE resource downloads, with sign-in, tasks, follow and credit systems, plus active member & post leaderboards.",
-      "verified_date": "2026-08-18",
-      "note": "MC 中文社区论坛，Discuz 搭建，资源板块全，京ICP备案正规，有QQ/微信客服。",
-      "note_en": "CN MC community forum on Discuz. Full resource boards, ICP filed, QQ/WeChat support.",
-      "category": "chat",
-      "group": "chat"
-    },
-    {
-      "name": "ModMinds 模组开发平台",
-      "name_en": "ModMinds Mod Development Platform",
-      "subtitle": "ether-studio.top",
-      "url": "https://ether-studio.top/",
-      "author": "Ether Studio",
-      "author_url": "",
-      "tags": [
-        "模组开发",
-        "AI"
-      ],
-      "description": "Minecraft 模组一站式开发平台：桌面开发工具内置 Agent 接入，授权后即可调用 AI 模型服务；按量计费、余额硬管控，余额不足自动冻结、充值秒级恢复，支持兑换码秒到账。",
-      "description_en": "A one-stop platform for Minecraft mod development. Desktop dev tools come with built-in Agent integration granting AI model services on authorization; pay-as-you-go billing with hard balance control, auto-freeze when credit runs out and instant restore after top-up, redeem-code recharge.",
-      "verified_date": "2026-08-25",
-      "note": "亲测可访问（已抓取验证）。模组开发者向的 AI 接入平台，兑换码在闲鱼自助购买。",
-      "note_en": "Verified accessible. Mod-dev oriented AI integration platform; redeem codes self-purchased on Xianyu.",
-      "category": "mc-tool",
-      "github": "https://github.com/waterpail114514/modmind",
-      "group": "mc"
-    },
-    {
-      "name": "AutoMods",
-      "name_en": "AutoMods",
-      "subtitle": "automods.cn",
-      "url": "https://automods.cn/",
-      "author": "AutoMods",
-      "author_url": "",
-      "tags": [
-        "模组制作",
-        "AI"
-      ],
-      "description": "用对话做 Minecraft 模组：一句话说清想法，AI 自动生成并实时展示每一步（读写文件、改动、编译是否通过），产物 jar/源码/贴图/模型随时可下载；支持连续对话与透明过程，兼容 Fabric/Forge/NeoForge。",
-      "description_en": "Make Minecraft mods by chatting: describe the idea in one sentence and AI generates it live, showing every step (files read/written, changes, build status); artifacts like jar/source/textures/models are downloadable anytime; supports ongoing dialogue and transparency, compatible with Fabric/Forge/NeoForge.",
-      "verified_date": "2026-08-25",
-      "note": "亲测可访问（浏览器验证）。AI 对话式模组制作平台，微信扫码注册送 1000 积分，公测中。",
-      "note_en": "Verified accessible via browser. AI dialogue-based mod creation platform; WeChat scan signup gives 1000 credits, in open beta.",
-      "category": "mc-tool",
-      "group": "mc"
-    },
-    {
-      "name": "Celestial Launcher",
-      "name_en": "Celestial Launcher",
-      "subtitle": "celestial.wemsur.top",
-      "url": "https://celestial.wemsur.top/",
-      "author": "Wemsur",
-      "author_url": "https://github.com/Wemsur/Celestial-Launcher",
-      "tags": [
-        "启动器"
-      ],
-      "description": "免费开源的 Minecraft 游戏启动器，基于 Modrinth App 分叉。多版本库互不打扰、直接兼容现有 .minecraft（从 PCL/HMCL/官方启动器零成本迁移）、自定义主题色与背景、离线登录、完整汉化、无广告、自动更新。",
-      "description_en": "A free & open-source Minecraft launcher forked from the Modrinth App. Multiple instance libraries that don't interfere, direct compatibility with existing .minecraft (zero-cost migration from PCL/HMCL/official launcher), custom accent color & background, offline login, full Chinese localization, ad-free, auto-update.",
-      "verified_date": "2026-08-25",
-      "note": "亲测可访问（浏览器验证）。开源启动器，Linux/RPM/DEB 等各平台安装包齐全。",
-      "note_en": "Verified accessible via browser. Open-source launcher with Linux/RPM/DEB packages.",
-      "category": "mc-tool",
-      "github": "https://github.com/Wemsur/Celestial-Launcher",
-      "group": "mc"
-    },
-    {
-      "name": "nsos",
-      "name_en": "nsos",
-      "subtitle": "nsos.astras.cc",
-      "url": "https://nsos.astras.cc",
-      "author": "ningqi24",
-      "author_url": "https://github.com/ningqi24",
-      "tags": [
-        "HTML",
-        "操作系统"
-      ],
-      "description": "一个运行在浏览器里的迷你移动操作系统（Web-based OS）。分层渲染、状态机驱动，含 Android 风格开机引导（Fastboot/Recovery）、桌面 Launcher、真锁屏、状态栏、终端与设置应用；内置统一命令引擎（shell），支持真实设备信息、虚拟文件系统、分区挂载、bootloader 解锁刷写等终端玩法。",
-      "description_en": "A web-based mini mobile OS running in the browser. Layered rendering driven by state machine: Android-style boot (Fastboot/Recovery), desktop Launcher, real lock screen, status bar, terminal & settings apps; built-in unified shell command engine with real device info, virtual filesystem, partition mounting, bootloader unlock/flash.",
-      "verified_date": "2026-08-29",
-      "note": "亲测：页面模拟完整 Android 开机流程（开机动画→锁屏→桌面），双击状态栏回锁屏；桌面终端命令真实可用（devinfo/df/mount/wipe/reboot/fastboot 等），Fastboot/Recovery 工程模式可进入，极客趣味十足。",
-      "note_en": "Tested: simulates full Android boot flow (boot animation → lock screen → desktop). Desktop terminal commands really work (devinfo/df/mount/wipe/reboot/fastboot etc.). Fastboot/Recovery modes accessible. Geeky fun.",
-      "category": "creative",
-      "github": "https://github.com/ningqi24/nsos",
-      "group": "creative"
-    },
-    {
-      "name": "02Engine",
-      "name_en": "02Engine",
-      "subtitle": "02engine.org",
-      "url": "https://02engine.org/",
-      "author": "0.2Studio",
-      "author_url": "https://github.com/02engine",
-      "tags": [
-        "编辑器",
-        "扩展"
-      ],
-      "description": "02Engine 是 TurboWarp 的二次修改版编辑器（官网自称 mod of TurboWarp），主打极限速度与丰富扩展：移除帧率上限提升运行速度，整合 PenguinMod、TurboWarp 与社区扩展（工具/物理/3D/网络），内置扩展管理器与代码转换工具，为硬核用户打造。",
-      "description_en": "02Engine is a mod of TurboWarp focused on extreme speed and rich extensions: removes framerate cap for faster runtime, integrates PenguinMod, TurboWarp and community extensions (tools/physics/3D/network), with an expansion manager and code tools for hardcore users.",
-      "verified_date": "2026-08-29",
-      "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器，UI 较朴素但功能强大，适合极客玩家，稳定性一般。",
-      "note_en": "Verified accessible via browser. TurboWarp mod with a plain UI but very powerful features for hardcore users; stability is so-so.",
-      "category": "scratch-editor",
-      "github": "https://github.com/02engine",
-      "group": "scratch"
-    },
-    {
-      "name": "Bilup",
-      "name_en": "Bilup",
-      "subtitle": "com.bilup.org",
-      "url": "https://com.bilup.org/",
-      "author": "Bilup",
-      "author_url": "https://github.com/Bilup",
-      "tags": [
-        "编辑器",
-        "协作"
-      ],
-      "description": "Bilup 是基于 TurboWarp 的 Scratch 二次修改编辑器：保留熟悉的编辑器体验，加入 blocks-to-JS 编译器、大量插件与主题、项目打包器、调试器、Git 版本控制与实时多人协作，并附带账号体系的社区平台；免费开源，浏览器/桌面端皆可用。",
-      "description_en": "Bilup is a Scratch modification built on TurboWarp: keeps the familiar editor and adds a blocks-to-JS compiler, a large set of addons and themes, a project packager, a debugger, git version control, live collaboration, and a community platform with accounts. Free and open source, works in browser or desktop.",
-      "verified_date": "2026-08-29",
-      "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器（用户所述 mistwarp 二改，实为 TurboWarp 二改），运行稳定，实时多人协作功能强大。",
-      "note_en": "Verified accessible via browser. TurboWarp mod (reported as MistWarp mod, actually built on TurboWarp). Stable, with powerful live collaboration.",
-      "category": "scratch-editor",
-      "github": "https://github.com/Bilup",
-      "group": "scratch"
-    },
-    {
-      "name": "Scratch Mods",
-      "name_en": "Scratch Mods",
-      "subtitle": "scratchmod.github.io",
-      "url": "https://scratchmod.github.io/",
-      "author": "GabsTheCuriousKid",
-      "author_url": "https://github.com/ScratchMod",
-      "tags": [
-        "导航"
-      ],
-      "description": "Scratch 模组导航目录站：集中罗列 60+ 个 Scratch 及其二次 mod 的入口（AbsoluteMod、Circle-IDE、PenguinMod、TurboWarp、MistWarp、02Engine、AstraEditor、ClipCC、Xcratch 等），是查找 Scratch 衍生编辑器的聚合索引。",
-      "description_en": "A directory of Scratch mods: aggregates links to 60+ Scratch and mod-of-mod editors (AbsoluteMod, Circle-IDE, PenguinMod, TurboWarp, MistWarp, 02Engine, AstraEditor, ClipCC, Xcratch, etc.) as an index of Scratch derivatives.",
-      "verified_date": "2026-08-29",
-      "note": "亲测可访问（浏览器验证）。开源目录站，主要维护者 GabsTheCuriousKid，收录约 66 个 Scratch 模组/编辑器。",
-      "note_en": "Verified accessible via browser. Open-source directory maintained by GabsTheCuriousKid, listing ~66 Scratch mods/editors.",
-      "category": "tool",
-      "github": "https://github.com/ScratchMod/scratchmod.github.io",
-      "group": "tool"
-    }
-  ]
+ "buttons": [
+  {
+   "name": "AstraEditor 官网(.top)",
+   "name_en": "AstraEditor Official(.top)",
+   "subtitle": "editors.astras.top",
+   "url": "https://editors.astras.top/",
+   "author": "AstraTeam",
+   "author_url": "https://github.com/AstraEditor",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "AstraEditor 的官方网站（.top 域名），同样提供增强型造型编辑器、更多插件和自定义主题，内容与 .cc 版本一致。",
+   "description_en": "The official website of AstraEditor on the .top domain, offering the same enhanced costume editor, more addons, and custom themes as the .cc version.",
+   "verified_date": "2026-07-31",
+   "note": "Scratch 衍生编辑器，国内用户维护，GitHub 开源，值得信赖。",
+   "note_en": "Scratch-derivative editor, CN-maintained, open-source on GitHub. Trustworthy.",
+   "category": "scratch-editor",
+   "github": "https://github.com/AstraEditor/AstraEditor",
+   "group": "scratch"
+  },
+  {
+   "name": "AstraEditor 非官方定制官网(.cc)",
+   "name_en": "AstraEditor Unofficial customized official website(.cc)",
+   "subtitle": "editors.astras.cc",
+   "url": "https://editors.astras.cc/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "AstraEditor 是一款基于 Scratch 的增强型造型编辑器，提供更好的造型编辑器、更多插件和自定义主题，让编程速度「快如闪电」。这是部署在 .cc 域名上的特制版本。",
+   "description_en": "AstraEditor is an enhanced Scratch costume editor with a better paint editor, more addons, and custom themes for lightning-fast coding. This is the special version deployed on the .cc domain.",
+   "verified_date": "2026-07-31",
+   "note": "AstraEditor 官网镜像，个人维护，fork 自官方仓库。",
+   "note_en": "Mirror of AstraEditor official, personal fork for UX tweaks.",
+   "category": "scratch-editor",
+   "github": "https://github.com/ningqi24/editors.astras.cc",
+   "group": "scratch"
+  },
+  {
+   "name": "COLID NS UI - scratch",
+   "name_en": "COLID NS UI - scratch",
+   "subtitle": "colidns.mysxl.cn",
+   "url": "https://colidns.mysxl.cn/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "OS&UI"
+   ],
+   "description": "COLID CE 出品的 NS UI 界面重制项目，旨在让 COLID OS 焕然一新。采用 CC-BY-4.0 开源协议，包含 NS 2.6UI 等版本，兼容部分原版拓展应用。",
+   "description_en": "A UI redesign project by COLID CE, aiming to refresh COLID OS with a new look. Released under CC-BY-4.0 license, includes versions like NS 2.6UI, compatible with select original extensions.",
+   "verified_date": "2026-07-31",
+   "note": "Scratch 仿 OS，开源于 GitHub，CC-BY-4.0，仅供学习。",
+   "note_en": "Scratch-based OS mock, open-source (CC-BY-4.0), study only.",
+   "category": "scratch",
+   "github": "https://github.com/ningqi24/COLID-CE-NS",
+   "group": "scratch"
+  },
+  {
+   "name": "COLID Studio",
+   "name_en": "COLID Studio",
+   "subtitle": "colid.mysxl.cn",
+   "url": "https://colid.mysxl.cn/",
+   "author": "COLID Studio",
+   "author_url": "https://colid.mysxl.cn/",
+   "tags": [
+    "OS&UI"
+   ],
+   "description": "COLID 创意工作室官方网站。使用 Scratch 图形化编程制作操作系统，产品包括 COLID OS（支持窗口拖动、窗口堆叠、任务栏、拓展程序）和 Arc Os 移动端系统。",
+   "description_en": "Official website of COLID Studio. Creates operating systems using Scratch visual programming, with products including COLID OS (window dragging, window stacking, taskbar, extensions) and Arc Os mobile system.",
+   "verified_date": "2026-07-31",
+   "note": "Scratch 仿 OS，开源协议未知，B站有信誉背书，mysxl 免费建站。",
+   "note_en": "Scratch OS project, license unknown, Bilibili-backed, on mysxl.",
+   "category": "scratch",
+   "group": "scratch"
+  },
+  {
+   "name": "COLID-EG APP Store",
+   "name_en": "COLID-EG APP Store",
+   "subtitle": "colid-eg-appstore.mysxl.cn",
+   "url": "https://colid-eg-appstore.mysxl.cn/",
+   "author": "COLID-EG",
+   "author_url": "https://colid-eg.mysxl.cn/",
+   "tags": [
+    "下载"
+   ],
+   "description": "COLID-EG 的应用商店，提供离线安装包和安装器两种下载方式。在线安装只需下载安装器，离线安装需同时下载两者并按提示导入。拓展程序为角色文件格式，架构程序为压缩包格式。",
+   "description_en": "The app store for COLID-EG, offering both offline installation packages and installers. For online installation, download the installer only; for offline installation, download both and import as prompted. Extensions are role files, while architecture programs are zip archives.",
+   "verified_date": "2026-07-31",
+   "note": "COLID 社区应用商店下载站，Scratch 制，仅供学习，mysxl 免费建站。",
+   "note_en": "COLID app store downloads, Scratch-made, study only, on mysxl.",
+   "category": "scratch",
+   "group": "scratch"
+  },
+  {
+   "name": "COLID-EG 官网",
+   "name_en": "COLID-EG Official",
+   "subtitle": "colid-eg.mysxl.cn",
+   "url": "https://colid-eg.mysxl.cn/",
+   "author": "COLID-EG",
+   "author_url": "https://colid-eg.mysxl.cn/",
+   "tags": [
+    "OS&UI"
+   ],
+   "description": "COLID-EG 是基于 Pro APP Store 项目开发的操作系统架构，应用窗口部分完全由架构负责，开发者仅需完成应用部分。提供大窗口和小窗口两种示例程序，关键代码带有注释。后期将更新开发手册和教程视频。",
+   "description_en": "COLID-EG is an OS architecture based on the Pro APP Store project. The architecture handles the application window part, allowing developers to focus on the app itself. Offers two window size examples with commented key code. Development manuals and tutorials are planned.",
+   "verified_date": "2026-07-31",
+   "note": "COLID 社区应用商店主页，Scratch 制，仅供学习，mysxl 免费建站。",
+   "note_en": "COLID app store homepage, Scratch-made, study only, on mysxl.",
+   "category": "scratch",
+   "github": "https://github.com/SWEEP-office/COLID-Eg-Achive",
+   "group": "scratch"
+  },
+  {
+   "name": "ToingOS/NQOS UI - scratch",
+   "name_en": "ToingOS/NQOS UI - scratch",
+   "subtitle": "ningqi24.mysxl.cn",
+   "url": "https://ningqi24.mysxl.cn/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "OS&UI"
+   ],
+   "description": "ToingOS 是 Ning Qi.24 用 Scratch 制作的操作系统，追寻 COLID OS 的质心之作。包含锁屏登录、桌面壁纸、音量/网络/蓝牙控制、设置面板、WLAN 面板、音乐应用、Dock 栏等功能，持续迭代更新至 1.995 版本。",
+   "description_en": "ToingOS is a Scratch-based operating system by Ning Qi.24, inspired by COLID OS. Features include lock screen, desktop wallpapers, volume/network/bluetooth controls, settings panel, WLAN panel, music app, dock bar, and more, continuously updated to v1.995.",
+   "verified_date": "2026-07-31",
+   "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
+   "note_en": "Author's early Scratch work, scattered like a draft, on mysxl.",
+   "category": "scratch",
+   "group": "scratch"
+  },
+  {
+   "name": "Minichat聊天 - Astras.cc",
+   "name_en": "MiniChat - Astras.cc",
+   "subtitle": "minichat.astras.cc",
+   "url": "https://minichat.astras.cc",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "社交"
+   ],
+   "description": "MiniChat 是一款轻量级在线聊天室（当前版本 4.0.0）。支持注册登录、全局聊天、自定义头像、桌面通知与提示音、@提醒、主题与语言切换等丰富功能。",
+   "description_en": "MiniChat is a lightweight online chat room (currently v4.0.0). Features include registration/login, global chat, custom avatars, desktop notifications and sounds, @mentions, theme and language switching, and more.",
+   "verified_date": "2026-07-31",
+   "note": "需注册且满13岁，有隐私政策，运营规模小，GitHub 开源。",
+   "note_en": "Reg required (13+), has privacy policy, small-scale, open-source.",
+   "category": "chat",
+   "github": "https://github.com/ningqi24/minichat.astras",
+   "group": "chat"
+  },
+  {
+   "name": "SimpleChatMini - scratch",
+   "name_en": "SimpleChatMini - scratch",
+   "subtitle": "simplechatmini.astras.cc",
+   "url": "https://simplechatmini.astras.cc/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "社交"
+   ],
+   "description": "基于 Scratch 的简易聊天 UI 组件，使用 WebGL 渲染，可在 Scratch 项目中嵌入聊天界面。",
+   "description_en": "A simple chat UI component for Scratch projects, rendered with WebGL, allowing chat interfaces to be embedded in Scratch projects.",
+   "verified_date": "2026-07-31",
+   "note": "个人维护的 Scratch 打包项目，仅供学习。",
+   "note_en": "Personal Scratch bundled project, study only.",
+   "category": "scratch",
+   "github": "https://github.com/ningqi24/simplechatmini.astras",
+   "group": "scratch"
+  },
+  {
+   "name": "AstraEditor 下载站(.cc)",
+   "name_en": "AstraEditor Download (.cc)",
+   "subtitle": "download.astras.cc",
+   "url": "https://download.astras.cc/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "下载"
+   ],
+   "description": "AstraEditor 各平台客户端下载站。提供大陆地区 GitHub 代理加速下载（按省份分配 ghproxy 节点），并附带 Chrome/Edge 并行下载提速指南。",
+   "description_en": "Download station for AstraEditor clients across platforms. Provides GitHub proxy acceleration for mainland China (province-based ghproxy routing) with Chrome/Edge parallel download tips.",
+   "verified_date": "2026-07-31",
+   "note": "第三方代下，ghproxy 加速，速度尚可，GitHub 开源。",
+   "note_en": "Third-party download mirror, ghproxy accelerated, open-source.",
+   "category": "scratch-editor",
+   "github": "https://github.com/ningqi24/download.astras",
+   "group": "scratch"
+  },
+  {
+   "name": "Search 极简页",
+   "name_en": "Simple Search Tab",
+   "subtitle": "search.astras.cc",
+   "url": "https://search.astras.cc/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "搜索"
+   ],
+   "description": "一个极简风格的搜索引擎首页，界面干净清爽，专注于快速搜索。",
+   "description_en": "A minimalist search engine homepage with a clean interface focused on quick searching.",
+   "verified_date": "2026-07-31",
+   "note": "Via 聚合搜索，含谷歌必应百度360等，无后端，GitHub 开源。",
+   "note_en": "Via aggregated search (Google/Bing/Baidu/360), no backend, open-source.",
+   "category": "tool",
+   "github": "https://github.com/ningqi24/search.astras",
+   "group": "tool"
+  },
+  {
+   "name": "深海字体 CDN",
+   "name_en": "DeepSea Fonts CDN",
+   "subtitle": "fontscdn.deepsealab.cc.cd",
+   "url": "https://fontscdn.deepsealab.cc.cd/",
+   "author": "深海实验室",
+   "author_url": "https://fontscdn.deepsealab.cc.cd/",
+   "tags": [
+    "字体"
+   ],
+   "description": "基于中文网字计划改编的中文字体 CDN 服务，提供大量中文字体的 CSS 引用链接，可一键复制并在网页中通过 link 标签引入使用。",
+   "description_en": "A Chinese fonts CDN service adapted from the Chinese Web Fonts project. Provides CSS links for a large number of Chinese fonts that can be easily copied and embedded via link tags in web pages.",
+   "verified_date": "2026-07-31",
+   "note": ".cc.cd 后缀虽不正规，字体丰富，对国内用户友好，体验尚可。",
+   "note_en": ".cc.cd suffix looks odd, but rich fonts, CN-friendly, works fine.",
+   "category": "tool",
+   "github": "https://github.com/KonghaYao/chinese-free-web-font-storage",
+   "group": "tool"
+  },
+  {
+   "name": "用域名发送邮件 - Astras.cc",
+   "name_en": "Send email with domain name - Astras.cc",
+   "subtitle": "astras.cc/sendemail",
+   "url": "https://astras.cc/sendemail",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "邮件"
+   ],
+   "description": "使用自定义域名发送邮件的在线工具。填写收件人、主题和内容（支持 HTML 格式）即可发送邮件。",
+   "description_en": "An online tool to send emails with a custom domain. Simply fill in the recipient, subject, and content (HTML supported) to send.",
+   "verified_date": "2026-07-31",
+   "note": "支持 API/SMTP 发信，有免费测试接口，个人自用尚可，GitHub 开源。",
+   "note_en": "API/SMTP sending, free test endpoint, for personal use, open-source.",
+   "category": "tool",
+   "group": "tool"
+  },
+  {
+   "name": "高速编号牌生成器 - NanGua-QWQ",
+   "name_en": "High Speed Number Card Generator - NanGua-QWQ",
+   "subtitle": "astras.cc/SignGenerator",
+   "url": "https://astras.cc/SignGenerator/",
+   "author": "NanGua-QWQ",
+   "author_url": "https://github.com/NanGua-QWQ",
+   "tags": [
+    "生成器"
+   ],
+   "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
+   "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
+   "verified_date": "2026-07-31",
+   "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。",
+   "note_en": "Personal, open-source, best tool for highway signs, CN-friendly.",
+   "category": "tool",
+   "github": "https://github.com/NanGua-QWQ/SignGenerator",
+   "group": "tool"
+  },
+  {
+   "name": "Lucide 图标中文网",
+   "name_en": "Lucide Icons (Chinese)",
+   "subtitle": "lucide.nodejs.cn",
+   "url": "https://lucide.nodejs.cn/icons/",
+   "author": "Lucide",
+   "author_url": "https://lucide.dev/",
+   "tags": [
+    "前端"
+   ],
+   "description": "Lucide 是由社区制作的开源图标工具包，提供美观且一致的 SVG 图标。中文网支持按类别（无障碍、动物、箭头、房屋、图表、设计、设备、表情等）浏览图标，可自定义颜色、描边宽度和尺寸，方便在项目中检索使用。",
+   "description_en": "Lucide is an open-source icon toolkit crafted by the community, providing beautiful and consistent SVG icons. The Chinese site supports browsing icons by category (accessibility, animals, arrows, buildings, charts, design, devices, emoji, etc.) with custom color, stroke width, and size for easy lookup in projects.",
+   "verified_date": "2026-07-31",
+   "note": "知名开源图标库国内汉化站，好评但 UI 不多。",
+   "note_en": "Popular icon library, CN localized, praised but sparse UI.",
+   "category": "tool",
+   "github": "https://github.com/lucide-icons/lucide",
+   "group": "tool"
+  },
+  {
+   "name": "React Bits 组件库",
+   "name_en": "React Bits Component Library",
+   "subtitle": "reactbits.dev",
+   "url": "https://reactbits.dev/get-started/index/",
+   "author": "React Bits",
+   "author_url": "https://reactbits.dev/",
+   "tags": [
+    "前端"
+   ],
+   "description": "React Bits 是一个开源的 React 组件库，提供大量精美的动画组件、UI 组件和模板，包含 Cursor Grid、Specular Button、Option Wheel、Curved Input、Line Sidebar 等创意组件，可直接复制代码在项目中使用。",
+   "description_en": "React Bits is an open-source React component library offering a rich collection of animated components, UI components, and templates, including Cursor Grid, Specular Button, Option Wheel, Curved Input, Line Sidebar, and more — copy and paste to use in your projects.",
+   "verified_date": "2026-07-31",
+   "note": "高质量 React 动效组件库，GitHub 44.6k 星，开源免费。",
+   "note_en": "High-quality React animation library, 44.6k stars, free & open-source.",
+   "category": "tool",
+   "github": "https://github.com/DavidHDev/react-bits",
+   "group": "tool"
+  },
+  {
+   "name": "鲨鲨幸存者",
+   "name_en": "Shark Survivor",
+   "subtitle": "astras.cc/game/shas",
+   "url": "https://astras.cc/game/shas/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [],
+   "description": "俯视角割草生存游戏。操控角色自动攻击，收集经验升级，从武士刀、左轮、风火轮等 10+ 武器与被动道具中自由搭配。历经 5 波 BOSS 战，超武进化后火力全开，撑过 8 分钟即胜利。适配手机触屏+虚拟摇杆，加载即玩。",
+   "description_en": "Top-down survivor-like bullet hell. Auto-attack, collect XP, level up, and combine 10+ weapons (katana, revolver, fire wheel, etc.) with passive items. Survive 5 BOSS waves over 8 minutes — super weapon evolution unleashes ultimate power. Mobile touch + virtual joystick support, play instantly.",
+   "verified_date": "2026-08-01",
+   "note": "适合横屏，打发时间利器。",
+   "note_en": "Best in landscape, great for killing time.",
+   "category": "game",
+   "github": "https://github.com/ningqi24/astras.cc/tree/main/game/shas",
+   "group": "game"
+  },
+  {
+   "name": "Cyberexplorer's World",
+   "name_en": "Cyberexplorer's World",
+   "subtitle": "cyberneko.cn",
+   "url": "https://cyberneko.cn/",
+   "author": "Cyberexplorer",
+   "author_url": "https://cyberneko.cn/",
+   "tags": [],
+   "description": "Cyberexplorer 的个人主页，展示个人项目与作品。",
+   "description_en": "Cyberexplorer's personal homepage showcasing projects and works.",
+   "verified_date": "2026-07-31",
+   "note": "个人博客，.cn 域名安全可靠，诸多作品，B站可查。",
+   "note_en": "Personal blog, .cn domain safe, many works, findable on Bilibili.",
+   "category": "personal",
+   "github": "https://github.com/LanwyWriteXU/lanwywritexu.github.io",
+   "group": "personal"
+  },
+  {
+   "name": "ningqi's github homepage",
+   "name_en": "ningqi's github homepage",
+   "subtitle": "github.com/ningqi24",
+   "url": "https://github.com/ningqi24",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [],
+   "description": "ningqi 的 GitHub 主页，包含所有开源项目与代码仓库。",
+   "description_en": "ningqi's GitHub profile, featuring all open-source projects and repositories.",
+   "verified_date": "2026-07-31",
+   "note": "作者本尊，年度546次贡献，astras.cc/minichat 等均开源于此。",
+   "note_en": "The author, 546 contributions/yr, astras.cc/minichat open-sourced here.",
+   "category": "personal",
+   "group": "personal"
+  },
+  {
+   "name": "ningqi开发社",
+   "name_en": "ningqi Dev Studio",
+   "subtitle": "nqxz.mysxl.cn",
+   "url": "https://nqxz.mysxl.cn/",
+   "author": "ningqi",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "OS&UI"
+   ],
+   "description": "ningqi 的个人作品展示站，收录了 ToingOS、NQ_OS 系列等 Scratch 操作系统作品及其它项目，提供蓝奏云下载链接。",
+   "description_en": "ningqi's personal portfolio site featuring Scratch OS projects like ToingOS and NQ_OS series, with download links via Lanzou cloud.",
+   "verified_date": "2026-07-31",
+   "note": "作者早期 Scratch 作品，内容零散像草稿本，mysxl 免费建站。",
+   "note_en": "Author's early Scratch work, scattered like a draft, on mysxl.",
+   "category": "scratch",
+   "group": "scratch"
+  },
+  {
+   "name": "猫娘计划 Project N.E.K.O.",
+   "name_en": "Project N.E.K.O.",
+   "subtitle": "project-neko.cn",
+   "url": "https://project-neko.cn/",
+   "author": "Project N.E.K.O. 团队",
+   "author_url": "",
+   "tags": [
+    "二次元"
+   ],
+   "description": "面向二次元用户的虚拟角色互动平台，猫娘主题。",
+   "description_en": "A virtual character interactive platform for anime-style users with cat-girl theme.",
+   "verified_date": "2026-07-31",
+   "note": "二次元虚拟角色互动平台，视觉精美，体验独特，有新意。",
+   "note_en": "Anime-style virtual character platform. Polished visuals, unique experience.",
+   "category": "creative",
+   "github": "https://github.com/Project-N-E-K-O",
+   "group": "creative"
+  },
+  {
+   "name": "Corona Studio 日冕工作室",
+   "name_en": "Corona Studio",
+   "subtitle": "corona.studio",
+   "url": "https://corona.studio/",
+   "author": "Corona Studio 团队",
+   "author_url": "",
+   "tags": [],
+   "description": "以 Minecraft 为核心的开发团队，日冕工作室官方站。",
+   "description_en": "Minecraft-focused development team, Corona Studio official site.",
+   "verified_date": "2026-07-31",
+   "note": "Minecraft 核心开发团队官方站，有完整项目介绍，关注 MC 生态必看。",
+   "note_en": "Minecraft-focused dev team homepage. Complete project listings for MC ecosystem watchers.",
+   "category": "mc-team",
+   "github": "https://github.com/Corona-Studio",
+   "group": "mc"
+  },
+  {
+   "name": "Ghost Downloader 资源发现器",
+   "name_en": "Ghost Downloader",
+   "subtitle": "gd.xychr.com",
+   "url": "https://gd.xychr.com/",
+   "author": "晓游 nicepkg",
+   "author_url": "",
+   "tags": [
+    "下载"
+   ],
+   "description": "浏览器优先的资源发现与桌面传输枢纽，资源检索工具。",
+   "description_en": "Browser-first resource discovery and desktop handoff hub.",
+   "verified_date": "2026-07-31",
+   "note": "浏览器内资源发现 + 桌面传输，免客户端，找资源效率高。",
+   "note_en": "Browser-based resource discover + desktop handoff. No client needed.",
+   "category": "tool",
+   "github": "https://github.com/XiaoYouChR/Ghost-Downloader-3",
+   "group": "tool"
+  },
+  {
+   "name": "DeskMakeover 桌面美化工作室",
+   "name_en": "DeskMakeover",
+   "subtitle": "dm.xiaominglab.com",
+   "url": "https://dm.xiaominglab.com/",
+   "author": "nicepkg 小明实验室",
+   "author_url": "",
+   "tags": [
+    "桌面"
+   ],
+   "description": "Windows 桌面美化工作室，提供桌面主题定制工具。",
+   "description_en": "Windows desktop makeover studio & customization tool.",
+   "verified_date": "2026-07-31",
+   "note": "Windows 桌面美化一站式，主题定制友好，适合美化党。",
+   "note_en": "One-stop Windows desktop customization. Theme-friendly, for aesthetic lovers.",
+   "category": "tool",
+   "github": "https://github.com/nicepkg/deskmakeover",
+   "group": "tool"
+  },
+  {
+   "name": "莫老师的附件表",
+   "name_en": "莫老师s Attachments",
+   "subtitle": "在下莫老师.com",
+   "url": "https://xn--fhqq21c322bzo0d.com/",
+   "author": "在下莫老师",
+   "author_url": "",
+   "tags": [
+    "资源"
+   ],
+   "description": "莫老师的个人资源分享站，中文资源汇总。",
+   "description_en": "莫老师s personal Chinese resource sharing hub.",
+   "verified_date": "2026-07-31",
+   "note": "中文个人资源分享集合，稀有中文资源多，适合找小众资源。",
+   "note_en": "Chinese personal resource hub. Lots of rare Chinese-language content.",
+   "category": "creative",
+   "group": "creative"
+  },
+  {
+   "name": "Cylorine Studio",
+   "name_en": "Cylorine Studio",
+   "subtitle": "cylorine.studio",
+   "url": "https://cylorine.studio/",
+   "author": "Cylorine Studio 团队",
+   "author_url": "",
+   "tags": [],
+   "description": "专注 Minecraft 相关内容开发与探索的组织，Cylorine 官方站。",
+   "description_en": "Minecraft content dev & exploration organization, Cylorine official site.",
+   "verified_date": "2026-07-31",
+   "note": "Minecraft 内容开发组织官方站，资源质量高，生态向全。",
+   "note_en": "Minecraft content org homepage. High-quality resources, full ecosystem coverage.",
+   "category": "mc-team",
+   "github": "https://github.com/CylorineStudio",
+   "group": "mc"
+  },
+  {
+   "name": "ChunkBase MC 应用与教程",
+   "name_en": "Chunk Base",
+   "subtitle": "chunkbase.com",
+   "url": "https://www.chunkbase.com/",
+   "author": "ChunkBase 团队",
+   "author_url": "",
+   "tags": [
+    "教程"
+   ],
+   "description": "Minecraft 种子查图、模组、应用与教程集合站，MC 玩家必备。",
+   "description_en": "Minecraft seed map apps, mods & tutorials. Essential for MC players.",
+   "verified_date": "2026-07-31",
+   "note": "MC 玩家必收藏：种子查图/村庄定位/生物群系/模组教程一站式。",
+   "note_en": "Must-bookmark: seed viewer, village finder, biomes & mod tutorials in one.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Minecraft Search 物品搜索站",
+   "name_en": "Minecraft Search",
+   "subtitle": "minecraftsearch.com",
+   "url": "https://minecraftsearch.com/",
+   "author": "Minecraft Search 团队",
+   "author_url": "",
+   "tags": [
+    "搜索"
+   ],
+   "description": "Minecraft 物品/生物/方块 ID 与合成表搜索站，快速查配方。",
+   "description_en": "Minecraft items, mobs, blocks & recipes search engine.",
+   "verified_date": "2026-07-31",
+   "note": "MC 物品 / 生物 / 方块一站式搜索，配方查得快，新手救星。",
+   "note_en": "One-stop MC items/mobs/blocks search. Recipe lookup for beginners.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Axolotl Launcher 蝾螈启动器",
+   "name_en": "Axolotl Launcher",
+   "subtitle": "axlmc.org",
+   "url": "https://axlmc.org/",
+   "author": "Garbage Human Studio",
+   "author_url": "",
+   "tags": [
+    "启动器"
+   ],
+   "description": "基于 Modrinth 生态的免费开源 Minecraft 启动器，支持模组整合。",
+   "description_en": "Free & open-source Minecraft launcher built on Modrinth ecosystem.",
+   "verified_date": "2026-07-31",
+   "note": "Modrinth 生态 MC 启动器，开源免费，国内可用速度不错。",
+   "note_en": "Modrinth-ecosystem MC launcher. Open-source, free, CN-reachable.",
+   "category": "mc-tool",
+   "github": "https://github.com/Mystic-Stars/Axolotl",
+   "group": "mc"
+  },
+  {
+   "name": "WormWaker 博客与产品站",
+   "name_en": "WormWaker",
+   "subtitle": "wormwake.com",
+   "url": "https://www.wormwake.com/",
+   "author": "WormWaker",
+   "author_url": "",
+   "tags": [
+    "博客"
+   ],
+   "description": "WormWaker 的个人博客与产品展示站，分享独立开发作品。",
+   "description_en": "WormWakers personal blog & indie product showcase.",
+   "verified_date": "2026-07-31",
+   "note": "独立开发者个人博客+产品展，项目思路清晰，有参考价值。",
+   "note_en": "Indie dev blog + product showcase. Clear projects, great reference.",
+   "category": "personal",
+   "group": "personal"
+  },
+  {
+   "name": "OCEAN MC 指令生成器",
+   "name_en": "OCEAN MC Command Generator",
+   "subtitle": "mc.ecylt.top",
+   "url": "https://mc.ecylt.top/",
+   "author": "OCEAN / ecylt",
+   "author_url": "",
+   "tags": [
+    "生成器"
+   ],
+   "description": "Minecraft 指令图形化生成工具，复杂命令拼接可视化。",
+   "description_en": "Minecraft visual command generator for complex command building.",
+   "verified_date": "2026-07-31",
+   "note": "MC 指令可视化拼接，命令方块党福音，不会忘参数。",
+   "note_en": "Visual MC command builder. Perfect for command-block users, no params missed.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Packery MC 数据包编辑器",
+   "name_en": "Packery",
+   "subtitle": "packery.skycrystal.fun",
+   "url": "https://packery.skycrystal.fun/",
+   "author": "bu_xu_yao",
+   "author_url": "",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "浏览器内 Minecraft 数据包编辑器，图形化编辑 data pack。",
+   "description_en": "In-browser Minecraft data pack visual editor.",
+   "verified_date": "2026-07-31",
+   "note": "浏览器内 MC 数据包可视化编辑器，免装软件，做 datapack 省时间。",
+   "note_en": "In-browser visual MC datapack editor. No install, saves time making packs.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "KitMC 数据包制作工具",
+   "name_en": "KitMC",
+   "subtitle": "kitemc.com",
+   "url": "https://www.kitemc.com/",
+   "author": "KitMC Team",
+   "author_url": "",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "Minecraft 数据包可视化制作工具，拖拽式编辑，低门槛造数据包。",
+   "description_en": "Visual Minecraft datapack maker with drag-and-drop, low-barrier.",
+   "verified_date": "2026-07-31",
+   "note": "拖拽式 MC 数据包制作，零代码入门，想做自定义玩法首选。",
+   "note_en": "Drag-and-drop MC datapack maker. Zero-code entry for custom gameplay.",
+   "category": "mc-tool",
+   "github": "https://github.com/KiteMC",
+   "group": "mc"
+  },
+  {
+   "name": "MCPlugin 插件开发框架",
+   "name_en": "MCPlugin Framework",
+   "subtitle": "mcplugin.netlify.app",
+   "url": "https://mcplugin.netlify.app/",
+   "author": "MCPlugin Team",
+   "author_url": "",
+   "tags": [
+    "开发"
+   ],
+   "description": "Minecraft 插件开发框架与文档站，Paper/Spigot 插件快速上手。",
+   "description_en": "Minecraft plugin dev framework & docs for Paper/Spigot rapid onboarding.",
+   "verified_date": "2026-07-31",
+   "note": "Paper/Spigot 插件开发框架+文档，开服写插件的脚手架好帮手。",
+   "note_en": "Paper/Spigot plugin framework + docs. Scaffold for server plugin devs.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "KJ 操作系统 标签页",
+   "name_en": "KJ OS Tab Page",
+   "subtitle": "kj.sgguo.com",
+   "url": "https://kj.sgguo.com/",
+   "author": "KJ 团队",
+   "author_url": "",
+   "tags": [
+    "操作系统"
+   ],
+   "description": "KJ 操作系统 浏览器标签页，欢迎配置新标签页工具。",
+   "description_en": "KJ OS browser tab page & welcome-config dashboard.",
+   "verified_date": "2026-08-01",
+   "note": "浏览器新标签页工具，欢迎配置，界面干净，适合开屏即用。",
+   "note_en": "Browser new-tab dashboard. Clean UI, ready to use out of the box.",
+   "category": "tool",
+   "group": "tool"
+  },
+  {
+   "name": "Portal MC 启动器",
+   "name_en": "Portal Launcher",
+   "subtitle": "portal.tiouo.cc",
+   "url": "https://portal.tiouo.cc/",
+   "author": "Portal contributors",
+   "author_url": "",
+   "tags": [
+    "启动器"
+   ],
+   "description": "Portal - 简洁、现代的开源跨平台 Minecraft 启动器与实例管理器。",
+   "description_en": "Portal - a clean, modern, open-source cross-platform Minecraft launcher & instance manager.",
+   "verified_date": "2026-08-01",
+   "note": "开源跨平台 MC 启动器，现代简洁 UI，多实例管理，Modrinth 生态友好。",
+   "note_en": "Open-source cross-platform MC launcher. Clean modern UI, multi-instance & Modrinth-friendly.",
+   "category": "mc-tool",
+   "github": "https://github.com/tiouoo/Portal",
+   "group": "mc"
+  },
+  {
+   "name": "bxya B站AI学习机器人",
+   "name_en": "bxya bilibili AI Learning Bot",
+   "subtitle": "bxya.app",
+   "url": "https://bxya.app/",
+   "author": "xiaoyaya191",
+   "author_url": "",
+   "tags": [
+    "AI"
+   ],
+   "description": "全自动 B 站 AI 学习机器人，自动化学习工具。",
+   "description_en": "Fully automated bilibili AI learning bot.",
+   "verified_date": "2026-08-02",
+   "note": "开源全自动 B 站 AI 学习机器人，作者 xiaoyaya191，自动化挂机学习，效率拉满。",
+   "note_en": "Open-source automated bilibili AI learning bot by xiaoyaya191. Auto study, full efficiency.",
+   "category": "tool",
+   "github": "https://github.com/xiaoyaya191/bilibili_learning_bot",
+   "group": "tool"
+  },
+  {
+   "name": "LUMEN MC 创作平台",
+   "name_en": "LUMEN MC Creator Platform",
+   "subtitle": "lumenplatform.net",
+   "url": "https://lumenplatform.net/",
+   "author": "LUMEN 团队",
+   "author_url": "",
+   "tags": [
+    "创作"
+   ],
+   "description": "LUMEN - 为 Minecraft 创作者打造的辅助创作平台。",
+   "description_en": "LUMEN - an assistant platform for Minecraft creators.",
+   "verified_date": "2026-08-02",
+   "note": "Minecraft 创作者辅助平台，一站式辅助创作，做 MC 内容必备。",
+   "note_en": "Minecraft creator assistant platform. All-in-one toolbox for MC content makers.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Coomi Agent for Android",
+   "name_en": "Coomi Agent for Android",
+   "subtitle": "coomi.septemc.com",
+   "url": "https://coomi.septemc.com/",
+   "author": "septemc",
+   "author_url": "https://septemc.com/",
+   "tags": [
+    "AI",
+    "Android"
+   ],
+   "description": "Coomi 是一款面向 Android 平台的 AI Agent 工具，类似 Claude Code / Codex，提供智能体对话与自动化能力。",
+   "description_en": "Coomi is an AI agent tool for Android, similar to Claude Code / Codex, providing intelligent agent conversations and automation capabilities.",
+   "verified_date": "2026-08-02",
+   "note": "AI Agent 工具，类似 Claude Code/Codex，septemc 维护，Android 端可用。",
+   "note_en": "AI agent tool, similar to Claude Code/Codex, maintained by septemc, available on Android.",
+   "category": "tool",
+   "github": "https://github.com/Septemc/Coomi",
+   "group": "tool"
+  },
+  {
+   "name": "resourcery - MC 资源包工具箱",
+   "name_en": "resourcery - MC Resource Pack Toolbox",
+   "subtitle": "resourcery.skycrystal.fun",
+   "url": "https://resourcery.skycrystal.fun/",
+   "author": "bu_xu_yao",
+   "author_url": "",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "面向 Minecraft 资源包制作的在线工具箱，支持材质绘画、声音编辑、模型编辑、方块状态、语言文件、粒子效果、画作、界面贴图等，内置 AI 助手辅助创作，可导出完整资源包。",
+   "description_en": "An online toolbox for Minecraft resource pack creation, supporting texture painting, sound editing, model editing, block states, language files, particles, paintings, UI textures, and more. Built-in AI assistant. Exportable resource packs.",
+   "verified_date": "2026-08-03",
+   "note": "MC 资源包一站式在线编辑器，v1.0 支持 MC 26.2+，bu_xu_yao 作品。",
+   "note_en": "One-stop online MC resource pack editor, v1.0 for MC 26.2+, by bu_xu_yao.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Web3村长 - 技术博客",
+   "name_en": "Web3 Cunzhang - Tech Blog",
+   "subtitle": "cunzhangblog.com",
+   "url": "https://www.cunzhangblog.com/",
+   "author": "Web3村长 / Rin",
+   "author_url": "https://www.cunzhangblog.com/",
+   "tags": [
+    "博客",
+    "AI"
+   ],
+   "description": "Web3村长（Rin）的技术博客，专注 AI 工具评测、Cloudflare 实战、开源项目部署、互联网效率工具、技术出海与变现。已积累 109 篇教程，以保姆级实战著称。",
+   "description_en": "Tech blog by Web3 Cunzhang (Rin), covering AI tool reviews, Cloudflare practices, open-source deployments, productivity tools, and tech globalization. 109 articles with hands-on tutorials.",
+   "verified_date": "2026-08-03",
+   "note": "109 篇技术博客，Cloudflare/AI 实战经验丰富，保姆级教程，值得订阅。",
+   "note_en": "109 tech articles, rich in Cloudflare/AI practices, step-by-step tutorials. Worth subscribing.",
+   "category": "personal",
+   "group": "personal"
+  },
+  {
+   "name": "Neumorphism.io - 软UI阴影生成器",
+   "name_en": "Neumorphism.io - Soft UI Shadow Generator",
+   "subtitle": "neumorphism.io",
+   "url": "https://neumorphism.io/",
+   "author": "Adam Giebl",
+   "author_url": "https://github.com/adamgiebl/neumorphism",
+   "tags": [
+    "前端",
+    "CSS",
+    "设计"
+   ],
+   "description": "在线生成新拟物风格（Neumorphism / Soft UI）CSS 阴影代码，支持实时预览、调节凸起/凹陷/模糊/距离参数，一键复制 CSS。",
+   "description_en": "Online CSS box-shadow generator for neumorphic / soft UI designs. Real-time preview, tweak elevation/inset/blur/distance, one-click copy CSS.",
+   "verified_date": "2026-08-03",
+   "note": "前端设计师必备，新拟物风格阴影一键出码，GitHub 开源。",
+   "note_en": "Must-have for frontend designers, one-click neumorphic shadow code, open-source on GitHub.",
+   "category": "tool",
+   "github": "https://github.com/adamgiebl/neumorphism",
+   "group": "tool"
+  },
+  {
+   "name": "PMPK 高速编号牌生成器 - NanGua-QWQ",
+   "name_en": "PMPK Highway Sign Generator - NanGua-QWQ",
+   "subtitle": "pmpk.astras.cc",
+   "url": "https://pmpk.astras.cc/",
+   "author": "NanGua-QWQ",
+   "author_url": "https://github.com/NanGua-QWQ",
+   "tags": [
+    "生成器"
+   ],
+   "description": "在线生成中国高速公路编号牌图片的工具。支持国家高速和省高速两种类型，可自定义道路编号（1/2/4 位数字）和高速名称，实时预览并导出编号牌图片。",
+   "description_en": "An online tool to generate Chinese expressway number sign images. Supports national and provincial highway types with custom road numbers (1/2/4 digits) and highway names, with real-time preview and export.",
+   "verified_date": "2026-08-03",
+   "note": "个人维护，GitHub 开源，制作高速牌的利器，对国内用户友好。PMPK 版本。",
+   "note_en": "Personal, open-source, great for highway signs, CN-friendly. PMPK edition.",
+   "category": "tool",
+   "group": "tool"
+  },
+  {
+   "name": "创客次元 MakerVerse - 创作者社区",
+   "name_en": "MakerVerse - Creator Community",
+   "subtitle": "forum.ctspace.xyz",
+   "url": "https://forum.ctspace.xyz/",
+   "author": "创客次元 / MakerVerse",
+   "author_url": "",
+   "tags": [
+    "社区",
+    "论坛",
+    "创作"
+   ],
+   "description": "面向创作者与开发者的中文社区平台，支持帖子讨论、作品展示、频道/标签分类浏览，提供开放 API 与扩展机制。",
+   "description_en": "A Chinese community for creators and developers. Supports discussions, project showcases, channel/tag browsing, with open API and extensions.",
+   "verified_date": "2026-08-03",
+   "note": "创作者社区，氛围友好，有开放 API 和扩展能力，适合技术创作交流。",
+   "note_en": "Creator community with friendly atmosphere, open API and extensions, great for tech creation discussions.",
+   "category": "chat",
+   "github": "https://github.com/Adopos610/AuroraForum",
+   "group": "chat"
+  },
+  {
+   "name": "抓鱼鸭 - 摸鱼起始页",
+   "name_en": "ZhuaYuYa - Slacking Startpage",
+   "subtitle": "zhuayuya.com",
+   "url": "https://zhuayuya.com/",
+   "author": "抓鱼鸭",
+   "author_url": "https://zhuayuya.com/",
+   "tags": [
+    "摸鱼",
+    "起始页",
+    "聚合"
+   ],
+   "description": "由 B站UP主 Pony 开发的摸鱼起始页，聚合实用工具与趣味功能（弹幕聊天、伪装更新、偷看小说等），iTab 风格，让摸鱼更快乐。",
+   "description_en": "A slacking startpage by Bilibili creator Pony, aggregating fun tools like bullet-chat, fake system updates, hidden novel reader, and more. iTab-style, makes slacking joyful.",
+   "verified_date": "2026-08-03",
+   "note": "摸鱼神器，弹幕聊天人气高，B站 UP主 Pony 维护，上班必备。",
+   "note_en": "Ultimate slacking tool, lively bullet-chat, maintained by Pony, office essential.",
+   "category": "tool",
+   "github": "https://github.com/ponysb/zhuayuya",
+   "group": "tool"
+  },
+  {
+   "name": "OWLCRAFT - MC 网页版",
+   "name_en": "OWLCRAFT - MC Web Edition",
+   "subtitle": "owlcraft.raymondjxu.net",
+   "url": "https://owlcraft.raymondjxu.net/",
+   "author": "awesomestowl / raymondjxu",
+   "author_url": "https://www.youtube.com/watch?v=i5luLslTLZk",
+   "tags": [
+    "浏览器"
+   ],
+   "description": "Minecraft v26.2 网页版，awesomestowl 原作，raymondjxu 移植，无需安装直接在浏览器里玩。",
+   "description_en": "Minecraft v26.2 web edition by awesomestowl, ported by raymondjxu. Play directly in browser.",
+   "verified_date": "2026-08-07",
+   "note": "awesomestowl 原作，raymondjxu 移植网页版，浏览器即玩 MC。",
+   "note_en": "Original by awesomestowl, web port by raymondjxu. Play MC in browser.",
+   "category": "mc-tool",
+   "github": "https://github.com/owlcraftweb",
+   "group": "mc"
+  },
+  {
+   "name": "NexBot - QQ 机器人托管",
+   "name_en": "NexBot - QQ Bot Hosting",
+   "subtitle": "nexbot.muzisen.asia",
+   "url": "https://nexbot.muzisen.asia/",
+   "author": "NexBot",
+   "author_url": "",
+   "tags": [
+    "QQ机器人",
+    "托管",
+    "云服务"
+   ],
+   "description": "QQ 机器人一键上云平台，NapCat + AstrBot，60 秒开通独立实例，免自建服务器。",
+   "description_en": "QQ bot one-click cloud hosting. NapCat + AstrBot, deploy in 60s, no server needed.",
+   "verified_date": "2026-08-07",
+   "note": "NapCat + AstrBot 组合，扫码即上，面板直达，QQ 机器人托管首选。",
+   "note_en": "NapCat + AstrBot combo, scan to deploy, panel access, top QQ bot host.",
+   "category": "tool",
+   "group": "tool"
+  },
+  {
+   "name": "Celia Music NextGen - 桌面音乐播放器",
+   "name_en": "Celia Music NextGen - Desktop Music Player",
+   "subtitle": "celiamusic.site",
+   "url": "https://celiamusic.site/",
+   "author": "seliaYYDS",
+   "author_url": "https://github.com/seliaYYDS/CeliaMusic-NextGen",
+   "tags": [
+    "音乐",
+    "播放器",
+    "桌面"
+   ],
+   "description": "基于 Tauri + Rust 的开源桌面播放器，支持本地音乐、网易云和酷狗在线音源，沉浸歌词与灵动岛。",
+   "description_en": "Open-source desktop music player built on Tauri + Rust. Supports local files, NetEase Cloud & Kugou, immersive lyrics & Dynamic Island.",
+   "verified_date": "2026-08-07",
+   "note": "Tauri + Rust 构建，网易云+酷狗双音源，桌面歌词灵动岛，颜值在线。",
+   "note_en": "Tauri + Rust, dual sources NetEase+Kugou, desktop lyrics & Dynamic Island.",
+   "category": "tool",
+   "github": "https://github.com/seliaYYDS/CeliaMusic-NextGen",
+   "group": "tool"
+  },
+  {
+   "name": "一加全能工具箱",
+   "name_en": "OnePlus All-in-one Toolbox",
+   "subtitle": "optool.daxiaamu.com",
+   "url": "https://optool.daxiaamu.com",
+   "author": "大侠阿木",
+   "author_url": "https://daxiaamu.com/",
+   "tags": [
+    "一加",
+    "ROOT",
+    "刷机"
+   ],
+   "description": "一加手机 PC 端刷机 / ROOT / 解 BL 锁一体化工具，支持 Magisk、KernelSU、APatch、SukiSU-Ultra。",
+   "description_en": "OnePlus PC toolbox for flashing / ROOT / BL unlock. Supports Magisk, KernelSU, APatch, SukiSU-Ultra.",
+   "verified_date": "2026-08-07",
+   "note": "大侠阿木出品，一加刷机 ROOT 一站式，多网盘下载，刷机党必备。",
+   "note_en": "By daxiaamu, one-stop OnePlus flashing & ROOT, multi-mirror downloads.",
+   "category": "tool",
+   "github": "https://github.com/daxiaamu/oplusmutools",
+   "group": "tool"
+  },
+  {
+   "name": "NoriAI - 虚拟AI世界",
+   "name_en": "NoriAI - Virtual AI World",
+   "subtitle": "os.inori.ai",
+   "url": "https://os.inori.ai",
+   "author": "FUTURUM 弗图姆科技",
+   "author_url": "",
+   "tags": [
+    "AI",
+    "二次元"
+   ],
+   "description": "基于 AlephPro 全新计算范式的虚拟 AI 世界。登录后进入 NoriOS 系统，内置浏览器、文件、终端、邮件等完整功能界面，可与虚拟二次元角色聊天互动、玩小游戏。核心玩法围绕「算力」展开，随剧情发展经营算力资源——小心，你的算力服务器随时可能遭到攻击。",
+   "description_en": "A virtual AI world built on AlephPro's next-gen computing paradigm. After login, enter NoriOS with full interfaces (browser, files, terminal, email). Chat and play mini-games with the virtual anime character. Core gameplay revolves around 'compute' — grow your compute resources through story progression, but watch out: your compute server may come under attack at any time.",
+   "verified_date": "2026-08-17",
+   "note": "AlephPro 全新计算范式，二次元 AI 互动 + 算力经营玩法，完整体验需登录。",
+   "note_en": "AlephPro next-gen computing. Anime AI interaction + compute management gameplay. Full experience requires login.",
+   "category": "creative",
+   "group": "creative"
+  },
+  {
+   "name": "Shaihai Studio - 晒海工作室",
+   "name_en": "Shaihai Studio",
+   "subtitle": "shaihai.cn",
+   "url": "https://shaihai.cn",
+   "author": "Shaihai Studio",
+   "author_url": "https://space.bilibili.com/3690976753223882",
+   "tags": [
+    "科普"
+   ],
+   "description": "Shaihai Studio（晒海工作室）的个人主页，坚持做高质量科普/实验性视频。页面含趣味彩蛋：背景颜色随时间变化、点击大标题跳转B站主页，并提供 BUG 反馈表单。",
+   "description_en": "Personal homepage of Shaihai Studio, dedicated to high-quality science popularization and experimental videos. Fun easter eggs: background color shifts over time, clicking the big title jumps to the Bilibili profile, plus a bug feedback form.",
+   "verified_date": "2026-08-18",
+   "note": "B站科普UP主个人站，浙ICP备案，有 BUG 反馈通道，彩蛋有意思。",
+   "note_en": "Bilibili science UP's personal site, ICP filed, has bug feedback, fun easter eggs.",
+   "category": "personal",
+   "group": "personal"
+  },
+  {
+   "name": "RemixWarp（重构跃迁）少儿图形化编辑器",
+   "name_en": "RemixWarp",
+   "subtitle": "remixwarp.pages.dev",
+   "url": "https://remixwarp.pages.dev/",
+   "author": "RemixWorld重构世界工作室",
+   "author_url": "https://remixwarp.pages.dev/",
+   "tags": [
+    "编辑器"
+   ],
+   "description": "基于 Scratch 的图形化编辑器，汇集 TurboWarp、MistWarp、O2Engine、AstraEditor、Bilup 等多家编辑器特性，支持极速编译、插件生态、实时预览与多格式导出。",
+   "description_en": "Scratch-based graphical editor that integrates features from TurboWarp, MistWarp, O2Engine, AstraEditor, Bilup, etc. Supports fast compilation, plugin ecosystem, live preview, and multi-format export.",
+   "verified_date": "2026-08-24",
+   "category": "scratch-editor",
+   "github": "https://github.com/RemixWarp",
+   "group": "scratch"
+  },
+  {
+   "name": "PixelForum 像素聚落",
+   "name_en": "PixelForum",
+   "subtitle": "www.pixelforum.cn",
+   "url": "https://www.pixelforum.cn",
+   "author": "PixelForum 像素聚落",
+   "author_url": "",
+   "tags": [
+    "社区",
+    "论坛"
+   ],
+   "description": "Minecraft 中文社区论坛（Discuz 搭建）。提供 JE 纹理光影 / Mods / 整合包 / 地图与 MCBE 资源下载，支持签到、任务、关注、充值等完整社区功能，会员榜与发帖榜活跃。",
+   "description_en": "A Chinese Minecraft community forum (powered by Discuz). Offers JE texture/shader/modpack/map and MCBE resource downloads, with sign-in, tasks, follow and credit systems, plus active member & post leaderboards.",
+   "verified_date": "2026-08-18",
+   "note": "MC 中文社区论坛，Discuz 搭建，资源板块全，京ICP备案正规，有QQ/微信客服。",
+   "note_en": "CN MC community forum on Discuz. Full resource boards, ICP filed, QQ/WeChat support.",
+   "category": "chat",
+   "group": "chat"
+  },
+  {
+   "name": "ModMinds 模组开发平台",
+   "name_en": "ModMinds Mod Development Platform",
+   "subtitle": "ether-studio.top",
+   "url": "https://ether-studio.top/",
+   "author": "Ether Studio",
+   "author_url": "",
+   "tags": [
+    "模组开发",
+    "AI"
+   ],
+   "description": "Minecraft 模组一站式开发平台：桌面开发工具内置 Agent 接入，授权后即可调用 AI 模型服务；按量计费、余额硬管控，余额不足自动冻结、充值秒级恢复，支持兑换码秒到账。",
+   "description_en": "A one-stop platform for Minecraft mod development. Desktop dev tools come with built-in Agent integration granting AI model services on authorization; pay-as-you-go billing with hard balance control, auto-freeze when credit runs out and instant restore after top-up, redeem-code recharge.",
+   "verified_date": "2026-08-25",
+   "note": "亲测可访问（已抓取验证）。模组开发者向的 AI 接入平台，兑换码在闲鱼自助购买。",
+   "note_en": "Verified accessible. Mod-dev oriented AI integration platform; redeem codes self-purchased on Xianyu.",
+   "category": "mc-tool",
+   "github": "https://github.com/waterpail114514/modmind",
+   "group": "mc"
+  },
+  {
+   "name": "AutoMods",
+   "name_en": "AutoMods",
+   "subtitle": "automods.cn",
+   "url": "https://automods.cn/",
+   "author": "AutoMods",
+   "author_url": "",
+   "tags": [
+    "模组制作",
+    "AI"
+   ],
+   "description": "用对话做 Minecraft 模组：一句话说清想法，AI 自动生成并实时展示每一步（读写文件、改动、编译是否通过），产物 jar/源码/贴图/模型随时可下载；支持连续对话与透明过程，兼容 Fabric/Forge/NeoForge。",
+   "description_en": "Make Minecraft mods by chatting: describe the idea in one sentence and AI generates it live, showing every step (files read/written, changes, build status); artifacts like jar/source/textures/models are downloadable anytime; supports ongoing dialogue and transparency, compatible with Fabric/Forge/NeoForge.",
+   "verified_date": "2026-08-25",
+   "note": "亲测可访问（浏览器验证）。AI 对话式模组制作平台，微信扫码注册送 1000 积分，公测中。",
+   "note_en": "Verified accessible via browser. AI dialogue-based mod creation platform; WeChat scan signup gives 1000 credits, in open beta.",
+   "category": "mc-tool",
+   "group": "mc"
+  },
+  {
+   "name": "Celestial Launcher",
+   "name_en": "Celestial Launcher",
+   "subtitle": "celestial.wemsur.top",
+   "url": "https://celestial.wemsur.top/",
+   "author": "Wemsur",
+   "author_url": "https://github.com/Wemsur/Celestial-Launcher",
+   "tags": [
+    "启动器"
+   ],
+   "description": "免费开源的 Minecraft 游戏启动器，基于 Modrinth App 分叉。多版本库互不打扰、直接兼容现有 .minecraft（从 PCL/HMCL/官方启动器零成本迁移）、自定义主题色与背景、离线登录、完整汉化、无广告、自动更新。",
+   "description_en": "A free & open-source Minecraft launcher forked from the Modrinth App. Multiple instance libraries that don't interfere, direct compatibility with existing .minecraft (zero-cost migration from PCL/HMCL/official launcher), custom accent color & background, offline login, full Chinese localization, ad-free, auto-update.",
+   "verified_date": "2026-08-25",
+   "note": "亲测可访问（浏览器验证）。开源启动器，Linux/RPM/DEB 等各平台安装包齐全。",
+   "note_en": "Verified accessible via browser. Open-source launcher with Linux/RPM/DEB packages.",
+   "category": "mc-tool",
+   "github": "https://github.com/Wemsur/Celestial-Launcher",
+   "group": "mc"
+  },
+  {
+   "name": "nsos",
+   "name_en": "nsos",
+   "subtitle": "nsos.astras.cc",
+   "url": "https://nsos.astras.cc",
+   "author": "ningqi24",
+   "author_url": "https://github.com/ningqi24",
+   "tags": [
+    "HTML",
+    "操作系统"
+   ],
+   "description": "一个运行在浏览器里的迷你移动操作系统（Web-based OS）。分层渲染、状态机驱动，含 Android 风格开机引导（Fastboot/Recovery）、桌面 Launcher、真锁屏、状态栏、终端与设置应用；内置统一命令引擎（shell），支持真实设备信息、虚拟文件系统、分区挂载、bootloader 解锁刷写等终端玩法。",
+   "description_en": "A web-based mini mobile OS running in the browser. Layered rendering driven by state machine: Android-style boot (Fastboot/Recovery), desktop Launcher, real lock screen, status bar, terminal & settings apps; built-in unified shell command engine with real device info, virtual filesystem, partition mounting, bootloader unlock/flash.",
+   "verified_date": "2026-08-29",
+   "note": "亲测：页面模拟完整 Android 开机流程（开机动画→锁屏→桌面），双击状态栏回锁屏；桌面终端命令真实可用（devinfo/df/mount/wipe/reboot/fastboot 等），Fastboot/Recovery 工程模式可进入，极客趣味十足。",
+   "note_en": "Tested: simulates full Android boot flow (boot animation → lock screen → desktop). Desktop terminal commands really work (devinfo/df/mount/wipe/reboot/fastboot etc.). Fastboot/Recovery modes accessible. Geeky fun.",
+   "category": "creative",
+   "github": "https://github.com/ningqi24/nsos",
+   "group": "creative"
+  },
+  {
+   "name": "02Engine",
+   "name_en": "02Engine",
+   "subtitle": "02engine.org",
+   "url": "https://02engine.org/",
+   "author": "0.2Studio",
+   "author_url": "https://github.com/02engine",
+   "tags": [
+    "编辑器",
+    "扩展"
+   ],
+   "description": "02Engine 是 TurboWarp 的二次修改版编辑器（官网自称 mod of TurboWarp），主打极限速度与丰富扩展：移除帧率上限提升运行速度，整合 PenguinMod、TurboWarp 与社区扩展（工具/物理/3D/网络），内置扩展管理器与代码转换工具，为硬核用户打造。",
+   "description_en": "02Engine is a mod of TurboWarp focused on extreme speed and rich extensions: removes framerate cap for faster runtime, integrates PenguinMod, TurboWarp and community extensions (tools/physics/3D/network), with an expansion manager and code tools for hardcore users.",
+   "verified_date": "2026-08-29",
+   "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器，UI 较朴素但功能强大，适合极客玩家，稳定性一般。",
+   "note_en": "Verified accessible via browser. TurboWarp mod with a plain UI but very powerful features for hardcore users; stability is so-so.",
+   "category": "scratch-editor",
+   "github": "https://github.com/02engine",
+   "group": "scratch"
+  },
+  {
+   "name": "Bilup",
+   "name_en": "Bilup",
+   "subtitle": "com.bilup.org",
+   "url": "https://com.bilup.org/",
+   "author": "Bilup",
+   "author_url": "https://github.com/Bilup",
+   "tags": [
+    "编辑器",
+    "协作"
+   ],
+   "description": "Bilup 是基于 TurboWarp 的 Scratch 二次修改编辑器：保留熟悉的编辑器体验，加入 blocks-to-JS 编译器、大量插件与主题、项目打包器、调试器、Git 版本控制与实时多人协作，并附带账号体系的社区平台；免费开源，浏览器/桌面端皆可用。",
+   "description_en": "Bilup is a Scratch modification built on TurboWarp: keeps the familiar editor and adds a blocks-to-JS compiler, a large set of addons and themes, a project packager, a debugger, git version control, live collaboration, and a community platform with accounts. Free and open source, works in browser or desktop.",
+   "verified_date": "2026-08-29",
+   "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器（用户所述 mistwarp 二改，实为 TurboWarp 二改），运行稳定，实时多人协作功能强大。",
+   "note_en": "Verified accessible via browser. TurboWarp mod (reported as MistWarp mod, actually built on TurboWarp). Stable, with powerful live collaboration.",
+   "category": "scratch-editor",
+   "github": "https://github.com/Bilup",
+   "group": "scratch"
+  },
+  {
+   "name": "Scratch Mods",
+   "name_en": "Scratch Mods",
+   "subtitle": "scratchmod.github.io",
+   "url": "https://scratchmod.github.io/",
+   "author": "GabsTheCuriousKid",
+   "author_url": "https://github.com/ScratchMod",
+   "tags": [
+    "导航"
+   ],
+   "description": "Scratch 模组导航目录站：集中罗列 60+ 个 Scratch 及其二次 mod 的入口（AbsoluteMod、Circle-IDE、PenguinMod、TurboWarp、MistWarp、02Engine、AstraEditor、ClipCC、Xcratch 等），是查找 Scratch 衍生编辑器的聚合索引。",
+   "description_en": "A directory of Scratch mods: aggregates links to 60+ Scratch and mod-of-mod editors (AbsoluteMod, Circle-IDE, PenguinMod, TurboWarp, MistWarp, 02Engine, AstraEditor, ClipCC, Xcratch, etc.) as an index of Scratch derivatives.",
+   "verified_date": "2026-08-29",
+   "note": "亲测可访问（浏览器验证）。开源目录站，主要维护者 GabsTheCuriousKid，收录约 66 个 Scratch 模组/编辑器。",
+   "note_en": "Verified accessible via browser. Open-source directory maintained by GabsTheCuriousKid, listing ~66 Scratch mods/editors.",
+   "category": "tool",
+   "github": "https://github.com/ScratchMod/scratchmod.github.io",
+   "group": "tool"
+  }
+ ]
 }
