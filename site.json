@@ -1125,6 +1125,25 @@
    "category": "tool",
    "github": "https://github.com/ScratchMod/scratchmod.github.io",
    "group": "tool"
+  },
+  {
+   "name": "PCL Nexa（PCL-N）Minecraft 启动器",
+   "name_en": "PCL Nexa (PCL-N)",
+   "subtitle": "pcln.top",
+   "url": "https://pcln.top/",
+   "author": "PCL-N-Edition",
+   "author_url": "https://github.com/PCL-N-Edition/PCL-N",
+   "tags": [
+    "启动器"
+   ],
+   "description": "基于 PCL-CE 开发的现代 Minecraft 启动器，跨平台支持 Windows/macOS/Linux，内置插件市场与开发文档。",
+   "description_en": "Modern Minecraft launcher built on PCL-CE, cross-platform for Windows/macOS/Linux, with built-in plugin market and docs.",
+   "verified_date": "2026-09-07",
+   "note": "亲测可访问（浏览器验证）。PCL 家族新世代启动器，界面现代、功能迁移中。",
+   "note_en": "Verified accessible via browser. Next-gen launcher of the PCL family; modern UI.",
+   "category": "mc-tool",
+   "github": "https://github.com/PCL-N-Edition/PCL-N",
+   "group": "mc"
   }
  ]
 }
