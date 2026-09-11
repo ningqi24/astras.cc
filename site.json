@@ -954,7 +954,7 @@
    "group": "personal"
   },
   {
-   "name": "RemixWarp（重构跃迁）少儿图形化编辑器",
+   "name": "RemixWarp（重构跃迁）编辑器",
    "name_en": "RemixWarp",
    "subtitle": "remixwarp.pages.dev",
    "url": "https://remixwarp.pages.dev/",
@@ -1068,26 +1068,6 @@
    "group": "creative"
   },
   {
-   "name": "02Engine",
-   "name_en": "02Engine",
-   "subtitle": "02engine.org",
-   "url": "https://02engine.org/",
-   "author": "0.2Studio",
-   "author_url": "https://github.com/02engine",
-   "tags": [
-    "编辑器",
-    "扩展"
-   ],
-   "description": "02Engine 是 TurboWarp 的二次修改版编辑器（官网自称 mod of TurboWarp），主打极限速度与丰富扩展：移除帧率上限提升运行速度，整合 PenguinMod、TurboWarp 与社区扩展（工具/物理/3D/网络），内置扩展管理器与代码转换工具，为硬核用户打造。",
-   "description_en": "02Engine is a mod of TurboWarp focused on extreme speed and rich extensions: removes framerate cap for faster runtime, integrates PenguinMod, TurboWarp and community extensions (tools/physics/3D/network), with an expansion manager and code tools for hardcore users.",
-   "verified_date": "2026-08-29",
-   "note": "亲测可访问（浏览器验证）。TurboWarp 二改编辑器，UI 较朴素但功能强大，适合极客玩家，稳定性一般。",
-   "note_en": "Verified accessible via browser. TurboWarp mod with a plain UI but very powerful features for hardcore users; stability is so-so.",
-   "category": "scratch-editor",
-   "github": "https://github.com/02engine",
-   "group": "scratch"
-  },
-  {
    "name": "Bilup",
    "name_en": "Bilup",
    "subtitle": "com.bilup.org",
@@ -1143,6 +1123,25 @@
    "note_en": "Verified accessible via browser. Next-gen launcher of the PCL family; modern UI.",
    "category": "mc-tool",
    "github": "https://github.com/PCL-N-Edition/PCL-N",
+   "group": "mc"
+  },
+  {
+   "name": "PCL-In（为非正版玩家准备的 MC 启动器）",
+   "name_en": "PCL-In",
+   "subtitle": "pclin.astras.cc",
+   "url": "https://pclin.astras.cc/",
+   "author": "ningqi24",
+   "author_url": "https://github.com/ningqi24/PCL-In",
+   "tags": [
+    "启动器"
+   ],
+   "description": "基于 PCL Community Edition 二次 fork 的 Minecraft 启动器：使用第三方皮肤站或离线档案时不再被强制进入试玩模式，移除全部赞助提示，独立更新机制。",
+   "description_en": "A Minecraft launcher forked from PCL Community Edition: no forced demo mode when using third-party skin sites or offline accounts, sponsorship prompts removed, with its own update mechanism.",
+   "verified_date": "2026-09-07",
+   "note": "亲测可访问（浏览器验证）。站长自维护的非正版友好启动器，移除赞助提示、无强制试玩。",
+   "note_en": "Verified accessible via browser. Non-premium-friendly launcher maintained by the site owner; demo mode & sponsorship prompts removed.",
+   "category": "mc-tool",
+   "github": "https://github.com/ningqi24/PCL-In",
    "group": "mc"
   }
  ]
