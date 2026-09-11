@@ -3892,18 +3892,21 @@
   }
 
   function getVerifiedStatus(verifiedDate) {
-    const STALE_DAYS = 90, EXPIRE_DAYS = 180;
+    const EXPIRE_DAYS = 180;
     const now = new Date();
     const d = verifiedDate ? new Date(verifiedDate) : null;
     if (!d || isNaN(d.getTime())) {
       return { cls: 'unverified', label: currentLang === 'zh' ? '未测' : 'Untested', title: currentLang === 'zh' ? '未亲测' : 'Not personally tested' };
     }
+    const nowYM = now.getFullYear() * 12 + now.getMonth();
+    const dYM = d.getFullYear() * 12 + d.getMonth();
+    const monthsGap = nowYM - dYM;
     const days = Math.floor((now - d) / 86400000);
     const ym = (d.getFullYear()) + '-' + String(d.getMonth() + 1).padStart(2, '0');
-    if (days <= STALE_DAYS) {
+    if (monthsGap === 0 || monthsGap === 1) {
       return { cls: 'fresh', label: ym, title: currentLang === 'zh' ? '亲测于 ' + verifiedDate : 'Verified on ' + verifiedDate };
     } else if (days <= EXPIRE_DAYS) {
-      return { cls: 'stale', label: currentLang === 'zh' ? '待复核' : 'Stale', title: currentLang === 'zh' ? '上次亲测 ' + ym + '，已超 90 天，待复核' : 'Verified ' + ym + ', >90d, needs recheck' };
+      return { cls: 'stale', label: currentLang === 'zh' ? '待复核' : 'Stale', title: currentLang === 'zh' ? '上次亲测 ' + ym + '，非近两月，待复核' : 'Verified ' + ym + ', not in last 2 months, needs recheck' };
     } else {
       return { cls: 'expired', label: currentLang === 'zh' ? '长期未复核' : 'Outdated', title: currentLang === 'zh' ? '上次亲测 ' + ym + '，已超 180 天' : 'Verified ' + ym + ', >180d, outdated' };
     }
