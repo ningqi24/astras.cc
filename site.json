@@ -1176,6 +1176,8 @@
       "tags": [
         "启动器"
       ],
+      "note": "Polymerium 用 symlink 共享 mod 的元数据架构解决了多实例磁盘浪费的痛点，设计很现代。MCP 模式让 AI 直接管理实例，同类产品里独一份，有前瞻性。整体是个对技术玩家很有吸引力的项目，就是生态还需时间沉淀。",
+      "note_en": "Polymerium’s symlink-based metadata-sharing architecture for mods addresses disk space inefficiencies in multi-instance setups. The MCP mod loader enables AI-driven instance management, making it highly appealing to tech-savvy players, though its ecosystem still needs time to mature.",
       "github": "https://github.com/d3ara1n/Polymerium",
       "category": "mc-tool",
       "verified_date": "2026-09-27",
